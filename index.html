@@ -421,10 +421,31 @@ const GITHUB_OWNER = 'starseaship';
 const GITHUB_REPO  = 'learnlist';
 const GITHUB_BRANCH = 'main';
 const MATERIALS_ROOT = 'materials';
+
+const SUBJECT_LABELS = {
+  english:  '🇬🇧 英语',
+  japanese: '🇯🇵 日语',
+  general:  '📚 通识',
+  wgl:      '🌐 WGL',
+};
+const TYPE_LABELS = {
+  grammar:    '文法',
+  vocabulary: '词汇',
+  quiz:       '练习',
+  notes:      '笔记',
+  reference:  '参考',
+};
+
 let allMaterials = [];
 let activeSubject = 'all';
 let activeType = 'all';
 let searchQuery = '';
+
+const cardGrid    = document.getElementById('cardGrid');
+const resultsInfo = document.getElementById('resultsInfo');
+const totalCount  = document.getElementById('totalCount');
+const subjectCount = document.getElementById('subjectCount');
+const searchInput = document.getElementById('searchInput');
 
 async function loadMaterials() {
   try {
