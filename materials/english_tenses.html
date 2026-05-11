@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>英语时态全解</title>
+<meta content="英语16种时态的结构、用法、例句与信号词整理" name="description"/>
+<meta content="grammar" name="type"/>
+<meta content="2026-05-11" name="date"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;family=Playfair+Display:wght@700;900&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface2: #f5f2ee;
+    --accent1: #f4a7b9;   /* macaron pink - 现在时 */
+    --accent2: #b5d5f5;   /* macaron blue - 过去时 */
+    --accent3: #ADC2AE;   /* macaron mint - 将来时 */
+    --accent4: #c9b8e8;   /* macaron lavender - 过去将来时 */
+    --accent1-deep: #c96f89;
+    --accent2-deep: #5a8fc2;
+    --accent3-deep: #6E8A70;
+    --accent4-deep: #8060b8;
+    --text: #3a3540;
+    --text-dim: #7a7585;
+    --border: rgba(0,0,0,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif SC', serif;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #fde8ef 0%, #e8f4fd 50%, #e8f5ec 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(244,167,185,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent1-deep);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.9;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #d4607a, #e8a0b0, #9b6abf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .header-sub {
+    color: var(--text-dim);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,245,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  nav a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--accent1-deep); border-bottom-color: var(--accent1); }
+
+  /* LAYOUT */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION */
+  .era {
+    margin-bottom: 64px;
+  }
+  .era-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .era-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.15;
+    min-width: 60px;
+  }
+  .era-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .era-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ERA COLORS */
+  .era-present .era-dot { background: var(--accent1); }
+  .era-present .era-num { color: var(--accent1); }
+  .era-present .era-title { color: var(--accent1-deep); }
+
+  .era-past .era-dot { background: var(--accent2); }
+  .era-past .era-num { color: var(--accent2); }
+  .era-past .era-title { color: var(--accent2-deep); }
+
+  .era-future .era-dot { background: var(--accent3); }
+  .era-future .era-num { color: var(--accent3); }
+  .era-future .era-title { color: var(--accent3-deep); }
+
+  .era-pastfuture .era-dot { background: var(--accent4); }
+  .era-pastfuture .era-num { color: var(--accent4); }
+  .era-pastfuture .era-title { color: var(--accent4-deep); }
+
+  /* TENSE CARD */
+  .tense-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .era-present .card::before { background: linear-gradient(90deg, var(--accent1), #fcd5de, transparent); }
+  .era-past .card::before { background: linear-gradient(90deg, var(--accent2), #d8ecff, transparent); }
+  .era-future .card::before { background: linear-gradient(90deg, var(--accent3), #c8efd4, transparent); }
+  .era-pastfuture .card::before { background: linear-gradient(90deg, var(--accent4), #ddd0f5, transparent); }
+
+  .card-index {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .card-en {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+  }
+
+  /* STRUCTURE BOX */
+  .struct-box {
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .era-present .struct-box { background: #fdeef2; }
+  .era-past .struct-box { background: #eaf4ff; }
+  .era-future .struct-box { background: #e8f8ed; }
+  .era-pastfuture .struct-box { background: #f0eaff; }
+  .struct-formula {
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .era-present .struct-formula { color: var(--accent1-deep); }
+  .era-past .struct-formula { color: var(--accent2-deep); }
+  .era-future .struct-formula { color: var(--accent3-deep); }
+  .era-pastfuture .struct-formula { color: var(--accent4-deep); }
+
+  /* USAGE */
+  .usage-title {
+    font-size: 12px;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .usage-list {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+  .usage-list li {
+    font-size: 14px;
+    color: var(--text);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .usage-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  /* EXAMPLES */
+  .examples { display: flex; flex-direction: column; gap: 10px; }
+  .example {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 3px solid transparent;
+  }
+  .era-present .example { border-left-color: var(--accent1); }
+  .era-past .example { border-left-color: var(--accent2); }
+  .era-future .example { border-left-color: var(--accent3); }
+  .era-pastfuture .example { border-left-color: var(--accent4); }
+
+  .example-en {
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .example-en em {
+    font-style: normal;
+    font-weight: 700;
+  }
+  .era-present .example-en em { color: var(--accent1-deep); }
+  .era-past .example-en em { color: var(--accent2-deep); }
+  .era-future .example-en em { color: var(--accent3-deep); }
+  .era-pastfuture .example-en em { color: var(--accent4-deep); }
+
+  .example-zh {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* SIGNAL WORDS */
+  .signals {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .signal-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .signal-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  /* NOTE CARD */
+  .note {
+    background: #fffbec;
+    border: 1px solid #f5e4a0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .note strong { color: #b5760a; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-dim);
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* SCROLL ANIMATION */
+  .card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+
+  @media (max-width: 500px) {
+    .tense-grid { grid-template-columns: 1fr; }
+    header { padding: 40px 20px 30px; }
+    nav a { padding: 12px 10px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="header-label">English Grammar · 语法参考</div>
+<h1>英语十六时态</h1>
+<div class="header-sub">语法要点 · 使用场景 · 例句详解 · 信号词</div>
+</header>
+<nav>
+<a href="#present">现在时</a>
+<a href="#past">过去时</a>
+<a href="#future">将来时</a>
+<a href="#pastfuture">过去将来时</a>
+</nav>
+<main>
+<!-- ===== 现在时 ===== -->
+<section class="era era-present" id="present">
+<div class="era-header">
+<div class="era-num">01</div>
+<div class="era-dot"></div>
+<div class="era-title">现在时</div>
+</div>
+<div class="tense-grid">
+<div class="card">
+<div class="card-index">01 — 01</div>
+<div class="card-title">Simple Present</div>
+<div class="card-en">一般现在时</div>
+<div class="struct-box">
+<span class="struct-formula">do / does（第三人称单数+s）</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She <em>drinks</em> coffee every morning.</div>
+<div class="example-zh">她每天早上喝咖啡。（习惯）</div>
+</div>
+<div class="example">
+<div class="example-en">The sun <em>rises</em> in the east.</div>
+<div class="example-zh">太阳从东方升起。（真理）</div>
+</div>
+<div class="example">
+<div class="example-en">The train <em>leaves</em> at 9 AM tomorrow.</div>
+<div class="example-zh">火车明天早上9点出发。（时刻表）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>习惯性、反复发生的动作</li>
+<li>客观事实、普遍真理</li>
+<li>表示状态（喜好、感知）</li>
+<li>时间表 / 时刻表中的将来</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">always</span>
+<span class="signal-tag">usually</span>
+<span class="signal-tag">every day</span>
+<span class="signal-tag">never</span>
+<span class="signal-tag">often</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">01 — 02</div>
+<div class="card-title">Present Continuous</div>
+<div class="card-en">现在进行时</div>
+<div class="struct-box">
+<span class="struct-formula">am / is / are + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She <em>is working</em> on her report right now.</div>
+<div class="example-zh">她现在正在写报告。（正在进行）</div>
+</div>
+<div class="example">
+<div class="example-en">He <em>is always losing</em> his keys!</div>
+<div class="example-zh">他老是搞丢钥匙！（令人不满的习惯）</div>
+</div>
+<div class="example">
+<div class="example-en">We <em>are meeting</em> the client tomorrow.</div>
+<div class="example-zh">我们明天要见客户。（已安排的将来）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>此刻正在进行的动作</li>
+<li>近期一段时间内持续的事情</li>
+<li>（带感情色彩）令人厌烦的习惯</li>
+<li>确定的将来安排</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">now</span>
+<span class="signal-tag">at the moment</span>
+<span class="signal-tag">right now</span>
+<span class="signal-tag">currently</span>
+</div>
+<div class="note">⚠ <strong>状态动词不用进行时：</strong>know / love / believe / want / need / seem 等表状态的动词一般不用进行时。✗ <em>I am knowing</em> → ✓ <em>I know</em></div>
+</div>
+<div class="card">
+<div class="card-index">01 — 03</div>
+<div class="card-title">Present Perfect</div>
+<div class="card-en">现在完成时</div>
+<div class="struct-box">
+<span class="struct-formula">have / has + done（过去分词）</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">I <em>have lost</em> my wallet. Can you help me?</div>
+<div class="example-zh">我丢了钱包。（影响现在：我现在没有钱包）</div>
+</div>
+<div class="example">
+<div class="example-en">She <em>has lived</em> in Osaka for three years.</div>
+<div class="example-zh">她在大阪住了三年了。（持续到现在）</div>
+</div>
+<div class="example">
+<div class="example-en">I <em>have been</em> to Paris twice.</div>
+<div class="example-zh">我去过巴黎两次。（人生经历）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>过去发生、对现在有影响的事</li>
+<li>从过去到现在持续的状态</li>
+<li>人生经历（不强调时间）</li>
+<li>刚刚完成的动作</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">just</span>
+<span class="signal-tag">already</span>
+<span class="signal-tag">yet</span>
+<span class="signal-tag">ever</span>
+<span class="signal-tag">for/since</span>
+<span class="signal-tag">recently</span>
+</div>
+<div class="note">📌 <strong>现在完成 vs 一般过去：</strong>现在完成强调"与现在的关联"，一般过去强调"过去某个时间点"。<br/>✓ <em>I have seen that movie.</em>（经历）<br/>✓ <em>I saw that movie last week.</em>（指定时间）</div>
+</div>
+<div class="card">
+<div class="card-index">01 — 04</div>
+<div class="card-title">Present Perfect Continuous</div>
+<div class="card-en">现在完成进行时</div>
+<div class="struct-box">
+<span class="struct-formula">have / has + been + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">I <em>have been studying</em> for five hours.</div>
+<div class="example-zh">我已经学了五个小时了。（还在学/刚停）</div>
+</div>
+<div class="example">
+<div class="example-en">She looks tired. She <em>has been working</em> all day.</div>
+<div class="example-zh">她看起来很累，她忙了一整天。（解释原因）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>从过去某点开始、一直持续到现在（且可能继续）的动作</li>
+<li>强调动作的持续性和"还没结束"感</li>
+<li>解释现在某个状态的原因</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">for + 时长</span>
+<span class="signal-tag">since + 时间点</span>
+<span class="signal-tag">all day/morning</span>
+<span class="signal-tag">lately</span>
+</div>
+<div class="note">💡 <strong>与现在完成时的区别：</strong>完成时强调"结果"，完成进行时强调"过程/持续"。<br/><em>I have read the book.</em>（读完了）<br/><em>I have been reading the book.</em>（一直在读，可能还没读完）</div>
+</div>
+</div>
+</section>
+<!-- ===== 过去时 ===== -->
+<section class="era era-past" id="past">
+<div class="era-header">
+<div class="era-num">02</div>
+<div class="era-dot"></div>
+<div class="era-title">过去时</div>
+</div>
+<div class="tense-grid">
+<div class="card">
+<div class="card-index">02 — 01</div>
+<div class="card-title">Simple Past</div>
+<div class="card-en">一般过去时</div>
+<div class="struct-box">
+<span class="struct-formula">did（动词过去式）</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">I <em>visited</em> Tokyo last summer.</div>
+<div class="example-zh">我去年夏天去了东京。</div>
+</div>
+<div class="example">
+<div class="example-en">She <em>woke up</em>, <em>brushed</em> her teeth, and <em>left</em>.</div>
+<div class="example-zh">她起床、刷牙、然后离开了。（顺序动作）</div>
+</div>
+<div class="example">
+<div class="example-en">He <em>played</em> the violin when he was young.</div>
+<div class="example-zh">他年轻时拉过小提琴。（过去的习惯）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>过去某个明确时间发生的事</li>
+<li>过去一系列按顺序发生的动作</li>
+<li>过去的习惯或状态（已结束）</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">yesterday</span>
+<span class="signal-tag">last week</span>
+<span class="signal-tag">ago</span>
+<span class="signal-tag">in 2020</span>
+<span class="signal-tag">then</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">02 — 02</div>
+<div class="card-title">Past Continuous</div>
+<div class="card-en">过去进行时</div>
+<div class="struct-box">
+<span class="struct-formula">was / were + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">I <em>was reading</em> when she called.</div>
+<div class="example-zh">她打电话时我正在看书。（背景+打断）</div>
+</div>
+<div class="example">
+<div class="example-en">At 8pm, they <em>were having</em> dinner.</div>
+<div class="example-zh">晚上8点，他们正在吃饭。</div>
+</div>
+<div class="example">
+<div class="example-en">While I <em>was cooking</em>, he <em>was setting</em> the table.</div>
+<div class="example-zh">我做饭的时候，他在摆桌子。（同时进行）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>过去某一时刻正在进行的动作</li>
+<li>过去某个背景动作（被另一事件打断）</li>
+<li>同时进行的两个过去动作</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">when</span>
+<span class="signal-tag">while</span>
+<span class="signal-tag">at that time</span>
+<span class="signal-tag">at 8pm last night</span>
+</div>
+<div class="note">📌 <strong>when vs while：</strong><br/><em>When</em> 接短暂动作（简单过去）→ <em>when she called</em><br/><em>While</em> 接持续动作（进行时）→ <em>while I was reading</em></div>
+</div>
+<div class="card">
+<div class="card-index">02 — 03</div>
+<div class="card-title">Past Perfect</div>
+<div class="card-en">过去完成时</div>
+<div class="struct-box">
+<span class="struct-formula">had + done（过去分词）</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">When I arrived, the movie <em>had already started</em>.</div>
+<div class="example-zh">我到的时候，电影已经开始了。（更早发生）</div>
+</div>
+<div class="example">
+<div class="example-en">She <em>had never seen</em> snow before she moved to Hokkaido.</div>
+<div class="example-zh">她搬去北海道之前从没见过雪。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>过去两个事件中，更早发生的那个</li>
+<li>强调"在某过去时间点之前已完成"</li>
+<li>常与 before / after / when / by the time 连用</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">by the time</span>
+<span class="signal-tag">before</span>
+<span class="signal-tag">after</span>
+<span class="signal-tag">already</span>
+<span class="signal-tag">when</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">02 — 04</div>
+<div class="card-title">Past Perfect Continuous</div>
+<div class="card-en">过去完成进行时</div>
+<div class="struct-box">
+<span class="struct-formula">had + been + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She was exhausted. She <em>had been running</em> for an hour.</div>
+<div class="example-zh">她精疲力竭，因为她已经跑了一个小时了。</div>
+</div>
+<div class="example">
+<div class="example-en">By the time he arrived, I <em>had been waiting</em> for two hours.</div>
+<div class="example-zh">他到的时候，我已经等了两个小时了。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>在过去某时间点之前，一直持续进行的动作</li>
+<li>强调该动作的持续时长</li>
+<li>解释过去某个状态的原因</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">for + 时长</span>
+<span class="signal-tag">since</span>
+<span class="signal-tag">by the time</span>
+<span class="signal-tag">before</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 将来时 ===== -->
+<section class="era era-future" id="future">
+<div class="era-header">
+<div class="era-num">03</div>
+<div class="era-dot"></div>
+<div class="era-title">将来时</div>
+</div>
+<div class="tense-grid">
+<div class="card">
+<div class="card-index">03 — 01</div>
+<div class="card-title">Simple Future</div>
+<div class="card-en">一般将来时</div>
+<div class="struct-box">
+<span class="struct-formula">will + do  /  be going to + do</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">I <em>will help</em> you. （刚决定的）</div>
+<div class="example-zh">我来帮你。（临时决定）</div>
+</div>
+<div class="example">
+<div class="example-en">I <em>am going to study</em> abroad next year.</div>
+<div class="example-zh">我明年打算出国留学。（事先计划）</div>
+</div>
+<div class="example">
+<div class="example-en">Look at those clouds — it <em>is going to</em> rain.</div>
+<div class="example-zh">看那些云，快要下雨了。（有证据的预测）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li><strong>will：</strong>临时决定、预测（无证据）、承诺/意愿</li>
+<li><strong>be going to：</strong>有计划的将来、有证据的预测</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">tomorrow</span>
+<span class="signal-tag">next week</span>
+<span class="signal-tag">in the future</span>
+<span class="signal-tag">soon</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">03 — 02</div>
+<div class="card-title">Future Continuous</div>
+<div class="card-en">将来进行时</div>
+<div class="struct-box">
+<span class="struct-formula">will + be + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">At 10pm tonight, I <em>will be sleeping</em>.</div>
+<div class="example-zh">今晚10点，我会正在睡觉。</div>
+</div>
+<div class="example">
+<div class="example-en"><em>Will</em> you <em>be using</em> the car later? （礼貌询问）</div>
+<div class="example-zh">你稍后会用车吗？</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>将来某时刻正在进行的动作</li>
+<li>按计划、自然会发生的事（比 will 更礼貌）</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">at this time tomorrow</span>
+<span class="signal-tag">by then</span>
+<span class="signal-tag">in two hours</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">03 — 03</div>
+<div class="card-title">Future Perfect</div>
+<div class="card-en">将来完成时</div>
+<div class="struct-box">
+<span class="struct-formula">will + have + done</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">By June, I <em>will have passed</em> the JLPT N2.</div>
+<div class="example-zh">到6月份，我将已经通过JLPT N2了。</div>
+</div>
+<div class="example">
+<div class="example-en">By the time you arrive, dinner <em>will have been</em> ready.</div>
+<div class="example-zh">等你到的时候，晚饭将已经准备好了。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>到将来某时间点为止，某动作已经完成</li>
+<li>常与"by + 将来时间"连用</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">by + 将来时间</span>
+<span class="signal-tag">by then</span>
+<span class="signal-tag">by next year</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">03 — 04</div>
+<div class="card-title">Future Perfect Continuous</div>
+<div class="card-en">将来完成进行时</div>
+<div class="struct-box">
+<span class="struct-formula">will + have + been + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">By December, I <em>will have been studying</em> TOEIC for a year.</div>
+<div class="example-zh">到12月，我将已经备考TOEIC整整一年了。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>到将来某时间点，某持续动作已进行了多久</li>
+<li>强调动作的持续时长（而非结果）</li>
+<li>日常口语少见，多用于书面和正式表达</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">by + 时间 + for + 时长</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 过去将来时 ===== -->
+<section class="era era-pastfuture" id="pastfuture">
+<div class="era-header">
+<div class="era-num">04</div>
+<div class="era-dot"></div>
+<div class="era-title">过去将来时</div>
+</div>
+<div class="tense-grid">
+<div class="card">
+<div class="card-index">04 — 01</div>
+<div class="card-title">Future in the Past (Simple)</div>
+<div class="card-en">一般过去将来时</div>
+<div class="struct-box">
+<span class="struct-formula">would + do  /  was/were going to + do</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She said she <em>would call</em> me later.</div>
+<div class="example-zh">她说她待会会打给我。（间接引语）</div>
+</div>
+<div class="example">
+<div class="example-en">I knew it <em>was going to</em> be a long day.</div>
+<div class="example-zh">我知道这会是漫长的一天。（过去的预感）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>在过去某时间点，预期将要发生的事</li>
+<li>大量出现于间接引语（reported speech）中</li>
+<li>也用于表示过去的意愿、礼貌请求</li>
+</ul>
+
+<div class="signals">
+<span class="signal-label">信号词</span>
+<span class="signal-tag">said / told / thought</span>
+<span class="signal-tag">promised</span>
+<span class="signal-tag">hoped</span>
+</div>
+</div>
+<div class="card">
+<div class="card-index">04 — 02</div>
+<div class="card-title">Future in the Past (Continuous)</div>
+<div class="card-en">过去将来进行时</div>
+<div class="struct-box">
+<span class="struct-formula">would + be + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">He said he <em>would be working</em> all weekend.</div>
+<div class="example-zh">他说他整个周末都会在工作。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>在过去某时间点预期将来某时刻正在进行的动作</li>
+<li>主要出现在间接引语中</li>
+</ul>
+
+</div>
+<div class="card">
+<div class="card-index">04 — 03</div>
+<div class="card-title">Future in the Past (Perfect)</div>
+<div class="card-en">过去将来完成时</div>
+<div class="struct-box">
+<span class="struct-formula">would + have + done</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She thought they <em>would have finished</em> by noon.</div>
+<div class="example-zh">她以为他们中午前就会做完了。</div>
+</div>
+<div class="example">
+<div class="example-en">If I had studied harder, I <em>would have passed</em>.</div>
+<div class="example-zh">如果我当时更努力，我就考过了。（虚拟语气）</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>过去预期将来某点前会完成的动作</li>
+<li>表示"与过去事实相反"的假设（虚拟语气）</li>
+</ul>
+
+<div class="note">💡 <strong>would have done</strong> 在虚拟语气中极为常见，是高频考点，要重点掌握！</div>
+</div>
+<div class="card">
+<div class="card-index">04 — 04</div>
+<div class="card-title">Future in the Past (Perfect Continuous)</div>
+<div class="card-en">过去将来完成进行时</div>
+<div class="struct-box">
+<span class="struct-formula">would + have + been + doing</span>
+</div>
+<div class="examples">
+<div class="example">
+<div class="example-en">She said by June she <em>would have been teaching</em> for 10 years.</div>
+<div class="example-zh">她说到六月她就已经教了十年书了。</div>
+</div>
+</div><div class="usage-title">USE</div>
+<ul class="usage-list">
+<li>最复杂的时态，日常极少使用</li>
+<li>表示过去视角下，将来某点前已持续进行的动作</li>
+<li>主要出现在复杂的间接引语或书面分析中</li>
+</ul>
+
+<div class="note">⚠ <strong>实用建议：</strong>这个时态理解即可，英语母语者在日常对话中也几乎不用，考试极少考查。</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+  ENGLISH TENSES REFERENCE  ·  16 TENSES  ·  MADE FOR ZOE
+</footer>
+</body>
+</html>
