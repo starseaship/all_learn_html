@@ -416,17 +416,17 @@ header {
 <script>
 
 // ── GitHub auto scan settings ──
-// Your public GitHub repository: https://github.com/starseaship/learnlist
+// Public GitHub repository: https://github.com/starseaship/learnlist
 const GITHUB_OWNER = 'starseaship';
 const GITHUB_REPO  = 'learnlist';
+const GITHUB_BRANCH = 'main';
 const MATERIALS_ROOT = 'materials';
 
 async function loadMaterials() {
   try {
     resultsInfo.textContent = '正在从 GitHub 读取资料…';
-    allMaterials = await scanFolder(MATERIALS_ROOT);
+    allMaterials = await scanMaterialsFromTree();
 
-    // Sort by date if available, otherwise by title.
     allMaterials.sort((a, b) => {
       if (a.date && b.date) return new Date(b.date) - new Date(a.date);
       return a.title.localeCompare(b.title, 'zh-CN');
@@ -438,38 +438,47 @@ async function loadMaterials() {
   } catch (e) {
     console.error(e);
     resultsInfo.textContent = '⚠ 无法读取 GitHub materials 文件夹';
-    cardGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;font-size:14px;">😢 请检查仓库是否为 Public，以及 materials 文件夹是否存在</div>`;
+    cardGrid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;font-size:14px;line-height:1.8;">
+        😢 GitHub 读取失败<br>
+        <span style="font-family:monospace;font-size:12px;color:#999;">${escHtml(String(e.message || e))}</span><br><br>
+        请检查：仓库是否 Public、分支是否 main、materials 文件夹是否存在。
+      </div>
+    `;
   }
 }
 
-async function scanFolder(path) {
-  const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
-  const res = await fetch(apiUrl);
+async function scanMaterialsFromTree() {
+  const treeUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+  const res = await fetch(treeUrl, { cache: 'no-store' });
 
   if (!res.ok) {
-    throw new Error(`GitHub API error: ${res.status} while reading ${path}`);
+    throw new Error(`GitHub Tree API error: ${res.status}. URL: ${treeUrl}`);
   }
 
-  const items = await res.json();
-  let results = [];
-
-  for (const item of items) {
-    if (item.type === 'dir') {
-      const childResults = await scanFolder(item.path);
-      results = results.concat(childResults);
-    }
-
-    if (item.type === 'file' && item.name.toLowerCase().endsWith('.html')) {
-      const material = await makeMaterialItem(item);
-      results.push(material);
-    }
+  const data = await res.json();
+  if (!data.tree || !Array.isArray(data.tree)) {
+    throw new Error('GitHub Tree API 返回内容不正常');
   }
 
-  return results;
+  const htmlFiles = data.tree.filter(item =>
+    item.type === 'blob' &&
+    item.path.startsWith(MATERIALS_ROOT + '/') &&
+    item.path.toLowerCase().endsWith('.html')
+  );
+
+  if (htmlFiles.length === 0) {
+    return [];
+  }
+
+  const materials = [];
+  for (const item of htmlFiles) {
+    materials.push(await makeMaterialItemFromPath(item.path));
+  }
+  return materials;
 }
 
-async function makeMaterialItem(item) {
-  const path = item.path;
+async function makeMaterialItemFromPath(path) {
   const parts = path.split('/');
   const subject = normalizeSubject(parts[1] || 'general');
   const filename = parts[parts.length - 1];
@@ -483,20 +492,22 @@ async function makeMaterialItem(item) {
   let date = '';
 
   try {
-    // Fetch actual HTML file and read <title> / <meta> fields.
-    const htmlRes = await fetch(item.download_url + '?v=' + Date.now());
-    const htmlText = await htmlRes.text();
-    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${path}?v=${Date.now()}`;
+    const htmlRes = await fetch(rawUrl, { cache: 'no-store' });
+    if (htmlRes.ok) {
+      const htmlText = await htmlRes.text();
+      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
-    const htmlTitle = doc.querySelector('title')?.textContent?.trim();
-    const htmlDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content')?.trim();
-    const htmlType = doc.querySelector('meta[name="type"]')?.getAttribute('content')?.trim();
-    const htmlDate = doc.querySelector('meta[name="date"]')?.getAttribute('content')?.trim();
+      const htmlTitle = doc.querySelector('title')?.textContent?.trim();
+      const htmlDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content')?.trim();
+      const htmlType = doc.querySelector('meta[name="type"]')?.getAttribute('content')?.trim();
+      const htmlDate = doc.querySelector('meta[name="date"]')?.getAttribute('content')?.trim();
 
-    if (htmlTitle) title = htmlTitle;
-    if (htmlDesc) description = htmlDesc;
-    if (htmlType) type = normalizeType(htmlType);
-    if (htmlDate) date = htmlDate;
+      if (htmlTitle) title = htmlTitle;
+      if (htmlDesc) description = htmlDesc;
+      if (htmlType) type = normalizeType(htmlType);
+      if (htmlDate) date = htmlDate;
+    }
   } catch (e) {
     console.warn('Could not read metadata from', path, e);
   }
