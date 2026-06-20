@@ -21,7 +21,55 @@ html,body{width:100%;height:100%;margin:0;padding:0;background:#06162c;overflow:
 </style>
 </head>
 <body>
-<iframe id="appFrame" src="./app.html?v=20260621-1" title="Zoe's Study Archive"></iframe>
+<iframe id="appFrame" src="./app.html?v=20260621-2" title="Zoe's Study Archive"></iframe>
 <noscript>需要启用 JavaScript 才能使用学习资料库。</noscript>
+<script>
+const appFrame = document.getElementById('appFrame');
+appFrame.addEventListener('load', () => {
+  try {
+    const doc = appFrame.contentDocument;
+    if (!doc || doc.getElementById('desktopLayoutOverride')) return;
+
+    const style = doc.createElement('style');
+    style.id = 'desktopLayoutOverride';
+    style.textContent = `
+      @media (min-width: 721px) {
+        .layout {
+          display: block !important;
+          width: 100% !important;
+          max-width: 1600px !important;
+          margin: 0 auto !important;
+          padding: 28px clamp(28px, 4vw, 56px) 56px !important;
+        }
+        .results-info {
+          margin-bottom: 18px !important;
+        }
+        .card-grid {
+          width: 100% !important;
+          display: grid !important;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+          gap: 18px !important;
+        }
+        .material-card {
+          min-height: 150px !important;
+        }
+      }
+      @media (min-width: 1500px) {
+        .card-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        }
+      }
+      @media (max-width: 720px) {
+        .layout {
+          display: block !important;
+        }
+      }
+    `;
+    doc.head.appendChild(style);
+  } catch (e) {
+    console.warn('Could not apply desktop layout override', e);
+  }
+});
+</script>
 </body>
 </html>
