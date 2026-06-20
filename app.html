@@ -300,17 +300,40 @@ header {
 /* open-link icon, appears on hover */
 .card-arrow {
   position: absolute;
-  top: 16px; right: 16px;
+  top: 48px; right: 16px;
   opacity: 0;
   transition: opacity 0.18s;
   color: var(--text-dim);
 }
 .material-card:hover .card-arrow { opacity: 1; }
 
+.edit-tags-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  color: var(--text-dim);
+  padding: 4px 9px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.edit-tags-btn:hover,
+.edit-tags-btn:focus {
+  color: var(--text);
+  border-color: #ccc;
+}
+
 .card-tags {
   display: flex;
   gap: 6px;
   margin-bottom: 8px;
+  padding-right: 48px;
   flex-wrap: wrap;
 }
 .tag {
@@ -331,6 +354,7 @@ header {
 .tag-type-notes       { background: var(--peach); color: var(--peach-deep); }
 .tag-type-reference   { background: var(--lav);   color: var(--lav-deep); }
 .tag-course           { background: var(--yellow); color: var(--peach-deep); text-transform: none; }
+.tag-local            { background: #f3edf8; color: var(--lav-deep); text-transform: none; }
 
 .card-title {
   font-size: 15px;
@@ -351,12 +375,98 @@ header {
   color: #bbb;
 }
 
+/* ── TAG EDITOR ── */
+.tag-editor-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(46,42,53,0.28);
+  backdrop-filter: blur(4px);
+}
+.tag-editor-backdrop.open { display: flex; }
+.tag-editor-panel {
+  width: min(420px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 18px 48px rgba(80,60,100,0.22);
+  padding: 20px;
+}
+.tag-editor-panel h2 {
+  font-family: 'Kaisei Opti', serif;
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.tag-editor-subtitle {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.tag-editor-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.tag-editor-field label {
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tag-editor-field select,
+.tag-editor-field input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+.tag-editor-field select:focus,
+.tag-editor-field input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(249,196,206,0.25);
+}
+.tag-editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.tag-editor-actions button {
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--text-dim);
+}
+.tag-editor-actions button:hover { color: var(--text); border-color: #ccc; }
+#saveTagButton { background: var(--text); color: #fff; border-color: var(--text); }
+#resetTagButton { margin-right: auto; color: var(--lav-deep); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 720px) {
   header { padding: 28px 20px 20px; }
   .controls { padding: 12px 16px; }
   .layout { padding: 20px 16px 40px; }
   .card-grid { grid-template-columns: 1fr; }
+  .tag-editor-panel { padding: 18px; }
 }
 </style>
 </head>
@@ -430,6 +540,47 @@ header {
   <div class="card-grid" id="cardGrid"></div>
 </div>
 
+<!-- TAG EDITOR -->
+<div class="tag-editor-backdrop" id="tagEditor" aria-hidden="true">
+  <form class="tag-editor-panel" id="tagEditorForm" role="dialog" aria-modal="true" aria-labelledby="tagEditorTitle">
+    <h2 id="tagEditorTitle">编辑标签</h2>
+    <p class="tag-editor-subtitle" id="tagEditorMaterialTitle"></p>
+
+    <div class="tag-editor-field">
+      <label for="editSubjectSelect">科目</label>
+      <select id="editSubjectSelect">
+        <option value="english">🇬🇧 英语</option>
+        <option value="japanese">🇯🇵 日语</option>
+        <option value="general">📚 通识</option>
+        <option value="wgl">🌐 WGL</option>
+      </select>
+    </div>
+
+    <div class="tag-editor-field">
+      <label for="editTypeSelect">类型</label>
+      <select id="editTypeSelect">
+        <option value="grammar">文法</option>
+        <option value="vocabulary">词汇</option>
+        <option value="quiz">练习</option>
+        <option value="notes">笔记</option>
+        <option value="reference">参考</option>
+      </select>
+    </div>
+
+    <div class="tag-editor-field">
+      <label for="editCourseInput">课程</label>
+      <input id="editCourseInput" list="courseOptions" placeholder="例如 Reading / TOEIC / JLPT">
+      <datalist id="courseOptions"></datalist>
+    </div>
+
+    <div class="tag-editor-actions">
+      <button type="button" id="resetTagButton">恢复自动</button>
+      <button type="button" id="cancelTagButton">取消</button>
+      <button type="submit" id="saveTagButton">保存</button>
+    </div>
+  </form>
+</div>
+
 <script>
 
 // ── GitHub auto scan settings ──
@@ -439,6 +590,7 @@ const GITHUB_REPO  = 'learnlist';
 const GITHUB_BRANCH = 'main';
 const MATERIALS_ROOT = 'materials';
 const COURSE_FALLBACK_LABEL = '未分类';
+const LOCAL_TAG_STORAGE_KEY = 'zoeStudyArchiveTagOverrides:v1';
 
 const SUBJECT_LABELS = {
   english:  '🇬🇧 英语',
@@ -459,6 +611,8 @@ let activeSubject = 'all';
 let activeType = 'all';
 let activeCourse = 'all';
 let searchQuery = '';
+let tagOverrides = loadTagOverrides();
+let editingMaterialId = '';
 
 const cardGrid    = document.getElementById('cardGrid');
 const resultsInfo = document.getElementById('resultsInfo');
@@ -466,6 +620,15 @@ const totalCount  = document.getElementById('totalCount');
 const subjectCount = document.getElementById('subjectCount');
 const searchInput = document.getElementById('searchInput');
 const courseFilter = document.getElementById('courseFilter');
+const tagEditor = document.getElementById('tagEditor');
+const tagEditorForm = document.getElementById('tagEditorForm');
+const tagEditorMaterialTitle = document.getElementById('tagEditorMaterialTitle');
+const editSubjectSelect = document.getElementById('editSubjectSelect');
+const editTypeSelect = document.getElementById('editTypeSelect');
+const editCourseInput = document.getElementById('editCourseInput');
+const courseOptions = document.getElementById('courseOptions');
+const cancelTagButton = document.getElementById('cancelTagButton');
+const resetTagButton = document.getElementById('resetTagButton');
 
 async function loadMaterials() {
   try {
@@ -561,16 +724,22 @@ async function makeMaterialItemFromPath(path) {
     console.warn('Could not read metadata from', path, e);
   }
 
-  return {
+  const material = {
     id: path,
     title,
     description,
     subject,
     type,
     course,
+    autoSubject: subject,
+    autoType: type,
+    autoCourse: course,
+    hasLocalTags: false,
     path,
     date
   };
+
+  return applyTagOverride(material);
 }
 
 function normalizeSubject(subject) {
@@ -607,6 +776,37 @@ function guessType(text) {
   return 'reference';
 }
 
+function loadTagOverrides() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LOCAL_TAG_STORAGE_KEY) || '{}');
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveTagOverrides() {
+  localStorage.setItem(LOCAL_TAG_STORAGE_KEY, JSON.stringify(tagOverrides));
+}
+
+function applyTagOverride(material) {
+  const override = tagOverrides[material.id];
+  if (!override) return material;
+
+  material.subject = normalizeSubject(override.subject || material.autoSubject);
+  material.type = normalizeType(override.type || material.autoType);
+  material.course = normalizeCourse(override.course || material.autoCourse);
+  material.hasLocalTags = true;
+  return material;
+}
+
+function resetMaterialToAuto(material) {
+  material.subject = material.autoSubject;
+  material.type = material.autoType;
+  material.course = material.autoCourse;
+  material.hasLocalTags = false;
+}
+
 function getFiltered() {
   return allMaterials.filter(m => {
     const matchSubject = activeSubject === 'all' || m.subject === activeSubject;
@@ -621,17 +821,22 @@ function getFiltered() {
   });
 }
 
+function getCourseList() {
+  return [...new Set(allMaterials.map(m => normalizeCourse(m.course)))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+}
+
 function renderCourseFilter() {
-  const courses = [...new Set(allMaterials.map(m => normalizeCourse(m.course)))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+  const courses = getCourseList();
+  if (activeCourse !== 'all' && !courses.includes(activeCourse)) activeCourse = 'all';
 
   courseFilter.innerHTML = `
     <span class="filter-label">课程</span>
-    <button class="chip active" data-course="all">全部</button>
+    <button class="chip ${activeCourse === 'all' ? 'active' : ''}" data-course="all">全部</button>
   `;
 
   courses.forEach(course => {
     const btn = document.createElement('button');
-    btn.className = 'chip';
+    btn.className = `chip${course === activeCourse ? ' active' : ''}`;
     btn.dataset.course = course;
     btn.textContent = course;
     courseFilter.appendChild(btn);
@@ -644,6 +849,17 @@ function renderCourseFilter() {
       activeCourse = btn.dataset.course;
       render();
     });
+  });
+}
+
+function renderCourseOptions(currentCourse) {
+  const courses = new Set(getCourseList());
+  courses.add(normalizeCourse(currentCourse));
+  courseOptions.innerHTML = '';
+  [...courses].sort((a, b) => a.localeCompare(b, 'zh-CN')).forEach(course => {
+    const option = document.createElement('option');
+    option.value = course;
+    courseOptions.appendChild(option);
   });
 }
 
@@ -667,6 +883,7 @@ function render() {
     a.style.animationDelay = `${i * 0.04}s`;
 
     a.innerHTML = `
+      <button type="button" class="edit-tags-btn" aria-label="编辑标签">编辑</button>
       <svg class="card-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
         <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
@@ -675,14 +892,80 @@ function render() {
         <span class="tag tag-subject-${m.subject}">${SUBJECT_LABELS[m.subject]||m.subject}</span>
         <span class="tag tag-type-${m.type}">${TYPE_LABELS[m.type]||m.type}</span>
         <span class="tag tag-course">${escHtml(m.course || COURSE_FALLBACK_LABEL)}</span>
+        ${m.hasLocalTags ? '<span class="tag tag-local">自定义</span>' : ''}
       </div>
       <div class="card-title">${escHtml(m.title)}</div>
       <div class="card-desc">${escHtml(m.description||'')}</div>
       <div class="card-date">${m.date}</div>
     `;
 
+    a.querySelector('.edit-tags-btn').addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      openTagEditor(m.id);
+    });
+
     cardGrid.appendChild(a);
   });
+}
+
+function openTagEditor(materialId) {
+  const material = allMaterials.find(m => m.id === materialId);
+  if (!material) return;
+
+  editingMaterialId = materialId;
+  tagEditorMaterialTitle.textContent = material.title;
+  editSubjectSelect.value = material.subject;
+  editTypeSelect.value = material.type;
+  editCourseInput.value = material.course;
+  renderCourseOptions(material.course);
+  tagEditor.classList.add('open');
+  tagEditor.setAttribute('aria-hidden', 'false');
+  setTimeout(() => editCourseInput.focus(), 0);
+}
+
+function closeTagEditor() {
+  tagEditor.classList.remove('open');
+  tagEditor.setAttribute('aria-hidden', 'true');
+  editingMaterialId = '';
+}
+
+function saveEditedTags() {
+  const material = allMaterials.find(m => m.id === editingMaterialId);
+  if (!material) return;
+
+  const nextSubject = normalizeSubject(editSubjectSelect.value);
+  const nextType = normalizeType(editTypeSelect.value);
+  const nextCourse = normalizeCourse(editCourseInput.value);
+
+  tagOverrides[material.id] = {
+    subject: nextSubject,
+    type: nextType,
+    course: nextCourse
+  };
+  saveTagOverrides();
+
+  material.subject = nextSubject;
+  material.type = nextType;
+  material.course = nextCourse;
+  material.hasLocalTags = true;
+
+  renderCourseFilter();
+  render();
+  closeTagEditor();
+}
+
+function resetEditedTags() {
+  const material = allMaterials.find(m => m.id === editingMaterialId);
+  if (!material) return;
+
+  delete tagOverrides[material.id];
+  saveTagOverrides();
+  resetMaterialToAuto(material);
+
+  renderCourseFilter();
+  render();
+  closeTagEditor();
 }
 
 document.querySelectorAll('.chip[data-subject]').forEach(btn => {
@@ -706,6 +989,22 @@ document.querySelectorAll('.chip[data-type]').forEach(btn => {
 searchInput.addEventListener('input', () => {
   searchQuery = searchInput.value;
   render();
+});
+
+tagEditorForm.addEventListener('submit', event => {
+  event.preventDefault();
+  saveEditedTags();
+});
+
+cancelTagButton.addEventListener('click', closeTagEditor);
+resetTagButton.addEventListener('click', resetEditedTags);
+
+tagEditor.addEventListener('click', event => {
+  if (event.target === tagEditor) closeTagEditor();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && tagEditor.classList.contains('open')) closeTagEditor();
 });
 
 function escHtml(str) {
