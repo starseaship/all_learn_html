@@ -227,6 +227,20 @@ header {
 .chip[data-course="all"].active { background: var(--text); color: #fff; }
 .chip[data-course].active       { background: var(--yellow); border-color: var(--peach-deep); color: var(--peach-deep); }
 
+.utility-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.utility-btn:hover { border-color: #ccc; color: var(--text); }
+
 .divider { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
 
 /* ── MAIN LAYOUT ── */
@@ -532,6 +546,16 @@ header {
     <span class="filter-label">课程</span>
     <button class="chip active" data-course="all">全部</button>
   </div>
+
+  <div class="divider"></div>
+
+  <!-- Local data tools -->
+  <div class="filter-group">
+    <span class="filter-label">数据</span>
+    <button type="button" class="utility-btn" id="exportDataButton">导出</button>
+    <button type="button" class="utility-btn" id="importDataButton">导入</button>
+    <input type="file" id="importDataInput" accept="application/json,.json" hidden>
+  </div>
 </div>
 
 <!-- MAIN LAYOUT -->
@@ -543,8 +567,13 @@ header {
 <!-- TAG EDITOR -->
 <div class="tag-editor-backdrop" id="tagEditor" aria-hidden="true">
   <form class="tag-editor-panel" id="tagEditorForm" role="dialog" aria-modal="true" aria-labelledby="tagEditorTitle">
-    <h2 id="tagEditorTitle">编辑标签</h2>
+    <h2 id="tagEditorTitle">编辑资料</h2>
     <p class="tag-editor-subtitle" id="tagEditorMaterialTitle"></p>
+
+    <div class="tag-editor-field">
+      <label for="editTitleInput">名称</label>
+      <input id="editTitleInput" placeholder="显示在卡片上的名称">
+    </div>
 
     <div class="tag-editor-field">
       <label for="editSubjectSelect">科目</label>
@@ -623,12 +652,16 @@ const courseFilter = document.getElementById('courseFilter');
 const tagEditor = document.getElementById('tagEditor');
 const tagEditorForm = document.getElementById('tagEditorForm');
 const tagEditorMaterialTitle = document.getElementById('tagEditorMaterialTitle');
+const editTitleInput = document.getElementById('editTitleInput');
 const editSubjectSelect = document.getElementById('editSubjectSelect');
 const editTypeSelect = document.getElementById('editTypeSelect');
 const editCourseInput = document.getElementById('editCourseInput');
 const courseOptions = document.getElementById('courseOptions');
 const cancelTagButton = document.getElementById('cancelTagButton');
 const resetTagButton = document.getElementById('resetTagButton');
+const exportDataButton = document.getElementById('exportDataButton');
+const importDataButton = document.getElementById('importDataButton');
+const importDataInput = document.getElementById('importDataInput');
 
 async function loadMaterials() {
   try {
@@ -731,6 +764,7 @@ async function makeMaterialItemFromPath(path) {
     subject,
     type,
     course,
+    autoTitle: title,
     autoSubject: subject,
     autoType: type,
     autoCourse: course,
@@ -740,6 +774,11 @@ async function makeMaterialItemFromPath(path) {
   };
 
   return applyTagOverride(material);
+}
+
+function normalizeTitle(title, fallback = '') {
+  const t = String(title || '').trim();
+  return t || fallback || '未命名资料';
 }
 
 function normalizeSubject(subject) {
@@ -793,6 +832,7 @@ function applyTagOverride(material) {
   const override = tagOverrides[material.id];
   if (!override) return material;
 
+  material.title = normalizeTitle(override.title, material.autoTitle);
   material.subject = normalizeSubject(override.subject || material.autoSubject);
   material.type = normalizeType(override.type || material.autoType);
   material.course = normalizeCourse(override.course || material.autoCourse);
@@ -801,10 +841,20 @@ function applyTagOverride(material) {
 }
 
 function resetMaterialToAuto(material) {
+  material.title = material.autoTitle;
   material.subject = material.autoSubject;
   material.type = material.autoType;
   material.course = material.autoCourse;
   material.hasLocalTags = false;
+}
+
+function refreshMaterialsFromOverrides() {
+  allMaterials.forEach(material => {
+    resetMaterialToAuto(material);
+    applyTagOverride(material);
+  });
+  renderCourseFilter();
+  render();
 }
 
 function getFiltered() {
@@ -883,7 +933,7 @@ function render() {
     a.style.animationDelay = `${i * 0.04}s`;
 
     a.innerHTML = `
-      <button type="button" class="edit-tags-btn" aria-label="编辑标签">编辑</button>
+      <button type="button" class="edit-tags-btn" aria-label="编辑资料">编辑</button>
       <svg class="card-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
         <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
@@ -914,14 +964,15 @@ function openTagEditor(materialId) {
   if (!material) return;
 
   editingMaterialId = materialId;
-  tagEditorMaterialTitle.textContent = material.title;
+  tagEditorMaterialTitle.textContent = material.autoTitle;
+  editTitleInput.value = material.title;
   editSubjectSelect.value = material.subject;
   editTypeSelect.value = material.type;
   editCourseInput.value = material.course;
   renderCourseOptions(material.course);
   tagEditor.classList.add('open');
   tagEditor.setAttribute('aria-hidden', 'false');
-  setTimeout(() => editCourseInput.focus(), 0);
+  setTimeout(() => editTitleInput.focus(), 0);
 }
 
 function closeTagEditor() {
@@ -934,17 +985,20 @@ function saveEditedTags() {
   const material = allMaterials.find(m => m.id === editingMaterialId);
   if (!material) return;
 
+  const nextTitle = normalizeTitle(editTitleInput.value, material.autoTitle);
   const nextSubject = normalizeSubject(editSubjectSelect.value);
   const nextType = normalizeType(editTypeSelect.value);
   const nextCourse = normalizeCourse(editCourseInput.value);
 
   tagOverrides[material.id] = {
+    title: nextTitle,
     subject: nextSubject,
     type: nextType,
     course: nextCourse
   };
   saveTagOverrides();
 
+  material.title = nextTitle;
   material.subject = nextSubject;
   material.type = nextType;
   material.course = nextCourse;
@@ -966,6 +1020,76 @@ function resetEditedTags() {
   renderCourseFilter();
   render();
   closeTagEditor();
+}
+
+function exportEditData() {
+  const payload = {
+    version: 1,
+    source: 'Zoe Study Archive',
+    exportedAt: new Date().toISOString(),
+    overrides: tagOverrides
+  };
+  const text = JSON.stringify(payload, null, 2);
+  const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  a.href = url;
+  a.download = `zoe-study-archive-edits-${date}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function normalizeImportedOverrides(raw) {
+  const source = raw && typeof raw === 'object' && raw.overrides && typeof raw.overrides === 'object'
+    ? raw.overrides
+    : raw;
+  if (!source || typeof source !== 'object' || Array.isArray(source)) {
+    throw new Error('导入文件格式不正确');
+  }
+
+  const normalized = {};
+  Object.entries(source).forEach(([id, item]) => {
+    if (!id || !item || typeof item !== 'object' || Array.isArray(item)) return;
+    normalized[id] = {
+      title: String(item.title || '').trim(),
+      subject: normalizeSubject(item.subject),
+      type: normalizeType(item.type),
+      course: normalizeCourse(item.course)
+    };
+  });
+
+  return normalized;
+}
+
+async function importEditDataFromFile(file) {
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    const imported = normalizeImportedOverrides(parsed);
+    const count = Object.keys(imported).length;
+
+    if (count === 0) {
+      alert('没有找到可导入的编辑数据。');
+      return;
+    }
+
+    tagOverrides = {
+      ...tagOverrides,
+      ...imported
+    };
+    saveTagOverrides();
+    refreshMaterialsFromOverrides();
+    alert(`已导入 ${count} 条编辑数据。`);
+  } catch (e) {
+    alert(`导入失败：${e.message || e}`);
+  } finally {
+    importDataInput.value = '';
+  }
 }
 
 document.querySelectorAll('.chip[data-subject]').forEach(btn => {
@@ -998,6 +1122,9 @@ tagEditorForm.addEventListener('submit', event => {
 
 cancelTagButton.addEventListener('click', closeTagEditor);
 resetTagButton.addEventListener('click', resetEditedTags);
+exportDataButton.addEventListener('click', exportEditData);
+importDataButton.addEventListener('click', () => importDataInput.click());
+importDataInput.addEventListener('change', () => importEditDataFromFile(importDataInput.files[0]));
 
 tagEditor.addEventListener('click', event => {
   if (event.target === tagEditor) closeTagEditor();
