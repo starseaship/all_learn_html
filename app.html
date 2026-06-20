@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoe's Study Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Kaisei+Opti:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN: Soft macaron pastel + editorial warmth
+   Airy cream base, hand-picked pastel chips, rounded & cozy
+   ============================================================ */
+:root {
+  --bg:        #f7f4ef;
+  --surface:   #ffffff;
+  --surface2:  #f0ece5;
+
+  /* macaron palette */
+  --pink:      #f9c4ce;
+  --pink-deep: #c4637a;
+  --blue:      #b8d8f8;
+  --blue-deep: #4a7fb5;
+  --mint:      #b5e8c8;
+  --mint-deep: #3a8f5e;
+  --lav:       #d4c4f0;
+  --lav-deep:  #7254b8;
+  --peach:     #ffd9b8;
+  --peach-deep:#c07030;
+  --yellow:    #fdeea0;
+
+  --text:      #2e2a35;
+  --text-dim:  #7a7585;
+  --border:    rgba(0,0,0,0.07);
+  --shadow:    rgba(80,60,100,0.10);
+
+  /* subject → color mapping */
+  --c-english:  var(--blue);
+  --c-japanese: var(--mint);
+  --c-general:  var(--peach);
+  --c-wgl:      var(--lav);
+
+  /* type → color mapping */
+  --c-grammar:    var(--pink);
+  --c-vocabulary: var(--blue);
+  --c-quiz:       var(--mint);
+  --c-notes:      var(--peach);
+  --c-reference:  var(--lav);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  min-height: auto;
+  overflow-x: hidden;
+}
+
+/* ── DECORATIVE BG BLOBS ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(249,196,206,0.35) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -100px; left: -100px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(181,232,200,0.3) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative; z-index: 10;
+  padding: 48px 40px 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  background: rgba(247,244,239,0.85);
+  backdrop-filter: blur(8px);
+}
+.header-left h1 {
+  font-family: 'Kaisei Opti', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+}
+.header-left h1 span {
+  background: linear-gradient(135deg, var(--pink-deep), var(--lav-deep));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header-left p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.header-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.stat-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 18px;
+  text-align: center;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.stat-chip .num {
+  font-family: 'Kaisei Opti', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+}
+.stat-chip .label {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── CONTROLS BAR ── */
+.controls {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(247,244,239,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 340px;
+}
+.search-wrap svg {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+#searchInput {
+  width: 100%;
+  padding: 10px 12px 10px 38px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#searchInput:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(249,196,206,0.3);
+}
+#searchInput::placeholder { color: var(--text-dim); }
+
+.filter-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.chip {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: var(--surface);
+  color: var(--text-dim);
+  border-color: var(--border);
+}
+.chip:hover { border-color: #ccc; color: var(--text); }
+.chip.active {
+  color: var(--text);
+  border-color: transparent;
+}
+/* subject chips */
+.chip[data-subject="all"].active    { background: var(--text); color: #fff; }
+.chip[data-subject="english"].active  { background: var(--blue); border-color: var(--blue-deep); color: var(--blue-deep); }
+.chip[data-subject="japanese"].active { background: var(--mint); border-color: var(--mint-deep); color: var(--mint-deep); }
+.chip[data-subject="general"].active  { background: var(--peach); border-color: var(--peach-deep); color: var(--peach-deep); }
+.chip[data-subject="wgl"].active      { background: var(--lav); border-color: var(--lav-deep); color: var(--lav-deep); }
+/* type chips */
+.chip[data-type="all"].active      { background: var(--text); color: #fff; }
+.chip[data-type="grammar"].active    { background: var(--pink); border-color: var(--pink-deep); color: var(--pink-deep); }
+.chip[data-type="vocabulary"].active { background: var(--blue); border-color: var(--blue-deep); color: var(--blue-deep); }
+.chip[data-type="quiz"].active       { background: var(--mint); border-color: var(--mint-deep); color: var(--mint-deep); }
+.chip[data-type="notes"].active      { background: var(--peach); border-color: var(--peach-deep); color: var(--peach-deep); }
+.chip[data-type="reference"].active  { background: var(--lav); border-color: var(--lav-deep); color: var(--lav-deep); }
+
+.divider { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
+
+/* ── MAIN LAYOUT ── */
+.layout {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  padding-bottom: 40px;
+}
+
+/* ── MAIN LAYOUT ── */
+.layout {
+  position: relative; z-index: 5;
+  padding: 24px 32px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.results-info {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+
+  align-items: start;
+  align-content: start;
+}
+
+.material-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  align-self: start;
+  height: auto;
+}
+.material-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+.material-card[data-subject="english"]::before  { background: var(--blue); }
+.material-card[data-subject="japanese"]::before { background: var(--mint); }
+.material-card[data-subject="general"]::before  { background: var(--peach); }
+.material-card[data-subject="wgl"]::before      { background: var(--lav); }
+
+.material-card:hover {
+  border-color: #c8c0d8;
+  box-shadow: 0 8px 24px var(--shadow);
+  transform: translateY(-4px);
+}
+
+/* open-link icon, appears on hover */
+.card-arrow {
+  position: absolute;
+  top: 16px; right: 16px;
+  opacity: 0;
+  transition: opacity 0.18s;
+  color: var(--text-dim);
+}
+.material-card:hover .card-arrow { opacity: 1; }
+
+.card-tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.tag-subject-english  { background: var(--blue);  color: var(--blue-deep); }
+.tag-subject-japanese { background: var(--mint);  color: var(--mint-deep); }
+.tag-subject-general  { background: var(--peach); color: var(--peach-deep); }
+.tag-subject-wgl      { background: var(--lav);   color: var(--lav-deep); }
+.tag-type-grammar     { background: var(--pink);  color: var(--pink-deep); }
+.tag-type-vocabulary  { background: #d8eeff;      color: var(--blue-deep); }
+.tag-type-quiz        { background: #c8f0d8;      color: var(--mint-deep); }
+.tag-type-notes       { background: var(--peach); color: var(--peach-deep); }
+.tag-type-reference   { background: var(--lav);   color: var(--lav-deep); }
+
+.card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+.card-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.card-date {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #bbb;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  header { padding: 28px 20px 20px; }
+  .controls { padding: 12px 16px; }
+  .layout { padding: 20px 16px 40px; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <h1>Zoe's <span>Study Archive</span></h1>
+    <p>学习资料库 · GitHub Pages 托管</p>
+  </div>
+  <div class="header-stats">
+    <div class="stat-chip">
+      <span class="num" id="totalCount">—</span>
+      <span class="label">资料总数</span>
+    </div>
+    <div class="stat-chip">
+      <span class="num" id="subjectCount">—</span>
+      <span class="label">科目</span>
+    </div>
+  </div>
+</header>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <!-- Search -->
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="搜索资料名称或描述…">
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Subject filter -->
+  <div class="filter-group">
+    <span class="filter-label">科目</span>
+    <button class="chip active" data-subject="all">全部</button>
+    <button class="chip" data-subject="english">🇬🇧 英语</button>
+    <button class="chip" data-subject="japanese">🇯🇵 日语</button>
+    <button class="chip" data-subject="general">📚 通识</button>
+    <button class="chip" data-subject="wgl">🌐 WGL</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Type filter -->
+  <div class="filter-group">
+    <span class="filter-label">类型</span>
+    <button class="chip active" data-type="all">全部</button>
+    <button class="chip" data-type="grammar">文法</button>
+    <button class="chip" data-type="vocabulary">词汇</button>
+    <button class="chip" data-type="quiz">练习</button>
+    <button class="chip" data-type="notes">笔记</button>
+    <button class="chip" data-type="reference">参考</button>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+  <div class="results-info" id="resultsInfo">载入中…</div>
+  <div class="card-grid" id="cardGrid"></div>
+</div>
+
+<script>
+
+// ── GitHub auto scan settings ──
+// Public GitHub repository: https://github.com/starseaship/learnlist
+const GITHUB_OWNER = 'starseaship';
+const GITHUB_REPO  = 'learnlist';
+const GITHUB_BRANCH = 'main';
+const MATERIALS_ROOT = 'materials';
+
+const SUBJECT_LABELS = {
+  english:  '🇬🇧 英语',
+  japanese: '🇯🇵 日语',
+  general:  '📚 通识',
+  wgl:      '🌐 WGL',
+};
+const TYPE_LABELS = {
+  grammar:    '文法',
+  vocabulary: '词汇',
+  quiz:       '练习',
+  notes:      '笔记',
+  reference:  '参考',
+};
+
+let allMaterials = [];
+let activeSubject = 'all';
+let activeType = 'all';
+let searchQuery = '';
+
+const cardGrid    = document.getElementById('cardGrid');
+const resultsInfo = document.getElementById('resultsInfo');
+const totalCount  = document.getElementById('totalCount');
+const subjectCount = document.getElementById('subjectCount');
+const searchInput = document.getElementById('searchInput');
+
+async function loadMaterials() {
+  try {
+    resultsInfo.textContent = '正在从 GitHub 读取资料…';
+    allMaterials = await scanMaterialsFromTree();
+
+    allMaterials.sort((a, b) => {
+      if (a.date && b.date) return new Date(b.date) - new Date(a.date);
+      return a.title.localeCompare(b.title, 'zh-CN');
+    });
+
+    totalCount.textContent = allMaterials.length;
+    subjectCount.textContent = new Set(allMaterials.map(m => m.subject)).size;
+    render();
+  } catch (e) {
+    console.error(e);
+    resultsInfo.textContent = '⚠ 无法读取 GitHub materials 文件夹';
+    cardGrid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;font-size:14px;line-height:1.8;">
+        😢 GitHub 读取失败<br>
+        <span style="font-family:monospace;font-size:12px;color:#999;">${escHtml(String(e.message || e))}</span><br><br>
+        请检查：仓库是否 Public、分支是否 main、materials 文件夹是否存在。
+      </div>
+    `;
+  }
+}
+
+async function scanMaterialsFromTree() {
+  const treeUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+  const res = await fetch(treeUrl, { cache: 'no-store' });
+
+  if (!res.ok) {
+    throw new Error(`GitHub Tree API error: ${res.status}. URL: ${treeUrl}`);
+  }
+
+  const data = await res.json();
+  if (!data.tree || !Array.isArray(data.tree)) {
+    throw new Error('GitHub Tree API 返回内容不正常');
+  }
+
+  const htmlFiles = data.tree.filter(item =>
+    item.type === 'blob' &&
+    item.path.startsWith(MATERIALS_ROOT + '/') &&
+    item.path.toLowerCase().endsWith('.html')
+  );
+
+  if (htmlFiles.length === 0) {
+    return [];
+  }
+
+  const materials = [];
+  for (const item of htmlFiles) {
+    materials.push(await makeMaterialItemFromPath(item.path));
+  }
+  return materials;
+}
+
+async function makeMaterialItemFromPath(path) {
+  const parts = path.split('/');
+  const subject = normalizeSubject(parts[1] || 'general');
+  const filename = parts[parts.length - 1];
+  const guessedTitle = filename
+    .replace(/\.html$/i, '')
+    .replace(/[-_]/g, ' ');
+
+  let title = guessedTitle;
+  let description = path;
+  let type = guessType(filename + ' ' + path);
+  let date = '';
+
+  try {
+    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${path}?v=${Date.now()}`;
+    const htmlRes = await fetch(rawUrl, { cache: 'no-store' });
+    if (htmlRes.ok) {
+      const htmlText = await htmlRes.text();
+      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+
+      const htmlTitle = doc.querySelector('title')?.textContent?.trim();
+      const htmlDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content')?.trim();
+      const htmlType = doc.querySelector('meta[name="type"]')?.getAttribute('content')?.trim();
+      const htmlDate = doc.querySelector('meta[name="date"]')?.getAttribute('content')?.trim();
+
+      if (htmlTitle) title = htmlTitle;
+      if (htmlDesc) description = htmlDesc;
+      if (htmlType) type = normalizeType(htmlType);
+      if (htmlDate) date = htmlDate;
+    }
+  } catch (e) {
+    console.warn('Could not read metadata from', path, e);
+  }
+
+  return {
+    id: path,
+    title,
+    description,
+    subject,
+    type,
+    path,
+    date
+  };
+}
+
+function normalizeSubject(subject) {
+  const s = String(subject || '').toLowerCase();
+  const allowed = ['english', 'japanese', 'general', 'wgl'];
+  return allowed.includes(s) ? s : 'general';
+}
+
+function normalizeType(type) {
+  const t = String(type || '').toLowerCase();
+  const allowed = ['grammar', 'vocabulary', 'quiz', 'notes', 'reference'];
+  return allowed.includes(t) ? t : 'reference';
+}
+
+function guessType(text) {
+  const name = String(text || '').toLowerCase();
+
+  if (name.includes('grammar') || name.includes('bunpou') || name.includes('文法')) return 'grammar';
+  if (name.includes('vocab') || name.includes('word') || name.includes('単語') || name.includes('词汇')) return 'vocabulary';
+  if (name.includes('quiz') || name.includes('test') || name.includes('练习')) return 'quiz';
+  if (name.includes('note') || name.includes('summary') || name.includes('笔记')) return 'notes';
+
+  return 'reference';
+}
+
+function getFiltered() {
+  return allMaterials.filter(m => {
+    const matchSubject = activeSubject === 'all' || m.subject === activeSubject;
+    const matchType    = activeType === 'all' || m.type === activeType;
+    const q = searchQuery.toLowerCase();
+    const matchSearch  = !q || m.title.toLowerCase().includes(q) || (m.description||'').toLowerCase().includes(q);
+    return matchSubject && matchType && matchSearch;
+  });
+}
+
+function render() {
+  const filtered = getFiltered();
+  resultsInfo.textContent = `共 ${filtered.length} 份资料`;
+  cardGrid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    cardGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:#999;font-size:14px;font-weight:700;">🔍 没有找到符合条件的资料</div>`;
+    return;
+  }
+
+  filtered.forEach((m, i) => {
+    const a = document.createElement('a');
+    a.className = 'material-card';
+    a.href = m.path;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.dataset.subject = m.subject;
+    a.style.animationDelay = `${i * 0.04}s`;
+
+    a.innerHTML = `
+      <svg class="card-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+      </svg>
+      <div class="card-tags">
+        <span class="tag tag-subject-${m.subject}">${SUBJECT_LABELS[m.subject]||m.subject}</span>
+        <span class="tag tag-type-${m.type}">${TYPE_LABELS[m.type]||m.type}</span>
+      </div>
+      <div class="card-title">${escHtml(m.title)}</div>
+      <div class="card-desc">${escHtml(m.description||'')}</div>
+      <div class="card-date">${m.date}</div>
+    `;
+
+    cardGrid.appendChild(a);
+  });
+}
+
+document.querySelectorAll('.chip[data-subject]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-subject]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeSubject = btn.dataset.subject;
+    render();
+  });
+});
+
+document.querySelectorAll('.chip[data-type]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip[data-type]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeType = btn.dataset.type;
+    render();
+  });
+});
+
+searchInput.addEventListener('input', () => {
+  searchQuery = searchInput.value;
+  render();
+});
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+loadMaterials();
+</script>
+</body>
+</html>
