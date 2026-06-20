@@ -223,6 +223,9 @@ header {
 .chip[data-type="quiz"].active       { background: var(--mint); border-color: var(--mint-deep); color: var(--mint-deep); }
 .chip[data-type="notes"].active      { background: var(--peach); border-color: var(--peach-deep); color: var(--peach-deep); }
 .chip[data-type="reference"].active  { background: var(--lav); border-color: var(--lav-deep); color: var(--lav-deep); }
+/* course chips */
+.chip[data-course="all"].active { background: var(--text); color: #fff; }
+.chip[data-course].active       { background: var(--yellow); border-color: var(--peach-deep); color: var(--peach-deep); }
 
 .divider { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
 
@@ -327,6 +330,7 @@ header {
 .tag-type-quiz        { background: #c8f0d8;      color: var(--mint-deep); }
 .tag-type-notes       { background: var(--peach); color: var(--peach-deep); }
 .tag-type-reference   { background: var(--lav);   color: var(--lav-deep); }
+.tag-course           { background: var(--yellow); color: var(--peach-deep); text-transform: none; }
 
 .card-title {
   font-size: 15px;
@@ -410,6 +414,14 @@ header {
     <button class="chip" data-type="notes">笔记</button>
     <button class="chip" data-type="reference">参考</button>
   </div>
+
+  <div class="divider"></div>
+
+  <!-- Course filter -->
+  <div class="filter-group" id="courseFilter">
+    <span class="filter-label">课程</span>
+    <button class="chip active" data-course="all">全部</button>
+  </div>
 </div>
 
 <!-- MAIN LAYOUT -->
@@ -426,6 +438,7 @@ const GITHUB_OWNER = 'starseaship';
 const GITHUB_REPO  = 'learnlist';
 const GITHUB_BRANCH = 'main';
 const MATERIALS_ROOT = 'materials';
+const COURSE_FALLBACK_LABEL = '未分类';
 
 const SUBJECT_LABELS = {
   english:  '🇬🇧 英语',
@@ -444,6 +457,7 @@ const TYPE_LABELS = {
 let allMaterials = [];
 let activeSubject = 'all';
 let activeType = 'all';
+let activeCourse = 'all';
 let searchQuery = '';
 
 const cardGrid    = document.getElementById('cardGrid');
@@ -451,6 +465,7 @@ const resultsInfo = document.getElementById('resultsInfo');
 const totalCount  = document.getElementById('totalCount');
 const subjectCount = document.getElementById('subjectCount');
 const searchInput = document.getElementById('searchInput');
+const courseFilter = document.getElementById('courseFilter');
 
 async function loadMaterials() {
   try {
@@ -464,6 +479,7 @@ async function loadMaterials() {
 
     totalCount.textContent = allMaterials.length;
     subjectCount.textContent = new Set(allMaterials.map(m => m.subject)).size;
+    renderCourseFilter();
     render();
   } catch (e) {
     console.error(e);
@@ -519,6 +535,7 @@ async function makeMaterialItemFromPath(path) {
   let title = guessedTitle;
   let description = path;
   let type = guessType(filename + ' ' + path);
+  let course = guessCourseFromPath(path);
   let date = '';
 
   try {
@@ -531,11 +548,13 @@ async function makeMaterialItemFromPath(path) {
       const htmlTitle = doc.querySelector('title')?.textContent?.trim();
       const htmlDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content')?.trim();
       const htmlType = doc.querySelector('meta[name="type"]')?.getAttribute('content')?.trim();
+      const htmlCourse = doc.querySelector('meta[name="course"]')?.getAttribute('content')?.trim();
       const htmlDate = doc.querySelector('meta[name="date"]')?.getAttribute('content')?.trim();
 
       if (htmlTitle) title = htmlTitle;
       if (htmlDesc) description = htmlDesc;
       if (htmlType) type = normalizeType(htmlType);
+      if (htmlCourse) course = normalizeCourse(htmlCourse);
       if (htmlDate) date = htmlDate;
     }
   } catch (e) {
@@ -548,6 +567,7 @@ async function makeMaterialItemFromPath(path) {
     description,
     subject,
     type,
+    course,
     path,
     date
   };
@@ -565,6 +585,17 @@ function normalizeType(type) {
   return allowed.includes(t) ? t : 'reference';
 }
 
+function normalizeCourse(course) {
+  const c = String(course || '').trim();
+  return c || COURSE_FALLBACK_LABEL;
+}
+
+function guessCourseFromPath(path) {
+  const parts = String(path || '').split('/');
+  const courseParts = parts.slice(2, -1).filter(Boolean);
+  return normalizeCourse(courseParts.join(' / '));
+}
+
 function guessType(text) {
   const name = String(text || '').toLowerCase();
 
@@ -580,9 +611,39 @@ function getFiltered() {
   return allMaterials.filter(m => {
     const matchSubject = activeSubject === 'all' || m.subject === activeSubject;
     const matchType    = activeType === 'all' || m.type === activeType;
+    const matchCourse  = activeCourse === 'all' || m.course === activeCourse;
     const q = searchQuery.toLowerCase();
-    const matchSearch  = !q || m.title.toLowerCase().includes(q) || (m.description||'').toLowerCase().includes(q);
-    return matchSubject && matchType && matchSearch;
+    const matchSearch  = !q ||
+      m.title.toLowerCase().includes(q) ||
+      (m.description||'').toLowerCase().includes(q) ||
+      (m.course||'').toLowerCase().includes(q);
+    return matchSubject && matchType && matchCourse && matchSearch;
+  });
+}
+
+function renderCourseFilter() {
+  const courses = [...new Set(allMaterials.map(m => normalizeCourse(m.course)))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+
+  courseFilter.innerHTML = `
+    <span class="filter-label">课程</span>
+    <button class="chip active" data-course="all">全部</button>
+  `;
+
+  courses.forEach(course => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.dataset.course = course;
+    btn.textContent = course;
+    courseFilter.appendChild(btn);
+  });
+
+  courseFilter.querySelectorAll('.chip[data-course]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      courseFilter.querySelectorAll('.chip[data-course]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCourse = btn.dataset.course;
+      render();
+    });
   });
 }
 
@@ -613,6 +674,7 @@ function render() {
       <div class="card-tags">
         <span class="tag tag-subject-${m.subject}">${SUBJECT_LABELS[m.subject]||m.subject}</span>
         <span class="tag tag-type-${m.type}">${TYPE_LABELS[m.type]||m.type}</span>
+        <span class="tag tag-course">${escHtml(m.course || COURSE_FALLBACK_LABEL)}</span>
       </div>
       <div class="card-title">${escHtml(m.title)}</div>
       <div class="card-desc">${escHtml(m.description||'')}</div>
@@ -647,7 +709,7 @@ searchInput.addEventListener('input', () => {
 });
 
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 loadMaterials();
