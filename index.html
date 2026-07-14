@@ -21,53 +21,123 @@ html,body{width:100%;height:100%;margin:0;padding:0;background:#06162c;overflow:
 </style>
 </head>
 <body>
-<iframe id="appFrame" src="./app.html?v=20260621-2" title="Zoe's Study Archive"></iframe>
+<iframe id="appFrame" src="./app.html?v=20260714-1" title="Zoe's Study Archive"></iframe>
 <noscript>需要启用 JavaScript 才能使用学习资料库。</noscript>
 <script>
 const appFrame = document.getElementById('appFrame');
 appFrame.addEventListener('load', () => {
   try {
     const doc = appFrame.contentDocument;
-    if (!doc || doc.getElementById('desktopLayoutOverride')) return;
+    if (!doc) return;
 
-    const style = doc.createElement('style');
-    style.id = 'desktopLayoutOverride';
-    style.textContent = `
-      @media (min-width: 721px) {
-        .layout {
-          display: block !important;
-          width: 100% !important;
-          max-width: 1600px !important;
-          margin: 0 auto !important;
-          padding: 28px clamp(28px, 4vw, 56px) 56px !important;
+    if (!doc.getElementById('desktopLayoutOverride')) {
+      const style = doc.createElement('style');
+      style.id = 'desktopLayoutOverride';
+      style.textContent = `
+        @media (min-width: 721px) {
+          .layout {
+            display: block !important;
+            width: 100% !important;
+            max-width: 1600px !important;
+            margin: 0 auto !important;
+            padding: 28px clamp(28px, 4vw, 56px) 56px !important;
+          }
+          .results-info {
+            margin-bottom: 18px !important;
+          }
+          .card-grid {
+            width: 100% !important;
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+            gap: 18px !important;
+          }
+          .material-card {
+            min-height: 150px !important;
+          }
         }
-        .results-info {
-          margin-bottom: 18px !important;
+        @media (min-width: 1500px) {
+          .card-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          }
         }
-        .card-grid {
-          width: 100% !important;
-          display: grid !important;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
-          gap: 18px !important;
+        @media (max-width: 720px) {
+          .layout {
+            display: block !important;
+          }
         }
-        .material-card {
-          min-height: 150px !important;
-        }
-      }
-      @media (min-width: 1500px) {
-        .card-grid {
-          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        }
-      }
-      @media (max-width: 720px) {
-        .layout {
-          display: block !important;
-        }
-      }
-    `;
-    doc.head.appendChild(style);
+      `;
+      doc.head.appendChild(style);
+    }
+
+    if (!doc.getElementById('writingTypeSupport')) {
+      const patch = doc.createElement('script');
+      patch.id = 'writingTypeSupport';
+      patch.textContent = `
+        (() => {
+          if (document.documentElement.dataset.writingTypeReady === '1') return;
+          document.documentElement.dataset.writingTypeReady = '1';
+
+          TYPE_LABELS.writing = '写作';
+
+          const originalNormalizeType = normalizeType;
+          normalizeType = function(type) {
+            const value = String(type || '').trim().toLowerCase();
+            if (value === 'writing' || value === '写作') return 'writing';
+            return originalNormalizeType(type);
+          };
+
+          const originalGuessType = guessType;
+          guessType = function(text) {
+            const value = String(text || '').toLowerCase();
+            if (value.includes('writing') || value.includes('写作')) return 'writing';
+            return originalGuessType(text);
+          };
+
+          const style = document.createElement('style');
+          style.textContent = \`
+            .chip[data-type="writing"].active {
+              background: var(--yellow);
+              border-color: var(--peach-deep);
+              color: var(--peach-deep);
+            }
+            .tag-type-writing {
+              background: var(--yellow);
+              color: var(--peach-deep);
+            }
+          \`;
+          document.head.appendChild(style);
+
+          const typeGroup = Array.from(document.querySelectorAll('.filter-group')).find(group => group.querySelector('[data-type="all"]'));
+          if (typeGroup && !typeGroup.querySelector('[data-type="writing"]')) {
+            const button = document.createElement('button');
+            button.className = 'chip';
+            button.dataset.type = 'writing';
+            button.textContent = '写作';
+            const referenceButton = typeGroup.querySelector('[data-type="reference"]');
+            typeGroup.insertBefore(button, referenceButton || null);
+            button.addEventListener('click', () => {
+              document.querySelectorAll('.chip[data-type]').forEach(item => item.classList.remove('active'));
+              button.classList.add('active');
+              activeType = 'writing';
+              render();
+            });
+          }
+
+          const typeSelect = document.getElementById('editTypeSelect');
+          if (typeSelect && !typeSelect.querySelector('option[value="writing"]')) {
+            const option = document.createElement('option');
+            option.value = 'writing';
+            option.textContent = '写作';
+            typeSelect.insertBefore(option, typeSelect.querySelector('option[value="reference"]') || null);
+          }
+
+          loadMaterials();
+        })();
+      `;
+      doc.body.appendChild(patch);
+    }
   } catch (e) {
-    console.warn('Could not apply desktop layout override', e);
+    console.warn('Could not apply study archive overrides', e);
   }
 });
 </script>
