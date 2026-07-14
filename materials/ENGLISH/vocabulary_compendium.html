@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>词汇整理 · Vocabulary Compendium</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;600&display=swap');
+
+  :root{
+    --cream:#faf6ee;
+    --parchment:#f3ecdc;
+    --ink:#3a3226;
+    --sage:#7c9070;
+    --sage-dark:#5d7052;
+    --plum:#8a5a72;
+    --rose:#b56464;
+    --gold:#c9a24b;
+    --gold-light:#fdf2c9;
+    --line:#e3d8bd;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'EB Garamond', 'Noto Serif SC', serif;
+    line-height:1.6;
+    padding:0 0 70px;
+  }
+  .hero{
+    text-align:center;
+    padding:36px 24px 26px;
+  }
+  .hero .jp-small{
+    color:var(--rose);
+    font-size:1.05em;
+    letter-spacing:2px;
+    margin-bottom:6px;
+    font-style:italic;
+  }
+  .hero h1{
+    font-size:2em;
+    font-weight:700;
+    margin:4px 0 10px;
+  }
+  .hero .sub{
+    font-style:italic;
+    color:#8a7f66;
+    font-size:1em;
+  }
+  .divider{
+    width:220px;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:22px auto 0;
+  }
+
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:28px auto 8px;
+    flex-wrap:wrap;
+    padding:0 16px;
+  }
+  .tab-pill{
+    font-family:'EB Garamond', serif;
+    font-size:1.05em;
+    padding:12px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    background:var(--parchment);
+    color:#8a7f66;
+    transition:all 0.2s ease;
+  }
+  .tab-pill.active{
+    background:var(--sage);
+    color:#fdf9ec;
+    font-weight:600;
+  }
+  .tab-pill:hover:not(.active){ background:#ece2c9; }
+
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+
+  .panel-title{
+    text-align:center;
+    margin:26px 0 18px;
+    font-size:1.25em;
+  }
+  .panel-title .count{ color:#a89a7c; font-size:0.8em; }
+
+  /* Accordion */
+  .unit{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .unit-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 20px;
+    cursor:pointer;
+    background:var(--parchment);
+  }
+  .unit-head .title{
+    font-weight:600;
+    font-size:1.15em;
+    color:var(--sage-dark);
+  }
+  .unit-head .meta{
+    color:#a89a7c;
+    font-size:0.85em;
+    font-style:italic;
+  }
+  .unit-head .chevron{
+    transition:transform 0.25s ease;
+    color:var(--gold);
+    font-size:1.1em;
+  }
+  .unit.open .chevron{ transform:rotate(180deg); }
+  .unit-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease;
+  }
+  .unit.open .unit-body{ max-height:6000px; }
+
+  .word-list{
+    display:grid;
+    gap:12px;
+    padding:16px 20px 20px;
+  }
+  .word-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 16px;
+    background:var(--cream);
+  }
+  .word-card .num{
+    color:var(--gold);
+    font-weight:600;
+    font-size:0.85em;
+  }
+  .word-card .headword-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .word-card .headword{
+    font-size:1.25em;
+    font-weight:700;
+  }
+  .word-card .zh{
+    color:#9a8f74;
+    font-family:'Noto Serif SC', serif;
+    font-size:0.92em;
+  }
+  .word-card .def{
+    margin-top:4px;
+    font-size:1em;
+  }
+  .word-card .def mark{
+    background:var(--gold-light);
+    font-weight:700;
+    padding:1px 4px;
+    border-radius:5px;
+    color:inherit;
+  }
+
+  /* Matching panel */
+  .scope-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:22px;
+  }
+  .scope-box .scope-title{
+    font-weight:600;
+    color:var(--plum);
+    margin-bottom:10px;
+    text-align:center;
+  }
+  .scope-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+  }
+  .scope-chip{
+    font-family:'EB Garamond', serif;
+    font-size:0.92em;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    cursor:pointer;
+    background:#fff;
+    color:#6b5f4a;
+    transition:all 0.2s ease;
+  }
+  .scope-chip.active{
+    background:var(--plum);
+    border-color:var(--plum);
+    color:#fff;
+  }
+  .scope-actions{
+    text-align:center;
+    margin-top:14px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .scope-actions button{
+    font-family:inherit;
+    background:var(--sage);
+    color:#fff;
+    border:none;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:0.9em;
+    cursor:pointer;
+  }
+  .scope-actions button.secondary{
+    background:var(--parchment);
+    color:#6b5f4a;
+  }
+  .scope-hint{
+    text-align:center;
+    color:#a89a7c;
+    font-size:0.85em;
+    font-style:italic;
+    margin-top:10px;
+  }
+
+  #matchGame{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .match-col{
+    flex:1;
+    min-width:260px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .match-item{
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    cursor:pointer;
+    transition:all 0.25s ease;
+    font-size:0.96em;
+    user-select:none;
+  }
+  .match-item.word{
+    font-weight:700;
+    color:var(--sage-dark);
+    text-align:center;
+  }
+  .match-item.def{ color:var(--ink); }
+  .match-item:hover{ border-color:var(--gold); }
+  .match-item.selected{
+    border-color:var(--plum);
+    background:#f6ecf1;
+  }
+  .match-item.matched{
+    background:var(--gold-light);
+    border-color:var(--sage);
+    color:#8a8370;
+    opacity:0.5;
+    transform:translateY(6px) scale(0.97);
+    cursor:default;
+    pointer-events:none;
+  }
+  .match-item.wrong{
+    animation:shake 0.4s;
+    border-color:#c0574f;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    75%{transform:translateX(5px);}
+  }
+  #matchStatus{
+    text-align:center;
+    margin-top:20px;
+    font-size:1.1em;
+    color:var(--sage-dark);
+    font-weight:600;
+    min-height:1.4em;
+  }
+  .controls{ text-align:center; margin-top:20px; }
+  button.reset{
+    font-family:inherit;
+    background:var(--sage);
+    color:#fff;
+    border:none;
+    padding:11px 26px;
+    border-radius:999px;
+    font-size:1em;
+    cursor:pointer;
+  }
+  button.reset:hover{ background:var(--sage-dark); }
+
+  footer{
+    text-align:center;
+    margin-top:50px;
+    color:#a89a7c;
+    font-style:italic;
+    font-size:0.9em;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="jp-small">小さな単語の庭</div>
+  <h1>词汇整理 · Vocabulary Compendium</h1>
+  <div class="sub">13 units · 260 words · merged from Vocabulary Summary &amp; PV/SF 2.8</div>
+  <div class="divider"></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-pill active" data-tab="browse">词汇浏览</button>
+  <button class="tab-pill" data-tab="match">配对练习</button>
+</div>
+
+<main>
+
+  <!-- BROWSE PANEL -->
+  <section class="panel active" id="panel-browse">
+    <div class="panel-title">按单元浏览 <span class="count">点击展开每个单元</span></div>
+    <div id="unitAccordion"></div>
+  </section>
+
+  <!-- MATCH PANEL -->
+  <section class="panel" id="panel-match">
+    <div class="panel-title">配对练习 <span class="count">Matching Practice</span></div>
+    <div class="scope-box">
+      <div class="scope-title">选择要练习的单元（可多选）</div>
+      <div class="scope-grid" id="scopeGrid"></div>
+      <div class="scope-actions">
+        <button id="selectAllBtn">全选</button>
+        <button class="secondary" id="clearBtn">清除</button>
+      </div>
+      <div class="scope-hint">建议一次选择 1–3 个单元，配对体验更佳</div>
+    </div>
+    <div id="matchGame">
+      <div class="match-col" id="wordCol"></div>
+      <div class="match-col" id="defCol"></div>
+    </div>
+    <div id="matchStatus"></div>
+    <div class="controls">
+      <button class="reset" id="resetBtn">Reset &amp; Reshuffle</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>词汇整理 · Vocabulary Summary + PV/SF 2.8</footer>
+
+<script>
+const units = [
+{id:"intro11", title:"Intro 1.1", words:[
+  {en:"abbreviation", zh:"缩写；简称", def:'a <mark>shortened form</mark> of a word or phrase'},
+  {en:"authority", zh:"权威人士；当局", def:'one with the <mark>power to make decisions</mark>'},
+  {en:"calm", zh:"冷静的；平静的", def:'<mark>not showing strong emotions</mark>'},
+  {en:"classmates", zh:"同班同学", def:'<mark>members of a class</mark> at school or college'},
+  {en:"comprehension", zh:"理解；理解力", def:'the action of <mark>understanding something</mark>'},
+  {en:"conclude", zh:"结束；作出结论", def:'to <mark>bring to an end</mark>'},
+  {en:"confidence", zh:"信心；自信", def:'the <mark>belief that you can do something</mark>'},
+  {en:"connection", zh:"联系；关系", def:'a <mark>relationship between two or more</mark> people, ideas, or things'},
+  {en:"diary", zh:"日记；日记本", def:'a book of <mark>personal memories and records</mark> of experiences'},
+  {en:"email", zh:"电子邮件", def:'<mark>electronic messages</mark>'},
+  {en:"hobby", zh:"爱好", def:'an activity <mark>done for pleasure</mark>'},
+  {en:"origin", zh:"起源；来源", def:'the point <mark>where something begins</mark>'},
+  {en:"personality", zh:"个性；性格", def:'qualities that <mark>form a person\'s character</mark>'},
+  {en:"phrase", zh:"短语；词组", def:'a group of words that <mark>work as one idea</mark>'},
+  {en:"polite", zh:"有礼貌的", def:'<mark>showing respect for others</mark>'},
+  {en:"punctual", zh:"准时的；守时的", def:'<mark>on time</mark>'},
+  {en:"repeat", zh:"重复；再说一次", def:'<mark>say again</mark>'},
+  {en:"suggestion", zh:"建议", def:'an idea <mark>put forward for consideration</mark>'},
+  {en:"summary", zh:"总结；摘要", def:'a <mark>brief statement of main points</mark>'},
+  {en:"survive", zh:"生存；幸存", def:'to <mark>continue to live</mark>'}
+]},
+{id:"intro18", title:"Intro 1.8", words:[
+  {en:"abroad", zh:"在国外；到国外", def:'<mark>in another country</mark>'},
+  {en:"assign", zh:"分配；布置任务", def:'<mark>set tasks to do</mark>'},
+  {en:"dictionary", zh:"字典；词典", def:'a book or website <mark>explaining the meaning of words</mark>'},
+  {en:"cultural", zh:"文化的；与社会文化有关的", def:'the <mark>ideas, customs, and behavior</mark> of a society'},
+  {en:"destination", zh:"目的地", def:'the <mark>place someone is going</mark>'},
+  {en:"edit", zh:"编辑；修改", def:'to prepare written material by <mark>correcting it</mark>'},
+  {en:"journal", zh:"日志；日记；期刊", def:'a <mark>daily record of news and events</mark>'},
+  {en:"participate", zh:"参加；参与", def:'to <mark>join in something</mark>'},
+  {en:"philosophy", zh:"哲学", def:'the study of the <mark>nature of reality and existence</mark>'},
+  {en:"respond", zh:"回答；回应", def:'to <mark>say something in reply</mark>'},
+  {en:"advice", zh:"建议；忠告", def:'a suggestion about <mark>what someone should do</mark>'},
+  {en:"principles", zh:"原则；行为准则", def:'a rule or belief that <mark>guides one\'s behavior</mark>'},
+  {en:"correct", zh:"正确的；没有错误的", def:'<mark>free from error</mark>'},
+  {en:"definition", zh:"定义；释义", def:'a statement of the <mark>meaning of a word</mark>'},
+  {en:"transition", zh:"过渡语；表示观点联系的短语", def:'a phrase that indicates the <mark>connections between ideas</mark>'},
+  {en:"festival", zh:"节日；庆祝活动", def:'<mark>a day of celebration</mark>'},
+  {en:"lecture", zh:"讲座；演讲", def:'an <mark>educational talk</mark> to an audience'},
+  {en:"passage", zh:"文章节选；段落", def:'a <mark>short article</mark> from a book, printed material, or the Bible'},
+  {en:"priority", zh:"优先事项；重点", def:'a thing seen as <mark>more important than another</mark>'},
+  {en:"tradition", zh:"传统；世代相传的习俗", def:'a long-established custom <mark>passed down by many generations</mark> in a society'}
+]},
+{id:"iv18", title:"IV 1.8", words:[
+  {en:"accurate", zh:"准确的；精确的", def:'<mark>correct in all details</mark>'},
+  {en:"awareness", zh:"意识；认识；了解", def:'<mark>knowledge or understanding</mark> of an issue'},
+  {en:"gender", zh:"性别；社会性别", def:'the social or cultural reference to <mark>either of the two sexes</mark>'},
+  {en:"insights", zh:"深刻见解；深入理解", def:'a <mark>deep understanding</mark> of a person or thing'},
+  {en:"preference", zh:"偏好；偏爱", def:'a <mark>greater liking for one</mark> alternative over another'},
+  {en:"absorbed", zh:"被吸收的；全神贯注的", def:'taken up or soaked in; <mark>greatly interested</mark>'},
+  {en:"deliberately", zh:"故意地；有意识地", def:'<mark>on purpose; consciously</mark>'},
+  {en:"impact", zh:"影响；产生强烈作用", def:'having a <mark>strong effect</mark> on something'},
+  {en:"interact", zh:"互动；相互影响", def:'do something that has an <mark>effect on another</mark>'},
+  {en:"overlap", zh:"重叠；部分相同", def:'<mark>cover partly</mark>; have a common interest'},
+  {en:"sexuality", zh:"性取向；性吸引", def:'a person\'s <mark>intimate physical attraction</mark>'},
+  {en:"socialize", zh:"参加社交活动；交往", def:'participate in <mark>activities in a community</mark>'},
+  {en:"immersed", zh:"沉浸的；专注的", def:'<mark>fascinated; absorbed</mark>'},
+  {en:"incomplete", zh:"不完整的；不完全的", def:'<mark>not having all the necessary</mark> or appropriate parts'},
+  {en:"intercultural", zh:"跨文化的；不同文化之间的", def:'between <mark>different societies or countries</mark>'},
+  {en:"interpersonal", zh:"人际的；人与人之间的", def:'the <mark>relationship between people</mark>'},
+  {en:"nationality", zh:"国籍", def:'the status of <mark>belonging to a particular country</mark>'},
+  {en:"professionally", zh:"职业上；专业地", def:'in a way <mark>related to a career</mark>'},
+  {en:"subculture", zh:"亚文化；次文化群体", def:'a <mark>smaller group within a larger one</mark> with distinct beliefs or practices'},
+  {en:"teens", zh:"青少年；13至19岁的人", def:'a person <mark>aged 13 to 19</mark>'}
+]},
+{id:"pv11", title:"PV 1.1", words:[
+  {en:"conflict", zh:"冲突；争执；战斗", def:'a <mark>disagreement, fight, or battle</mark>'},
+  {en:"violence", zh:"暴力；伤害他人的行为", def:'<mark>behavior that hurts others</mark>'},
+  {en:"civil war", zh:"内战", def:'a <mark>battle between groups in one country</mark>'},
+  {en:"nowadays", zh:"现今；如今", def:'<mark>currently; at the present time</mark>'},
+  {en:"territory", zh:"领土；管辖区域", def:'<mark>an area of control</mark>'},
+  {en:"regularly", zh:"定期地；有规律地", def:'<mark>at uniform time periods</mark>'},
+  {en:"rescue", zh:"营救；救援", def:'save from a <mark>dangerous situation</mark>'},
+  {en:"scare", zh:"使害怕；惊吓", def:'<mark>cause fear</mark> in someone'},
+  {en:"badly", zh:"糟糕地；不令人满意地", def:'<mark>in an unsatisfactory manner</mark>'},
+  {en:"barely", zh:"几乎不；勉强", def:'<mark>almost not</mark>'},
+  {en:"blind", zh:"失明的；看不见的", def:'<mark>unable to see</mark>'},
+  {en:"flash", zh:"闪光；短暂的亮光", def:'a <mark>bright light for a short time</mark>'},
+  {en:"invade", zh:"入侵；侵占", def:'enter in order to <mark>take control</mark>'},
+  {en:"bang", zh:"砰的一声；突然的巨响", def:'a <mark>sudden loud noise</mark>'},
+  {en:"transmit", zh:"传送；传播", def:'<mark>send from one place to another</mark>'},
+  {en:"stepfather", zh:"继父", def:'a man married to someone\'s mother but <mark>not biologically related</mark>'},
+  {en:"spy", zh:"间谍；秘密监视者", def:'a person who <mark>watches others secretly</mark>'},
+  {en:"officially", zh:"正式地；官方地", def:'with the <mark>authority of a government</mark> or group'},
+  {en:"terror", zh:"极度恐惧；恐怖", def:'<mark>extreme fear</mark>'},
+  {en:"fighter", zh:"战士；打斗者", def:'a person that engages in behavior that <mark>hurts others</mark>'}
+]},
+{id:"pv18", title:"PV 1.8", words:[
+  {en:"civilian", zh:"平民；非军警人员", def:'a person <mark>not in the military or police</mark>'},
+  {en:"destruction", zh:"破坏；毁灭", def:'causing so much damage that something <mark>cannot be repaired or ceases to exist</mark>'},
+  {en:"(the) elderly", zh:"老年人", def:'<mark>old or aging people</mark>'},
+  {en:"hunger", zh:"饥饿；渴望", def:'a feeling of discomfort from <mark>lack of food</mark>; a desire for something'},
+  {en:"electricity", zh:"电；电力", def:'<mark>a form of energy</mark>'},
+  {en:"transportation", zh:"交通；运输", def:'a means for <mark>moving things or people</mark> from one place to another'},
+  {en:"disaster", zh:"灾难；灾害", def:'a sudden event that causes <mark>great damage or loss of life</mark>'},
+  {en:"flood", zh:"淹没；洪水", def:'<mark>cover with water</mark> beyond what is normal'},
+  {en:"ruin", zh:"毁坏；使严重受损", def:'to destroy or cause to be <mark>severely damaged</mark>'},
+  {en:"similarly", zh:"相似地；同样地", def:'<mark>in almost the same manner</mark>'},
+  {en:"artistic", zh:"有艺术天赋的；艺术的", def:'having a <mark>natural, creative skill</mark>'},
+  {en:"traditionally", zh:"传统上；依照传统", def:'as part of a <mark>long-established practice</mark> or belief'},
+  {en:"scatter", zh:"撒；使散开", def:'<mark>throw in random directions</mark>'},
+  {en:"displaced", zh:"移位的；流离失所的", def:'<mark>moved from its usual position</mark>'},
+  {en:"favorable", zh:"赞同的；有利的", def:'<mark>expressing approval</mark>'},
+  {en:"internally", zh:"内部地；从内部", def:'<mark>coming from within</mark>'},
+  {en:"sacrifices", zh:"牺牲；为他人放弃的事物", def:'things <mark>given up for the sake of others</mark>'},
+  {en:"seldom", zh:"很少；不常", def:'<mark>not often; rarely</mark>'},
+  {en:"deadly", zh:"致命的", def:'causing or able to <mark>cause death</mark>'},
+  {en:"peaceful", zh:"和平的；安宁的", def:'<mark>free from disturbance</mark>, without troubles'}
+]},
+{id:"pv21", title:"PV 2.1", words:[
+  {en:"compromise", zh:"妥协；折中协议", def:'<mark>a mutual agreement</mark>'},
+  {en:"distinction", zh:"区别；差异", def:'a <mark>contrast between similar things</mark>'},
+  {en:"found", zh:"创立；建立", def:'to <mark>establish or begin an organization</mark>'},
+  {en:"poverty", zh:"贫困；贫穷", def:'the state of being <mark>insufficient in amount</mark>'},
+  {en:"discrimination", zh:"歧视；不公平对待", def:'the <mark>unjust treatment of a particular group</mark>, especially because of race, religion, or gender'},
+  {en:"equality", zh:"平等", def:'<mark>the state of being the same</mark>'},
+  {en:"philosophy", zh:"哲学", def:'the study of the <mark>nature of knowledge and existence</mark>'},
+  {en:"satisfactory", zh:"令人满意的；符合要求的", def:'<mark>fulfilling expectations or needs</mark>'},
+  {en:"racial", zh:"种族的", def:'relating to the groupings of people <mark>based on physical characteristics</mark>'},
+  {en:"strict", zh:"严格的；严厉的", def:'demanding that <mark>rules are obeyed</mark>'},
+  {en:"violent", zh:"暴力的；猛烈的", def:'using physical force intended to <mark>hurt or kill</mark>'},
+  {en:"extremism", zh:"极端主义", def:'the holding of views considered <mark>far outside those held by most</mark> in a political or religious group'},
+  {en:"prejudice", zh:"偏见；成见", def:'a preconceived opinion <mark>not based on evidence or experience</mark>'},
+  {en:"activist", zh:"活动家；社会运动人士", def:'a person who campaigns to <mark>bring about change</mark> in a society'},
+  {en:"indigenous", zh:"本土的；当地原生的", def:'originating or occurring <mark>naturally in a particular place</mark>'},
+  {en:"separately", zh:"分开地；分别地", def:'<mark>not together</mark>'},
+  {en:"bullying", zh:"欺凌；霸凌", def:'seeking to <mark>frighten or harm by force</mark>'},
+  {en:"founder", zh:"创始人；创建者", def:'a person who <mark>starts an institution</mark>'},
+  {en:"postpone", zh:"推迟；延期", def:'arrange to take place at a <mark>later time</mark>'},
+  {en:"hungry", zh:"饥饿的；感到饿的", def:'feeling or showing a <mark>need for food</mark>'}
+]},
+{id:"pv28", title:"PV 2.8", words:[
+  {en:"privilege", def:'a <mark>special right given only to a specific group</mark>'},
+  {en:"wealth", def:'an <mark>abundant supply of money</mark> or possessions'},
+  {en:"symbol", def:'a shape, sign, or thing <mark>used to represent something</mark>'},
+  {en:"behave", def:'act in accordance with <mark>accepted social norms</mark>'},
+  {en:"charity", def:'the voluntary <mark>giving of help to those in need</mark>'},
+  {en:"punish", def:'<mark>inflict a penalty</mark> on someone for an offense they committed'},
+  {en:"atomic", def:'related to the energy released in <mark>nuclear fission or fusion</mark>'},
+  {en:"non-", def:'expressing an <mark>absence of something</mark>'},
+  {en:"philosopher", def:'a person who <mark>studies the basic nature of knowledge</mark>'},
+  {en:"positively", def:'in a way that <mark>expresses agreement</mark>'},
+  {en:"sadly", def:'in a way that expresses <mark>feeling unhappy</mark>'},
+  {en:"hardship", def:'<mark>severe suffering or lack</mark>'},
+  {en:"ideally", def:'<mark>in the best possible way</mark>'},
+  {en:"ignorant", def:'<mark>lacking knowledge or awareness</mark>, uneducated'},
+  {en:"respectful", def:'<mark>feeling of admiration</mark>'},
+  {en:"responsibility", def:'in a <mark>sensible trustworthy manner</mark>'},
+  {en:"sickness", def:'<mark>state of being ill</mark>'},
+  {en:"uneducated", def:'<mark>lacking schooling</mark>'},
+  {en:"luckily", def:'<mark>it is fortunate that</mark>'},
+  {en:"publicly", def:'<mark>as seen by other people</mark>'}
+]},
+{id:"pv31", title:"PV 3.1", words:[
+  {en:"overseas", zh:"在海外；在国外", def:'<mark>in another country</mark>'},
+  {en:"pro-", zh:"支持；赞成", def:'<mark>in favor of something</mark>'},
+  {en:"supporter", zh:"支持者；拥护者", def:'a person who <mark>approves of something</mark>'},
+  {en:"voluntary", zh:"自愿的；主动的", def:'done, given, or acting of one\'s <mark>free will</mark>'},
+  {en:"transform", zh:"改变；使转变", def:'make a <mark>dramatic change</mark> in something'},
+  {en:"assistance", zh:"帮助；援助", def:'the action of <mark>helping someone with a task</mark> or job'},
+  {en:"awareness", zh:"意识；了解", def:'<mark>knowledge of a situation</mark> or act'},
+  {en:"rapid", zh:"快速的；迅速的", def:'happening in a <mark>short time or at a fast pace</mark>'},
+  {en:"importantly", zh:"重要的是；值得注意的是", def:'emphasizing a <mark>significant point</mark>'},
+  {en:"collaborator", zh:"合作者；协作者", def:'a person who <mark>works jointly on a project</mark>'},
+  {en:"donation", zh:"捐赠物；捐款", def:'something <mark>given to charity</mark>, especially money'},
+  {en:"earthquake", zh:"地震", def:'a sudden and <mark>violent shaking of the ground</mark>'},
+  {en:"hygiene", zh:"卫生；卫生条件", def:'conditions that help to <mark>maintain good health</mark>'},
+  {en:"torture", zh:"折磨；酷刑", def:'the action of <mark>inflicting pain or suffering</mark>'},
+  {en:"drought", zh:"干旱", def:'a long period with <mark>low rainfall leading to a lack of water</mark>'},
+  {en:"preservation", zh:"保护；保存", def:'the act of maintaining something and <mark>keeping it safe</mark>'},
+  {en:"technological", zh:"技术的；科技的", def:'relating to the application of <mark>scientific knowledge for practical purposes</mark>'},
+  {en:"diverse", zh:"多样的；不同的", def:'<mark>showing a great variety</mark>'},
+  {en:"donor", zh:"捐赠者", def:'a person who <mark>gives money or other things</mark> to a charity'},
+  {en:"vulnerable", zh:"脆弱的；易受伤害的", def:'<mark>likely to be harmed</mark> by a physical or emotional attack'}
+]},
+{id:"pv41", title:"PV 4.1", words:[
+  {en:"evil", zh:"邪恶的；罪恶的", def:'<mark>extremely immoral and wicked</mark>'},
+  {en:"greet", zh:"问候；打招呼", def:'give a <mark>polite word or sign</mark> of recognition'},
+  {en:"assist", zh:"帮助；协助", def:'help someone by <mark>doing some of the work</mark>'},
+  {en:"modify", zh:"修改；稍作改变", def:'make partial or <mark>minor changes</mark> to something'},
+  {en:"straighten", zh:"整理；使整齐", def:'<mark>to put into order</mark>'},
+  {en:"triumph", zh:"巨大胜利；重大成就", def:'a <mark>great victory or achievement</mark>'},
+  {en:"machinery", zh:"机器；机械设备", def:'<mark>equipment</mark>'},
+  {en:"productivity", zh:"生产力；生产效率", def:'<mark>the amount of things made</mark>'},
+  {en:"gender", zh:"性别；性别认同", def:'the sex of something; <mark>male or female identification</mark>'},
+  {en:"disorder", zh:"疾病；身体或心理障碍", def:'<mark>a medical condition</mark>'},
+  {en:"immigrant", zh:"移民", def:'a person who comes to <mark>live permanently in a foreign country</mark>'},
+  {en:"inequality", zh:"不平等；待遇或处境上的差异", def:'<mark>differences in treatment or circumstances</mark>'},
+  {en:"trauma", zh:"创伤；痛苦经历", def:'a <mark>deeply distressing</mark> or disturbing experience'},
+  {en:"kindergarten", zh:"幼儿园", def:'a class for children <mark>before they enter first grade</mark> of elementary school'},
+  {en:"handicap", zh:"障碍；不利条件", def:'something that makes it <mark>difficult or impossible</mark> for someone to do something that others can do'},
+  {en:"hypocrisy", zh:"虚伪；伪善", def:'<mark>not behaving the way that you say people should</mark>'},
+  {en:"unfortunate", zh:"不幸的；倒霉的", def:'<mark>bad and/or unlucky</mark>'},
+  {en:"rebuild", zh:"重建；修复", def:'<mark>construct something again</mark> after it was damaged'},
+  {en:"empowered", zh:"被赋予权力的；有自主能力的", def:'to have the <mark>confidence or authority</mark> to do something'},
+  {en:"internship", zh:"实习；实习经历", def:'a student that works at a job <mark>without pay to gain experience</mark>'}
+]},
+{id:"sf11", title:"SF 1.1", words:[
+  {en:"advice", zh:"建议；忠告", def:'<mark>guidance offered for action</mark>'},
+  {en:"calculate", zh:"计算", def:'to <mark>determine the amount mathematically</mark>'},
+  {en:"concept", zh:"概念；想法", def:'<mark>a plan or idea</mark>'},
+  {en:"domestic", zh:"国内的；本国的", def:'<mark>inside a country</mark>'},
+  {en:"equal", zh:"相等的；同等的", def:'being the <mark>same in quantity, size, or value</mark>'},
+  {en:"export", zh:"出口；输出", def:'<mark>to send overseas</mark>'},
+  {en:"frequently", zh:"经常地；频繁地", def:'<mark>often</mark>'},
+  {en:"examine", zh:"检查；调查", def:'<mark>to check; to investigate</mark>'},
+  {en:"partner", zh:"搭档；伙伴；伴侣", def:'either of a pair of people <mark>working together</mark>; two people that have an established relationship'},
+  {en:"waste", zh:"废物；浪费", def:'something that is left over; to <mark>use carelessly</mark>; to fail to make good use of'},
+  {en:"million", zh:"一百万", def:'<mark>1,000,000</mark>'},
+  {en:"planet", zh:"行星", def:'a large body in space that <mark>moves around a star</mark>'},
+  {en:"impact", zh:"影响；作用", def:'<mark>effect or influence</mark>'},
+  {en:"self-sufficiency", zh:"自给自足；独立自主", def:'the quality of <mark>needing no outside help</mark>'},
+  {en:"sustainable", zh:"可持续的", def:'able to be <mark>kept at a certain rate or level</mark>'},
+  {en:"preserve", zh:"保存；保护", def:'to keep in its original state; <mark>keep safe from harm</mark>'},
+  {en:"spoil", zh:"腐坏；糟蹋；破坏", def:'to rot; to <mark>destroy the value or quality</mark> of'},
+  {en:"destruction", zh:"破坏；毁灭", def:'the action of causing so much damage that something <mark>no longer functions</mark>'},
+  {en:"shelter", zh:"避难所；庇护处", def:'a place giving <mark>protection from bad weather or danger</mark>'},
+  {en:"ecology", zh:"生态学", def:'the study of how <mark>organisms in an environment relate</mark> to one another'}
+]},
+{id:"sf18", title:"SF 1.8", words:[
+  {en:"climate", zh:"气候", def:'weather conditions in a general area <mark>over a long period</mark>'},
+  {en:"consequence", zh:"后果；结果", def:'<mark>the result or effect of an action</mark>'},
+  {en:"decrease", zh:"减少；降低", def:'make or become <mark>smaller in amount or degree</mark>'},
+  {en:"alternative", zh:"替代方案；另一种选择", def:'<mark>another possibility or choice</mark>'},
+  {en:"efficient", zh:"高效的；节约资源的", def:'working well; <mark>preventing wasteful use</mark> of something'},
+  {en:"awareness", zh:"意识；认识", def:'<mark>knowledge or perception of a situation</mark>'},
+  {en:"restore", zh:"修复；恢复", def:'to repair; to <mark>bring back to a previous condition</mark>'},
+  {en:"inspire", zh:"激励；启发", def:'to fill with the <mark>urge to do something</mark>'},
+  {en:"pollution", zh:"污染", def:'damage caused to water, air, etc. by <mark>harmful things or waste</mark>'},
+  {en:"appliance", zh:"家用电器；器具", def:'a device that has a <mark>specific task</mark>, especially one used in a home'},
+  {en:"collective", zh:"集体的；共同的", def:'done by people <mark>acting as a group</mark>'},
+  {en:"deforestation", zh:"森林砍伐；滥伐森林", def:'<mark>clearing a wide area of trees</mark>'},
+  {en:"emission", zh:"排放；排放物", def:'releasing something into the environment, especially <mark>gas or radiation</mark>'},
+  {en:"intensive", zh:"集中的；密集的", def:'<mark>concentrated in a single area</mark> or done in a short time'},
+  {en:"offsetting", zh:"抵消；补偿", def:'a consideration or amount that <mark>balances the effects of another action</mark>'},
+  {en:"overuse", zh:"过度使用", def:'<mark>using something too much</mark>'},
+  {en:"renew", zh:"更新；使恢复活力", def:'to update; to give <mark>fresh life</mark> to something'},
+  {en:"indication", zh:"迹象；指示", def:'a <mark>sign or piece of information</mark> that shows something'},
+  {en:"praise", zh:"表扬；赞扬", def:'to express <mark>warm approval</mark> of someone or something'},
+  {en:"discomfort", zh:"不适；轻微疼痛；尴尬", def:'<mark>slight pain</mark>; unease or embarrassment'}
+]},
+{id:"sf21", title:"SF 2.1", words:[
+  {en:"crop", zh:"农作物；庄稼", def:'a plant <mark>grown by farmers</mark>, such as grains, fruit, and vegetables'},
+  {en:"chemical", zh:"化学的；化学物质", def:'related to the <mark>interactions of substances</mark>'},
+  {en:"consume", zh:"消耗；消费；吃喝", def:'eat and drink; buy; <mark>use up a resource</mark>'},
+  {en:"gene", zh:"基因", def:'a basic <mark>unit of heredity coded in DNA and RNA</mark>'},
+  {en:"farm", zh:"农场；农田", def:'an area of land used for <mark>growing crops and raising animals</mark>'},
+  {en:"import", zh:"进口；输入", def:'<mark>bring goods into a country</mark>'},
+  {en:"technique", zh:"技术；方法；技巧", def:'a way of <mark>carrying out a task</mark>; skill or ability'},
+  {en:"agricultural", zh:"农业的", def:'relating to the <mark>science of farming</mark>'},
+  {en:"bacteria", zh:"细菌", def:'biological cells that lack an organized center, including some that <mark>cause diseases</mark>'},
+  {en:"retrieve", zh:"取回；找回", def:'<mark>to get and bring something back</mark>'},
+  {en:"antibiotics", zh:"抗生素", def:'medicine that <mark>inhibits or destroys the growth of bacteria</mark>'},
+  {en:"compost", zh:"堆肥；腐殖肥料", def:'decayed organic material <mark>used as food for plants</mark>'},
+  {en:"domestically", zh:"国内地；家庭方面地", def:'related to activities <mark>inside a home or country</mark>'},
+  {en:"fertilizer", zh:"肥料", def:'organic or manufactured material added to soil to <mark>help plants grow</mark>'},
+  {en:"herbicide", zh:"除草剂", def:'a substance used to <mark>kill unwanted plants</mark>'},
+  {en:"quota", zh:"配额；定额", def:'a <mark>fixed share</mark> of something'},
+  {en:"poison", zh:"毒物；毒药", def:'a substance that can <mark>cause illness or death</mark>'},
+  {en:"crop rotation", zh:"轮作；作物轮种", def:'<mark>regularly changing</mark> the plants grown in an area'},
+  {en:"prevent", zh:"防止；预防", def:'<mark>keep something from happening</mark>'},
+  {en:"solve", zh:"解决；解答", def:'<mark>find an answer</mark> or a way to fix a problem'}
+]},
+{id:"sf28", title:"SF 2.8", words:[
+  {en:"brief", def:'<mark>short and simple</mark>'},
+  {en:"annual", def:'<mark>every year</mark>'},
+  {en:"connected", def:'brought together; <mark>associated or related</mark>'},
+  {en:"fair trade", def:'paying an <mark>equitable amount to producers</mark> of food or goods; equitable business relationships between people and companies'},
+  {en:"industrial", def:'relating to the <mark>manufacture of goods from raw materials</mark>'},
+  {en:"label", def:'a small piece of paper or fabric that <mark>provides information</mark>; a name applied to something'},
+  {en:"manufacture", def:'<mark>to make; to produce</mark>'},
+  {en:"coal", def:'a black or brown rock made of carbon that can be <mark>used as fuel</mark>'},
+  {en:"innovation", def:'the action of making a <mark>new product, idea, or method</mark>'},
+  {en:"organic", def:'produced <mark>without chemicals</mark>; related to living matter'},
+  {en:"soil", def:'dirt; the upper layer of earth in which <mark>plants will grow</mark>'},
+  {en:"donate", def:'to <mark>give money or goods</mark> to a cause'},
+  {en:"refrigerator", def:'a device or place to <mark>keep items cool</mark>'},
+  {en:"leftover", def:'food <mark>remaining after the rest</mark> has been consumed'},
+  {en:"carbohydrate", def:'an organic compound that can <mark>provide sugar energy</mark>; in food science the complex forms are in bread and pasta, the simple form is sugars in candy and jam'},
+  {en:"unwanted", def:'<mark>no longer desired</mark>'},
+  {en:"nutritional", def:'providing substances <mark>necessary for growth and good health</mark>'},
+  {en:"excess", def:'an amount <mark>more than what is necessary</mark>'},
+  {en:"accumulate", def:'to <mark>gather together</mark>; to acquire an increasing amount'},
+  {en:"handy", def:'<mark>convenient to use</mark>; useful'}
+]}
+];
+
+// ---------- Render accordion (browse panel) ----------
+const accordionEl = document.getElementById('unitAccordion');
+units.forEach(u => {
+  const unitEl = document.createElement('div');
+  unitEl.className = 'unit';
+
+  const head = document.createElement('div');
+  head.className = 'unit-head';
+  head.innerHTML = `
+    <span class="title">${u.title}</span>
+    <span class="meta">${u.words.length} words</span>
+    <span class="chevron">▾</span>
+  `;
+  head.addEventListener('click', () => unitEl.classList.toggle('open'));
+
+  const body = document.createElement('div');
+  body.className = 'unit-body';
+  const list = document.createElement('div');
+  list.className = 'word-list';
+  u.words.forEach((w, i) => {
+    const card = document.createElement('div');
+    card.className = 'word-card';
+    card.innerHTML = `
+      <div class="num">${String(i+1).padStart(2,'0')}</div>
+      <div class="headword-row">
+        <span class="headword">${w.en}</span>
+        ${w.zh ? `<span class="zh">${w.zh}</span>` : ''}
+      </div>
+      <div class="def">${w.def}</div>
+    `;
+    list.appendChild(card);
+  });
+  body.appendChild(list);
+
+  unitEl.appendChild(head);
+  unitEl.appendChild(body);
+  accordionEl.appendChild(unitEl);
+});
+
+// ---------- Tabs ----------
+document.querySelectorAll('.tab-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------- Matching scope selector ----------
+const scopeGrid = document.getElementById('scopeGrid');
+const selectedUnits = new Set([units[0].id]); // default first unit selected
+
+units.forEach(u => {
+  const chip = document.createElement('div');
+  chip.className = 'scope-chip' + (selectedUnits.has(u.id) ? ' active' : '');
+  chip.textContent = u.title;
+  chip.dataset.id = u.id;
+  chip.addEventListener('click', () => {
+    if(selectedUnits.has(u.id)){
+      selectedUnits.delete(u.id);
+      chip.classList.remove('active');
+    } else {
+      selectedUnits.add(u.id);
+      chip.classList.add('active');
+    }
+    buildGame();
+  });
+  scopeGrid.appendChild(chip);
+});
+
+document.getElementById('selectAllBtn').addEventListener('click', () => {
+  units.forEach(u => selectedUnits.add(u.id));
+  document.querySelectorAll('.scope-chip').forEach(c => c.classList.add('active'));
+  buildGame();
+});
+document.getElementById('clearBtn').addEventListener('click', () => {
+  selectedUnits.clear();
+  document.querySelectorAll('.scope-chip').forEach(c => c.classList.remove('active'));
+  buildGame();
+});
+
+// ---------- Matching game ----------
+let selectedWord = null;
+let selectedDef = null;
+let matchedCount = 0;
+let activeWords = [];
+
+function stripMark(html){ return html.replace(/<\/?mark>/g, ''); }
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getScopeWords(){
+  let list = [];
+  units.forEach(u => {
+    if(selectedUnits.has(u.id)){
+      u.words.forEach((w, idx) => list.push({id: u.id + '-' + idx, en: w.en, def: w.def}));
+    }
+  });
+  return list;
+}
+
+function buildGame(){
+  activeWords = getScopeWords();
+  matchedCount = 0;
+  selectedWord = null;
+  selectedDef = null;
+  const statusEl = document.getElementById('matchStatus');
+  const wordCol = document.getElementById('wordCol');
+  const defCol = document.getElementById('defCol');
+  wordCol.innerHTML = '';
+  defCol.innerHTML = '';
+
+  if(activeWords.length === 0){
+    statusEl.textContent = '请先选择至少一个单元';
+    return;
+  }
+  statusEl.textContent = '';
+
+  const shuffledWords = shuffle(activeWords);
+  const shuffledDefs = shuffle(activeWords);
+
+  shuffledWords.forEach(w => {
+    const el = document.createElement('div');
+    el.className = 'match-item word';
+    el.textContent = w.en;
+    el.dataset.id = w.id;
+    el.addEventListener('click', () => handleWordClick(el, w));
+    wordCol.appendChild(el);
+  });
+
+  shuffledDefs.forEach(w => {
+    const el = document.createElement('div');
+    el.className = 'match-item def';
+    el.textContent = stripMark(w.def);
+    el.dataset.id = w.id;
+    el.addEventListener('click', () => handleDefClick(el, w));
+    defCol.appendChild(el);
+  });
+}
+
+function handleWordClick(el, w){
+  if(el.classList.contains('matched')) return;
+  if(selectedWord) selectedWord.el.classList.remove('selected');
+  selectedWord = {el, id: w.id};
+  el.classList.add('selected');
+  tryMatch();
+}
+function handleDefClick(el, w){
+  if(el.classList.contains('matched')) return;
+  if(selectedDef) selectedDef.el.classList.remove('selected');
+  selectedDef = {el, id: w.id};
+  el.classList.add('selected');
+  tryMatch();
+}
+function tryMatch(){
+  if(!selectedWord || !selectedDef) return;
+  if(selectedWord.id === selectedDef.id){
+    selectedWord.el.classList.remove('selected');
+    selectedDef.el.classList.remove('selected');
+    selectedWord.el.classList.add('matched');
+    selectedDef.el.classList.add('matched');
+    matchedCount++;
+    selectedWord = null;
+    selectedDef = null;
+    if(matchedCount === activeWords.length){
+      document.getElementById('matchStatus').textContent = '🎉 All matched! Great job!';
+    }
+  } else {
+    const w = selectedWord.el, d = selectedDef.el;
+    w.classList.add('wrong');
+    d.classList.add('wrong');
+    setTimeout(() => {
+      w.classList.remove('wrong','selected');
+      d.classList.remove('wrong','selected');
+      selectedWord = null;
+      selectedDef = null;
+    }, 400);
+  }
+}
+
+document.getElementById('resetBtn').addEventListener('click', buildGame);
+
+// init
+buildGame();
+</script>
+
+</body>
+</html>
