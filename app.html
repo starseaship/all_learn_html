@@ -110,30 +110,29 @@ header {
 }
 .header-stats {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .stat-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 18px;
-  text-align: center;
-  box-shadow: 0 2px 8px var(--shadow);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
 }
 .stat-chip .num {
   font-family: 'Kaisei Opti', serif;
-  font-size: 22px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text);
-  display: block;
 }
 .stat-chip .label {
   font-size: 11px;
   color: var(--text-dim);
   font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ── CONTROLS BAR ── */
@@ -179,6 +178,12 @@ header {
 }
 #searchInput::placeholder { color: var(--text-dim); }
 
+.filter-scroll {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 .filter-group {
   display: flex;
   gap: 6px;
@@ -477,7 +482,33 @@ header {
 /* ── RESPONSIVE ── */
 @media (max-width: 720px) {
   header { padding: 28px 20px 20px; }
-  .controls { padding: 12px 16px; }
+  .controls {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+  }
+  .search-wrap { max-width: none; width: 100%; }
+  .controls > .divider { display: none; }
+  .filter-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .filter-scroll::-webkit-scrollbar { display: none; }
+  .filter-scroll .filter-group {
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+  }
+  .filter-scroll .divider { display: none; }
+  .filter-label { flex-shrink: 0; }
+  .chip, .utility-btn { flex-shrink: 0; }
   .layout { padding: 20px 16px 40px; }
   .card-grid { grid-template-columns: 1fr; }
   .tag-editor-panel { padding: 18px; }
@@ -490,7 +521,6 @@ header {
 <header>
   <div class="header-left">
     <h1>Zoe's <span>Study Archive</span></h1>
-    <p>学习资料库 · GitHub Pages 托管</p>
   </div>
   <div class="header-stats">
     <div class="stat-chip">
@@ -516,45 +546,47 @@ header {
 
   <div class="divider"></div>
 
-  <!-- Subject filter -->
-  <div class="filter-group">
-    <span class="filter-label">科目</span>
-    <button class="chip active" data-subject="all">全部</button>
-    <button class="chip" data-subject="english">🇬🇧 英语</button>
-    <button class="chip" data-subject="japanese">🇯🇵 日语</button>
-    <button class="chip" data-subject="general">📚 通识</button>
-    <button class="chip" data-subject="wgl">🌐 WGL</button>
-  </div>
+  <div class="filter-scroll">
+    <!-- Subject filter -->
+    <div class="filter-group">
+      <span class="filter-label">科目</span>
+      <button class="chip active" data-subject="all">全部</button>
+      <button class="chip" data-subject="english">🇬🇧 英语</button>
+      <button class="chip" data-subject="japanese">🇯🇵 日语</button>
+      <button class="chip" data-subject="general">📚 通识</button>
+      <button class="chip" data-subject="wgl">🌐 WGL</button>
+    </div>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <!-- Type filter -->
-  <div class="filter-group">
-    <span class="filter-label">类型</span>
-    <button class="chip active" data-type="all">全部</button>
-    <button class="chip" data-type="grammar">文法</button>
-    <button class="chip" data-type="vocabulary">词汇</button>
-    <button class="chip" data-type="quiz">练习</button>
-    <button class="chip" data-type="notes">笔记</button>
-    <button class="chip" data-type="reference">参考</button>
-  </div>
+    <!-- Type filter -->
+    <div class="filter-group">
+      <span class="filter-label">类型</span>
+      <button class="chip active" data-type="all">全部</button>
+      <button class="chip" data-type="grammar">文法</button>
+      <button class="chip" data-type="vocabulary">词汇</button>
+      <button class="chip" data-type="quiz">练习</button>
+      <button class="chip" data-type="notes">笔记</button>
+      <button class="chip" data-type="reference">参考</button>
+    </div>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <!-- Course filter -->
-  <div class="filter-group" id="courseFilter">
-    <span class="filter-label">课程</span>
-    <button class="chip active" data-course="all">全部</button>
-  </div>
+    <!-- Course filter -->
+    <div class="filter-group" id="courseFilter">
+      <span class="filter-label">课程</span>
+      <button class="chip active" data-course="all">全部</button>
+    </div>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <!-- Local data tools -->
-  <div class="filter-group">
-    <span class="filter-label">数据</span>
-    <button type="button" class="utility-btn" id="exportDataButton">导出</button>
-    <button type="button" class="utility-btn" id="importDataButton">导入</button>
-    <input type="file" id="importDataInput" accept="application/json,.json" hidden>
+    <!-- Local data tools -->
+    <div class="filter-group">
+      <span class="filter-label">数据</span>
+      <button type="button" class="utility-btn" id="exportDataButton">导出</button>
+      <button type="button" class="utility-btn" id="importDataButton">导入</button>
+      <input type="file" id="importDataInput" accept="application/json,.json" hidden>
+    </div>
   </div>
 </div>
 
