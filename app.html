@@ -653,6 +653,23 @@ const MATERIALS_ROOT = 'materials';
 const COURSE_FALLBACK_LABEL = '未分类';
 const LOCAL_TAG_STORAGE_KEY = 'zoeStudyArchiveTagOverrides:v1';
 
+// Raw source files that have been folded into a combined summary page.
+// They stay in the repo (the summary pages load them in iframes) but are
+// hidden from the browsable material list so only the summary shows up.
+const HIDDEN_MATERIAL_PATHS = new Set([
+  'materials/ENGLISH/chapter1_explanatory_paragraphs_review.html',
+  'materials/ENGLISH/chapter2_information_paragraphs_review.html',
+  'materials/ENGLISH/chapter3_opinion_paragraphs_review.html',
+  'materials/ENGLISH/chapter4_descriptive_paragraphs_review.html',
+  'materials/ENGLISH/chapter5_comparative_paragraphs_review.html',
+  'materials/ENGLISH/chapter6_contrast_paragraphs_review.html',
+  'materials/ENGLISH/阅3单词.html',
+  'materials/ENGLISH/阅读第二章单词.html',
+  'materials/ENGLISH/reading2-war-definition.html',
+  'materials/ENGLISH/阅2问题.html',
+  'materials/ENGLISH/阅读童兵.html'
+]);
+
 const SUBJECT_LABELS = {
   english:  '🇬🇧 英语',
   japanese: '🇯🇵 日语',
@@ -738,7 +755,8 @@ async function scanMaterialsFromTree() {
   const htmlFiles = data.tree.filter(item =>
     item.type === 'blob' &&
     item.path.startsWith(MATERIALS_ROOT + '/') &&
-    item.path.toLowerCase().endsWith('.html')
+    item.path.toLowerCase().endsWith('.html') &&
+    !HIDDEN_MATERIAL_PATHS.has(item.path)
   );
 
   if (htmlFiles.length === 0) {
