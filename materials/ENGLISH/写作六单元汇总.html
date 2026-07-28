@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语写作 · 六单元段落复习汇总</title>
+<meta name="description" content="第一章至第六章段落写作复习，六个单元合并导航">
+<meta name="type" content="写作">
+<meta name="course" content="英语写作">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --parchment:#f3ecdc;
+    --ink:#3a3226;
+    --sage:#7c9070;
+    --sage-dark:#5d7052;
+    --gold:#c9a24b;
+    --line:#e3d8bd;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Serif SC','EB Garamond',serif;
+    display:flex;
+    flex-direction:column;
+  }
+  header{
+    text-align:center;
+    padding:22px 20px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--parchment);
+    flex:0 0 auto;
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:1.4em;
+    font-weight:700;
+  }
+  header p{
+    margin:0;
+    font-size:0.85em;
+    color:#8a7f66;
+    font-style:italic;
+  }
+  nav.tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:12px 16px;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    flex:0 0 auto;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:0 0 auto;
+    font-family:inherit;
+    font-size:0.88em;
+    padding:10px 18px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:#8a7f66;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all 0.2s ease;
+  }
+  nav.tabs button.active{
+    background:var(--sage);
+    border-color:var(--sage);
+    color:#fdf9ec;
+    font-weight:600;
+  }
+  nav.tabs button:hover:not(.active){
+    background:var(--parchment);
+  }
+  .frame-wrap{
+    flex:1 1 auto;
+    min-height:0;
+  }
+  iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>英语写作 · 段落复习六单元</h1>
+  <p>第一章 ~ 第六章 · 点击标签切换查看</p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<div class="frame-wrap">
+  <iframe id="viewer" title="章节内容"></iframe>
+</div>
+
+<script>
+const chapters = [
+  {file:"chapter1_explanatory_paragraphs_review.html", label:"第一章 · 解释说明段落"},
+  {file:"chapter2_information_paragraphs_review.html", label:"第二章 · 信息段落"},
+  {file:"chapter3_opinion_paragraphs_review.html", label:"第三章 · 观点段落"},
+  {file:"chapter4_descriptive_paragraphs_review.html", label:"第四章 · 描述段落"},
+  {file:"chapter5_comparative_paragraphs_review.html", label:"第五章 · 比较段落"},
+  {file:"chapter6_contrast_paragraphs_review.html", label:"第六章 · 对比段落"}
+];
+
+const tabsEl = document.getElementById('tabs');
+const viewer = document.getElementById('viewer');
+
+function showChapter(index){
+  document.querySelectorAll('#tabs button').forEach((b,i) => b.classList.toggle('active', i === index));
+  viewer.src = chapters[index].file;
+}
+
+chapters.forEach((c, i) => {
+  const btn = document.createElement('button');
+  btn.textContent = c.label;
+  btn.addEventListener('click', () => showChapter(i));
+  tabsEl.appendChild(btn);
+});
+
+// Deep-link support: ?ch=3 opens chapter 3
+const params = new URLSearchParams(location.search);
+const startIndex = Math.max(0, Math.min(chapters.length - 1, (parseInt(params.get('ch'), 10) || 1) - 1));
+showChapter(startIndex);
+</script>
+
+</body>
+</html>

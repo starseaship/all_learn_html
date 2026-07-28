@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阅读 · 单词汇总</title>
+<meta name="description" content="阅读课单词整理合并导航">
+<meta name="type" content="vocabulary">
+<meta name="course" content="阅读">
+<style>
+  :root{
+    --cream:#faf6ee;
+    --parchment:#f3ecdc;
+    --ink:#3a3226;
+    --sage:#7c9070;
+    --gold:#c9a24b;
+    --line:#e3d8bd;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Serif SC','EB Garamond',serif;
+    display:flex;
+    flex-direction:column;
+  }
+  header{
+    text-align:center;
+    padding:22px 20px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--parchment);
+    flex:0 0 auto;
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:1.4em;
+    font-weight:700;
+  }
+  header p{
+    margin:0;
+    font-size:0.85em;
+    color:#8a7f66;
+    font-style:italic;
+  }
+  nav.tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:12px 16px;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    flex:0 0 auto;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:0 0 auto;
+    font-family:inherit;
+    font-size:0.88em;
+    padding:10px 18px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:#8a7f66;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all 0.2s ease;
+  }
+  nav.tabs button.active{
+    background:var(--sage);
+    border-color:var(--sage);
+    color:#fdf9ec;
+    font-weight:600;
+  }
+  nav.tabs button:hover:not(.active){
+    background:var(--parchment);
+  }
+  .frame-wrap{
+    flex:1 1 auto;
+    min-height:0;
+  }
+  iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>阅读课 · 单词汇总</h1>
+  <p>各章节词汇表 · 点击标签切换查看</p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<div class="frame-wrap">
+  <iframe id="viewer" title="单词内容"></iframe>
+</div>
+
+<script>
+const units = [
+  {file:"阅读第二章单词.html", label:"第二章 · No War is Not Enough"},
+  {file:"阅3单词.html", label:"第三章 · NGOs and NPOs"}
+];
+
+const tabsEl = document.getElementById('tabs');
+const viewer = document.getElementById('viewer');
+
+function showUnit(index){
+  document.querySelectorAll('#tabs button').forEach((b,i) => b.classList.toggle('active', i === index));
+  viewer.src = units[index].file;
+}
+
+units.forEach((u, i) => {
+  const btn = document.createElement('button');
+  btn.textContent = u.label;
+  btn.addEventListener('click', () => showUnit(i));
+  tabsEl.appendChild(btn);
+});
+
+const params = new URLSearchParams(location.search);
+const startIndex = Math.max(0, Math.min(units.length - 1, (parseInt(params.get('u'), 10) || 1) - 1));
+showUnit(startIndex);
+</script>
+
+</body>
+</html>
