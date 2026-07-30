@@ -359,8 +359,9 @@
       <div class="scope-actions">
         <button id="selectAllBtn">全选</button>
         <button class="secondary" id="clearBtn">清除</button>
+        <button class="secondary" id="randomBtn">🎲 全部单元随机抽10题</button>
       </div>
-      <div class="scope-hint">建议一次选择 1–3 个单元，配对体验更佳</div>
+      <div class="scope-hint" id="scopeHint">建议一次选择 1–3 个单元，配对体验更佳</div>
     </div>
     <div id="matchGame">
       <div class="match-col" id="wordCol"></div>
@@ -783,7 +784,10 @@ document.querySelectorAll('.tab-pill').forEach(btn => {
 
 // ---------- Matching scope selector ----------
 const scopeGrid = document.getElementById('scopeGrid');
+const scopeHintEl = document.getElementById('scopeHint');
+const DEFAULT_SCOPE_HINT = '建议一次选择 1–3 个单元，配对体验更佳';
 const selectedUnits = new Set([units[0].id]); // default first unit selected
+let randomMode = false;
 
 units.forEach(u => {
   const chip = document.createElement('div');
@@ -791,6 +795,8 @@ units.forEach(u => {
   chip.textContent = u.title;
   chip.dataset.id = u.id;
   chip.addEventListener('click', () => {
+    randomMode = false;
+    scopeHintEl.textContent = DEFAULT_SCOPE_HINT;
     if(selectedUnits.has(u.id)){
       selectedUnits.delete(u.id);
       chip.classList.remove('active');
@@ -804,12 +810,21 @@ units.forEach(u => {
 });
 
 document.getElementById('selectAllBtn').addEventListener('click', () => {
+  randomMode = false;
+  scopeHintEl.textContent = DEFAULT_SCOPE_HINT;
   units.forEach(u => selectedUnits.add(u.id));
   document.querySelectorAll('.scope-chip').forEach(c => c.classList.add('active'));
   buildGame();
 });
 document.getElementById('clearBtn').addEventListener('click', () => {
+  randomMode = false;
+  scopeHintEl.textContent = DEFAULT_SCOPE_HINT;
   selectedUnits.clear();
+  document.querySelectorAll('.scope-chip').forEach(c => c.classList.remove('active'));
+  buildGame();
+});
+document.getElementById('randomBtn').addEventListener('click', () => {
+  randomMode = true;
   document.querySelectorAll('.scope-chip').forEach(c => c.classList.remove('active'));
   buildGame();
 });
@@ -841,8 +856,16 @@ function getScopeWords(){
   return list;
 }
 
+function getRandomWordsAllUnits(count){
+  let all = [];
+  units.forEach(u => {
+    u.words.forEach((w, idx) => all.push({id: u.id + '-' + idx, en: w.en, def: w.def}));
+  });
+  return shuffle(all).slice(0, Math.min(count, all.length));
+}
+
 function buildGame(){
-  activeWords = getScopeWords();
+  activeWords = randomMode ? getRandomWordsAllUnits(10) : getScopeWords();
   matchedCount = 0;
   selectedWord = null;
   selectedDef = null;
@@ -857,6 +880,10 @@ function buildGame(){
     return;
   }
   statusEl.textContent = '';
+
+  if(randomMode){
+    scopeHintEl.textContent = `🎲 随机模式：已从全部 ${units.length} 个单元中随机抽取 ${activeWords.length} 题（点击 Reset 可换一批）`;
+  }
 
   const shuffledWords = shuffle(activeWords);
   const shuffledDefs = shuffle(activeWords);
