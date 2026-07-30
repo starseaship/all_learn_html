@@ -314,9 +314,36 @@
     25%{transform:translateX(-5px);}
     75%{transform:translateX(5px);}
   }
+  .match-pagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-top:22px;
+    flex-wrap:wrap;
+  }
+  .match-pagination[hidden]{ display:none; }
+  .page-btn{
+    font-family:inherit;
+    background:var(--parchment);
+    color:#5f5870;
+    border:1.5px solid var(--line);
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:0.92em;
+    cursor:pointer;
+  }
+  .page-btn:hover:not(:disabled){ border-color:var(--gold); }
+  .page-btn:disabled{ opacity:0.4; cursor:default; }
+  #pageIndicator{
+    min-width:150px;
+    text-align:center;
+    color:var(--plum-dark);
+    font-weight:600;
+  }
   #matchStatus{
     text-align:center;
-    margin-top:20px;
+    margin-top:16px;
     font-size:1.1em;
     color:var(--sage-dark);
     font-weight:600;
@@ -375,13 +402,18 @@
       <div class="scope-actions">
         <button id="selectAllBtn">全选</button>
         <button class="secondary" id="clearBtn">清除</button>
-        <button class="secondary" id="randomBtn">🎲 全部单元随机抽10题</button>
+        <button class="secondary" id="randomBtn">🎲 全部单元随机抽20题</button>
       </div>
       <div class="scope-hint" id="scopeHint">建议一次选择 1–3 个单元，配对体验更佳</div>
     </div>
     <div id="matchGame">
       <div class="match-col" id="wordCol"></div>
       <div class="match-col" id="defCol"></div>
+    </div>
+    <div class="match-pagination" id="matchPagination" hidden>
+      <button class="page-btn" id="prevPageBtn">← 上一页</button>
+      <span id="pageIndicator">第 1 / 2 页</span>
+      <button class="page-btn" id="nextPageBtn">下一页 →</button>
     </div>
     <div id="matchStatus"></div>
     <div class="controls">
@@ -810,7 +842,7 @@ document.querySelectorAll('.tab-pill').forEach(btn => {
 // ---------- Matching scope selector ----------
 const scopeGrid = document.getElementById('scopeGrid');
 const scopeHintEl = document.getElementById('scopeHint');
-const DEFAULT_SCOPE_HINT = '建议一次选择 1–3 个单元，配对体验更佳';
+const DEFAULT_SCOPE_HINT = '每轮最多 20 题，分 2 页，每页 10 题';
 const selectedUnits = new Set([units[0].id]); // default first unit selected
 let randomMode = false;
 
@@ -859,6 +891,11 @@ let selectedWord = null;
 let selectedDef = null;
 let matchedCount = 0;
 let activeWords = [];
+let questionPages = [];
+let currentPage = 0;
+let matchedIds = new Set();
+const PAGE_SIZE = 10;
+const MAX_QUESTIONS = 20;
 
 function stripMark(html){ return html.replace(/<\/?mark>/g, ''); }
 
@@ -890,11 +927,17 @@ function getRandomWordsAllUnits(count){
 }
 
 function buildGame(){
-  activeWords = randomMode ? getRandomWordsAllUnits(10) : getScopeWords();
+  const sourceWords = randomMode ? getRandomWordsAllUnits(MAX_QUESTIONS) : getScopeWords();
+  activeWords = randomMode ? sourceWords : shuffle(sourceWords).slice(0, MAX_QUESTIONS);
   matchedCount = 0;
+  matchedIds = new Set();
   selectedWord = null;
   selectedDef = null;
+  currentPage = 0;
+  questionPages = [];
+
   const statusEl = document.getElementById('matchStatus');
+  const paginationEl = document.getElementById('matchPagination');
   const wordCol = document.getElementById('wordCol');
   const defCol = document.getElementById('defCol');
   wordCol.innerHTML = '';
@@ -902,34 +945,88 @@ function buildGame(){
 
   if(activeWords.length === 0){
     statusEl.textContent = '请先选择至少一个单元';
+    paginationEl.hidden = true;
     return;
   }
-  statusEl.textContent = '';
 
-  if(randomMode){
-    scopeHintEl.textContent = `🎲 随机模式：已从全部 ${units.length} 个单元中随机抽取 ${activeWords.length} 题（点击 Reset 可换一批）`;
+  for(let i = 0; i < activeWords.length; i += PAGE_SIZE){
+    const pageWords = activeWords.slice(i, i + PAGE_SIZE);
+    questionPages.push({
+      words: shuffle(pageWords),
+      defs: shuffle(pageWords)
+    });
   }
 
-  const shuffledWords = shuffle(activeWords);
-  const shuffledDefs = shuffle(activeWords);
+  if(randomMode){
+    scopeHintEl.textContent = `🎲 随机模式：已从全部 ${units.length} 个单元中随机抽取 ${activeWords.length} 题，分 ${questionPages.length} 页完成`;
+  } else {
+    scopeHintEl.textContent = `本轮 ${activeWords.length} 题 · 共 ${questionPages.length} 页 · 每页最多 ${PAGE_SIZE} 题`;
+  }
 
-  shuffledWords.forEach(w => {
+  renderPage();
+}
+
+function renderPage(){
+  selectedWord = null;
+  selectedDef = null;
+
+  const wordCol = document.getElementById('wordCol');
+  const defCol = document.getElementById('defCol');
+  wordCol.innerHTML = '';
+  defCol.innerHTML = '';
+
+  const page = questionPages[currentPage];
+  if(!page) return;
+
+  page.words.forEach(w => {
     const el = document.createElement('div');
     el.className = 'match-item word';
     el.textContent = w.en;
     el.dataset.id = w.id;
+    if(matchedIds.has(w.id)) el.classList.add('matched');
     el.addEventListener('click', () => handleWordClick(el, w));
     wordCol.appendChild(el);
   });
 
-  shuffledDefs.forEach(w => {
+  page.defs.forEach(w => {
     const el = document.createElement('div');
     el.className = 'match-item def';
     el.textContent = stripMark(w.def);
     el.dataset.id = w.id;
+    if(matchedIds.has(w.id)) el.classList.add('matched');
     el.addEventListener('click', () => handleDefClick(el, w));
     defCol.appendChild(el);
   });
+
+  updatePagination();
+  updateMatchStatus();
+}
+
+function updatePagination(){
+  const paginationEl = document.getElementById('matchPagination');
+  paginationEl.hidden = questionPages.length === 0;
+  document.getElementById('pageIndicator').textContent =
+    `第 ${currentPage + 1} / ${questionPages.length} 页 · 每页最多 ${PAGE_SIZE} 题`;
+  document.getElementById('prevPageBtn').disabled = currentPage === 0;
+  document.getElementById('nextPageBtn').disabled = currentPage === questionPages.length - 1;
+}
+
+function updateMatchStatus(){
+  const statusEl = document.getElementById('matchStatus');
+  if(matchedIds.size === activeWords.length){
+    statusEl.textContent = '🎉 两页全部完成！Great job!';
+    return;
+  }
+
+  const pageIds = [...questionPages[currentPage].words.map(w => w.id)];
+  const pageComplete = pageIds.every(id => matchedIds.has(id));
+  if(pageComplete && currentPage < questionPages.length - 1){
+    statusEl.textContent = `第 ${currentPage + 1} 页完成！可以进入下一页啦`;
+  } else if(pageComplete){
+    statusEl.textContent = `第 ${currentPage + 1} 页完成！前一页还有未完成的题`;
+  } else {
+    statusEl.textContent = `已完成 ${matchedIds.size} / ${activeWords.length} 题`;
+  }
 }
 
 function handleWordClick(el, w){
@@ -953,12 +1050,11 @@ function tryMatch(){
     selectedDef.el.classList.remove('selected');
     selectedWord.el.classList.add('matched');
     selectedDef.el.classList.add('matched');
-    matchedCount++;
+    matchedIds.add(selectedWord.id);
+    matchedCount = matchedIds.size;
     selectedWord = null;
     selectedDef = null;
-    if(matchedCount === activeWords.length){
-      document.getElementById('matchStatus').textContent = '🎉 All matched! Great job!';
-    }
+    updateMatchStatus();
   } else {
     const w = selectedWord.el, d = selectedDef.el;
     w.classList.add('wrong');
@@ -972,6 +1068,18 @@ function tryMatch(){
   }
 }
 
+document.getElementById('prevPageBtn').addEventListener('click', () => {
+  if(currentPage > 0){
+    currentPage--;
+    renderPage();
+  }
+});
+document.getElementById('nextPageBtn').addEventListener('click', () => {
+  if(currentPage < questionPages.length - 1){
+    currentPage++;
+    renderPage();
+  }
+});
 document.getElementById('resetBtn').addEventListener('click', buildGame);
 
 // init
