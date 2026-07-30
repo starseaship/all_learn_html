@@ -6,84 +6,12 @@
 <title>词汇整理 · Vocabulary Compendium</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;600&display=swap');
-:root{
-  --cream:#f8f6fb;
-  --parchment:#ddccec;
-  --ink:#4a4458;
-  --sage:#7ab8a3;
-  --sage-dark:#579881;
-  --plum:#b088b8;
-  --rose:#e8a4b8;
-  --gold:#93b3e0;
-  --line:#c6aed9;
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink)}
-body{font-family:'EB Garamond','Noto Serif SC',serif}
-.portal{
-  position:sticky;top:0;z-index:10;
-  background:rgba(248,246,251,.96);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(10px);
-  padding:12px 16px 13px;
-}
-.portal-inner{max-width:980px;margin:0 auto;text-align:center}
-.portal-title{font-size:1.18rem;font-weight:700;margin-bottom:8px}
-.portal-title span{color:var(--rose);font-style:italic;font-size:.82em;margin-left:6px}
-.portal-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.portal-nav a{
-  display:inline-block;text-decoration:none;color:#5f5870;
-  background:#fff;border:1.5px solid var(--line);
-  padding:7px 14px;border-radius:999px;
-  font-size:.92rem;transition:.2s ease;
-}
-.portal-nav a:hover{border-color:var(--gold);transform:translateY(-1px)}
-.portal-nav a.current{background:var(--sage);border-color:var(--sage);color:#fff;font-weight:600}
-.frame-wrap{width:100%}
-iframe{
-  display:block;width:100%;border:0;
-  min-height:calc(100vh - 102px);
-  background:var(--cream);
-}
-@media(max-width:600px){
-  .portal{padding:10px 10px 11px}
-  .portal-title{font-size:1.04rem}
-  .portal-nav a{padding:7px 11px;font-size:.84rem}
-  iframe{min-height:calc(100vh - 132px)}
-}
+:root{--cream:#f8f6fb;--parchment:#ddccec;--ink:#4a4458;--sage:#7ab8a3;--sage-dark:#579881;--plum:#b088b8;--rose:#e8a4b8;--gold:#93b3e0;--line:#c6aed9}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink)}body{font-family:'EB Garamond','Noto Serif SC',serif}.portal{position:sticky;top:0;z-index:10;background:rgba(248,246,251,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);padding:12px 16px 13px}.portal-inner{max-width:1080px;margin:0 auto;text-align:center}.portal-title{font-size:1.18rem;font-weight:700;margin-bottom:8px}.portal-title span{color:var(--rose);font-style:italic;font-size:.82em;margin-left:6px}.portal-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.portal-nav a{display:inline-block;text-decoration:none;color:#5f5870;background:#fff;border:1.5px solid var(--line);padding:7px 14px;border-radius:999px;font-size:.92rem;transition:.2s ease}.portal-nav a:hover{border-color:var(--gold);transform:translateY(-1px)}.portal-nav a.current{background:var(--sage);border-color:var(--sage);color:#fff;font-weight:600}.frame-wrap{width:100%}iframe{display:block;width:100%;border:0;min-height:calc(100vh - 102px);background:var(--cream)}@media(max-width:600px){.portal{padding:10px 10px 11px}.portal-title{font-size:1.04rem}.portal-nav a{padding:7px 11px;font-size:.84rem}iframe{min-height:calc(100vh - 172px)}}
 </style>
 </head>
 <body>
-<header class="portal">
-  <div class="portal-inner">
-    <div class="portal-title">词汇整理 · Vocabulary Compendium <span>小さな単語の庭</span></div>
-    <nav class="portal-nav" aria-label="词汇学习页面">
-      <a class="current" href="vocabulary_compendium.html">词汇总表</a>
-      <a href="vocabulary_word_families.html">词族与变形</a>
-      <a href="vocabulary_confusable_meanings.html">近义易混词</a>
-      <a href="vocabulary_related_topics.html">同主题关联词</a>
-      <a href="vocabulary_starred_words.html">重点收藏词</a>
-    </nav>
-  </div>
-</header>
-<div class="frame-wrap">
-  <iframe id="coreFrame" src="vocabulary_compendium_core.html?v=3" title="词汇总表与配对练习"></iframe>
-</div>
-<script>
-const frame = document.getElementById('coreFrame');
-function resizeFrame(){
-  try{
-    const doc = frame.contentDocument || frame.contentWindow.document;
-    const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-    if(height > 400) frame.style.height = height + 'px';
-  }catch(e){}
-}
-frame.addEventListener('load', () => {
-  resizeFrame();
-  setTimeout(resizeFrame, 400);
-  setTimeout(resizeFrame, 1200);
-});
-window.addEventListener('resize', resizeFrame);
-</script>
-</body>
-</html>
+<header class="portal"><div class="portal-inner"><div class="portal-title">词汇整理 · Vocabulary Compendium <span>小さな単語の庭</span></div><nav class="portal-nav" aria-label="词汇学习页面"><a class="current" href="vocabulary_compendium.html">词汇总表</a><a href="vocabulary_word_families.html">词族与变形</a><a href="vocabulary_confusable_meanings.html">近义易混词</a><a href="vocabulary_related_topics.html">同主题关联词</a><a href="vocabulary_lookalike_words.html">形近易混词</a><a href="vocabulary_starred_words.html">重点收藏词</a></nav></div></header>
+<div class="frame-wrap"><iframe id="coreFrame" src="vocabulary_compendium_core.html?v=3" title="词汇总表与配对练习"></iframe></div>
+<script>const frame=document.getElementById('coreFrame');function resizeFrame(){try{const doc=frame.contentDocument||frame.contentWindow.document;const height=Math.max(doc.body.scrollHeight,doc.documentElement.scrollHeight);if(height>400)frame.style.height=height+'px'}catch(e){}}frame.addEventListener('load',()=>{resizeFrame();setTimeout(resizeFrame,400);setTimeout(resizeFrame,1200)});window.addEventListener('resize',resizeFrame);</script>
+</body></html>
