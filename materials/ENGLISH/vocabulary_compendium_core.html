@@ -844,7 +844,8 @@ document.querySelectorAll('.tab-pill').forEach(btn => {
 // ---------- Matching scope selector ----------
 const scopeGrid = document.getElementById('scopeGrid');
 const scopeHintEl = document.getElementById('scopeHint');
-const DEFAULT_SCOPE_HINT = '每轮最多 20 题，分 2 页，每页 10 题';
+const DEFAULT_SCOPE_HINT = '普通单元每轮最多 20 题；重点词汇分类全部出题；每页 10 题';
+const FULL_SCOPE_UNIT_IDS = new Set(['focus36', 'focus39']);
 const selectedUnits = new Set([units[0].id]); // default first unit selected
 let randomMode = false;
 
@@ -859,7 +860,16 @@ units.forEach(u => {
     if(selectedUnits.has(u.id)){
       selectedUnits.delete(u.id);
       chip.classList.remove('active');
+    } else if(FULL_SCOPE_UNIT_IDS.has(u.id)){
+      selectedUnits.clear();
+      document.querySelectorAll('.scope-chip').forEach(c => c.classList.remove('active'));
+      selectedUnits.add(u.id);
+      chip.classList.add('active');
     } else {
+      FULL_SCOPE_UNIT_IDS.forEach(id => selectedUnits.delete(id));
+      document.querySelectorAll('.scope-chip').forEach(c => {
+        if(FULL_SCOPE_UNIT_IDS.has(c.dataset.id)) c.classList.remove('active');
+      });
       selectedUnits.add(u.id);
       chip.classList.add('active');
     }
@@ -930,7 +940,13 @@ function getRandomWordsAllUnits(count){
 
 function buildGame(){
   const sourceWords = randomMode ? getRandomWordsAllUnits(MAX_QUESTIONS) : getScopeWords();
-  activeWords = randomMode ? sourceWords : shuffle(sourceWords).slice(0, MAX_QUESTIONS);
+  const fullScopeSelected = selectedUnits.size === 1 &&
+    FULL_SCOPE_UNIT_IDS.has([...selectedUnits][0]);
+  activeWords = randomMode
+    ? sourceWords
+    : fullScopeSelected
+      ? shuffle(sourceWords)
+      : shuffle(sourceWords).slice(0, MAX_QUESTIONS);
   matchedCount = 0;
   matchedIds = new Set();
   selectedWord = null;
@@ -1016,7 +1032,7 @@ function updatePagination(){
 function updateMatchStatus(){
   const statusEl = document.getElementById('matchStatus');
   if(matchedIds.size === activeWords.length){
-    statusEl.textContent = '🎉 两页全部完成！Great job!';
+    statusEl.textContent = `🎉 全部 ${questionPages.length} 页完成！Great job!`;
     return;
   }
 
