@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spring Term Exam Review｜期末语法复习</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6f1e6;
+    --paper:#fbf7ee;
+    --ink:#3a332a;
+    --ink-soft:#6b6152;
+    --sage:#7c8a6e;
+    --sage-deep:#5c6b4f;
+    --plum:#7a5468;
+    --gold:#b8923f;
+    --line:#e3d9c3;
+    --rule:1px solid var(--line);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'EB Garamond','Noto Serif SC',serif;
+    line-height:1.65;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px 120px;}
+
+  header.hero{
+    padding:72px 24px 40px;
+    text-align:center;
+    border-bottom:var(--rule);
+    background:var(--paper);
+  }
+  header.hero .eyebrow{
+    font-family:'Noto Serif SC',serif;
+    letter-spacing:0.35em;
+    font-size:12px;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  header.hero h1{
+    font-family:'Noto Serif SC',serif;
+    font-weight:700;
+    font-size:42px;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  header.hero p{
+    color:var(--ink-soft);
+    font-size:17px;
+    font-style:italic;
+    margin:0;
+  }
+
+  nav.toc{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    padding:22px 24px;
+    background:var(--paper);
+    border-bottom:var(--rule);
+  }
+  nav.toc a{
+    text-decoration:none;
+    color:var(--sage-deep);
+    font-family:'Noto Serif SC',serif;
+    font-size:13.5px;
+    padding:7px 16px;
+    border:1px solid var(--sage);
+    border-radius:20px;
+    background:transparent;
+    transition:background .15s, color .15s;
+  }
+  nav.toc a:hover{background:var(--sage);color:#fff;}
+
+  section.part{
+    margin-top:56px;
+    padding-top:8px;
+  }
+  .part-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:6px;
+  }
+  .part-num{
+    font-family:'Noto Serif SC',serif;
+    font-weight:700;
+    font-size:15px;
+    color:#fff;
+    background:var(--plum);
+    padding:4px 12px;
+    border-radius:3px;
+    letter-spacing:0.05em;
+  }
+  .part-head h2{
+    font-family:'Noto Serif SC',serif;
+    font-size:26px;
+    margin:0;
+    color:var(--ink);
+  }
+  .part-ref{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:2px 0 26px 0;
+    font-style:italic;
+  }
+
+  .topic{
+    background:var(--paper);
+    border:var(--rule);
+    border-radius:6px;
+    padding:24px 26px;
+    margin-bottom:22px;
+  }
+  .topic h3{
+    font-family:'Noto Serif SC',serif;
+    font-size:19px;
+    margin:0 0 10px;
+    color:var(--sage-deep);
+  }
+  .topic p.explain{
+    margin:0 0 14px;
+    color:var(--ink);
+    font-size:16px;
+  }
+  .topic p.explain .jp{
+    font-family:'Noto Serif JP','Noto Serif SC',serif;
+  }
+
+  .examples{
+    background:var(--cream);
+    border-left:3px solid var(--sage);
+    padding:14px 18px;
+    margin:14px 0;
+    border-radius:0 4px 4px 0;
+  }
+  .examples .label{
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    font-family:'Noto Serif SC',serif;
+    margin-bottom:8px;
+  }
+  .examples ul{margin:0;padding-left:20px;}
+  .examples li{margin-bottom:6px;font-size:16px;}
+  .examples li .jp{font-family:'Noto Serif JP','Noto Serif SC',serif;color:var(--ink-soft);}
+
+  .memorize{
+    background:#fbf3e3;
+    border:1px solid var(--gold);
+    border-radius:4px;
+    padding:14px 18px;
+    margin-top:14px;
+  }
+  .memorize .label{
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-family:'Noto Serif SC',serif;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .memorize p, .memorize ul{margin:0;font-size:15.5px;}
+  .memorize ul{padding-left:20px;}
+  .memorize li{margin-bottom:4px;}
+
+  table.gram{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    font-size:15.5px;
+  }
+  table.gram th, table.gram td{
+    border:var(--rule);
+    padding:9px 12px;
+    text-align:left;
+  }
+  table.gram th{
+    background:var(--sage);
+    color:#fff;
+    font-family:'Noto Serif SC',serif;
+    font-weight:600;
+    font-size:14px;
+  }
+  table.gram td.hi{color:var(--plum);font-weight:600;}
+
+  .scale{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:16px 0 6px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .scale-bar{
+    display:flex;
+    height:34px;
+    border-radius:4px;
+    overflow:hidden;
+    margin-bottom:6px;
+  }
+  .scale-bar div{
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:12.5px;font-family:'Noto Serif SC',serif;
+    padding:0 4px;
+  }
+
+  .quantifiers{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:14px;
+  }
+  .qgroup{
+    background:var(--cream);
+    border:var(--rule);
+    border-radius:4px;
+    padding:12px 14px;
+  }
+  .qgroup h4{
+    margin:0 0 8px;
+    font-family:'Noto Serif SC',serif;
+    font-size:14px;
+    color:var(--plum);
+  }
+  .qgroup p{margin:0;font-size:14.5px;}
+
+  @media (max-width:640px){
+    header.hero h1{font-size:30px;}
+    .quantifiers{grid-template-columns:1fr;}
+    .part-head h2{font-size:22px;}
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 24px;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-style:italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Spring Term Exam Preparation</div>
+  <h1>期末语法复习手册</h1>
+  <p>Part 1 – Part 5　语法知识点 · 讲解 · 例句 · 背诵要点</p>
+</header>
+
+<nav class="toc">
+  <a href="#part1">Part 1 时态与状态动词</a>
+  <a href="#part2">Part 2 情态动词</a>
+  <a href="#part3">Part 3 被动 / 使役被动</a>
+  <a href="#part4">Part 4 动名词与不定式</a>
+  <a href="#part5">Part 5 可数与不可数</a>
+</nav>
+
+<div class="wrap">
+
+<!-- PART 1 -->
+<section class="part" id="part1">
+  <div class="part-head">
+    <span class="part-num">PART 1</span>
+    <h2>时态辨析 & 动作 / 状态动词</h2>
+  </div>
+  <p class="part-ref">教材范围：p.9, p.25 EX3, p.39-6</p>
+
+  <div class="topic">
+    <h3>① 一般现在时 vs 现在进行时（三种含义辨析）</h3>
+    <p class="explain">
+      同一个动作，用不同时态表达的意思完全不同。判断关键在于：这句话说的是<b>习惯</b>、<b>此刻正在发生</b>，还是<b>近期一段时间内反复发生</b>。
+    </p>
+    <div class="examples">
+      <div class="label">例句对照</div>
+      <ul>
+        <li><b>Habit（习惯，一般现在时）</b>：She watches TV every morning.（她每天早上都看电视——长期习惯）</li>
+        <li><b>Happening right now（此刻，现在进行时）</b>：She is watching TV.（她现在正在看电视）</li>
+        <li><b>These days（最近这段时间，现在进行时+ these days）</b>：She is watching a lot of TV these days.（她最近这段时间看很多电视，暗示是临时性的、可能会变化的状态）</li>
+      </ul>
+    </div>
+    <div class="memorize">
+      <div class="label">要背的判断口诀</div>
+      <p>① every day / usually / always → 一般现在时（习惯）　② right now / at the moment → 现在进行时（当下）　③ these days / this week / lately → 现在进行时（近期趋势，非永久）</p>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h3>② Action Verb（动作动词）vs Non-Action Verb（状态动词）</h3>
+    <p class="explain">
+      状态动词（如 know, like, believe, belong, taste 表示"尝起来"）描述的是持续性的状态、感觉、所属关系，<b>通常不能用进行时</b>。但有些动词在不同语义下可以两者都用——这是最容易出错的点。
+    </p>
+    <div class="examples">
+      <div class="label">课件原题（A=动作 / N=状态）</div>
+      <ul>
+        <li>She runs every morning. → <b>A</b>（run 是动作）</li>
+        <li>I know the answer. → <b>N</b>（know 表状态）</li>
+        <li>This soup tastes great. → <b>N</b>（taste 表"尝起来如何"，状态）</li>
+        <li>She is tasting the soup. → <b>A</b>（taste 表"品尝"这个动作）</li>
+        <li>I think this movie is interesting. → <b>N</b>（think 表"认为"，状态）</li>
+        <li>I am thinking about your idea. → <b>A</b>（think about 表"思考"这个动作）</li>
+        <li>This bag belongs to me. → <b>N</b>（belong 永远是状态动词，不用进行时）</li>
+      </ul>
+    </div>
+    <div class="memorize">
+      <div class="label">必背陷阱动词</div>
+      <p>taste / think / have / see / smell 等词，<b>词义是"感受/观点/所属"时是状态动词；词义变成主动做某事时是动作动词</b>。做题时先判断这句话里的具体含义。</p>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h3>③ 未来完了时 / 未来完了进行时（Future Perfect）</h3>
+    <p class="explain">
+      表示"到将来某个时间点为止，某事将会已经完成"。句型：<b>will have + 过去分词</b>。常与 "by + 时间点" 或 "by the time + 从句" 连用。
+    </p>
+    <div class="examples">
+      <div class="label">例句</div>
+      <ul>
+        <li>I will have finished my homework by six.（到六点之前，我将已经做完作业）<span class="jp">私は６時までには宿題を終わらせられるでしょう。</span></li>
+        <li>I will have finished my homework by the time my mother comes home.（到妈妈回家之前，我将已经做完作业）<span class="jp">私は母が帰るまでに宿題を終わらせているでしょう。</span></li>
+      </ul>
+    </div>
+    <div class="memorize">
+      <div class="label">要背的句型</div>
+      <p>By the time + 主语 + 一般现在时动词，主语 + will have + 过去分词 ……<br>
+      练习句自查：By the time I graduate from OJ, I will have ___.（用未来完了或未来完了进行时补全）</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="part" id="part2">
+  <div class="part-head">
+    <span class="part-num">PART 2</span>
+    <h2>情态动词表达"必要性"的程度</h2>
+  </div>
+  <p class="part-ref">教材范围：p.55</p>
+
+  <div class="topic">
+    <h3>Modals to Express Degrees of Necessity</h3>
+    <p class="explain">
+      不同情态动词表达"必须做某事"的强弱程度不同，从100%（绝对必须）到0%（完全不必要，有其他更弱的可能性）。这是一个连续的量表，而不是简单的"必须/不必须"二元对立。
+    </p>
+    <div class="scale">
+      <span>必要性 100%</span><span>0%</span>
+    </div>
+    <div class="scale-bar">
+      <div style="flex:2;background:var(--plum);">must / have to / have got to</div>
+      <div style="flex:2;background:var(--sage-deep);">had better / should / ought to</div>
+      <div style="flex:2;background:var(--sage);">are supposed to / are to</div>
+      <div style="flex:2;background:var(--gold);">could / might / don't have to</div>
+    </div>
+    <table class="gram">
+      <tr><th>强度</th><th>情态动词</th><th>含义要点</th></tr>
+      <tr><td class="hi">最强（100%）</td><td>must / have to / have got to</td><td>必须、不做不行</td></tr>
+      <tr><td class="hi">较强</td><td>had better / should / ought to</td><td>最好这样做、应该做（建议性）</td></tr>
+      <tr><td class="hi">中等</td><td>are supposed to / are to</td><td>被期望这样做、规定应该做</td></tr>
+      <tr><td class="hi">最弱（0%）</td><td>could, might / don't have to</td><td>可以但非必须；don't have to = "不必"（不是"不可以"！）</td></tr>
+    </table>
+    <div class="memorize">
+      <div class="label">必背易混点</div>
+      <p><b>don't have to</b> ≠ <b>must not</b>：don't have to 是"不必做"（有选择），must not 是"禁止做"（不可以）。这是考试最常见的陷阱之一。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3 -->
+<section class="part" id="part3">
+  <div class="part-head">
+    <span class="part-num">PART 3</span>
+    <h2>被动语态 vs 使役被动（Get/Have + 过去分词）</h2>
+  </div>
+  <p class="part-ref">教材范围：p.98</p>
+
+  <div class="topic">
+    <h3>Passive vs Passive Causative with get/have</h3>
+    <p class="explain">
+      普通被动语态强调"动作发生在主语身上"，不强调是谁做的。<b>使役被动（get/have + 宾语 + 过去分词）</b>则强调"主语安排/请别人为自己做了这件事"，通常用于花钱请人服务的情境（修东西、剪头发、看牙等）。
+    </p>
+    <table class="gram">
+      <tr><th>Passive（被动语态）</th><th>Passive Causative（使役被动）</th></tr>
+      <tr><td>My laptop was fixed.</td><td>I got my laptop fixed.</td></tr>
+      <tr><td>My hair was cut.</td><td>I got my hair cut.</td></tr>
+      <tr><td>My tooth was pulled.</td><td>I got my tooth pulled.</td></tr>
+      <tr><td>My phone screen was replaced.</td><td>I got my phone screen replaced.</td></tr>
+    </table>
+    <div class="memorize">
+      <div class="label">要背的结构</div>
+      <p>get/have + 宾语（物）+ 过去分词　→　强调"我请人做了这件事"，主语是"安排者"而非被动接受者。<br>
+      普通被动句型：be + 过去分词，主语本身经历了这个动作，没有"我主动安排"的含义。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4 -->
+<section class="part" id="part4">
+  <div class="part-head">
+    <span class="part-num">PART 4</span>
+    <h2>动名词（Gerunds）与不定式（Infinitives）</h2>
+  </div>
+  <p class="part-ref">教材范围：pp.127-129（动名词）, p.143（不定式）</p>
+
+  <div class="topic">
+    <h3>① Gerunds 动名词的四种用法</h3>
+    <p class="explain">动名词（V-ing）可以在句中充当名词的四种成分：</p>
+    <div class="examples">
+      <div class="label">四种用法与例句</div>
+      <ul>
+        <li><b>作主语（as Subject）</b>：Studying grammar can improve your fluency.（学习语法能提高你的流利度）</li>
+        <li><b>作宾语（as Object）</b>：In winter, we enjoy skiing.（冬天我们喜欢滑雪）</li>
+        <li><b>作表语（as Subject Complement，多接系动词）</b>：My hobby is dancing.（我的爱好是跳舞，My hobby = dancing）</li>
+        <li><b>作宾语补足语（as Object Complement）</b>：We caught him cheating.（我们抓到他作弊，him = cheating）；The teacher found the student sleeping.（老师发现学生在睡觉）</li>
+      </ul>
+    </div>
+    <div class="memorize">
+      <div class="label">必背动词组（后接"宾语 + doing"）</div>
+      <p>find, see, hear, watch, notice, keep, leave, catch　——　这些感官/发现类动词后面接"宾语 + V-ing"表示"发现/听到/看到某人正在做某事"。</p>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h3>② Infinitives 不定式的三种用法</h3>
+    <p class="explain">不定式（to + 动词原形）同样可以充当主语、宾语、表语：</p>
+    <div class="examples">
+      <div class="label">三种用法与例句</div>
+      <ul>
+        <li><b>作主语（as Subject）</b>：To study abroad costs a lot of money.（出国留学花费很多钱）</li>
+        <li><b>作宾语（as Object）</b>：We need to work.（我们需要工作）</li>
+        <li><b>作表语（as Subject Complement，多接系动词）</b>：My dream is to be an actress.（我的梦想是成为女演员，My dream = to be an actress）</li>
+      </ul>
+    </div>
+    <div class="memorize">
+      <div class="label">对比记忆</div>
+      <p>动名词和不定式都能作主语/宾语/表语，但具体哪个动词后面接哪种形式需要单独记忆（如 enjoy + doing，need + to do）。考试中注意区分课件给出的固定搭配。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5 -->
+<section class="part" id="part5">
+  <div class="part-head">
+    <span class="part-num">PART 5</span>
+    <h2>可数名词 vs 不可数名词 & 限定词分组</h2>
+  </div>
+  <p class="part-ref">教材范围：p.185, p.197</p>
+
+  <div class="topic">
+    <h3>① Countable or Uncountable？（易混词清单）</h3>
+    <p class="explain">
+      很多名词的可数性和中文直觉不一致，是期末考的高频考点。以下是课件原题的完整分类：
+    </p>
+    <table class="gram">
+      <tr><th>可数（Countable）</th><th>不可数（Uncountable）</th></tr>
+      <tr>
+        <td>job, laugh, chair, view, trip, bag, suggestion</td>
+        <td>advice, scenery, laughter, furniture, research, vocabulary, baggage/luggage, equipment, work（仕事）, butter, sugar, salt, pepper</td>
+      </tr>
+    </table>
+    <div class="memorize">
+      <div class="label">必背不可数名词（最容易考错）</div>
+      <p><b>advice（建议）、furniture（家具）、research（研究）、baggage/luggage（行李）、equipment（设备）、work（工作）、scenery（风景）、laughter（笑声）、vocabulary（词汇）</b> —— 这些名词永远不加 -s，前面不能用 a/an，要用 much / a piece of 等修饰。<br>
+      注意 laugh（一次具体的笑，可数）与 laughter（笑声这个概念，不可数）的区别。</p>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h3>② 限定词三分组（Quantifiers）</h3>
+    <p class="explain">不同限定词只能搭配可数名词、不可数名词，或两者都可以：</p>
+    <div class="quantifiers">
+      <div class="qgroup">
+        <h4>Group A｜仅用于可数名词</h4>
+        <p>one, each, every, a, an, both, a couple of, several, few, many, a great many, a number of</p>
+      </div>
+      <div class="qgroup">
+        <h4>Group B｜仅用于不可数名词</h4>
+        <p>little, a little, much, a great deal of, a bit of</p>
+      </div>
+      <div class="qgroup">
+        <h4>Group C｜两者通用</h4>
+        <p>no, any, some, enough, a lot of, lots of, plenty of, most, all</p>
+      </div>
+    </div>
+    <div class="memorize">
+      <div class="label">要背的练习任务</div>
+      <p>课件原题要求：用每组各写三个例句（Write three sentences using quantifiers from each group）——建议实际动笔练习一遍，确认 many/much、few/little 的可数性不会混淆。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>Spring Term Exam Preparation · 语法复习整理　|　别忘了对照课件里的 4 份 Review Check 文档核对细节</footer>
+
+</body>
+</html>
