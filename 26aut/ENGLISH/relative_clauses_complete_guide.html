@@ -16,6 +16,43 @@
 @media(max-width:540px){body{font-size:14px}.layout{padding:16px 12px 75px}.brand{font-size:12px}.topbar{height:55px}.top-actions{gap:5px}.topbtn{padding:6px 8px;font-size:11px}.hero{padding:27px 20px;border-radius:13px}.hero h1{font-size:27px}.unit{padding:21px 17px;border-radius:13px}.unit h2{font-size:19px}.unit h3{font-size:15px}.comparison{grid-template-columns:1fr}.en{font-size:16px}.tips{padding:14px}.unit{scroll-margin-top:68px}.tablewrap{margin-left:-3px;margin-right:-3px}th,td{padding:9px 10px}}
 @media print{body{background:#fff;font-size:11px}.topbar,.sidebar,.toplink,.quiz-bottom{display:none!important}.layout{display:block;max-width:100%;padding:0}.hero{box-shadow:none;margin:0 0 10px;padding:15px 0;border:0}.hero h1{font-size:23px}.unit{padding:13px 0;border:0;border-bottom:1px solid #ddd;box-shadow:none;border-radius:0;break-inside:avoid-page;margin-bottom:10px}.unit h2{font-size:18px}.en{font-size:13px}.tips,.example,.formula{print-color-adjust:exact;-webkit-print-color-adjust:exact}a{text-decoration:none}}
 .fused-answer{margin:9px 0 12px;border:1px solid var(--line);border-radius:8px;background:#fbfcff;padding:7px 12px;font-size:13px}.fused-answer summary{cursor:pointer;color:var(--violet);font-weight:700;list-style-position:inside}.fused-answer[open]{background:#f8f6fc}.fused-answer p{margin:6px 0}.unit h3[id]{scroll-margin-top:83px}
+
+/* Collapsible desktop table of contents */
+.sidebar-top{position:sticky;top:-20px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:5px;padding:0 4px 12px;background:var(--paper)}
+.sidebar .sidebar-heading{margin:0 0 0 6px;line-height:1.5}
+.sidebar-toggle{width:32px;height:32px;flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--muted);transition:background .18s,color .18s}
+.sidebar-toggle:hover,.sidebar-toggle:focus-visible{background:var(--violet-light);color:var(--violet);outline-offset:2px}
+.sidebar-toggle svg{transition:transform .22s ease}
+.sidebar-links{display:flex;flex-direction:column;gap:2px}
+.sidebar .navlink{display:flex;align-items:center;gap:9px;min-height:35px;white-space:normal}
+.nav-count{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:21px;font-size:11px;font-weight:700;color:#8a809e}
+.nav-name{min-width:0;overflow-wrap:anywhere}
+.sidebar .navlink.active .nav-count{color:var(--violet)}
+.sidebar .tipnav .nav-count{color:var(--mint)}
+@media(min-width:961px){
+  .layout{transition:grid-template-columns .25s ease,gap .25s ease}
+  .layout.sidebar-collapsed{grid-template-columns:60px minmax(0,1fr);gap:18px}
+  .layout.sidebar-collapsed .sidebar{padding:10px 6px}
+  .layout.sidebar-collapsed .sidebar-top{top:-10px;justify-content:center;padding:0 0 9px}
+  .layout.sidebar-collapsed .sidebar-heading,.layout.sidebar-collapsed .nav-name,.layout.sidebar-collapsed .sidebar footer{display:none}
+  .layout.sidebar-collapsed .sidebar-toggle{width:40px;height:40px}
+  .layout.sidebar-collapsed .sidebar-toggle svg{transform:rotate(180deg)}
+  .layout.sidebar-collapsed .navlink{justify-content:center;min-height:40px;padding:7px 2px;border-radius:9px}
+  .layout.sidebar-collapsed .nav-count{min-width:35px;min-height:29px;font-size:11px}
+}
+@media(max-width:960px){
+  .layout,.layout.sidebar-collapsed{grid-template-columns:minmax(0,1fr)}
+  .layout .sidebar{display:none}
+  .layout .sidebar.mobile-nav-open{display:block;position:fixed;top:72px;bottom:12px;left:12px;width:min(320px,calc(100vw - 24px));max-height:none;z-index:30;overflow:auto;box-shadow:0 14px 55px #24304030}
+  .sidebar-toggle{display:none}
+}
+@media(max-width:540px){
+  .layout .sidebar.mobile-nav-open{top:65px}
+}
+@media(prefers-reduced-motion:reduce){
+  .layout,.sidebar-toggle svg{transition:none}
+}
+
 </style>
 <meta name="subject" content="english">
 <meta name="type" content="grammar">
@@ -24,10 +61,30 @@
 <meta name="description" content="定语从句完整讲义：关系代词、关系副词、非限制性定语从句、介词提前、of whom/of which、分词短语与互动练习。">
 </head>
 <body>
-<header class="topbar"><div class="brand"><span>ENGLISH NOTES</span> / Grammar Library</div><div class="top-actions"><button class="topbtn mobile-index" onclick="toggleIndex()" id="indexButton">目录</button><button class="topbtn" onclick="window.print()">打印 / 保存 PDF</button></div></header>
-<div class="layout">
-<nav class="sidebar" aria-label="章节目录" id="sideindex"><h3>CONTENTS · 目录</h3>
-<a class="navlink" href="#s1">01 基础概念</a><a class="navlink" href="#s2">02 五大关系代词</a><a class="navlink" href="#s3">03 关系副词</a><a class="navlink" href="#s4">04 限定性与非限定性</a><a class="navlink tipnav" href="#nondef-tip">↳ Tips：非限制性是什么？</a><a class="navlink" href="#s5">05 介词 + 关系代词</a><a class="navlink" href="#s6">06 数量词 + of whom / which</a><a class="navlink" href="#s7">07 关系代词省略</a><a class="navlink" href="#s8">08 that 的特殊用法</a><a class="navlink" href="#s9">09 从句缩减为短语</a><a class="navlink" href="#s10">10 including / involving</a><a class="navlink" href="#s11">11 特殊结构</a><a class="navlink" href="#s12">12 主谓一致与时态</a><a class="navlink" href="#s13">13 与其他从句的区别</a><a class="navlink" href="#s14">14 常见错误</a><a class="navlink" href="#s15">15 解题方法</a><a class="navlink" href="#s16">16 综合练习 · 10 题</a><a class="navlink" href="#summary">总复习表</a><footer>单文件 HTML · 不需要网络连接<br>适合手机阅读、电脑复习和打印</footer></nav>
+<header class="topbar"><div class="brand"><span>ENGLISH NOTES</span> / Grammar Library</div><div class="top-actions"><button class="topbtn mobile-index" onclick="toggleIndex()" id="indexButton" aria-controls="sideindex" aria-expanded="false">目录</button><button class="topbtn" onclick="window.print()">打印 / 保存 PDF</button></div></header>
+<div class="layout" id="studyLayout">
+<nav class="sidebar" aria-label="章节目录" id="sideindex">
+<div class="sidebar-top"><h3 class="sidebar-heading">CONTENTS · 目录</h3><button type="button" class="sidebar-toggle" id="sidebarToggle" aria-controls="sideindex" aria-expanded="true" aria-label="收起侧边栏" title="收起侧边栏"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18"></path><path d="m15 9-3 3 3 3"></path></svg></button></div>
+<div class="sidebar-links"><a class="navlink" href="#s1" title="01 基础概念"><span class="nav-count" aria-hidden="true">01</span><span class="nav-name">基础概念</span></a>
+<a class="navlink" href="#s2" title="02 五大关系代词"><span class="nav-count" aria-hidden="true">02</span><span class="nav-name">五大关系代词</span></a>
+<a class="navlink" href="#s3" title="03 关系副词"><span class="nav-count" aria-hidden="true">03</span><span class="nav-name">关系副词</span></a>
+<a class="navlink" href="#s4" title="04 限定性与非限定性"><span class="nav-count" aria-hidden="true">04</span><span class="nav-name">限定性与非限定性</span></a>
+<a class="navlink tipnav" href="#nondef-tip" title="↳ Tips：非限制性是什么？"><span class="nav-count" aria-hidden="true">?</span><span class="nav-name">Tips：非限制性是什么？</span></a>
+<a class="navlink" href="#s5" title="05 介词 + 关系代词"><span class="nav-count" aria-hidden="true">05</span><span class="nav-name">介词 + 关系代词</span></a>
+<a class="navlink" href="#s6" title="06 数量词 + of whom / which"><span class="nav-count" aria-hidden="true">06</span><span class="nav-name">数量词 + of whom / which</span></a>
+<a class="navlink" href="#s7" title="07 关系代词省略"><span class="nav-count" aria-hidden="true">07</span><span class="nav-name">关系代词省略</span></a>
+<a class="navlink" href="#s8" title="08 that 的特殊用法"><span class="nav-count" aria-hidden="true">08</span><span class="nav-name">that 的特殊用法</span></a>
+<a class="navlink" href="#s9" title="09 从句缩减为短语"><span class="nav-count" aria-hidden="true">09</span><span class="nav-name">从句缩减为短语</span></a>
+<a class="navlink" href="#s10" title="10 including / involving"><span class="nav-count" aria-hidden="true">10</span><span class="nav-name">including / involving</span></a>
+<a class="navlink" href="#s11" title="11 特殊结构"><span class="nav-count" aria-hidden="true">11</span><span class="nav-name">特殊结构</span></a>
+<a class="navlink" href="#s12" title="12 主谓一致与时态"><span class="nav-count" aria-hidden="true">12</span><span class="nav-name">主谓一致与时态</span></a>
+<a class="navlink" href="#s13" title="13 与其他从句的区别"><span class="nav-count" aria-hidden="true">13</span><span class="nav-name">与其他从句的区别</span></a>
+<a class="navlink" href="#s14" title="14 常见错误"><span class="nav-count" aria-hidden="true">14</span><span class="nav-name">常见错误</span></a>
+<a class="navlink" href="#s15" title="15 解题方法"><span class="nav-count" aria-hidden="true">15</span><span class="nav-name">解题方法</span></a>
+<a class="navlink" href="#s16" title="16 综合练习 · 10 题"><span class="nav-count" aria-hidden="true">16</span><span class="nav-name">综合练习 · 10 题</span></a>
+<a class="navlink" href="#summary" title="总复习表"><span class="nav-count" aria-hidden="true">总</span><span class="nav-name">总复习表</span></a></div>
+<footer>单文件 HTML · 不需要网络连接<br>适合手机阅读、电脑复习和打印</footer>
+</nav>
 <main class="main">
 <section class="hero"><div class="eyebrow">Grammar Guide · Unit 15</div><h1>英语定语从句<br>完整语法讲义</h1><p>Relative Clauses / Adjective Clauses<br>从关系代词、关系副词，到介词提前、非限制性定语从句、分词短语、题目纠错，按学习顺序系统整理。</p><div class="chiprow"><span class="chip">16 个章节</span><span class="chip">中英对照例句</span><span class="chip">非限制性 Tips</span><span class="chip">10 题互动自测</span></div></section>
 <section class="unit" id="s1"><div class="unit-heading"><span class="num">01</span><h2>什么是定语从句？</h2></div><p>定语从句（<b>Relative Clause / Adjective Clause</b>）用一个从句修饰名词或代词，告诉我们这个人或事物是谁、是什么样、具有什么特点。</p><div class="example"><div class="en">I met a girl <strong>who speaks Japanese</strong>.</div><p class="zh">我遇到了一个会说日语的女孩。</p></div><div class="breakdown"><span class="part"><strong>先行词 Antecedent</strong>a girl</span><span class="arrow">←</span><span class="part"><strong>关系代词 Relative Pronoun</strong>who</span><span class="arrow">+</span><span class="part"><strong>定语从句 Relative Clause</strong>who speaks Japanese</span></div><div class="formula">先行词 + 关系词 + 从句其余部分</div><p>关系词分为两类：<b>关系代词</b> who / whom / whose / which / that（在从句中充当主语、宾语等）；<b>关系副词</b> when / where / why（在从句中充当时间、地点、原因状语）。</p><div class="takeaway">核心思路：先找被修饰的名词，再判断关系词在从句里承担什么语法成分。</div></section>
@@ -156,8 +213,40 @@ function renderQuiz(){const el=document.getElementById('quizQuestions');el.inner
 function selectAnswer(i,j){if(!graded){selections[i]=j;renderQuiz();}}
 function gradeQuiz(){if(selections.includes(null))return;graded=true;renderQuiz();}
 function resetQuiz(){selections.fill(null);graded=false;renderQuiz();}
-function toggleIndex(){let el=document.getElementById('sideindex');let on=el.style.display==='block';el.style.display=on?'none':'block';if(!on){el.style.position='fixed';el.style.top='61px';el.style.left='12px';el.style.right='12px';el.style.zIndex='19';el.style.maxHeight='75vh';}else{el.removeAttribute('style');}}
-document.querySelectorAll('#sideindex a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<=960)document.getElementById('sideindex').removeAttribute('style');}));
+const studyLayout=document.getElementById('studyLayout');
+const sidebar=document.getElementById('sideindex');
+const sidebarToggle=document.getElementById('sidebarToggle');
+const indexButton=document.getElementById('indexButton');
+const SIDEBAR_STORAGE_KEY='zoe-relative-clauses-sidebar-collapsed';
+function setSidebarCollapsed(collapsed,persist=true){
+  studyLayout.classList.toggle('sidebar-collapsed',collapsed);
+  sidebarToggle.setAttribute('aria-expanded',String(!collapsed));
+  sidebarToggle.setAttribute('aria-label',collapsed?'展开侧边栏':'收起侧边栏');
+  sidebarToggle.title=collapsed?'展开侧边栏':'收起侧边栏';
+  if(persist){try{localStorage.setItem(SIDEBAR_STORAGE_KEY,String(collapsed));}catch(e){}}
+}
+try{setSidebarCollapsed(localStorage.getItem(SIDEBAR_STORAGE_KEY)==='true',false);}catch(e){setSidebarCollapsed(false,false);}
+sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!studyLayout.classList.contains('sidebar-collapsed')));
+function closeMobileIndex(){
+  sidebar.classList.remove('mobile-nav-open');
+  indexButton.setAttribute('aria-expanded','false');
+}
+function toggleIndex(){
+  const open=sidebar.classList.toggle('mobile-nav-open');
+  indexButton.setAttribute('aria-expanded',String(open));
+}
+document.querySelectorAll('#sideindex a').forEach(a=>a.addEventListener('click',()=>{
+  if(window.innerWidth<=960)closeMobileIndex();
+}));
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&sidebar.classList.contains('mobile-nav-open')){
+    closeMobileIndex();indexButton.focus();
+  }
+});
+document.addEventListener('click',event=>{
+  if(sidebar.classList.contains('mobile-nav-open')&&!sidebar.contains(event.target)&&!indexButton.contains(event.target))closeMobileIndex();
+});
+window.addEventListener('resize',()=>{if(window.innerWidth>960)closeMobileIndex();});
 const links=[...document.querySelectorAll('#sideindex .navlink')];if('IntersectionObserver' in window){let obs=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));}}},{rootMargin:'-70px 0px -65% 0px'});document.querySelectorAll('section.unit').forEach(s=>obs.observe(s));}
 renderQuiz();
 </script>
