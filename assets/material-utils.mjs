@@ -1,0 +1,50 @@
+export const SUBJECT_LABELS = Object.freeze({english:'🇬🇧 英语',japanese:'🇯🇵 日语',general:'📚 通识',wgl:'🌐 WGL'});
+export const TYPE_LABELS = Object.freeze({grammar:'文法',vocabulary:'词汇',quiz:'练习',notes:'笔记',writing:'写作',reference:'参考'});
+const cleanText = (value, limit = 200) => typeof value === 'string' ? value.trim().slice(0, limit) : '';
+
+export function validDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return '';
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0,10) === value ? value : '';
+}
+
+export function normalizeCatalog(raw) {
+  if (!raw || raw.version !== 1 || !Array.isArray(raw.semesters) || !Array.isArray(raw.materials)) throw new Error('资料目录格式不正确');
+  const semesters = raw.semesters.map(item => ({id:cleanText(item.id),label:cleanText(item.label)}));
+  if (!semesters.length || semesters.some(item => !/^\d{2}(?:aut|spring)$/.test(item.id) || !item.label) || new Set(semesters.map(s=>s.id)).size !== semesters.length) throw new Error('学期信息不正确');
+  const semesterIds = new Set(semesters.map(item=>item.id));
+  if (!semesterIds.has(raw.currentSemester)) throw new Error('当前学期不存在');
+  const paths = new Set();
+  const materials = raw.materials.map(item => {
+    const path = cleanText(item.path,1000);
+    const parts = path.split('/');
+    if (!semesterIds.has(parts[0]) || parts.some(p=>!p || p==='.' || p==='..') || /[\\?#:%\x00-\x1f]/.test(path) || !/\.html$/i.test(path) || paths.has(path)) throw new Error('资料链接格式不正确');
+    paths.add(path);
+    const lesson = Number(item.lessonNumber);
+    return {
+      id:path, path, semester:parts[0], title:cleanText(item.title,300) || parts.at(-1).replace(/\.html$/i,''),
+      description:cleanText(item.description,1200), course:cleanText(item.course,100) || '未分类',
+      subject:Object.hasOwn(SUBJECT_LABELS,item.subject) ? item.subject : 'general',
+      type:Object.hasOwn(TYPE_LABELS,item.type) ? item.type : 'reference', date:validDate(item.date),
+      lessonNumber:Number.isInteger(lesson) && lesson > 0 ? lesson : null
+    };
+  });
+  return {version:1,currentSemester:raw.currentSemester,semesters,materials};
+}
+
+export function filterMaterials(materials, {subject='all',type='all',course='all',query=''} = {}) {
+  const q = query.trim().toLocaleLowerCase();
+  return materials.filter(item => (subject==='all'||item.subject===subject) && (type==='all'||item.type===type) && (course==='all'||item.course===course) && (!q||`${item.title} ${item.description} ${item.course}`.toLocaleLowerCase().includes(q)));
+}
+
+export function sortMaterials(materials, mode='lesson') {
+  const byTitle = (a,b)=>a.title.localeCompare(b.title,'zh-CN',{numeric:true}) || a.path.localeCompare(b.path);
+  return [...materials].sort((a,b)=> {
+    if (mode==='title') return byTitle(a,b);
+    if (mode==='updated') return (b.date||'').localeCompare(a.date||'') || byTitle(a,b);
+    const courseOrder = a.course.localeCompare(b.course,'zh-CN',{numeric:true});
+    if (courseOrder) return courseOrder;
+    const left=a.lessonNumber??Infinity, right=b.lessonNumber??Infinity;
+    return left===right ? byTitle(a,b) : left<right ? -1 : 1;
+  });
+}

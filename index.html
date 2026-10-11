@@ -1,46 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Zoe's Study Archive</title>
-<meta name="application-name" content="Zoe Study">
-<meta name="theme-color" content="#06162c">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Zoe Study">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="/all_learn_html/manifest.webmanifest?v=20260621-1">
-<link rel="icon" type="image/png" href="/all_learn_html/apple-touch-icon.png?v=20260621-1">
-<link rel="shortcut icon" type="image/png" href="/all_learn_html/apple-touch-icon.png?v=20260621-1">
-<link rel="apple-touch-icon" href="/all_learn_html/apple-touch-icon.png?v=20260621-1">
-<link rel="apple-touch-icon" sizes="180x180" href="/all_learn_html/apple-touch-icon.png?v=20260621-1">
-<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/all_learn_html/apple-touch-icon-precomposed.png?v=20260621-1">
-<style>html,body{width:100%;height:100%;margin:0;padding:0;background:#06162c;overflow:hidden}#appFrame{position:fixed;inset:0;width:100%;height:100%;border:0;background:#f7f4ef}noscript{display:block;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:#2e2a35;background:#f7f4ef}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Zoe 的学习资料库，按学期、课程和课次整理课堂知识。">
+  <meta name="application-name" content="Zoe Study">
+  <meta name="theme-color" content="#f7f4ef">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Zoe Study">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Zoe's Study Archive</title>
+  <link rel="manifest" href="./manifest.webmanifest?v=20261011-2">
+  <link rel="icon" type="image/png" href="./apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="./assets/archive.css?v=20261011-2">
+  <script type="module" src="./assets/archive.js?v=20261011-2"></script>
 </head>
 <body>
-<iframe id="appFrame" src="./app.html?v=20261011-ai-summary" title="Zoe's Study Archive"></iframe>
-<noscript>需要启用 JavaScript 才能使用学习资料库。</noscript>
-<script>
-const appFrame=document.getElementById('appFrame');
-appFrame.addEventListener('load',()=>{
- try{
-  const doc=appFrame.contentDocument,win=appFrame.contentWindow;if(!doc||!win)return;
-  if(!doc.getElementById('desktopLayoutOverride')){
-   const style=doc.createElement('style');style.id='desktopLayoutOverride';style.textContent=`@media (min-width:721px){.layout{display:block!important;width:100%!important;max-width:1600px!important;margin:0 auto!important;padding:28px clamp(28px,4vw,56px) 56px!important}.results-info{margin-bottom:18px!important}.card-grid{width:100%!important;display:grid!important;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))!important;gap:18px!important}.material-card{min-height:150px!important}}@media (min-width:1500px){.card-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}@media (max-width:720px){.layout{display:block!important}}`;doc.head.appendChild(style);
-  }
-  if(!doc.getElementById('writingTypeSupport')){
-   const patch=doc.createElement('script');patch.id='writingTypeSupport';patch.textContent=`(()=>{if(document.documentElement.dataset.writingTypeReady==='1')return;document.documentElement.dataset.writingTypeReady='1';TYPE_LABELS.writing='写作';const originalNormalizeType=normalizeType;normalizeType=function(type){const value=String(type||'').trim().toLowerCase();if(value==='writing'||value==='写作')return'writing';return originalNormalizeType(type)};const originalGuessType=guessType;guessType=function(text){const value=String(text||'').toLowerCase();if(value.includes('writing')||value.includes('写作'))return'writing';return originalGuessType(text)};const style=document.createElement('style');style.textContent='.chip[data-type="writing"].active{background:var(--yellow);border-color:var(--peach-deep);color:var(--peach-deep)}.tag-type-writing{background:var(--yellow);color:var(--peach-deep)}';document.head.appendChild(style);const typeGroup=Array.from(document.querySelectorAll('.filter-group')).find(group=>group.querySelector('[data-type="all"]'));if(typeGroup&&!typeGroup.querySelector('[data-type="writing"]')){const button=document.createElement('button');button.className='chip';button.dataset.type='writing';button.textContent='写作';const referenceButton=typeGroup.querySelector('[data-type="reference"]');typeGroup.insertBefore(button,referenceButton||null);button.addEventListener('click',()=>{document.querySelectorAll('.chip[data-type]').forEach(item=>item.classList.remove('active'));button.classList.add('active');activeType='writing';render()})}const typeSelect=document.getElementById('editTypeSelect');if(typeSelect&&!typeSelect.querySelector('option[value="writing"]')){const option=document.createElement('option');option.value='writing';option.textContent='写作';typeSelect.insertBefore(option,typeSelect.querySelector('option[value="reference"]')||null)}loadMaterials()})();`;doc.body.appendChild(patch);
-  }
-  if(!doc.documentElement.dataset.unlistedVocabularyReady&&typeof win.scanMaterialsFromTree==='function'){
-   doc.documentElement.dataset.unlistedVocabularyReady='1';
-   const unlisted=new Set(['materials/ENGLISH/vocabulary_compendium.html','materials/ENGLISH/vocabulary_lookalike_words.html']);
-   const originalScan=win.scanMaterialsFromTree;
-   win.scanMaterialsFromTree=async function(){const items=await originalScan();return items.filter(item=>!unlisted.has(item.path))};
-   if(typeof win.loadMaterials==='function')win.loadMaterials();
-  }
- }catch(e){console.warn('Could not apply study archive overrides',e)}
-});
-</script>
+  <a class="skip-link" href="#materials">跳到资料列表</a>
+  <header class="site-header">
+    <div class="header-left">
+      <h1>Zoe's <span>Study Archive</span></h1>
+      <div class="semester-navigation">
+        <p id="semesterLabel" class="semester-label">2026 秋学期</p>
+        <button id="currentSemesterButton" class="text-button" type="button" hidden>返回当前学期</button>
+        <details class="archive-menu" id="archiveMenu">
+          <summary>历史资料 <span aria-hidden="true">⌄</span></summary>
+          <div id="archiveOptions" class="archive-options"></div>
+        </details>
+      </div>
+    </div>
+    <div class="header-stats" aria-label="当前学期统计">
+      <p class="stat-chip"><strong id="totalCount">—</strong> <span>份资料</span></p>
+      <p class="stat-chip"><strong id="subjectCount">—</strong> <span>个科目</span></p>
+    </div>
+  </header>
+  <div class="controls">
+    <div class="search-row">
+      <div class="search-wrap">
+        <label class="visually-hidden" for="searchInput">搜索资料名称、知识点或课程</label>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 4 4"/></svg>
+        <input type="search" id="searchInput" placeholder="搜索资料名称、知识点或课程…" autocomplete="off">
+      </div>
+      <button type="button" id="filterToggle" class="utility-button filter-toggle" aria-expanded="false" aria-controls="advancedFilters" hidden>筛选</button>
+      <button type="button" id="clearFilters" class="text-button" disabled>清除筛选</button>
+    </div>
+    <div class="filter-row">
+      <div id="courseFilter" class="filter-group" role="group" aria-label="课程筛选"></div>
+      <div class="sort-control">
+        <label for="sortSelect">排序</label>
+        <select id="sortSelect">
+          <option value="lesson">按课次</option>
+          <option value="updated">最近更新</option>
+          <option value="title">按名称</option>
+        </select>
+      </div>
+    </div>
+    <div id="advancedFilters" class="advanced-filters">
+      <div id="subjectFilter" class="filter-group" role="group" aria-label="科目筛选"></div>
+      <div id="typeFilter" class="filter-group" role="group" aria-label="类型筛选"></div>
+    </div>
+  </div>
+  <main id="materials" class="layout" tabindex="-1">
+    <div id="loadStatus" class="load-status" role="status" aria-live="polite" aria-atomic="true">
+      <span id="statusMessage">正在载入资料目录…</span>
+      <button type="button" id="retryButton" class="utility-button" hidden>重新加载</button>
+      <details id="errorDetails" hidden><summary>错误详情</summary><p id="errorMessage"></p></details>
+    </div>
+    <p id="resultsInfo" class="results-info" aria-live="polite" aria-atomic="true"></p>
+    <div id="cardGrid" class="card-grid" aria-busy="true"></div>
+    <div id="emptyState" class="empty-state" hidden>
+      <p id="emptyMessage">没有找到符合条件的资料</p>
+      <button type="button" id="emptyClearButton" class="utility-button">清除筛选</button>
+    </div>
+  </main>
+  <footer>每一回，慢慢积累。</footer>
+  <noscript><p class="noscript-message">请启用 JavaScript 查看资料目录。<a href="./26aut/数据科学第1回_知识点_汉字假名.html">也可以直接打开第一回资料。</a></p></noscript>
 </body>
 </html>

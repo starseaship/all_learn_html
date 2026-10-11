@@ -1,0 +1,22 @@
+{
+  "26aut/数据科学第1回_知识点_汉字假名.html": {
+    "title": "数据科学第1回｜知识点与汉字假名",
+    "course": "ai", "type": "notes", "lessonNumber": 1,
+    "description": "第1回知识整理：数据科学、数据活用、大数据、IoT、AI及三者的关系。"
+  },
+  "26aut/数据科学第2回_知识点_汉字假名.html": {
+    "title": "数据科学第2回｜社会变化｜知识点与汉字假名",
+    "course": "ai", "type": "notes", "lessonNumber": 2,
+    "description": "第2回知识整理：人口减少、长尾化、从商品到体验、DX、第四次工业革命、CPS与Society 5.0。"
+  },
+  "26aut/DS3_知识整理_日中对照_假名.html": {
+    "title": "数据科学第3回｜社会で活用されているデータ",
+    "course": "ai", "type": "notes", "lessonNumber": 3, "date": "2026-10-11",
+    "description": "第3回知识整理：国势调查、人口图表、日志数据、数据分类、开放数据。日中对照、假名注音、35页原讲义。"
+  },
+  "26aut/DS4_知识整理_日中对照_假名.html": {
+    "title": "第四回｜数据与AI的应用领域｜日中对照・假名",
+    "course": "ai", "type": "notes", "lessonNumber": 4,
+    "description": "第4回知识整理：AI定义与历史、搜索、专家系统、机器学习与深度学习、行业应用与创作案例。日中对照、假名注音、原讲义图表。"
+  }
+}

@@ -4,13 +4,9 @@
   "start_url": "/all_learn_html/",
   "scope": "/all_learn_html/",
   "display": "standalone",
-  "background_color": "#06162c",
-  "theme_color": "#06162c",
+  "background_color": "#f7f4ef",
+  "theme_color": "#f7f4ef",
   "icons": [
-    {
-      "src": "./apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    }
+    {"src": "./apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}
   ]
 }
