@@ -649,48 +649,12 @@ header {
 const GITHUB_OWNER = 'starseaship';
 const GITHUB_REPO  = 'all_learn_html';
 const GITHUB_BRANCH = 'main';
-const MATERIALS_ROOT = 'materials';
+const MATERIALS_ROOT = '26aut';
 const COURSE_FALLBACK_LABEL = '未分类';
 const LOCAL_TAG_STORAGE_KEY = 'zoeStudyArchiveTagOverrides:v1';
 
-// Raw source files that have been folded into a combined summary page.
-// They stay in the repo (the summary pages load them in iframes) but are
-// hidden from the browsable material list so only the summary shows up.
-const HIDDEN_MATERIAL_PATHS = new Set([
-  'materials/ENGLISH/vocabulary_compendium.html',
-  'materials/ENGLISH/vocabulary_lookalike_words.html',
-  'materials/ENGLISH/english_tenses.html',
-  'materials/ENGLISH/exam_review.html',
-  'materials/ENGLISH/final-exam-review-all.html',
-  'materials/ENGLISH/final-exam-review-questions.html',
-  'materials/ENGLISH/final-review-four-chapters.html',
-  'materials/ENGLISH/phonetics_D_F_review.html',
-  'materials/ENGLISH/toeic520_100words_beautified.html',
-  'materials/ENGLISH/vocabulary_focus_words.html',
-  'materials/ENGLISH/vocabulary_focus_words_2.html',
-  'materials/ENGLISH/写作六单元汇总.html',
-  'materials/ENGLISH/文法U4.html',
-  'materials/ENGLISH/阅读单词汇总.html',
-  'materials/ENGLISH/阅读问答汇总.html',
-  'materials/ENGLISH/chapter1_explanatory_paragraphs_review.html',
-  'materials/ENGLISH/chapter2_information_paragraphs_review.html',
-  'materials/ENGLISH/chapter3_opinion_paragraphs_review.html',
-  'materials/ENGLISH/chapter4_descriptive_paragraphs_review.html',
-  'materials/ENGLISH/chapter5_comparative_paragraphs_review.html',
-  'materials/ENGLISH/chapter6_contrast_paragraphs_review.html',
-  'materials/ENGLISH/阅3单词.html',
-  'materials/ENGLISH/阅读第二章单词.html',
-  'materials/ENGLISH/reading2-war-definition.html',
-  'materials/ENGLISH/阅2问题.html',
-  'materials/ENGLISH/阅读童兵.html',
-  'materials/ENGLISH/paragraph-structure-notes.html',
-  'materials/ENGLISH/review-activity-sheet.html',
-  'materials/ENGLISH/vocabulary_compendium_core.html',
-  'materials/ENGLISH/vocabulary_confusable_meanings.html',
-  'materials/ENGLISH/vocabulary_related_topics.html',
-  'materials/ENGLISH/vocabulary_word_families.html',
-  'materials/ENGLISH/vocabulary_starred_words.html'
-]);
+// The current semester is selected by MATERIALS_ROOT.
+const HIDDEN_MATERIAL_PATHS = new Set();
 
 const SUBJECT_LABELS = {
   english:  '🇬🇧 英语',
@@ -750,12 +714,12 @@ async function loadMaterials() {
     render();
   } catch (e) {
     console.error(e);
-    resultsInfo.textContent = '⚠ 无法读取 GitHub materials 文件夹';
+    resultsInfo.textContent = '⚠ 无法读取 GitHub 26aut 文件夹';
     cardGrid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;font-size:14px;line-height:1.8;">
         😢 GitHub 读取失败<br>
         <span style="font-family:monospace;font-size:12px;color:#999;">${escHtml(String(e.message || e))}</span><br><br>
-        请检查：仓库是否 Public、分支是否 main、materials 文件夹是否存在。
+        请检查：仓库是否 Public、分支是否 main、26aut 文件夹是否存在。
       </div>
     `;
   }
@@ -794,7 +758,7 @@ async function scanMaterialsFromTree() {
 
 async function makeMaterialItemFromPath(path) {
   const parts = path.split('/');
-  const subject = normalizeSubject(parts[1] || 'general');
+  const subject = parts.length > 2 ? normalizeSubject(parts[1]) : 'general';
   const filename = parts[parts.length - 1];
   const guessedTitle = filename
     .replace(/\.html$/i, '')
