@@ -651,6 +651,26 @@ const GITHUB_REPO  = 'all_learn_html';
 const GITHUB_BRANCH = 'main';
 const MATERIALS_ROOT = '26aut';
 const COURSE_FALLBACK_LABEL = '未分类';
+
+// Shared card labels and knowledge summaries for the current AI course.
+const MATERIAL_CARD_METADATA = {
+  "26aut/数据科学第1回_知识点_汉字假名.html": {
+    "course": "ai",
+    "description": "第1回知识整理：数据科学、数据活用、大数据、IoT、AI及三者的关系。"
+  },
+  "26aut/数据科学第2回_知识点_汉字假名.html": {
+    "course": "ai",
+    "description": "第2回知识整理：人口减少、长尾化、从商品到体验、DX、第四次工业革命、CPS与Society 5.0。"
+  },
+  "26aut/DS3_知识整理_日中对照_假名.html": {
+    "course": "ai",
+    "description": "第3回知识整理：国势调查、人口图表、日志数据、数据分类、开放数据。日中对照、假名注音、35页原讲义。"
+  },
+  "26aut/DS4_知识整理_日中对照_假名.html": {
+    "course": "ai",
+    "description": "第4回知识整理：AI定义与历史、搜索、专家系统、机器学习与深度学习、行业应用与创作案例。日中对照、假名注音、原讲义图表。"
+  }
+};
 const LOCAL_TAG_STORAGE_KEY = 'zoeStudyArchiveTagOverrides:v1';
 
 // The current semester is selected by MATERIALS_ROOT.
@@ -793,6 +813,12 @@ async function makeMaterialItemFromPath(path) {
     console.warn('Could not read metadata from', path, e);
   }
 
+  const cardMetadata = MATERIAL_CARD_METADATA[path];
+  if (cardMetadata) {
+    course = cardMetadata.course;
+    description = cardMetadata.description;
+  }
+
   const material = {
     id: path,
     title,
@@ -809,7 +835,9 @@ async function makeMaterialItemFromPath(path) {
     date
   };
 
-  return applyTagOverride(material);
+  const result = applyTagOverride(material);
+  if (cardMetadata) result.course = cardMetadata.course;
+  return result;
 }
 
 function normalizeTitle(title, fallback = '') {
