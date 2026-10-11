@@ -51,6 +51,7 @@ h1 span { color: #9565a0; }
 .chip[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: white; }
 .chip[data-kind="course"][aria-pressed="true"] { background: var(--yellow); border-color: #d9c57b; color: var(--peach-deep); }
 .text-button { padding: 8px; min-height: 40px; border: 0; background: none; font-size: 13px; color: var(--lav-deep); border-radius: 8px; }
+.semester-navigation .text-button { font-size: 11px; }
 .sort-control { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .sort-control select { min-height: 40px; padding: 7px 28px 7px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; }
 .advanced-filters { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
