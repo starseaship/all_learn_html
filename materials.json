@@ -51,6 +51,20 @@
       "lessonNumber": null
     },
     {
+      "path": "26aut/ENGLISH/Unit16_Adverbs_Complete_Grammar_Notes.html",
+      "title": "Unit 16｜Adverbs: Sentence, Focus, and Negative — 完整语法笔记",
+      "description": "句子副词、焦点副词、否定副词与倒装完整双语笔记，含易错点、24道互动练习及考前速查。",
+      "subject": "english",
+      "type": "grammar",
+      "course": "英语文法",
+      "date": "2026-10-12",
+      "lessonNumber": 16,
+      "badges": [
+        "中英双语",
+        "24道互动练习"
+      ]
+    },
+    {
       "path": "26aut/数据科学第1回_知识点_汉字假名.html",
       "title": "数据科学第1回｜知识点与汉字假名",
       "description": "第1回精细版：数据科学、数据活用、大数据3V、VUCA、IoT、AI协作流程、日中对照与知识点概括。",
