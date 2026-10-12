@@ -11,6 +11,16 @@
 [data-theme='dark']{--bg:#121b1f;--paper:#1b292e;--ink:#e9f1ef;--muted:#afc0bd;--line:#34464b;--teal:#69c7b8;--teal-soft:#223e3d;--orange:#e0a477;--orange-soft:#3d2a23;--violet:#b4a0e9;--violet-soft:#342946;--blue:#91bfea;--blue-soft:#25394d;--shadow:0 8px 35px rgba(0,0,0,.18)}[data-theme='dark'] .hero{background:linear-gradient(120deg,#1c3a39,#243333);border-color:#32504c}[data-theme='dark'] .hero h1 small,[data-theme='dark'] .hero p{color:#b2cbc6}[data-theme='dark'] .hero:after{color:#3a817a}[data-theme='dark'] .pill{background:#284741;color:#c1e3dc;border-color:#4a6d66}[data-theme='dark'] .table-wrap th,[data-theme='dark'] .formula,[data-theme='dark'] .word,[data-theme='dark'] .contrastgrid .hbox,[data-theme='dark'] .feedback{background:#233338}[data-theme='dark'] .formula .chunk,[data-theme='dark'] .opt{background:#1b292e}[data-theme='dark'] .qcard{background:#1b292e}[data-theme='dark'] .opt.correct{background:#1f4535;border-color:#4e9b72;color:#a1dec1}[data-theme='dark'] .opt.wrong{background:#462c2b;border-color:#af7064;color:#f1b8ac}[data-theme='dark'] .callout{color:var(--ink)}[data-theme='dark'] .topbar{background:#1b292ee8}
 @media(max-width:960px){.layout{grid-template-columns:1fr;max-width:830px;gap:0;padding:20px 15px 65px}.sidebar{display:none}.jumpbar{display:flex;overflow-x:auto;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--paper)}.jumpbar a{white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:11px;color:var(--muted)}.hero{padding:30px 26px}.section{padding:24px 23px;margin-top:20px}.topinner{padding:10px 14px}}@media(max-width:620px){body{font-size:14px}.hero{padding:25px 19px}.hero h1{font-size:28px}.section{padding:22px 16px}.section h2{font-size:21px}.twocol,.compare,.contrastgrid{grid-template-columns:1fr}.pairof{grid-template-columns:1fr;gap:7px}.arrow{text-align:center;transform:rotate(90deg)}.wordgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.opts{grid-template-columns:1fr}.actions{gap:5px}.btn{padding:6px 9px;font-size:11px}.brand{font-size:12px;white-space:nowrap}.topinner{gap:7px}.actions .btn{font-size:10px;padding:6px 7px;white-space:nowrap}.section-head{gap:8px}.footer{padding-bottom:20px}}
 @media print{body{background:#fff;color:#000}.topbar,.sidebar,.jumpbar,.backtop,.progress,.quiztools,.btn{display:none!important}.layout{display:block;padding:0;max-width:none}.content{max-width:none}.hero,.section{box-shadow:none;break-inside:avoid;border:1px solid #ddd;padding:16px;margin:12px 0;border-radius:5px}.hero{background:#fff}.hero:after{display:none}.section{break-inside:auto}.example,.hbox,.table-wrap,.more{break-inside:avoid}details{break-inside:auto}details:not([open]) .morebody{display:block}.opt{break-inside:avoid}.footer{display:none}}
+
+/* Collapsible desktop table of contents */
+.sidebar-toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:38px;margin-bottom:10px;padding:7px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--teal);font-size:12px;cursor:pointer}
+.sidebar-toggle-icon{font-size:20px;line-height:1}
+.sidebarbox[hidden]{display:none}
+.layout.sidebar-collapsed{grid-template-columns:44px minmax(0,1fr);gap:20px}
+.sidebar-collapsed .sidebar-toggle{justify-content:center;padding:7px}
+.sidebar-collapsed .sidebar-toggle-label{display:none}
+.sidebar-collapsed .content{max-width:none}
+@media(max-width:960px){.layout.sidebar-collapsed{grid-template-columns:1fr;gap:0}}
 </style>
 </head>
 <body>
@@ -18,7 +28,7 @@
 <header class="topbar"><div class="topinner"><a class="brand" href="#top"><span>U16</span> / Adverbs Notes</a><div class="actions"><button id="toggleDetails" class="btn" type="button">展开补充讲解</button><button id="themeToggle" class="btn" type="button">☾ 深色模式</button><button onclick="window.print()" class="btn" type="button">打印 / PDF</button></div></div></header>
 <nav class="jumpbar" aria-label="快速导航"><a href="#overview">总览</a><a href="#sentence">句子副词</a><a href="#focus">焦点副词</a><a href="#negative">否定副词</a><a href="#other">其他倒装</a><a href="#mistakes">易错点</a><a href="#quiz">自测</a><a href="#recap">知识点概括</a></nav>
 <div class="layout">
-<aside class="sidebar"><div class="sidebarbox"><div class="side-title">学习目录</div><a href="#overview"><span>00</span>本单元总览</a><a href="#sentence"><span>01</span>Sentence Adverbs</a><a href="#focus"><span>02</span>Focus Adverbs</a><a href="#negative"><span>03</span>Negative Adverbs</a><a href="#other"><span>04</span>Other Adverbs</a><a href="#mistakes"><span>05</span>考点与易错点</a><a href="#quiz"><span>06</span>互动练习 · 24 题</a><a href="#recap"><span>07</span>知识点概括</a><div class="side-foot">参考：教材 Unit 16 · P.269 语法总表与 Grammar Notes；课堂 PPT 补充例句。<br>所有文字、图表与测验均可离线使用。</div></div></aside>
+<aside class="sidebar" aria-label="学习目录"><button id="sidebarToggle" class="sidebar-toggle" type="button" aria-expanded="true" aria-controls="studySidebarContents" aria-label="收起学习目录" title="收起学习目录"><span class="sidebar-toggle-label">收起目录</span><span class="sidebar-toggle-icon" aria-hidden="true">‹</span></button><div class="sidebarbox" id="studySidebarContents"><div class="side-title">学习目录</div><a href="#overview"><span>00</span>本单元总览</a><a href="#sentence"><span>01</span>Sentence Adverbs</a><a href="#focus"><span>02</span>Focus Adverbs</a><a href="#negative"><span>03</span>Negative Adverbs</a><a href="#other"><span>04</span>Other Adverbs</a><a href="#mistakes"><span>05</span>考点与易错点</a><a href="#quiz"><span>06</span>互动练习 · 24 题</a><a href="#recap"><span>07</span>知识点概括</a><div class="side-foot">参考：教材 Unit 16 · P.269 语法总表与 Grammar Notes；课堂 PPT 补充例句。<br>所有文字、图表与测验均可离线使用。</div></div></aside>
 <main class="content" id="top">
 <section class="hero"><div class="eyebrow">Unit 16 · Grammar Presentation &amp; Notes</div><h1>Adverbs: Sentence,<br>Focus, and Negative<small>句子副词 · 焦点副词 · 否定副词 · 倒装</small></h1><p>把教材语法总表、Grammar Notes 和老师课堂投影合并为一份完整笔记。保留关键英文例句，逐句配中文释义，补充句型图解、对比与高频易错点。</p><div class="pills"><span class="pill">教材 P.269 + Grammar Notes</span><span class="pill">4 大核心板块</span><span class="pill">双语例句 &amp; 倒装拆解</span><span class="pill">24 题即时反馈</span><span class="pill">离线单文件</span></div></section>
 <section class="section" id="overview"><div class="section-head"><span class="secno">00</span><div><h2>先建立整体概念</h2><div class="subtitle">这一单元学的是副词如何影响整句、强调范围与语序</div></div></div><div class="table-wrap"><table><thead><tr><th>类别</th><th>主要作用</th><th>代表词</th><th>最常见考法</th></tr></thead><tbody><tr><td><b>Sentence Adverbs</b><br>句子副词</td><td>修饰整个句子，表达说话人的态度或判断</td><td>clearly, fortunately, basically</td><td>放句首／句中／句尾；与普通副词区分</td></tr><tr><td><b>Focus Adverbs</b><br>焦点副词</td><td>限定或强调句中某个对象／动作／范围</td><td>only, even, just, almost</td><td>位置改变，句意改变</td></tr><tr><td><b>Negative Adverbs</b><br>否定副词</td><td>表达否定、极少或限制</td><td>never, seldom, rarely, hardly, little</td><td>放句首引起<b>部分倒装</b></td></tr><tr><td><b>Other Adverbs</b><br>其他相关副词</td><td>表示“这里／那里来了……”或“我也一样”</td><td>here, there, so, neither</td><td>名词／代词主语区别；so/neither 倒装</td></tr></tbody></table></div><div class="callout"><b>先记一句话：</b>Sentence 看态度，Focus 看强调谁，Negative 看倒不倒装，Here / There / So 看主语与前句肯否。</div></section>
@@ -71,6 +81,32 @@ function renderQuiz(){const parent=$('#quiz-list');parent.innerHTML=quizzes.map(
 function updateScore(){const n=Object.keys(replies).length;const right=Object.entries(replies).filter(([i,a])=>quizzes[+i].a===a).length;$('#scoreLabel').textContent=`已答 ${n} / ${quizzes.length} · 正确 ${right}`;$('#scoreBar').style.width=(100*n/quizzes.length)+'%';let end=$('#quiz-end');if(n===quizzes.length){end.style.display='block';end.textContent=`完成！正确 ${right} / ${quizzes.length} 题（${Math.round(100*right/quizzes.length)}%）。可以点击“重新作答”复习，也可以回到上方针对薄弱板块查看讲解。`}else end.style.display='none'}
 $('#resetQuiz').addEventListener('click',()=>{Object.keys(replies).forEach(k=>delete replies[k]);renderQuiz()});renderQuiz();
 const sections=[...document.querySelectorAll('main section[id]')];function onScroll(){const pos=window.scrollY;const height=document.documentElement.scrollHeight-innerHeight;$('#reading-progress').style.width=(height>0?Math.max(0,100*pos/height):0)+'%';$('#backtop').classList.toggle('visible',pos>650);let current=sections[0]?.id;for(const s of sections)if(s.getBoundingClientRect().top<130)current=s.id;document.querySelectorAll('.sidebar a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current))}window.addEventListener('scroll',onScroll,{passive:true});onScroll();$('#backtop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+<script>
+(function(){
+  const layout=document.querySelector('.layout');
+  const toggle=document.getElementById('sidebarToggle');
+  const contents=document.getElementById('studySidebarContents');
+  const key='zoe-u16-sidebar-collapsed';
+  function setCollapsed(collapsed){
+    layout.classList.toggle('sidebar-collapsed',collapsed);
+    contents.hidden=collapsed;
+    toggle.setAttribute('aria-expanded',String(!collapsed));
+    const label=collapsed?'展开学习目录':'收起学习目录';
+    toggle.setAttribute('aria-label',label);
+    toggle.title=label;
+    toggle.querySelector('.sidebar-toggle-label').textContent=collapsed?'展开目录':'收起目录';
+    toggle.querySelector('.sidebar-toggle-icon').textContent=collapsed?'›':'‹';
+  }
+  let saved=false;
+  try{saved=localStorage.getItem(key)==='true'}catch(e){}
+  setCollapsed(saved);
+  toggle.addEventListener('click',function(){
+    const collapsed=!layout.classList.contains('sidebar-collapsed');
+    setCollapsed(collapsed);
+    try{localStorage.setItem(key,String(collapsed))}catch(e){}
+  });
+})();
 </script>
 </body>
 </html>
