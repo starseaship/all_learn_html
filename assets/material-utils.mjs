@@ -26,7 +26,8 @@ export function normalizeCatalog(raw) {
       description:cleanText(item.description,1200), course:cleanText(item.course,100) || '未分类',
       subject:Object.hasOwn(SUBJECT_LABELS,item.subject) ? item.subject : 'general',
       type:Object.hasOwn(TYPE_LABELS,item.type) ? item.type : 'reference', date:validDate(item.date),
-      lessonNumber:Number.isInteger(lesson) && lesson > 0 ? lesson : null
+      lessonNumber:Number.isInteger(lesson) && lesson > 0 ? lesson : null,
+      badges:Array.isArray(item.badges) ? item.badges.map(badge=>cleanText(badge,24)).filter(Boolean).slice(0,4) : []
     };
   });
   return {version:1,currentSemester:raw.currentSemester,semesters,materials};

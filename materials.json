@@ -20,7 +20,12 @@
       "type": "notes",
       "course": "ai",
       "date": "2026-10-11",
-      "lessonNumber": 3
+      "lessonNumber": 3,
+      "badges": [
+        "日中对照",
+        "假名注音",
+        "原讲义 35 页"
+      ]
     },
     {
       "path": "26aut/DS4_知识整理_日中对照_假名.html",
@@ -30,7 +35,20 @@
       "type": "notes",
       "course": "ai",
       "date": "",
-      "lessonNumber": 4
+      "lessonNumber": 4,
+      "badges": [
+        "原讲义 30 页"
+      ]
+    },
+    {
+      "path": "26aut/ENGLISH/relative_clauses_complete_guide.html",
+      "title": "英语定语从句完整讲义 · Relative Clauses",
+      "description": "定语从句完整讲义：关系代词、关系副词、非限制性定语从句、介词提前、of whom/of which、分词短语与互动练习。",
+      "subject": "english",
+      "type": "grammar",
+      "course": "英语文法",
+      "date": "2026-10-11",
+      "lessonNumber": null
     },
     {
       "path": "26aut/数据科学第1回_知识点_汉字假名.html",
@@ -40,7 +58,10 @@
       "type": "notes",
       "course": "ai",
       "date": "",
-      "lessonNumber": 1
+      "lessonNumber": 1,
+      "badges": [
+        "中文解释"
+      ]
     },
     {
       "path": "26aut/数据科学第2回_知识点_汉字假名.html",
@@ -50,16 +71,19 @@
       "type": "notes",
       "course": "ai",
       "date": "",
-      "lessonNumber": 2
+      "lessonNumber": 2,
+      "badges": [
+        "中文解释"
+      ]
     },
     {
       "path": "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html",
       "title": "第一章：解释说明段落复习",
-      "description": "课程学习资料，打开查看完整内容。",
+      "description": "英语写作课第一章：解释说明段落的知识点、常见错误与考试题型整理",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
-      "date": "",
+      "date": "2026-07-14",
       "lessonNumber": 1
     },
     {
@@ -380,16 +404,6 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
-    },
-    {
-      "path": "26aut/ENGLISH/relative_clauses_complete_guide.html",
-      "title": "定语从句完整讲义｜Relative Clauses",
-      "description": "定语从句系统复习：who / whom / which / that / whose、when / where / why、非限制性定语从句 Tips、介词提前、of whom / of which、分词短语与 10 题互动练习。",
-      "subject": "english",
-      "type": "grammar",
-      "course": "英语文法",
-      "date": "2026-10-11",
       "lessonNumber": null
     }
   ]

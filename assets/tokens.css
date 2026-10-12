@@ -1,0 +1,8 @@
+/* 共用配色：首页（archive.css）与阅读页（reader.css）都引用这里。 */
+:root {
+  --bg: #f7f4ef; --surface: #fff; --text: #2e2a35; --dim: #666171;
+  --border: #e8e2e8; --pink: #f9c4ce; --pink-deep: #a34760;
+  --blue: #d4e7fb; --blue-deep: #315e8d; --mint: #d3efdd; --mint-deep: #326e4b;
+  --lav: #e5dcf5; --lav-deep: #604395; --peach: #ffe5cf; --peach-deep: #8a4c21;
+  --yellow: #fff1bd; --shadow: 0 8px 24px rgba(80,60,100,.08);
+}
