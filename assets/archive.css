@@ -50,6 +50,10 @@ h1 span { color: #85508f; }
 .semester-navigation .text-button { font-size: 11px; }
 .sort-control { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .sort-control select { min-height: 44px; padding: 7px 28px 7px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; }
+.sort-direction-button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: 0 0 auto; padding: 7px 11px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); white-space: nowrap; font-size: 13px; font-weight: 600; transition: border-color .15s,background-color .15s; }
+.sort-direction-button:active { background: var(--lav); }
+.sort-direction-button:hover { border-color: var(--lav-deep); }
+#sortArrow { font-size: 16px; line-height: 1; color: var(--lav-deep); }
 .advanced-filters { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
 .advanced-filters:empty { display: none; }
 .filter-toggle { display: none; }
@@ -97,11 +101,13 @@ footer { text-align: center; color: var(--dim); font-size: 12px; padding: 8px 20
   h1 { font-size: 16px; }
   .archive-menu summary { min-height: 44px; display: flex; align-items: center; gap: 4px; }
   .controls { padding: 10px 16px; }
-  .search-row { gap: 8px; }
-  .search-wrap { flex: 1 1 0; max-width: none; }
-  .sort-control { margin-left: 0; }
-  .sort-control label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .sort-control select { max-width: 112px; }
+  .search-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+  .search-wrap { grid-column: 1; max-width: none; }
+  .search-row .filter-toggle { grid-column: 2; }
+  .sort-control { grid-column: 1 / -1; justify-self: start; margin-left: 0; flex-wrap: nowrap; gap: 7px; }
+  .sort-control label { position: static; width: auto; height: auto; padding: 0; margin: 0 2px 0 0; overflow: visible; clip-path: none; white-space: nowrap; }
+  .sort-control select { max-width: 122px; }
+  .sort-direction-button { min-height: 44px; }
   .filter-toggle { display: inline-flex; justify-content: center; align-items: center; min-height: 44px; padding: 8px 12px; }
   .filter-row .filter-group { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 2px 16px; scrollbar-width: none; }
   .filter-row .filter-group::-webkit-scrollbar { display: none; }
