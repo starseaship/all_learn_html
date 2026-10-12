@@ -14,8 +14,8 @@
   <link rel="icon" type="image/png" href="./apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
   <link rel="stylesheet" href="./assets/tokens.css?v=20261011-5">
-  <link rel="stylesheet" href="./assets/archive.css?v=20261011-5">
-  <script type="module" src="./assets/archive.js?v=20261011-5"></script>
+  <link rel="stylesheet" href="./assets/archive.css?v=20261012-1">
+  <script type="module" src="./assets/archive.js?v=20261012-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#materials">跳到资料列表</a>
@@ -51,6 +51,10 @@
           <option value="updated">最近更新</option>
           <option value="title">按名称</option>
         </select>
+        <button type="button" id="sortDirection" class="sort-direction-button" aria-pressed="false" aria-label="当前正序，点击切换为倒序" title="切换排序方向">
+          <span id="sortArrow" aria-hidden="true">↑</span>
+          <span id="sortDirectionLabel">正序</span>
+        </button>
       </div>
     </div>
     <div class="filter-row" id="filterRow">
