@@ -38,14 +38,24 @@ export function filterMaterials(materials, {subject='all',type='all',course='all
   return materials.filter(item => (subject==='all'||item.subject===subject) && (type==='all'||item.type===type) && (course==='all'||item.course===course) && (!q||`${item.title} ${item.description} ${item.course}`.toLocaleLowerCase().includes(q)));
 }
 
-export function sortMaterials(materials, mode='lesson') {
+export function sortMaterials(materials, mode='lesson', direction=mode==='updated'?'desc':'asc') {
+  const order = direction==='desc' ? -1 : 1;
   const byTitle = (a,b)=>a.title.localeCompare(b.title,'zh-CN',{numeric:true}) || a.path.localeCompare(b.path);
   return [...materials].sort((a,b)=> {
-    if (mode==='title') return byTitle(a,b);
-    if (mode==='updated') return (b.date||'').localeCompare(a.date||'') || byTitle(a,b);
-    const courseOrder = a.course.localeCompare(b.course,'zh-CN',{numeric:true});
-    if (courseOrder) return courseOrder;
-    const left=a.lessonNumber??Infinity, right=b.lessonNumber??Infinity;
-    return left===right ? byTitle(a,b) : left<right ? -1 : 1;
+    if (mode==='title') return byTitle(a,b)*order;
+    // Unknown update dates are always last; ties stay alphabetical.
+    if (mode==='updated') {
+      if (!a.date && b.date) return 1;
+      if (a.date && !b.date) return -1;
+      return (a.date||'').localeCompare(b.date||'')*order || byTitle(a,b);
+    }
+    const courseOrder=a.course.localeCompare(b.course,'zh-CN',{numeric:true});
+    if (courseOrder) return courseOrder*order;
+    // Keep lessons without a chapter number at the end in both directions.
+    const left=a.lessonNumber, right=b.lessonNumber;
+    if (left===null && right!==null) return 1;
+    if (left!==null && right===null) return -1;
+    if (left!==right) return (left-right)*order;
+    return byTitle(a,b)*order;
   });
 }
