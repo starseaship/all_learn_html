@@ -13,8 +13,9 @@
   <link rel="manifest" href="./manifest.webmanifest?v=20261011-2">
   <link rel="icon" type="image/png" href="./apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
-  <link rel="stylesheet" href="./assets/archive.css?v=20261011-4">
-  <script type="module" src="./assets/archive.js?v=20261011-2"></script>
+  <link rel="stylesheet" href="./assets/tokens.css?v=20261011-5">
+  <link rel="stylesheet" href="./assets/archive.css?v=20261011-5">
+  <script type="module" src="./assets/archive.js?v=20261011-5"></script>
 </head>
 <body>
   <a class="skip-link" href="#materials">跳到资料列表</a>
@@ -32,21 +33,17 @@
     </div>
     <div class="header-stats" aria-label="当前学期统计">
       <p class="stat-chip"><strong id="totalCount">—</strong> <span>份资料</span></p>
-      <p class="stat-chip"><strong id="subjectCount">—</strong> <span>个科目</span></p>
+      <p class="stat-chip" id="subjectChip"><strong id="subjectCount">—</strong> <span>个科目</span></p>
     </div>
   </header>
-  <div class="controls">
+  <div class="controls" id="controls">
     <div class="search-row">
       <div class="search-wrap">
         <label class="visually-hidden" for="searchInput">搜索资料名称、知识点或课程</label>
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 4 4"/></svg>
-        <input type="search" id="searchInput" placeholder="搜索资料名称、知识点或课程…" autocomplete="off">
+        <input type="search" id="searchInput" placeholder="搜索资料" autocomplete="off">
       </div>
       <button type="button" id="filterToggle" class="utility-button filter-toggle" aria-expanded="false" aria-controls="advancedFilters" hidden>筛选</button>
-      <button type="button" id="clearFilters" class="text-button" disabled>清除筛选</button>
-    </div>
-    <div class="filter-row">
-      <div id="courseFilter" class="filter-group" role="group" aria-label="课程筛选"></div>
       <div class="sort-control">
         <label for="sortSelect">排序</label>
         <select id="sortSelect">
@@ -55,6 +52,9 @@
           <option value="title">按名称</option>
         </select>
       </div>
+    </div>
+    <div class="filter-row" id="filterRow">
+      <div id="courseFilter" class="filter-group" role="group" aria-label="课程筛选"></div>
     </div>
     <div id="advancedFilters" class="advanced-filters">
       <div id="subjectFilter" class="filter-group" role="group" aria-label="科目筛选"></div>
@@ -67,7 +67,10 @@
       <button type="button" id="retryButton" class="utility-button" hidden>重新加载</button>
       <details id="errorDetails" hidden><summary>错误详情</summary><p id="errorMessage"></p></details>
     </div>
-    <p id="resultsInfo" class="results-info" aria-live="polite" aria-atomic="true"></p>
+    <div class="results-row">
+      <p id="resultsInfo" class="results-info" aria-live="polite" aria-atomic="true"></p>
+      <button type="button" id="clearFilters" class="text-button" hidden disabled>清除筛选</button>
+    </div>
     <div id="cardGrid" class="card-grid" aria-busy="true"></div>
     <div id="emptyState" class="empty-state" hidden>
       <p id="emptyMessage">没有找到符合条件的资料</p>

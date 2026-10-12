@@ -1,10 +1,19 @@
-import {SUBJECT_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261011-2';
+import {SUBJECT_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261011-5';
 
 const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
-const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
+const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
 const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'lesson'};
 let catalog = null;
 let loading = null;
+
+function splitTitle(title) {
+  // “数据科学第3回｜主题｜补充说明” → 小标题 / 主标题 / 额外说明；不符合这种写法的标题原样显示。
+  const parts=title.split('｜').map(part=>part.trim()).filter(Boolean);
+  if(parts.length>=2 && /第\s*\d+\s*回$/.test(parts[0])) {
+    return {eyebrow:parts[0].replace(/\s*(第\s*\d+\s*回)$/,' $1').trim(),title:parts[1],extra:parts.slice(2)};
+  }
+  return {eyebrow:'',title,extra:[]};
+}
 
 function node(tag,className,text) {
   const element=document.createElement(tag);
@@ -65,6 +74,7 @@ function render() {
   ui.currentSemesterButton.hidden=state.semester===catalog.currentSemester;
   ui.totalCount.textContent=String(materials.length);
   ui.subjectCount.textContent=String(subjects.length);
+  ui.subjectChip.hidden=subjects.length<=1;
   ui.archiveOptions.replaceChildren();
   const historical=catalog.semesters.filter(s=>s.id!==catalog.currentSemester);
   ui.archiveMenu.hidden=!historical.length;
@@ -73,24 +83,34 @@ function render() {
     button.setAttribute('aria-pressed',String(item.id===state.semester)); ui.archiveOptions.append(button);
   }
   renderFilter(ui.subjectFilter,'subject',subjects,SUBJECT_LABELS,'科目');
-  renderFilter(ui.courseFilter,'course',courses,null,'课程',true);
+  renderFilter(ui.courseFilter,'course',courses,null,'课程');
   renderFilter(ui.typeFilter,'type',types,TYPE_LABELS,'类型');
+  ui.filterRow.hidden=ui.courseFilter.hidden;
   const advanced=!ui.subjectFilter.hidden||!ui.typeFilter.hidden;
   ui.advancedFilters.hidden=!advanced;
   ui.filterToggle.hidden=!advanced;
   const filtered=sortMaterials(filterMaterials(materials,state),state.sort);
   const active=state.subject!=='all'||state.type!=='all'||state.course!=='all'||!!state.query.trim();
-  ui.clearFilters.disabled=!active;
+  ui.clearFilters.disabled=!active; ui.clearFilters.hidden=!active;
   ui.resultsInfo.textContent=active?`找到 ${filtered.length} / ${materials.length} 份资料`:`共 ${materials.length} 份资料`;
   ui.cardGrid.replaceChildren();
   const fragment=document.createDocumentFragment();
+  // 整个学期里完全相同的标签对区分资料没有帮助，隐藏它们；只有一份资料时保留。
+  const uniform=Object.fromEntries(['subject','type','course'].map(key=>[key,materials.length>1 && new Set(materials.map(item=>item[key])).size===1]));
   for(const material of filtered) {
     const card=node('a','material-card');
     card.href='./'+material.path.split('/').map(encodeURIComponent).join('/');
     card.target='_blank'; card.rel='noopener noreferrer'; card.dataset.subject=material.subject;
+    const heading=splitTitle(material.title);
     const tags=node('div','card-tags');
-    tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]),node('span','tag tag-type',TYPE_LABELS[material.type]),node('span','tag tag-course',material.course));
-    card.append(tags,node('h2','card-title',material.title),node('p','card-desc',material.description));
+    if(!uniform.subject) tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]));
+    if(!uniform.type) tags.append(node('span','tag tag-type',TYPE_LABELS[material.type]));
+    if(!uniform.course) tags.append(node('span','tag tag-course',material.course));
+    if(tags.childElementCount) card.append(tags);
+    if(heading.eyebrow) card.append(node('p','card-eyebrow',heading.eyebrow));
+    card.append(node('h2','card-title',heading.title),node('p','card-desc',material.description));
+    const badges=[...new Set([...heading.extra,...material.badges])].slice(0,4);
+    if(badges.length) { const row=node('div','card-badges'); for(const badge of badges) row.append(node('span','badge',badge)); card.append(row); }
     const foot=node('div','card-footer');
     const date=node('time','card-date',material.date ? `更新 ${material.date}` : '');
     if(material.date) date.dateTime=material.date;
@@ -165,6 +185,20 @@ document.addEventListener('keydown',event=>{
   if(event.key==='Escape' && ui.archiveMenu.open) {ui.archiveMenu.open=false;ui.archiveMenu.querySelector('summary').focus();}
   if(event.key==='Escape' && ui.advancedFilters.classList.contains('is-open')) {ui.advancedFilters.classList.remove('is-open');ui.filterToggle.setAttribute('aria-expanded','false');ui.filterToggle.focus();}
 });
+// 下滑时收起筛选行，只留搜索栏；上滑或回到顶部时展开。输入、展开筛选面板或页面太短时不收起。
+let lastScroll=0, scrollQueued=false;
+function updateCompact() {
+  scrollQueued=false;
+  const y=Math.max(0,window.scrollY), delta=y-lastScroll;
+  const hasRows=!ui.filterRow.hidden||!ui.advancedFilters.hidden;
+  const longPage=document.documentElement.scrollHeight-window.innerHeight>700;
+  const blocked=!hasRows||!longPage||document.activeElement===ui.searchInput||ui.advancedFilters.classList.contains('is-open')||y<80;
+  if(blocked) ui.controls.classList.remove('is-compact');
+  else if(delta>8) ui.controls.classList.add('is-compact');
+  else if(delta<-8) ui.controls.classList.remove('is-compact');
+  if(Math.abs(delta)>8||y<80) lastScroll=y;
+}
+window.addEventListener('scroll',()=>{ if(!scrollQueued) { scrollQueued=true; requestAnimationFrame(updateCompact); } },{passive:true});
 const cached=readCache();
 if(cached) setCatalog(cached);
 loadCatalog();

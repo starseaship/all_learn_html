@@ -115,6 +115,11 @@ def make_item(path, root, overrides):
             item[key] = override[key]
     if item["subject"] not in SUBJECTS or item["type"] not in TYPES:
         raise ValueError(f"Invalid classification: {relative}")
+    badges = override.get("badges")
+    if badges:
+        if not isinstance(badges, list) or not all(isinstance(b, str) and b.strip() for b in badges):
+            raise ValueError(f"Invalid badges: {relative}")
+        item["badges"] = [b.strip() for b in badges]
     item["date"] = date_or_empty(str(item["date"]))
     if not item["title"] or not item["course"] or not item["description"]:
         raise ValueError(f"Missing catalog metadata: {relative}")
