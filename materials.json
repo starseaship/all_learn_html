@@ -13,6 +13,21 @@
   ],
   "materials": [
     {
+      "path": "26aut/ENGLISH/Breaking_Barriers_Chapter9_P65-74_Bilingual_Annotated.html",
+      "title": "Chapter 9｜Breaking Barriers｜中英对照精读",
+      "description": "WL 课程第9章《Breaking Barriers》P65–74：100句中英逐句翻译、原书页码及行号、难词高亮与中文释义、原书排版模式和历史图片。",
+      "subject": "wgl",
+      "type": "reference",
+      "course": "WL",
+      "date": "2026-10-12",
+      "lessonNumber": 9,
+      "badges": [
+        "中英对照",
+        "逐行页码",
+        "生词注释"
+      ]
+    },
+    {
       "path": "26aut/DS3_知识整理_日中对照_假名.html",
       "title": "数据科学第3回｜社会で活用されているデータ",
       "description": "第3回知识整理：国势调查、人口图表、日志数据、数据分类、开放数据、知识点概括；日中对照与35页原讲义。",
