@@ -1,8 +1,8 @@
-import {SUBJECT_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261011-5';
+import {SUBJECT_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261012-1';
 
 const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
-const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
-const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'lesson'};
+const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
+const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'lesson',sortDirection:'asc'};
 let catalog = null;
 let loading = null;
 
@@ -89,7 +89,12 @@ function render() {
   const advanced=!ui.subjectFilter.hidden||!ui.typeFilter.hidden;
   ui.advancedFilters.hidden=!advanced;
   ui.filterToggle.hidden=!advanced;
-  const filtered=sortMaterials(filterMaterials(materials,state),state.sort);
+  const filtered=sortMaterials(filterMaterials(materials,state),state.sort,state.sortDirection);
+  const isDescending=state.sortDirection==='desc';
+  ui.sortDirectionLabel.textContent=isDescending?'倒序':'正序';
+  ui.sortArrow.textContent=isDescending?'↓':'↑';
+  ui.sortDirection.setAttribute('aria-pressed',String(isDescending));
+  ui.sortDirection.setAttribute('aria-label',isDescending?'当前倒序，点击切换为正序':'当前正序，点击切换为倒序');
   const active=state.subject!=='all'||state.type!=='all'||state.course!=='all'||!!state.query.trim();
   ui.clearFilters.disabled=!active; ui.clearFilters.hidden=!active;
   ui.resultsInfo.textContent=active?`找到 ${filtered.length} / ${materials.length} 份资料`:`共 ${materials.length} 份资料`;
@@ -174,7 +179,15 @@ ui.archiveOptions.addEventListener('click',event=>{
 });
 ui.currentSemesterButton.addEventListener('click',()=>{setSemester(catalog.currentSemester); ui.archiveMenu.querySelector('summary').focus();});
 ui.searchInput.addEventListener('input',()=>{state.query=ui.searchInput.value; render();});
-ui.sortSelect.addEventListener('change',()=>{state.sort=ui.sortSelect.value; render();});
+ui.sortSelect.addEventListener('change',()=>{
+  state.sort=ui.sortSelect.value;
+  state.sortDirection=state.sort==='updated'?'desc':'asc';
+  render();
+});
+ui.sortDirection.addEventListener('click',()=>{
+  state.sortDirection=state.sortDirection==='asc'?'desc':'asc';
+  render();
+});
 for(const button of [ui.clearFilters,ui.emptyClearButton]) button.addEventListener('click',()=>{resetFilters();render();ui.searchInput.focus();});
 ui.filterToggle.addEventListener('click',()=>{
   const open=ui.advancedFilters.classList.toggle('is-open'); ui.filterToggle.setAttribute('aria-expanded',String(open));
