@@ -116,6 +116,36 @@
       ]
     },
     {
+      "path": "26aut/ENGLISH/reading_chapter_2_17_bilingual.html",
+      "title": "阅读 Chapter 2.17｜日本的国际劳动者与留学生",
+      "description": "10道阅读理解题：英文题目与补全答案，关键词彩色高亮，每题均附灰色小字中文翻译。重点题：2、7、8、9。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "中英对照",
+        "10道问答",
+        "重点题高亮"
+      ]
+    },
+    {
+      "path": "26aut/ENGLISH/reading_dominant_minority_bilingual.html",
+      "title": "阅读 III｜Dominant Minority 与 Powerless Majority",
+      "description": "掌权少数与无权多数：10道阅读理解题，完善参考答案、题目/答案关键词高亮与逐题中文翻译。重点题：2、7、8、9。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "中英对照",
+        "10道问答",
+        "答案补充"
+      ]
+    },
+    {
       "path": "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html",
       "title": "第一章：解释说明段落复习",
       "description": "英语写作课第一章：解释说明段落的知识点、常见错误与考试题型整理",
@@ -447,4 +477,3 @@
     }
   ]
 }
-
