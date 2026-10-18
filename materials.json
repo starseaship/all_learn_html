@@ -25,7 +25,8 @@
         "日中对照",
         "假名注音",
         "原讲义 35 页"
-      ]
+      ],
+      "addedOrder": 36
     },
     {
       "path": "26aut/DS4_知识整理_日中对照_假名.html",
@@ -38,7 +39,8 @@
       "lessonNumber": 4,
       "badges": [
         "原讲义 30 页"
-      ]
+      ],
+      "addedOrder": 37
     },
     {
       "path": "26aut/ENGLISH/Breaking_Barriers_Chapter9_P65-74_Bilingual_Annotated.html",
@@ -53,7 +55,8 @@
         "中英对照",
         "逐行页码",
         "生词注释"
-      ]
+      ],
+      "addedOrder": 40
     },
     {
       "path": "26aut/ENGLISH/relative_clauses_complete_guide.html",
@@ -63,7 +66,8 @@
       "type": "grammar",
       "course": "英语文法",
       "date": "2026-10-11",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 38
     },
     {
       "path": "26aut/ENGLISH/句子副词_焦点副词_否定副词_完整语法笔记.html",
@@ -77,7 +81,8 @@
       "badges": [
         "中英双语",
         "24道互动练习"
-      ]
+      ],
+      "addedOrder": 39
     },
     {
       "path": "26aut/JAPANESE/abab-adverbs.html",
@@ -87,7 +92,8 @@
       "type": "vocabulary",
       "course": "日语词汇",
       "date": "2026-10-12",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 41
     },
     {
       "path": "26aut/数据科学第1回_知识点_汉字假名.html",
@@ -100,7 +106,8 @@
       "lessonNumber": 1,
       "badges": [
         "中文解释"
-      ]
+      ],
+      "addedOrder": 34
     },
     {
       "path": "26aut/数据科学第2回_知识点_汉字假名.html",
@@ -113,7 +120,8 @@
       "lessonNumber": 2,
       "badges": [
         "中文解释"
-      ]
+      ],
+      "addedOrder": 35
     },
     {
       "path": "26aut/ENGLISH/reading_chapter_2_17_bilingual.html",
@@ -128,7 +136,8 @@
         "中英对照",
         "10道问答",
         "重点题高亮"
-      ]
+      ],
+      "addedOrder": 42
     },
     {
       "path": "26aut/ENGLISH/reading_dominant_minority_bilingual.html",
@@ -143,7 +152,8 @@
         "中英对照",
         "10道问答",
         "答案补充"
-      ]
+      ],
+      "addedOrder": 43
     },
     {
       "path": "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html",
@@ -153,7 +163,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
-      "lessonNumber": 1
+      "lessonNumber": 1,
+      "addedOrder": 1
     },
     {
       "path": "26spring/ENGLISH/chapter2_information_paragraphs_review.html",
@@ -163,7 +174,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
-      "lessonNumber": 2
+      "lessonNumber": 2,
+      "addedOrder": 2
     },
     {
       "path": "26spring/ENGLISH/chapter3_opinion_paragraphs_review.html",
@@ -173,7 +185,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
-      "lessonNumber": 3
+      "lessonNumber": 3,
+      "addedOrder": 3
     },
     {
       "path": "26spring/ENGLISH/chapter4_descriptive_paragraphs_review.html",
@@ -183,7 +196,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-15",
-      "lessonNumber": 4
+      "lessonNumber": 4,
+      "addedOrder": 4
     },
     {
       "path": "26spring/ENGLISH/chapter5_comparative_paragraphs_review.html",
@@ -193,7 +207,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-15",
-      "lessonNumber": 5
+      "lessonNumber": 5,
+      "addedOrder": 5
     },
     {
       "path": "26spring/ENGLISH/chapter6_contrast_paragraphs_review.html",
@@ -203,7 +218,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
-      "lessonNumber": 6
+      "lessonNumber": 6,
+      "addedOrder": 6
     },
     {
       "path": "26spring/ENGLISH/english_tenses.html",
@@ -213,7 +229,8 @@
       "type": "grammar",
       "course": "英语文法",
       "date": "2026-05-11",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 7
     },
     {
       "path": "26spring/ENGLISH/exam_review.html",
@@ -223,7 +240,8 @@
       "type": "grammar",
       "course": "英语文法",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 8
     },
     {
       "path": "26spring/ENGLISH/final-exam-review-all.html",
@@ -233,7 +251,8 @@
       "type": "reference",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 9
     },
     {
       "path": "26spring/ENGLISH/final-exam-review-questions.html",
@@ -243,7 +262,8 @@
       "type": "quiz",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 10
     },
     {
       "path": "26spring/ENGLISH/final-review-four-chapters.html",
@@ -253,7 +273,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 11
     },
     {
       "path": "26spring/ENGLISH/paragraph-structure-notes.html",
@@ -263,7 +284,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 12
     },
     {
       "path": "26spring/ENGLISH/phonetics_D_F_review.html",
@@ -273,7 +295,8 @@
       "type": "reference",
       "course": "发音学",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 13
     },
     {
       "path": "26spring/ENGLISH/reading2-war-definition.html",
@@ -283,7 +306,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 14
     },
     {
       "path": "26spring/ENGLISH/review-activity-sheet.html",
@@ -293,7 +317,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 15
     },
     {
       "path": "26spring/ENGLISH/toeic520_100words_beautified.html",
@@ -303,7 +328,8 @@
       "type": "vocabulary",
       "course": "TOEIC",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 16
     },
     {
       "path": "26spring/ENGLISH/vocabulary_compendium.html",
@@ -313,7 +339,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 17
     },
     {
       "path": "26spring/ENGLISH/vocabulary_compendium_core.html",
@@ -323,7 +350,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 18
     },
     {
       "path": "26spring/ENGLISH/vocabulary_confusable_meanings.html",
@@ -333,7 +361,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 19
     },
     {
       "path": "26spring/ENGLISH/vocabulary_focus_words.html",
@@ -343,7 +372,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 20
     },
     {
       "path": "26spring/ENGLISH/vocabulary_focus_words_2.html",
@@ -353,7 +383,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 21
     },
     {
       "path": "26spring/ENGLISH/vocabulary_lookalike_words.html",
@@ -363,7 +394,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 22
     },
     {
       "path": "26spring/ENGLISH/vocabulary_related_topics.html",
@@ -373,7 +405,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 23
     },
     {
       "path": "26spring/ENGLISH/vocabulary_starred_words.html",
@@ -383,7 +416,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 24
     },
     {
       "path": "26spring/ENGLISH/vocabulary_word_families.html",
@@ -393,7 +427,8 @@
       "type": "vocabulary",
       "course": "英语",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 25
     },
     {
       "path": "26spring/ENGLISH/写作六单元汇总.html",
@@ -403,7 +438,8 @@
       "type": "writing",
       "course": "英语写作",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 26
     },
     {
       "path": "26spring/ENGLISH/文法U4.html",
@@ -413,7 +449,8 @@
       "type": "grammar",
       "course": "英语文法",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 27
     },
     {
       "path": "26spring/ENGLISH/阅2问题.html",
@@ -423,7 +460,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 28
     },
     {
       "path": "26spring/ENGLISH/阅3单词.html",
@@ -433,7 +471,8 @@
       "type": "vocabulary",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 29
     },
     {
       "path": "26spring/ENGLISH/阅读单词汇总.html",
@@ -443,7 +482,8 @@
       "type": "vocabulary",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 30
     },
     {
       "path": "26spring/ENGLISH/阅读童兵.html",
@@ -453,7 +493,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 31
     },
     {
       "path": "26spring/ENGLISH/阅读第二章单词.html",
@@ -463,7 +504,8 @@
       "type": "vocabulary",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 32
     },
     {
       "path": "26spring/ENGLISH/阅读问答汇总.html",
@@ -473,7 +515,8 @@
       "type": "reference",
       "course": "阅读",
       "date": "",
-      "lessonNumber": null
+      "lessonNumber": null,
+      "addedOrder": 33
     },
     {
       "path": "26aut/ENGLISH/Human_Rights_Ch1.3_1.7_Vocab.html",
@@ -487,7 +530,8 @@
       "badges": [
         "中英双语",
         "配对练习"
-      ]
+      ],
+      "addedOrder": 44
     },
     {
       "path": "26aut/ENGLISH/Human_Rights_Ch2.3_2.7_Vocab.html",
@@ -501,7 +545,8 @@
       "badges": [
         "中英双语",
         "配对练习"
-      ]
+      ],
+      "addedOrder": 45
     }
   ]
 }
