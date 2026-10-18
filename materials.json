@@ -474,6 +474,34 @@
       "course": "阅读",
       "date": "",
       "lessonNumber": null
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch1.3_1.7_Vocab.html",
+      "title": "Human Rights 词汇｜Ch1.3 / Ch1.7",
+      "description": "IR2 Human Rights 教材 Chapter 1.3《How The Modern Idea of Human Rights was Born》与 Chapter 1.7《Protected by Human Rights》共24个单词：中英释义背诵页，外加全部单词随机配对练习。",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "中英双语",
+        "配对练习"
+      ]
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch2.3_2.7_Vocab.html",
+      "title": "Human Rights 词汇｜Ch2.3 / Ch2.7",
+      "description": "IR2 Human Rights 教材 Chapter 2.3《Dominant Minorities and Powerless Majorities》与 Chapter 2.7《Changing Attitudes as Japan Welcomes International Workers and Students》共26个单词：中英释义背诵页，外加全部单词随机配对练习。",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "中英双语",
+        "配对练习"
+      ]
     }
   ]
 }
