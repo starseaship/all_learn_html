@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/meibao-180.png">
   <link rel="stylesheet" href="./assets/tokens.css?v=20261011-5">
   <link rel="stylesheet" href="./assets/archive.css?v=20261018-1">
-  <script type="module" src="./assets/archive.js?v=20261018-2"></script>
+  <script type="module" src="./assets/archive.js?v=20261018-3"></script>
 </head>
 <body>
   <a class="skip-link" href="#materials">跳到资料列表</a>
@@ -47,13 +47,14 @@
       <div class="sort-control">
         <label for="sortSelect">排序</label>
         <select id="sortSelect">
+          <option value="added" selected>最新添加</option>
           <option value="lesson">按课次</option>
           <option value="updated">最近更新</option>
           <option value="title">按名称</option>
         </select>
-        <button type="button" id="sortDirection" class="sort-direction-button" aria-pressed="false" aria-label="当前正序，点击切换为倒序" title="切换排序方向">
-          <span id="sortArrow" aria-hidden="true">↑</span>
-          <span id="sortDirectionLabel">正序</span>
+        <button type="button" id="sortDirection" class="sort-direction-button" aria-pressed="false" aria-label="当前倒序，点击切换为正序" title="切换排序方向">
+          <span id="sortArrow" aria-hidden="true">↓</span>
+          <span id="sortDirectionLabel">倒序</span>
         </button>
       </div>
     </div>
