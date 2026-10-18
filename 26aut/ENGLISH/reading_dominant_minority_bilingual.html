@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5f6f9">
+<title>阅读作业 · Dominant Minority &amp; Powerless Majority 中英对照</title>
+<style>
+:root{--ink:#1c2431;--muted:#858d99;--purple:#6657a2;--purple-faint:#f6f2ff;--line:#e8eaf0;--paper:#fff;--page:#f4f6f9;--yellow:#fff1a1;--cyan:#d3f2e6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--page);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}
+.container{max-width:920px;margin:auto;padding:46px 22px 80px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.14em;color:#7465a4;text-transform:uppercase}.heading{font-size:clamp(28px,4.6vw,43px);letter-spacing:-.035em;line-height:1.2;margin:12px 0 10px}.subtitle{font-size:15px;line-height:1.6;color:#647083;margin:0 0 22px;max-width:740px}.meta{display:flex;gap:9px;flex-wrap:wrap}.chip{padding:5px 12px;font-size:12px;background:#fff;border:1px solid #e8e8ee;border-radius:999px;color:#5f697a}.chip strong{color:#55438f}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:33px 0 19px}.button-group{display:flex;flex-wrap:wrap;gap:9px}.tool-button{appearance:none;cursor:pointer;border:1px solid #dddfea;border-radius:12px;background:#fff;padding:10px 15px;font-size:13px;font-weight:650;color:#4f5868;transition:background .15s,border-color .15s}.tool-button:hover{border-color:#afa6ce}.tool-button.active{background:#eee9fb;border-color:#c7b9eb;color:#594592}.jumps{display:flex;gap:8px;align-items:center;font-size:12px;color:#7d8593}.jumps a{color:#62539c;background:#eeebf8;text-decoration:none;padding:6px 11px;border-radius:9px;font-weight:750}.jumps a:hover{background:#e1daf5}
+.cards{display:grid;gap:17px}.question-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:25px 29px 27px;box-shadow:0 3px 12px rgba(25,35,60,.026);scroll-margin-top:24px}.question-card.featured{border-color:#dcd4f0;border-left:5px solid #8e7bc6;background:linear-gradient(90deg, #fbf9ff 0px, white 200px)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.number{font-size:19px;color:#b0b3be;font-weight:780;font-variant-numeric:tabular-nums}.featured .number{color:#715dae}.focus-label{background:#ede6ff;color:#6651a0;border:1px solid #e1d5ff;border-radius:999px;font-size:11px;padding:4px 10px;font-weight:800;letter-spacing:.03em}.ordinary-label{font-size:10px;letter-spacing:.1em;color:#c2c5cf}.section-name{font-size:10px;font-weight:850;letter-spacing:.12em;margin-bottom:7px}.question-name{color:#7a6aa9}.answer-name{color:#388a73}.english{margin:0;line-height:1.72;font-size:16px}.question-en{font-weight:700;font-size:17px}.answer-en{font-size:16px;color:#2f3c4a}.translation{font-size:12.5px;line-height:1.8;color:#9197a3;margin:8px 0 0}.translation-icon{display:inline-block;color:#b2b7c2;border-radius:5px;font-size:10px;margin-right:8px;font-weight:750}.separator{border-top:1px dashed #e6e8ee;margin:18px 0 17px}mark{background:var(--cyan);color:inherit;padding:1px 4px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-weight:750}.qmark{background:var(--yellow)}.answer-line{display:block}.answer-line+.answer-line{margin-top:3px}.example{margin-top:5px;color:#677181;font-size:14px}.hidden-translation .translation{display:none}.only-focus .question-card:not(.featured){display:none}.legend{display:flex;align-items:center;gap:17px;flex-wrap:wrap;color:#7d8492;font-size:12px}.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:14px;height:12px;border-radius:3px;display:inline-block}.legend .q{background:var(--yellow)}.legend .a{background:var(--cyan)}.footnote{color:#a2a8b1;font-size:12px;line-height:1.7;margin-top:23px;text-align:center}
+@media(max-width:560px){.container{padding:32px 15px 56px}.toolbar{margin-top:27px}.question-card{padding:20px 18px 22px;border-radius:16px}.english{font-size:15px}.question-en{font-size:16px}.translation{font-size:12px}.jumps{width:100%}.heading{letter-spacing:-.02em}}
+@media print{body{background:#fff}.container{max-width:none;padding:0 5mm}.toolbar,.jumps,.footnote{display:none}.heading{font-size:25px}.question-card{page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;padding:12px 16px;margin-bottom:8px}.cards{display:block}.question-card.featured{border-left:4px solid #8e7bc6}.translation{display:block!important}mark{-webkit-print-color-adjust:exact;print-color-adjust:exact}.number{font-size:14px}.section-name{font-size:9px}.question-en{font-size:13px}.answer-en{font-size:12px}.translation{font-size:10px}}
+</style>
+<style>
+.translation.note{margin-top:7px;padding-left:24px;position:relative;color:#9193a3;line-height:1.75}
+.translation.note::before{content:"注";position:absolute;left:0;top:0;font-size:10px;color:#9c96b2;font-weight:800}
+.source-note{margin-top:22px;font-size:11.5px;line-height:1.8;color:#959ca8;text-align:center}
+.source-note a{color:#7263a7;text-decoration:underline;text-underline-offset:2px}
+@media print{.source-note{display:none}}
+</style>
+<meta name="description" content="Dominant Minority 与 Powerless Majority：10道阅读理解问答，补全答案、重点标记及中文翻译。">
+<meta name="subject" content="english">
+<meta name="type" content="reference">
+<meta name="course" content="阅读">
+<meta name="date" content="2026-10-18">
+</head>
+<body>
+<main class="container" id="app">
+  <header>
+    <div class="eyebrow">READING HOMEWORK · COMPREHENSION III</div>
+    <h1 class="heading">阅读作业 <span style="color:#9b92b2;font-weight:500">/</span> 中英对照</h1>
+    <p class="subtitle">Dominant Minority &amp; Powerless Majority<br>Comprehension Questions &amp; Improved Answers</p>
+    <div class="meta"><span class="chip">共 <strong>10</strong> 道题</span><span class="chip">重点 <strong>2 · 7 · 8 · 9</strong></span><span class="chip">题目＋答案逐条翻译</span><span class="chip">已补全手写答案</span></div>
+  </header>
+  <div class="toolbar">
+    <div class="button-group"><button id="focusBtn" class="tool-button" type="button" aria-pressed="false">☆ 只看重点题</button><button id="translateBtn" class="tool-button active" type="button" aria-pressed="true">中译显示中</button></div>
+    <nav class="jumps" aria-label="重点题快捷跳转"><span>重点直达</span><a href="#q2">02</a><a href="#q7">07</a><a href="#q8">08</a><a href="#q9">09</a></nav>
+  </div>
+  <div class="legend"><span><i class="q"></i>黄色 = 题目关键词</span><span><i class="a"></i>绿色 = 答案关键词</span></div>
+  <section class="cards" aria-label="阅读理解题目">
+  <article class="question-card" id="q1" data-focus="false">
+      <div class="card-top"><span class="number">01</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What kind of people are in the <mark class="qmark">majority</mark> according to this paragraph?</p>
+        <p class="translation"><span class="translation-icon">中</span>根据这一段，什么样的人属于多数群体？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">The <mark>majority</mark> is the group with <mark>more people</mark>. It often has <mark>more power</mark>, but this is not always true.</p>
+        <p class="translation"><span class="translation-icon">中</span>多数群体是人数较多的群体。他们通常拥有较大的权力，但并不总是如此。</p>
+        
+      </div>
+    </article>
+<article class="question-card featured" id="q2" data-focus="true">
+      <div class="card-top"><span class="number">02</span><span class="focus-label">★ 重点复习</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What is a <mark class="qmark">“dominant minority”</mark>? <mark class="qmark">Give an example</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>什么是“掌权的少数群体”？请举一个例子。</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">A <mark>dominant minority</mark> is a <mark>small group</mark> that has <mark>more power</mark> than a larger group. For example, the <mark>five permanent members</mark> of the UN Security Council have special power.</p>
+        <p class="translation"><span class="translation-icon">中</span>“掌权的少数群体”指人数较少，却比人数更多的群体掌握更大权力的一群人。例如，联合国安全理事会的五个常任理事国拥有特殊权力。</p>
+        
+      </div>
+    </article>
+<article class="question-card" id="q3" data-focus="false">
+      <div class="card-top"><span class="number">03</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">Which <mark class="qmark">countries</mark> make many of the <mark class="qmark">decisions</mark> in the <mark class="qmark">United Nations</mark>?</p>
+        <p class="translation"><span class="translation-icon">中</span>哪些国家在联合国的许多重要决定中有较大影响力？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">The <mark>five permanent members of the UN Security Council</mark> are <mark>China, France, Russia, the United Kingdom, and the United States</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>联合国安理会的五个常任理事国是中国、法国、俄罗斯、英国和美国。</p>
+        <p class="translation note">这里特指安理会的特殊决策权，并不是说联合国所有决定都由这五个国家作出。</p>
+      </div>
+    </article>
+<article class="question-card" id="q4" data-focus="false">
+      <div class="card-top"><span class="number">04</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">How many <mark class="qmark">countries</mark> are the <mark class="qmark">members of the United Nations</mark> now?</p>
+        <p class="translation"><span class="translation-icon">中</span>目前联合国有多少个会员国？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">There are <mark>193 member states</mark> in the United Nations.</p>
+        <p class="translation"><span class="translation-icon">中</span>联合国目前有193个会员国。</p>
+        
+      </div>
+    </article>
+<article class="question-card" id="q5" data-focus="false">
+      <div class="card-top"><span class="number">05</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What is a <mark class="qmark">powerless majority</mark>? Is <mark class="qmark">Japan</mark> a part of the <mark class="qmark">“dominant minority”</mark> or the <mark class="qmark">“powerless majority”</mark> in the United Nations?</p>
+        <p class="translation"><span class="translation-icon">中</span>什么是“缺乏权力的多数群体”？日本在联合国属于“掌权的少数群体”还是“缺乏权力的多数群体”？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">A <mark>powerless majority</mark> is a <mark>large group</mark> with <mark>less power</mark> than a smaller group. In this example, <mark>Japan belongs to the “powerless majority”</mark> because it is <mark>not a permanent member</mark> of the UN Security Council and has <mark>no veto power</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>“缺乏权力的多数群体”指人数较多，却比小群体掌握更少权力的一群人。在这个例子中，日本属于“缺乏权力的多数群体”，因为它不是安理会常任理事国，没有否决权。</p>
+        <p class="translation note">这里的“powerless”是课文用于对比权力差异的说法；日本仍有联合国大会投票权，也能参与联合国事务。</p>
+      </div>
+    </article>
+<article class="question-card" id="q6" data-focus="false">
+      <div class="card-top"><span class="number">06</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What is an example of an <mark class="qmark">economically powerless majority</mark>?</p>
+        <p class="translation"><span class="translation-icon">中</span>请举出一个在经济上缺乏权力的多数群体的例子。</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en"><mark>Black South Africans</mark> under <mark>apartheid</mark> are an example. They were the <mark>majority</mark> of the population, but the <mark>white minority controlled much of the wealth</mark> and economic power.</p>
+        <p class="translation"><span class="translation-icon">中</span>种族隔离制度时期的南非黑人就是一个例子。虽然他们在人口中占多数，但大量财富和经济权力掌握在白人少数群体手中。</p>
+        <p class="translation note">这是南非历史上的例子，不能直接当作对当今南非所有群体的概括。</p>
+      </div>
+    </article>
+<article class="question-card featured" id="q7" data-focus="true">
+      <div class="card-top"><span class="number">07</span><span class="focus-label">★ 重点复习</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">Which group is the <mark class="qmark">“dominant minority”</mark> in <mark class="qmark">South Africa</mark>?</p>
+        <p class="translation"><span class="translation-icon">中</span>在南非，哪个群体属于“掌权的少数群体”？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">The <mark>white minority</mark> was the <mark>dominant minority</mark> in South Africa <mark>during apartheid</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>在种族隔离制度时期，南非的白人少数群体是掌权的少数群体。</p>
+        
+      </div>
+    </article>
+<article class="question-card featured" id="q8" data-focus="true">
+      <div class="card-top"><span class="number">08</span><span class="focus-label">★ 重点复习</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What is <mark class="qmark">one of the ways</mark> that show <mark class="qmark">women</mark> are a <mark class="qmark">powerless majority group</mark>?</p>
+        <p class="translation"><span class="translation-icon">中</span>有什么例子可以说明女性属于权力较少的多数群体？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">One example is that women may <mark>receive lower pay</mark> than men for similar work. They may also have <mark>fewer leadership positions</mark> and <mark>less decision-making power</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>一个例子是，女性做类似的工作时可能比男性获得更低的报酬。她们还可能拥有更少的领导职位和决策权。</p>
+        
+      </div>
+    </article>
+<article class="question-card featured" id="q9" data-focus="true">
+      <div class="card-top"><span class="number">09</span><span class="focus-label">★ 重点复习</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en"><mark class="qmark">Give three examples</mark> of <mark class="qmark">large groups of people with no power</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>请举出三个虽然人数众多但缺乏权力的群体的例子。</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en"><span class="answer-line">1) <mark>Women</mark> who have less political or economic power.</span><span class="answer-line">2) <mark>Black South Africans</mark> during apartheid.</span><span class="answer-line">3) People in the <mark>188 UN member states without permanent Security Council seats</mark> (in the comparison used in the reading).</span></p>
+        <p class="translation"><span class="translation-icon">中</span>① 在政治或经济方面权力较少的女性。② 种族隔离制度时期的南非黑人。③ 按课文的比较方式，没有安理会常任席位的188个联合国会员国的民众。</p>
+        <p class="translation note">第③个例子强调安理会没有常任席位及否决权，不代表这些国家完全没有政治影响力。</p>
+      </div>
+    </article>
+<article class="question-card" id="q10" data-focus="false">
+      <div class="card-top"><span class="number">10</span><span class="ordinary-label">COMPREHENSION</span></div>
+      <div class="qa-section">
+        <div class="section-name question-name">QUESTION · 题目</div>
+        <p class="english question-en">What does the <mark class="qmark">author think</mark> about the <mark class="qmark">position of minority groups</mark> in society?</p>
+        <p class="translation"><span class="translation-icon">中</span>作者如何看待少数群体在社会中的地位？</p>
+      </div>
+      <div class="separator"></div>
+      <div class="qa-section">
+        <div class="section-name answer-name">IMPROVED ANSWER · 完善答案</div>
+        <p class="english answer-en">The author thinks that a <mark>small group</mark> can have <mark>most of the power</mark>, while a <mark>larger group</mark> may have <mark>little power</mark>. <mark>Numbers do not always decide power</mark>.</p>
+        <p class="translation"><span class="translation-icon">中</span>作者认为，少数群体可能掌握大部分权力，而人数更多的群体却可能权力很少。群体的人数不一定决定它掌握多少权力。</p>
+        
+      </div>
+    </article>
+  </section>
+  <p class="footnote">依据照片题目与手写要点整理；对不完整答案进行补充和语法润色，非课文原文逐字摘录。可使用浏览器打印或保存为 PDF。</p>
+  <p class="source-note">事实核对：<a href="https://www.un.org/en/node/122499" target="_blank" rel="noopener">联合国会员国数</a> · <a href="https://main.un.org/securitycouncil/en/content/voting-system" target="_blank" rel="noopener">安理会常任理事国与否决权</a> · <a href="https://www.un.org/en/events/mandeladay/court_statement_1962.shtml" target="_blank" rel="noopener">南非种族隔离历史背景</a></p>
+</main>
+<script>
+(function(){
+ const app=document.getElementById('app');
+ const fb=document.getElementById('focusBtn');
+ const tb=document.getElementById('translateBtn');
+ fb.addEventListener('click',()=>{
+  const on=app.classList.toggle('only-focus');
+  fb.classList.toggle('active',on);fb.setAttribute('aria-pressed',String(on));
+  fb.textContent=on?'★ 显示全部题目':'☆ 只看重点题';
+ });
+ tb.addEventListener('click',()=>{
+  const off=app.classList.toggle('hidden-translation');
+  tb.classList.toggle('active',!off);tb.setAttribute('aria-pressed',String(!off));
+  tb.textContent=off?'中译已隐藏':'中译显示中';
+ });
+})();
+</script>
+</body>
+</html>
