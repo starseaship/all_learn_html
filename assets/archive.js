@@ -1,4 +1,4 @@
-import {SUBJECT_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261012-1';
+import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261018-2';
 
 const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
 const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
@@ -83,7 +83,7 @@ function render() {
     button.setAttribute('aria-pressed',String(item.id===state.semester)); ui.archiveOptions.append(button);
   }
   renderFilter(ui.subjectFilter,'subject',subjects,SUBJECT_LABELS,'科目');
-  renderFilter(ui.courseFilter,'course',courses,null,'课程');
+  renderFilter(ui.courseFilter,'course',courses,COURSE_LABELS,'课程');
   renderFilter(ui.typeFilter,'type',types,TYPE_LABELS,'类型');
   ui.filterRow.hidden=ui.courseFilter.hidden;
   const advanced=!ui.subjectFilter.hidden||!ui.typeFilter.hidden;
@@ -110,7 +110,7 @@ function render() {
     const tags=node('div','card-tags');
     if(!uniform.subject) tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]));
     if(!uniform.type) tags.append(node('span','tag tag-type',TYPE_LABELS[material.type]));
-    if(!uniform.course) tags.append(node('span','tag tag-course',material.course));
+    if(!uniform.course) tags.append(node('span','tag tag-course',COURSE_LABELS[material.course]||material.course));
     if(tags.childElementCount) card.append(tags);
     if(heading.eyebrow) card.append(node('p','card-eyebrow',heading.eyebrow));
     card.append(node('h2','card-title',heading.title),node('p','card-desc',material.description));
