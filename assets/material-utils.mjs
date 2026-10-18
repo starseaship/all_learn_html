@@ -16,7 +16,7 @@ export function normalizeCatalog(raw) {
   const semesterIds = new Set(semesters.map(item=>item.id));
   if (!semesterIds.has(raw.currentSemester)) throw new Error('当前学期不存在');
   const paths = new Set();
-  const materials = raw.materials.map(item => {
+  const materials = raw.materials.map((item, index) => {
     const path = cleanText(item.path,1000);
     const parts = path.split('/');
     if (!semesterIds.has(parts[0]) || parts.some(p=>!p || p==='.' || p==='..') || /[\\?#:%\x00-\x1f]/.test(path) || !/\.html$/i.test(path) || paths.has(path)) throw new Error('资料链接格式不正确');
@@ -27,6 +27,8 @@ export function normalizeCatalog(raw) {
       description:cleanText(item.description,1200), course:cleanText(item.course,100) || '未分类',
       subject:Object.hasOwn(SUBJECT_LABELS,item.subject) ? item.subject : 'general',
       type:Object.hasOwn(TYPE_LABELS,item.type) ? item.type : 'reference', date:validDate(item.date),
+      // Existing cached catalogs may predate the explicit order field.
+      addedOrder:Number.isSafeInteger(item.addedOrder) && item.addedOrder>0 ? item.addedOrder : index+1,
       lessonNumber:Number.isInteger(lesson) && lesson > 0 ? lesson : null,
       badges:Array.isArray(item.badges) ? item.badges.map(badge=>cleanText(badge,24)).filter(Boolean).slice(0,4) : []
     };
@@ -39,11 +41,12 @@ export function filterMaterials(materials, {subject='all',type='all',course='all
   return materials.filter(item => (subject==='all'||item.subject===subject) && (type==='all'||item.type===type) && (course==='all'||item.course===course) && (!q||`${item.title} ${item.description} ${item.course}`.toLocaleLowerCase().includes(q)));
 }
 
-export function sortMaterials(materials, mode='lesson', direction=mode==='updated'?'desc':'asc') {
+export function sortMaterials(materials, mode='added', direction=(mode==='added'||mode==='updated')?'desc':'asc') {
   const order = direction==='desc' ? -1 : 1;
   const byTitle = (a,b)=>a.title.localeCompare(b.title,'zh-CN',{numeric:true}) || a.path.localeCompare(b.path);
   return [...materials].sort((a,b)=> {
     if (mode==='title') return byTitle(a,b)*order;
+    if (mode==='added') return (a.addedOrder-b.addedOrder)*order || byTitle(a,b);
     // Unknown update dates are always last; ties stay alphabetical.
     if (mode==='updated') {
       if (!a.date && b.date) return 1;
