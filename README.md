@@ -8,6 +8,7 @@
 2. 推荐在 HTML 的 `<head>` 中填写 `description`、`type`、`course`、`date` 和 `lesson-number` 元信息。`type` 支持 `grammar`、`vocabulary`、`quiz`、`notes`、`writing`、`reference`。
 3. 需要单独调整卡片信息时，在 `catalog-overrides.json` 中以相对文件路径添加记录。可选的 `badges`（最多 4 个短标签，如“日中对照”“原讲义 35 页”）会显示在卡片底部。标题写成“数据科学第3回｜主题”时，首页会把“数据科学 第3回”显示为卡片小标题，“主题”作为卡片标题。
 4. 提交前在仓库根目录运行 `python3 scripts/build_catalog.py`，并一起提交生成的 `materials.json`。这个步骤也适用于资料删除、改名和移动。
+5. 首页默认按资料加入目录的顺序倒序排列，最新加入的文件在最前。`materials.json` 的 `addedOrder` 由目录脚本自动为新文件分配；重新生成目录或修改现有资料时会保留既有顺序。
 
 目录脚本只读取 HTML 头部；首页只请求 `materials.json`，不会为了获得标题提前下载完整讲义。目录使用条件缓存，加载失败时显示上次成功的目录并提供重试。缓存不包含任何编辑、收藏或阅读记录。
 
