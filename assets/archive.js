@@ -1,8 +1,8 @@
-import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261018-2';
+import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261018-3';
 
 const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
 const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
-const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'lesson',sortDirection:'asc'};
+const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'added',sortDirection:'desc'};
 let catalog = null;
 let loading = null;
 
@@ -181,7 +181,7 @@ ui.currentSemesterButton.addEventListener('click',()=>{setSemester(catalog.curre
 ui.searchInput.addEventListener('input',()=>{state.query=ui.searchInput.value; render();});
 ui.sortSelect.addEventListener('change',()=>{
   state.sort=ui.sortSelect.value;
-  state.sortDirection=state.sort==='updated'?'desc':'asc';
+  state.sortDirection=(state.sort==='added'||state.sort==='updated')?'desc':'asc';
   render();
 });
 ui.sortDirection.addEventListener('click',()=>{
