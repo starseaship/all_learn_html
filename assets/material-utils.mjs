@@ -1,4 +1,5 @@
-export const SUBJECT_LABELS = Object.freeze({english:'🇬🇧 英语',japanese:'🇯🇵 日语',general:'📚 通识',wgl:'🌐 WGL'});
+export const SUBJECT_LABELS = Object.freeze({english:'英语',japanese:'日语',general:'📚 通识',wgl:'🌐 WGL'});
+export const COURSE_LABELS = Object.freeze({'日语词汇':'日语','日语单词':'日语','英语文法':'语法'});
 export const TYPE_LABELS = Object.freeze({grammar:'文法',vocabulary:'词汇',quiz:'练习',notes:'笔记',writing:'写作',reference:'参考'});
 const cleanText = (value, limit = 200) => typeof value === 'string' ? value.trim().slice(0, limit) : '';
 
