@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Rights 2.3 / 2.7 词汇复习</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;600&display=swap');
+
+  :root{
+    --cream:#f6f1e4;
+    --parchment:#efe6d2;
+    --sage:#8a9a7c;
+    --sage-dark:#657357;
+    --plum:#6e4e5c;
+    --gold:#c9a24b;
+    --ink:#3c352b;
+    --wrong:#b05c52;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(201,162,75,0.08), transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(110,78,92,0.08), transparent 40%);
+    font-family:'EB Garamond','Noto Serif JP',serif;
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 16px 60px;
+  }
+
+  h1{
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0 0 4px;
+    color:var(--plum);
+    text-align:center;
+  }
+  .subtitle{
+    font-style:italic;
+    color:var(--sage-dark);
+    margin-bottom:18px;
+    text-align:center;
+    font-size:0.9rem;
+  }
+
+  .page-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .page-tab{
+    border:1px solid var(--plum);
+    background:transparent;
+    color:var(--plum);
+    padding:8px 18px;
+    border-radius:999px;
+    font-family:inherit;
+    font-size:0.92rem;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .page-tab.active{
+    background:var(--plum);
+    color:#fff;
+  }
+
+  .page{
+    display:none;
+    width:100%;
+    max-width:600px;
+  }
+  .page.active{
+    display:block;
+  }
+
+  .section-title{
+    text-align:center;
+    color:var(--plum);
+    font-weight:600;
+    font-size:1.15rem;
+    margin-bottom:12px;
+  }
+
+  .list-view{
+    background:linear-gradient(160deg,#fbf7ea,var(--parchment));
+    border:1px solid rgba(201,162,75,0.4);
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(60,53,43,0.12);
+    padding:6px 20px;
+  }
+  .list-row{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:12px 0;
+    border-bottom:1px solid rgba(110,78,92,0.15);
+  }
+  .list-row:last-child{
+    border-bottom:none;
+  }
+  .list-word{
+    flex:0 0 auto;
+    background:#f3d675;
+    color:var(--ink);
+    font-weight:600;
+    font-size:1.05rem;
+    padding:2px 10px;
+    border-radius:6px;
+    white-space:nowrap;
+    box-shadow:0 1px 2px rgba(60,53,43,0.15);
+  }
+  .list-def-col{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .list-def{
+    font-size:0.98rem;
+    line-height:1.45;
+    color:var(--ink);
+  }
+  .list-def-cn{
+    font-size:0.85rem;
+    color:var(--sage-dark);
+  }
+  .list-pos{
+    font-size:0.72rem;
+    color:var(--sage-dark);
+    margin-left:4px;
+    font-style:italic;
+  }
+
+  /* matching game */
+  .match-controls{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .match-progress{
+    text-align:center;
+    color:var(--plum);
+    font-size:0.95rem;
+    margin-bottom:14px;
+    letter-spacing:0.02em;
+  }
+  .match-grid{
+    display:flex;
+    gap:14px;
+  }
+  .match-col{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .match-item{
+    background:linear-gradient(160deg,#fbf7ea,var(--parchment));
+    border:1px solid rgba(201,162,75,0.5);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:0.88rem;
+    line-height:1.3;
+    cursor:pointer;
+    transition:all 0.15s;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    box-shadow:0 2px 6px rgba(60,53,43,0.08);
+  }
+  .match-item.word{
+    font-weight:600;
+    color:var(--plum);
+    justify-content:center;
+    text-align:center;
+  }
+  .match-item.def{
+    color:var(--ink);
+  }
+  .match-item.selected{
+    border-color:var(--gold);
+    background:linear-gradient(160deg,#fff8e0,#f3e4bd);
+    box-shadow:0 0 0 2px rgba(201,162,75,0.5);
+  }
+  .match-item.correct{
+    background:linear-gradient(160deg,#e7edd9,#d4e0c2);
+    border-color:var(--sage);
+    color:var(--sage-dark);
+    cursor:default;
+    opacity:0.75;
+  }
+  .match-item.wrong{
+    background:#f3d9d5;
+    border-color:var(--wrong);
+    animation:shake 0.3s;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-4px);}
+    75%{transform:translateX(4px);}
+  }
+
+  .btn{
+    border:1px solid var(--sage);
+    background:var(--sage);
+    color:#fff;
+    font-family:inherit;
+    font-size:0.95rem;
+    padding:8px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:transform 0.15s, opacity 0.2s;
+  }
+  .btn.gold{
+    background:var(--gold);
+    border-color:var(--gold);
+  }
+  .btn:active{transform:scale(0.96);}
+
+  .win-banner{
+    text-align:center;
+    color:var(--sage-dark);
+    font-weight:600;
+    margin-top:14px;
+    display:none;
+  }
+
+  footer{
+    margin-top:30px;
+    font-size:0.75rem;
+    color:var(--sage-dark);
+    opacity:0.7;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<h1>人権 Human Rights 词汇复习</h1>
+<div class="subtitle">Chapter 2.3 · Chapter 2.7</div>
+
+<div class="page-tabs">
+  <button class="page-tab active" data-page="p23">2.3 背诵</button>
+  <button class="page-tab" data-page="p27">2.7 背诵</button>
+  <button class="page-tab" data-page="pmatch">🎲 配对练习</button>
+</div>
+
+<!-- PAGE 1: Chapter 2.3 recitation list -->
+<div class="page active" id="p23">
+  <div class="section-title">Chapter 2.3 — Dominant Minorities and Powerless Majorities</div>
+  <div class="list-view" id="list23"></div>
+</div>
+
+<!-- PAGE 2: Chapter 2.7 recitation list -->
+<div class="page" id="p27">
+  <div class="section-title">Chapter 2.7 — Changing Attitudes as Japan Welcomes International Workers and Students</div>
+  <div class="list-view" id="list27"></div>
+</div>
+
+<!-- PAGE 3: matching game -->
+<div class="page" id="pmatch">
+  <div class="section-title">全部单词配对练习（左侧按字母顺序）</div>
+  <div class="match-controls">
+    <button class="btn gold" id="reshuffleBtn">🔀 重新打乱释义顺序</button>
+  </div>
+  <div class="match-progress" id="matchProgress">已配对 0 / 26</div>
+  <div class="match-grid">
+    <div class="match-col" id="wordCol"></div>
+    <div class="match-col" id="defCol"></div>
+  </div>
+  <div class="win-banner" id="winBanner">🎉 全部配对完成！点击上方按钮再来一组</div>
+</div>
+
+<footer>Osaka Jogakuin · Integrated Reading / IR Human Rights Book — Ch 2.3 & 2.7</footer>
+
+<script>
+const data23 = [
+  ["majority","the biggest group of people or things","n","多数派"],
+  ["minority","less than half of the group or things","n","少数派"],
+  ["exception(s)","someone or something that is not included in a rule, group, or list","n","例外"],
+  ["a large number of","many","phr","大量的；许多"],
+  ["dominant","more important, strong, or noticeable than anything else of the same type","adj","支配性的；占主导地位的"],
+  ["vote","to choose someone or something in an election or meeting by making a mark on an official piece of paper or by putting your hand up","v","投票"],
+  ["nearly","almost","adv","几乎"],
+  ["realize","to notice or understand something that you did not notice or understand before","v","意识到；理解"],
+  ["in contrast","it is used to show something or somebody is clearly different from somebody or something else","id","相比之下"],
+  ["compared to","it is used to show somebody/something is similar to somebody/something else, either better or worse","phv","与……相比"]
+];
+
+const data27 = [
+  ["immigrant","someone who comes to live in a different country","n","移民"],
+  ["remote","far away","adj","偏远的；人迹罕至的"],
+  ["current","happening and existing now","adj","当前的；现在的"],
+  ["permanent","continuing always or for a long time","adj","永久的"],
+  ["temporary","existing or happening for only a short time","adj","临时的；暂时的"],
+  ["advanced","at a higher, more difficult level","adj","高级的；先进的"],
+  ["agent","someone whose job is to deal with business for someone else","n","代理人；经纪人"],
+  ["deprive","to take something, especially something necessary or pleasant, away from someone","v","剥夺"],
+  ["vocational","providing skills and educational that prepare you for a job","adj","职业的；职业培训的"],
+  ["credentials","documents that state the abilities and experience of a person and show that the person is qualified for a particular job or activity","n","资格证明；证书"],
+  ["sacrifice","to give something that is valuable to you in order to help another person","v","牺牲"],
+  ["hospitality","the act of being friendly and welcoming to guests and visitors","n","好客；款待"],
+  ["up to","used to say that something is less than or equal to but not more than a stated value, number, or level","ph","直到；多达"],
+  ["end up","to reach or come to a place, condition, or situation that was not planned or expected","phv","最终落得；最后变成"],
+  ["turn to","to go to somebody/something for help, advice, etc","phv","向……求助"],
+  ["sever","to break or separate, especially by cutting","v","(强行)切断；断绝"]
+];
+
+function renderList(containerId, data){
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  data.forEach(([w,d,pos,cn])=>{
+    const row = document.createElement('div');
+    row.className = 'list-row';
+    const wordEl = document.createElement('span');
+    wordEl.className = 'list-word';
+    wordEl.textContent = w;
+    const defCol = document.createElement('span');
+    defCol.className = 'list-def-col';
+    const defEl = document.createElement('span');
+    defEl.className = 'list-def';
+    defEl.textContent = d;
+    const posEl = document.createElement('span');
+    posEl.className = 'list-pos';
+    posEl.textContent = `[${pos}]`;
+    defEl.appendChild(posEl);
+    const cnEl = document.createElement('span');
+    cnEl.className = 'list-def-cn';
+    cnEl.textContent = cn;
+    defCol.appendChild(defEl);
+    defCol.appendChild(cnEl);
+    row.appendChild(wordEl);
+    row.appendChild(defCol);
+    el.appendChild(row);
+  });
+}
+renderList('list23', data23);
+renderList('list27', data27);
+
+// page tab switching
+document.querySelectorAll('.page-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.page).classList.add('active');
+  });
+});
+
+// ---- matching game ----
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+const wordCol = document.getElementById('wordCol');
+const defCol = document.getElementById('defCol');
+const matchProgress = document.getElementById('matchProgress');
+const winBanner = document.getElementById('winBanner');
+
+let roundPairs = [];
+let matchedCount = 0;
+let selectedWord = null;
+let selectedDef = null;
+let lock = false;
+
+function startRound(){
+  const pool = [...data23, ...data27].sort((a,b)=> a[0].localeCompare(b[0]));
+
+  roundPairs = pool.map((item, i)=>({id:i, word:item[0], def:item[1]}));
+  matchedCount = 0;
+  selectedWord = null;
+  selectedDef = null;
+  lock = false;
+  winBanner.style.display = 'none';
+  matchProgress.textContent = `已配对 0 / ${roundPairs.length}`;
+
+  const words = roundPairs; // alphabetical, unshuffled
+  const defs = shuffle(roundPairs);
+
+  wordCol.innerHTML = "";
+  defCol.innerHTML = "";
+
+  words.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'match-item word';
+    el.textContent = p.word;
+    el.dataset.id = p.id;
+    el.addEventListener('click', ()=>onPick(el, 'word', p.id));
+    wordCol.appendChild(el);
+  });
+
+  defs.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'match-item def';
+    el.textContent = p.def;
+    el.dataset.id = p.id;
+    el.addEventListener('click', ()=>onPick(el, 'def', p.id));
+    defCol.appendChild(el);
+  });
+}
+
+function onPick(el, kind, id){
+  if(lock || el.classList.contains('correct')) return;
+
+  if(kind === 'word'){
+    if(selectedWord) selectedWord.el.classList.remove('selected');
+    selectedWord = {el, id};
+    el.classList.add('selected');
+  } else {
+    if(selectedDef) selectedDef.el.classList.remove('selected');
+    selectedDef = {el, id};
+    el.classList.add('selected');
+  }
+
+  if(selectedWord && selectedDef){
+    lock = true;
+    if(selectedWord.id === selectedDef.id){
+      selectedWord.el.classList.remove('selected');
+      selectedDef.el.classList.remove('selected');
+      selectedWord.el.classList.add('correct');
+      selectedDef.el.classList.add('correct');
+      matchedCount++;
+      matchProgress.textContent = `已配对 ${matchedCount} / ${roundPairs.length}`;
+      selectedWord = null;
+      selectedDef = null;
+      lock = false;
+      if(matchedCount === roundPairs.length){
+        winBanner.style.display = 'block';
+      }
+    } else {
+      selectedWord.el.classList.add('wrong');
+      selectedDef.el.classList.add('wrong');
+      setTimeout(()=>{
+        selectedWord.el.classList.remove('selected','wrong');
+        selectedDef.el.classList.remove('selected','wrong');
+        selectedWord = null;
+        selectedDef = null;
+        lock = false;
+      }, 500);
+    }
+  }
+}
+
+document.getElementById('reshuffleBtn').addEventListener('click', startRound);
+
+startRound();
+</script>
+
+</body>
+</html>
