@@ -109,14 +109,11 @@
   }
   .list-word{
     flex:0 0 auto;
-    background:#f3d675;
-    color:var(--ink);
-    font-weight:600;
+    background:none;
+    color:var(--plum);
+    font-weight:700;
     font-size:1.05rem;
-    padding:2px 10px;
-    border-radius:6px;
     white-space:nowrap;
-    box-shadow:0 1px 2px rgba(60,53,43,0.15);
   }
   .list-def-col{
     flex:1 1 auto;
@@ -128,6 +125,13 @@
     font-size:0.98rem;
     line-height:1.45;
     color:var(--ink);
+  }
+  .kw{
+    background:#f3d675;
+    padding:1px 5px;
+    border-radius:5px;
+    font-weight:600;
+    box-shadow:0 1px 2px rgba(60,53,43,0.12);
   }
   .list-def-cn{
     font-size:0.85rem;
@@ -286,41 +290,58 @@
 
 <script>
 const data23 = [
-  ["majority","the biggest group of people or things","n","多数派"],
-  ["minority","less than half of the group or things","n","少数派"],
-  ["exception(s)","someone or something that is not included in a rule, group, or list","n","例外"],
-  ["a large number of","many","phr","大量的；许多"],
-  ["dominant","more important, strong, or noticeable than anything else of the same type","adj","支配性的；占主导地位的"],
-  ["vote","to choose someone or something in an election or meeting by making a mark on an official piece of paper or by putting your hand up","v","投票"],
-  ["nearly","almost","adv","几乎"],
-  ["realize","to notice or understand something that you did not notice or understand before","v","意识到；理解"],
-  ["in contrast","it is used to show something or somebody is clearly different from somebody or something else","id","相比之下"],
-  ["compared to","it is used to show somebody/something is similar to somebody/something else, either better or worse","phv","与……相比"]
+  ["majority","the biggest group of people or things","n","多数派","biggest group"],
+  ["minority","less than half of the group or things","n","少数派","less than half"],
+  ["exception(s)","someone or something that is not included in a rule, group, or list","n","例外","not included"],
+  ["a large number of","many","phr","大量的；许多","many"],
+  ["dominant","more important, strong, or noticeable than anything else of the same type","adj","支配性的；占主导地位的","more important, strong"],
+  ["vote","to choose someone or something in an election or meeting by making a mark on an official piece of paper or by putting your hand up","v","投票","choose someone"],
+  ["nearly","almost","adv","几乎","almost"],
+  ["realize","to notice or understand something that you did not notice or understand before","v","意识到；理解","notice or understand"],
+  ["in contrast","it is used to show something or somebody is clearly different from somebody or something else","id","相比之下","clearly different"],
+  ["compared to","it is used to show somebody/something is similar to somebody/something else, either better or worse","phv","与……相比","similar to"]
 ];
 
 const data27 = [
-  ["immigrant","someone who comes to live in a different country","n","移民"],
-  ["remote","far away","adj","偏远的；人迹罕至的"],
-  ["current","happening and existing now","adj","当前的；现在的"],
-  ["permanent","continuing always or for a long time","adj","永久的"],
-  ["temporary","existing or happening for only a short time","adj","临时的；暂时的"],
-  ["advanced","at a higher, more difficult level","adj","高级的；先进的"],
-  ["agent","someone whose job is to deal with business for someone else","n","代理人；经纪人"],
-  ["deprive","to take something, especially something necessary or pleasant, away from someone","v","剥夺"],
-  ["vocational","providing skills and educational that prepare you for a job","adj","职业的；职业培训的"],
-  ["credentials","documents that state the abilities and experience of a person and show that the person is qualified for a particular job or activity","n","资格证明；证书"],
-  ["sacrifice","to give something that is valuable to you in order to help another person","v","牺牲"],
-  ["hospitality","the act of being friendly and welcoming to guests and visitors","n","好客；款待"],
-  ["up to","used to say that something is less than or equal to but not more than a stated value, number, or level","ph","直到；多达"],
-  ["end up","to reach or come to a place, condition, or situation that was not planned or expected","phv","最终落得；最后变成"],
-  ["turn to","to go to somebody/something for help, advice, etc","phv","向……求助"],
-  ["sever","to break or separate, especially by cutting","v","(强行)切断；断绝"]
+  ["immigrant","someone who comes to live in a different country","n","移民","live in a different country"],
+  ["remote","far away","adj","偏远的；人迹罕至的","far away"],
+  ["current","happening and existing now","adj","当前的；现在的","existing now"],
+  ["permanent","continuing always or for a long time","adj","永久的","long time"],
+  ["temporary","existing or happening for only a short time","adj","临时的；暂时的","short time"],
+  ["advanced","at a higher, more difficult level","adj","高级的；先进的","higher, more difficult level"],
+  ["agent","someone whose job is to deal with business for someone else","n","代理人；经纪人","deal with business"],
+  ["deprive","to take something, especially something necessary or pleasant, away from someone","v","剥夺","away from someone"],
+  ["vocational","providing skills and educational that prepare you for a job","adj","职业的；职业培训的","prepare you for a job"],
+  ["credentials","documents that state the abilities and experience of a person and show that the person is qualified for a particular job or activity","n","资格证明；证书","qualified"],
+  ["sacrifice","to give something that is valuable to you in order to help another person","v","牺牲","help another person"],
+  ["hospitality","the act of being friendly and welcoming to guests and visitors","n","好客；款待","friendly and welcoming"],
+  ["up to","used to say that something is less than or equal to but not more than a stated value, number, or level","ph","直到；多达","less than or equal to"],
+  ["end up","to reach or come to a place, condition, or situation that was not planned or expected","phv","最终落得；最后变成","not planned or expected"],
+  ["turn to","to go to somebody/something for help, advice, etc","phv","向……求助","for help"],
+  ["sever","to break or separate, especially by cutting","v","(强行)切断；断绝","break or separate"]
 ];
+
+function buildHighlightedDef(defText, keyword){
+  const frag = document.createDocumentFragment();
+  const idx = keyword ? defText.indexOf(keyword) : -1;
+  if(idx === -1){
+    frag.appendChild(document.createTextNode(defText));
+    return frag;
+  }
+  if(idx > 0) frag.appendChild(document.createTextNode(defText.slice(0, idx)));
+  const kw = document.createElement('span');
+  kw.className = 'kw';
+  kw.textContent = defText.slice(idx, idx + keyword.length);
+  frag.appendChild(kw);
+  const rest = defText.slice(idx + keyword.length);
+  if(rest) frag.appendChild(document.createTextNode(rest));
+  return frag;
+}
 
 function renderList(containerId, data){
   const el = document.getElementById(containerId);
   el.innerHTML = "";
-  data.forEach(([w,d,pos,cn])=>{
+  data.forEach(([w,d,pos,cn,kw])=>{
     const row = document.createElement('div');
     row.className = 'list-row';
     const wordEl = document.createElement('span');
@@ -330,7 +351,7 @@ function renderList(containerId, data){
     defCol.className = 'list-def-col';
     const defEl = document.createElement('span');
     defEl.className = 'list-def';
-    defEl.textContent = d;
+    defEl.appendChild(buildHighlightedDef(d, kw));
     const posEl = document.createElement('span');
     posEl.className = 'list-pos';
     posEl.textContent = `[${pos}]`;
