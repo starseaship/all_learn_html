@@ -126,17 +126,38 @@ def make_item(path, root, overrides):
     return item
 
 
-def build_catalog(root, overrides):
+def get_existing_added_orders(catalog_path):
+    """Keep each file's original position when rebuilding the catalog."""
+    if not catalog_path.exists():
+        return {}
+    previous = json.loads(catalog_path.read_text(encoding="utf-8"))
+    orders = {}
+    for index, item in enumerate(previous.get("materials", []), start=1):
+        path = item.get("path")
+        order = item.get("addedOrder")
+        if isinstance(path, str) and path:
+            orders[path] = order if isinstance(order, int) and order > 0 else index
+    return orders
+
+
+def build_catalog(root, overrides, existing_orders=None):
     roots = sorted((p for p in root.iterdir() if p.is_dir() and re.fullmatch(r"\d{2}(aut|spring)", p.name)), key=lambda p: (int(p.name[:2]), p.name.endswith("aut")), reverse=True)
     if not roots:
         raise ValueError("No semester folders found")
     semesters = [{"id": p.name, "label": f"20{p.name[:2]} {'秋' if p.name.endswith('aut') else '春'}学期"} for p in roots]
     items = []
+    existing_orders = existing_orders or {}
+    next_added_order = max(existing_orders.values(), default=0)
     for semester in roots:
         for path in sorted(semester.rglob("*")):
             if path.is_file() and path.suffix.lower() == ".html":
                 item = make_item(path, root, overrides)
                 if item:
+                    order = existing_orders.get(item["path"])
+                    if order is None:
+                        next_added_order += 1
+                        order = next_added_order
+                    item["addedOrder"] = order
                     items.append(item)
     return {"version": 1, "currentSemester": roots[0].name, "semesters": semesters, "materials": items}
 
@@ -149,8 +170,8 @@ def main():
     args = parser.parse_args()
     override_path = args.overrides or args.root / "catalog-overrides.json"
     overrides = json.loads(override_path.read_text(encoding="utf-8")) if override_path.exists() else {}
-    catalog = build_catalog(args.root.resolve(), overrides)
     target = args.output or args.root / "materials.json"
+    catalog = build_catalog(args.root.resolve(), overrides, get_existing_added_orders(target))
     target.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Built {len(catalog['materials'])} materials across {len(catalog['semesters'])} semesters ({target.stat().st_size} bytes)")
 
