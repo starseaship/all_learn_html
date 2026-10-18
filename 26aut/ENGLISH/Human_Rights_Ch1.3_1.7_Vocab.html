@@ -109,14 +109,11 @@
   }
   .list-word{
     flex:0 0 auto;
-    background:#f3d675;
-    color:var(--ink);
-    font-weight:600;
+    background:none;
+    color:var(--plum);
+    font-weight:700;
     font-size:1.05rem;
-    padding:2px 10px;
-    border-radius:6px;
     white-space:nowrap;
-    box-shadow:0 1px 2px rgba(60,53,43,0.15);
   }
   .list-def-col{
     flex:1 1 auto;
@@ -128,6 +125,13 @@
     font-size:0.98rem;
     line-height:1.45;
     color:var(--ink);
+  }
+  .kw{
+    background:#f3d675;
+    padding:1px 5px;
+    border-radius:5px;
+    font-weight:600;
+    box-shadow:0 1px 2px rgba(60,53,43,0.12);
   }
   .list-def-cn{
     font-size:0.85rem;
@@ -286,39 +290,56 @@
 
 <script>
 const data13 = [
-  ["fairly","more than average, but less than very","adv","相当地；颇为"],
-  ["acquire","to get something by your own or being given it","v","获得"],
-  ["universal","true or right at all times and in all places","adj","普遍的"],
-  ["prevent","to stop something from happening or someone from doing something","v","预防；阻止"],
-  ["handicapped","not able to use your body or your mind because it has been damaged","adj","有残疾的"],
-  ["attitude","a feeling or opinion about something, especially when this shows in your behavior","n","态度"],
-  ["establish","to start a company or organization that will continue for a long time","v","建立；设立"],
-  ["freedom","the state of being able to do what you want, without anything stopping you","n","自由"],
-  ["shelter","a place to stay or live, especially when you need protection from bad weather or danger","n","住所；庇护所"],
-  ["article","a section of a formal agreement or document which deals with a particular point","n","条款；项目"],
-  ["deserve","it should happen to someone because of the way (s)he has behaved","v","应得；值得"],
-  ["mental","relating to the mind, or involving the process of thinking","adj","精神的；心理的"]
+  ["fairly","more than average, but less than very","adv","相当地；颇为","more than average"],
+  ["acquire","to get something by your own or being given it","v","获得","get something"],
+  ["universal","true or right at all times and in all places","adj","普遍的","true or right at all times"],
+  ["prevent","to stop something from happening or someone from doing something","v","预防；阻止","stop something from happening"],
+  ["handicapped","not able to use your body or your mind because it has been damaged","adj","有残疾的","not able to use your body or your mind"],
+  ["attitude","a feeling or opinion about something, especially when this shows in your behavior","n","态度","feeling or opinion"],
+  ["establish","to start a company or organization that will continue for a long time","v","建立；设立","start a company or organization"],
+  ["freedom","the state of being able to do what you want, without anything stopping you","n","自由","do what you want"],
+  ["shelter","a place to stay or live, especially when you need protection from bad weather or danger","n","住所；庇护所","place to stay or live"],
+  ["article","a section of a formal agreement or document which deals with a particular point","n","条款；项目","section of a formal agreement"],
+  ["deserve","it should happen to someone because of the way (s)he has behaved","v","应得；值得","should happen to someone"],
+  ["mental","relating to the mind, or involving the process of thinking","adj","精神的；心理的","relating to the mind"]
 ];
 
 const data17 = [
-  ["suffer","experience physical or mental pain","v","遭受；忍受"],
-  ["legal","concerned with or relating to the law","adj","法律的；合法的"],
-  ["press","reports in newspapers and on radio and television","n","新闻界；媒体报道"],
-  ["arrest","put them in custody for breaking the law","v","逮捕"],
-  ["prison","a building where people are kept as a punishment for a crime, or while they are waiting to go to court for their trial","n","监狱"],
-  ["trial","a formal meeting in a law court, at which a judge and jury listen to evidence and decide whether a person is guilty of a crime","n","审判"],
-  ["evidence","facts or signs that show clearly that something exists or is true","n","证据"],
-  ["proper","right, suitable, and correct","adj","适当的；恰当的"],
-  ["torture","the act of deliberately hurting someone in order to force them to tell you something, to punish them, or to be cruel","n","拷问；折磨"],
-  ["bondage","the state of having your freedom limited, or being prevented from doing what you want","n","束缚"],
-  ["criticize","express your disapproval of someone or something, or to talk about their feeling","v","批评"],
-  ["abuse","the act of treating someone cruelly and violently or the use of something in a wrong way or for a bad purpose","n","虐待；滥用"]
+  ["suffer","experience physical or mental pain","v","遭受；忍受","physical or mental pain"],
+  ["legal","concerned with or relating to the law","adj","法律的；合法的","relating to the law"],
+  ["press","reports in newspapers and on radio and television","n","新闻界；媒体报道","reports in newspapers"],
+  ["arrest","put them in custody for breaking the law","v","逮捕","in custody"],
+  ["prison","a building where people are kept as a punishment for a crime, or while they are waiting to go to court for their trial","n","监狱","kept as a punishment"],
+  ["trial","a formal meeting in a law court, at which a judge and jury listen to evidence and decide whether a person is guilty of a crime","n","审判","decide whether a person is guilty"],
+  ["evidence","facts or signs that show clearly that something exists or is true","n","证据","facts or signs"],
+  ["proper","right, suitable, and correct","adj","适当的；恰当的","right, suitable, and correct"],
+  ["torture","the act of deliberately hurting someone in order to force them to tell you something, to punish them, or to be cruel","n","拷问；折磨","deliberately hurting someone"],
+  ["bondage","the state of having your freedom limited, or being prevented from doing what you want","n","束缚","freedom limited"],
+  ["criticize","express your disapproval of someone or something, or to talk about their feeling","v","批评","disapproval"],
+  ["abuse","the act of treating someone cruelly and violently or the use of something in a wrong way or for a bad purpose","n","虐待；滥用","treating someone cruelly"]
 ];
+
+function buildHighlightedDef(defText, keyword){
+  const frag = document.createDocumentFragment();
+  const idx = keyword ? defText.indexOf(keyword) : -1;
+  if(idx === -1){
+    frag.appendChild(document.createTextNode(defText));
+    return frag;
+  }
+  if(idx > 0) frag.appendChild(document.createTextNode(defText.slice(0, idx)));
+  const kw = document.createElement('span');
+  kw.className = 'kw';
+  kw.textContent = defText.slice(idx, idx + keyword.length);
+  frag.appendChild(kw);
+  const rest = defText.slice(idx + keyword.length);
+  if(rest) frag.appendChild(document.createTextNode(rest));
+  return frag;
+}
 
 function renderList(containerId, data){
   const el = document.getElementById(containerId);
   el.innerHTML = "";
-  data.forEach(([w,d,pos,cn])=>{
+  data.forEach(([w,d,pos,cn,kw])=>{
     const row = document.createElement('div');
     row.className = 'list-row';
     const wordEl = document.createElement('span');
@@ -328,7 +349,7 @@ function renderList(containerId, data){
     defCol.className = 'list-def-col';
     const defEl = document.createElement('span');
     defEl.className = 'list-def';
-    defEl.textContent = d;
+    defEl.appendChild(buildHighlightedDef(d, kw));
     const posEl = document.createElement('span');
     posEl.className = 'list-pos';
     posEl.textContent = `[${pos}]`;
