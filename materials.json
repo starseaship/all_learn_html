@@ -60,14 +60,19 @@
     },
     {
       "path": "26aut/ENGLISH/relative_clauses_complete_guide.html",
-      "title": "定语从句 · Relative Clauses",
-      "description": "关系代词、关系副词、非限制性定语从句、介词提前、of whom/of which、分词短语。",
+      "title": "定语从句｜完整讲义与Unit 14–15考试题型",
+      "description": "完整讲义＋六类考试题型：改错、圈选、正误、数量词合并句、短文选择、关系词填空；逐题中文解析与折叠答案。",
       "subject": "english",
       "type": "grammar",
-      "course": "英语文法",
-      "date": "2026-10-11",
+      "course": "语法",
+      "date": "2026-10-19",
       "lessonNumber": null,
-      "addedOrder": 38
+      "addedOrder": 38,
+      "badges": [
+        "六类考试题型",
+        "中英对照",
+        "逐题解析"
+      ]
     },
     {
       "path": "26aut/ENGLISH/句子副词_焦点副词_否定副词_完整语法笔记.html",
@@ -174,8 +179,8 @@
     },
     {
       "path": "26aut/ENGLISH/Grammar_Personality_Types_Vocabulary_A_8_Words.html",
-      "title": "语法｜Personality Types · 8个重点单词",
-      "description": "课本 After You Read · Vocabulary A：conflict、data、discount、enable、gravitate、insight、moreover、secure。按词性整理，含音标、中文释义、固定搭配、记忆提示和8道互动填空。",
+      "title": "语法单词｜Personality Types＋Unit 14–15考试词库",
+      "description": "保留原书8词，补充本次11选10考试词库（去重共16词）；含音标、中文释义、搭配、记忆提示与10道考试填空。",
       "subject": "english",
       "type": "vocabulary",
       "course": "语法",
@@ -183,10 +188,10 @@
       "lessonNumber": null,
       "addedOrder": 48,
       "badges": [
-        "8个单词",
+        "16个单词",
+        "11选10",
         "中英对照",
-        "互动填空",
-        "记忆技巧"
+        "互动填空"
       ]
     },
     {
