@@ -116,7 +116,7 @@
   },
   "26aut/ENGLISH/relative_clauses_complete_guide.html": {
     "title": "定语从句｜完整讲义与Unit 14–15考试题型",
-    "description": "完整讲义＋六类考试题型：改错、圈选、正误、数量词合并句、短文选择、关系词填空；逐题中文解析与折叠答案。",
+    "description": "完整讲义＋六类考试题型；新增个人错题标注、作答对照、错误原因、章节跳转及针对性知识补充。",
     "subject": "english",
     "type": "grammar",
     "course": "语法",
@@ -124,7 +124,8 @@
     "badges": [
       "六类考试题型",
       "中英对照",
-      "逐题解析"
+      "逐题解析",
+      "错题复盘"
     ]
   }
 }
