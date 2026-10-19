@@ -205,12 +205,16 @@ function updateCompact() {
   const y=Math.max(0,window.scrollY), delta=y-lastScroll;
   const hasRows=!ui.filterRow.hidden||!ui.advancedFilters.hidden;
   const longPage=document.documentElement.scrollHeight-window.innerHeight>700;
-  const blocked=!hasRows||!longPage||document.activeElement===ui.searchInput||ui.advancedFilters.classList.contains('is-open')||y<80;
+  // 离底部也留出缓冲区，和顶部的 y<80 对称：收起/展开会改变 scrollHeight，
+  // 如果允许在最底部附近继续切换，页面被钉在最大可滚动位置时会被反复拉扯，
+  // 造成来回闪烁、卡住滑不动。这里强制在底部缓冲区内保持展开，锁死这个状态。
+  const nearBottom=y+window.innerHeight>=document.documentElement.scrollHeight-80;
+  const blocked=!hasRows||!longPage||document.activeElement===ui.searchInput||ui.advancedFilters.classList.contains('is-open')||y<80||nearBottom;
   let nextCompact=wasCompact;
   if(blocked) nextCompact=false;
   else if(delta>8) nextCompact=true;
   else if(delta<-8) nextCompact=false;
-  if(Math.abs(delta)>8||y<80) lastScroll=y;
+  if(Math.abs(delta)>8||y<80||nearBottom) lastScroll=y;
   if(nextCompact!==wasCompact) {
     wasCompact=nextCompact;
     ui.controls.classList.toggle('is-compact',nextCompact);
