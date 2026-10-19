@@ -103,7 +103,8 @@ def make_item(path, root, overrides):
     lesson_match = re.search(r"(?:第\s*|\bDS|chapter)(\d+)", relative, re.I)
     lesson = meta.get("lesson-number") or (lesson_match.group(1) if lesson_match else None)
     item = {
-        "path": relative, "title": title or guessed_title, "description": "",
+        "path": relative, "title": title or guessed_title,
+        "description": "" if kind == "vocabulary" else meta.get("description", ""),
         "subject": subject, "type": kind, "course": meta.get("course") or guess_course(relative, kind),
         "date": date_or_empty(meta.get("date", "")), "lessonNumber": int(lesson) if lesson and str(lesson).isdigit() else None,
     }

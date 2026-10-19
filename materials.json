@@ -15,7 +15,7 @@
     {
       "path": "26aut/DS3_知识整理_日中对照_假名.html",
       "title": "数据科学第3回",
-      "description": "",
+      "description": "国势调查、人口图表、日志数据、数据分类与开放数据。",
       "subject": "general",
       "type": "notes",
       "course": "ai",
@@ -29,7 +29,7 @@
     {
       "path": "26aut/DS4_知识整理_日中对照_假名.html",
       "title": "数据科学第4回",
-      "description": "",
+      "description": "AI定义、发展热潮、机器学习与产业应用。",
       "subject": "general",
       "type": "notes",
       "course": "ai",
@@ -43,7 +43,7 @@
     {
       "path": "26aut/ENGLISH/Breaking_Barriers_Chapter9_P65-74_Bilingual_Annotated.html",
       "title": "Breaking Barriers",
-      "description": "",
+      "description": "《Breaking Barriers》第9章中英精读与生词注释。",
       "subject": "wgl",
       "type": "reference",
       "course": "WL",
@@ -55,24 +55,126 @@
       "addedOrder": 40
     },
     {
+      "path": "26aut/ENGLISH/Grammar_Personality_Types_Vocabulary_A_8_Words.html",
+      "title": "语法单词",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "语法",
+      "date": "2026-10-19",
+      "lessonNumber": null,
+      "badges": [
+        "Unit 14",
+        "Unit 15",
+        "Unit 16"
+      ],
+      "addedOrder": 48
+    },
+    {
+      "path": "26aut/ENGLISH/HR_Chapter_2_10_First_People_Bilingual.html",
+      "title": "阅读2.10",
+      "description": "期末范围：美洲原住民与人权，重点复习第4–6题。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-19",
+      "lessonNumber": null,
+      "badges": [
+        "2.10"
+      ],
+      "addedOrder": 47
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch1.3_1.7_Vocab.html",
+      "title": "阅读单词1.3・1.7",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "1.3",
+        "1.7"
+      ],
+      "addedOrder": 44
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch2.10_Vocab.html",
+      "title": "阅读单词2.10",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-19",
+      "lessonNumber": null,
+      "badges": [
+        "2.10"
+      ],
+      "addedOrder": 46
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch2.3_2.7_Vocab.html",
+      "title": "阅读单词2.3・2.7",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "2.3",
+        "2.7"
+      ],
+      "addedOrder": 45
+    },
+    {
+      "path": "26aut/ENGLISH/reading_chapter_2_17_bilingual.html",
+      "title": "阅读2.7",
+      "description": "日本接纳国际劳动者与留学生的阅读问答。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "2.7"
+      ],
+      "addedOrder": 42
+    },
+    {
+      "path": "26aut/ENGLISH/reading_dominant_minority_bilingual.html",
+      "title": "阅读2.3",
+      "description": "Dominant Minority 与 Powerless Majority 阅读问答。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-18",
+      "lessonNumber": null,
+      "badges": [
+        "2.3"
+      ],
+      "addedOrder": 43
+    },
+    {
       "path": "26aut/ENGLISH/relative_clauses_complete_guide.html",
       "title": "定语从句",
-      "description": "",
+      "description": "关系代词、非限制性从句、介词结构与错题复盘。",
       "subject": "english",
       "type": "grammar",
       "course": "语法",
       "date": "2026-10-19",
       "lessonNumber": null,
-      "addedOrder": 38,
       "badges": [
         "Unit 14",
         "Unit 15"
-      ]
+      ],
+      "addedOrder": 38
     },
     {
       "path": "26aut/ENGLISH/句子副词_焦点副词_否定副词_完整语法笔记.html",
       "title": "副词",
-      "description": "",
+      "description": "句子副词、焦点副词、否定副词与倒装。",
       "subject": "english",
       "type": "grammar",
       "course": "英语文法",
@@ -92,13 +194,13 @@
       "course": "日语词汇",
       "date": "2026-10-12",
       "lessonNumber": null,
-      "addedOrder": 41,
-      "badges": []
+      "badges": [],
+      "addedOrder": 41
     },
     {
       "path": "26aut/数据科学第1回_知识点_汉字假名.html",
       "title": "数据科学第1回",
-      "description": "",
+      "description": "数据科学、大数据3V、VUCA、IoT与AI协作流程。",
       "subject": "general",
       "type": "notes",
       "course": "ai",
@@ -112,7 +214,7 @@
     {
       "path": "26aut/数据科学第2回_知识点_汉字假名.html",
       "title": "数据科学第2回",
-      "description": "",
+      "description": "人口减少、体验经济、DX、CPS与Society 5.0。",
       "subject": "general",
       "type": "notes",
       "course": "ai",
@@ -124,260 +226,202 @@
       "addedOrder": 35
     },
     {
-      "path": "26aut/ENGLISH/reading_chapter_2_17_bilingual.html",
-      "title": "阅读2.7",
-      "description": "",
-      "subject": "english",
-      "type": "reference",
-      "course": "阅读",
-      "date": "2026-10-18",
-      "lessonNumber": null,
-      "badges": [
-        "2.7"
-      ],
-      "addedOrder": 42
-    },
-    {
-      "path": "26aut/ENGLISH/reading_dominant_minority_bilingual.html",
-      "title": "阅读2.3",
-      "description": "",
-      "subject": "english",
-      "type": "reference",
-      "course": "阅读",
-      "date": "2026-10-18",
-      "lessonNumber": null,
-      "badges": [
-        "2.3"
-      ],
-      "addedOrder": 43
-    },
-    {
-      "path": "26aut/ENGLISH/HR_Chapter_2_10_First_People_Bilingual.html",
-      "title": "阅读2.10",
-      "description": "",
-      "subject": "english",
-      "type": "reference",
-      "course": "阅读",
-      "date": "2026-10-19",
-      "lessonNumber": null,
-      "addedOrder": 47,
-      "badges": [
-        "2.10"
-      ]
-    },
-    {
-      "path": "26aut/ENGLISH/Grammar_Personality_Types_Vocabulary_A_8_Words.html",
-      "title": "语法单词",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "语法",
-      "date": "2026-10-19",
-      "lessonNumber": null,
-      "addedOrder": 48,
-      "badges": [
-        "Unit 14",
-        "Unit 15",
-        "Unit 16"
-      ]
-    },
-    {
       "path": "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html",
       "title": "写作第1章",
-      "description": "",
+      "description": "解释说明段落的结构、常见错误与考试题型。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
       "lessonNumber": 1,
-      "addedOrder": 1,
       "badges": [
         "Chapter 1"
-      ]
+      ],
+      "addedOrder": 1
     },
     {
       "path": "26spring/ENGLISH/chapter2_information_paragraphs_review.html",
       "title": "写作第2章",
-      "description": "",
+      "description": "信息段落、支持句、连接词与逗号规则。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
       "lessonNumber": 2,
-      "addedOrder": 2,
       "badges": [
         "Chapter 2"
-      ]
+      ],
+      "addedOrder": 2
     },
     {
       "path": "26spring/ENGLISH/chapter3_opinion_paragraphs_review.html",
       "title": "写作第3章",
-      "description": "",
+      "description": "观点段落、结论句、观点表达及because与so。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
       "lessonNumber": 3,
-      "addedOrder": 3,
       "badges": [
         "Chapter 3"
-      ]
+      ],
+      "addedOrder": 3
     },
     {
       "path": "26spring/ENGLISH/chapter4_descriptive_paragraphs_review.html",
       "title": "写作第4章",
-      "description": "",
+      "description": "描述段落、细节与例子、描述词及形容词顺序。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-15",
       "lessonNumber": 4,
-      "addedOrder": 4,
       "badges": [
         "Chapter 4"
-      ]
+      ],
+      "addedOrder": 4
     },
     {
       "path": "26spring/ENGLISH/chapter5_comparative_paragraphs_review.html",
       "title": "写作第5章",
-      "description": "",
+      "description": "比较段落及too、so、either与neither的用法。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-15",
       "lessonNumber": 5,
-      "addedOrder": 5,
       "badges": [
         "Chapter 5"
-      ]
+      ],
+      "addedOrder": 5
     },
     {
       "path": "26spring/ENGLISH/chapter6_contrast_paragraphs_review.html",
       "title": "写作第6章",
-      "description": "",
+      "description": "对比段落、比较级、连接词与综合改错。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "2026-07-14",
       "lessonNumber": 6,
-      "addedOrder": 6,
       "badges": [
         "Chapter 6"
-      ]
+      ],
+      "addedOrder": 6
     },
     {
       "path": "26spring/ENGLISH/english_tenses.html",
       "title": "英语时态",
-      "description": "",
+      "description": "16种英语时态的结构、用法、例句与信号词。",
       "subject": "english",
       "type": "grammar",
       "course": "英语文法",
       "date": "2026-05-11",
       "lessonNumber": null,
-      "addedOrder": 7,
-      "badges": []
+      "badges": [],
+      "addedOrder": 7
     },
     {
       "path": "26spring/ENGLISH/exam_review.html",
       "title": "期末语法",
-      "description": "",
+      "description": "时态、情态动词、被动语态、动名词与名词限定词。",
       "subject": "english",
       "type": "grammar",
       "course": "英语文法",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 8,
-      "badges": []
+      "badges": [],
+      "addedOrder": 8
     },
     {
       "path": "26spring/ENGLISH/final-exam-review-all.html",
       "title": "期末复习・答案",
-      "description": "",
+      "description": "段落结构、可持续发展与和平价值观问答答案。",
       "subject": "english",
       "type": "reference",
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 9,
-      "badges": []
+      "badges": [],
+      "addedOrder": 9
     },
     {
       "path": "26spring/ENGLISH/final-exam-review-questions.html",
       "title": "期末复习・自测",
-      "description": "",
+      "description": "段落结构、可持续发展与和平价值观自测题。",
       "subject": "english",
       "type": "quiz",
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 10,
-      "badges": []
+      "badges": [],
+      "addedOrder": 10
     },
     {
       "path": "26spring/ENGLISH/final-review-four-chapters.html",
       "title": "期末复习・新增四章",
-      "description": "",
+      "description": "Sustainable Futures 与 Peace & Values 四章问答。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 11,
-      "badges": []
+      "badges": [],
+      "addedOrder": 11
     },
     {
       "path": "26spring/ENGLISH/paragraph-structure-notes.html",
       "title": "段落结构",
-      "description": "",
+      "description": "主题句、支持句、结尾句与文章结构。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 12,
-      "badges": []
+      "badges": [],
+      "addedOrder": 12
     },
     {
       "path": "26spring/ENGLISH/phonetics_D_F_review.html",
       "title": "发音学D–F",
-      "description": "",
+      "description": "IPA辨音、英文拼写与教材D–F题型复习。",
       "subject": "english",
       "type": "reference",
       "course": "发音学",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 13,
       "badges": [
         "D",
         "E",
         "F"
-      ]
+      ],
+      "addedOrder": 13
     },
     {
       "path": "26spring/ENGLISH/reading2-war-definition.html",
       "title": "阅读2・战争定义",
-      "description": "",
+      "description": "战争类型、典型案例及媒体在战争中的作用。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 14,
       "badges": [
         "Unit 2"
-      ]
+      ],
+      "addedOrder": 14
     },
     {
       "path": "26spring/ENGLISH/review-activity-sheet.html",
       "title": "作文结构",
-      "description": "",
+      "description": "英语段落与Essay的组成、顺序和写作功能。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 15,
-      "badges": []
+      "badges": [],
+      "addedOrder": 15
     },
     {
       "path": "26spring/ENGLISH/toeic520_100words_beautified.html",
@@ -388,8 +432,8 @@
       "course": "TOEIC",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 16,
-      "badges": []
+      "badges": [],
+      "addedOrder": 16
     },
     {
       "path": "26spring/ENGLISH/vocabulary_compendium.html",
@@ -400,8 +444,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 17,
-      "badges": []
+      "badges": [],
+      "addedOrder": 17
     },
     {
       "path": "26spring/ENGLISH/vocabulary_compendium_core.html",
@@ -412,8 +456,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 18,
-      "badges": []
+      "badges": [],
+      "addedOrder": 18
     },
     {
       "path": "26spring/ENGLISH/vocabulary_confusable_meanings.html",
@@ -424,8 +468,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 19,
-      "badges": []
+      "badges": [],
+      "addedOrder": 19
     },
     {
       "path": "26spring/ENGLISH/vocabulary_focus_words.html",
@@ -436,8 +480,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 20,
-      "badges": []
+      "badges": [],
+      "addedOrder": 20
     },
     {
       "path": "26spring/ENGLISH/vocabulary_focus_words_2.html",
@@ -448,8 +492,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 21,
-      "badges": []
+      "badges": [],
+      "addedOrder": 21
     },
     {
       "path": "26spring/ENGLISH/vocabulary_lookalike_words.html",
@@ -460,8 +504,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 22,
-      "badges": []
+      "badges": [],
+      "addedOrder": 22
     },
     {
       "path": "26spring/ENGLISH/vocabulary_related_topics.html",
@@ -472,8 +516,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 23,
-      "badges": []
+      "badges": [],
+      "addedOrder": 23
     },
     {
       "path": "26spring/ENGLISH/vocabulary_starred_words.html",
@@ -484,8 +528,8 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 24,
-      "badges": []
+      "badges": [],
+      "addedOrder": 24
     },
     {
       "path": "26spring/ENGLISH/vocabulary_word_families.html",
@@ -496,50 +540,50 @@
       "course": "英语",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 25,
-      "badges": []
+      "badges": [],
+      "addedOrder": 25
     },
     {
       "path": "26spring/ENGLISH/写作六单元汇总.html",
       "title": "英语写作",
-      "description": "",
+      "description": "六类英语段落的结构、连接表达与改错复习。",
       "subject": "english",
       "type": "writing",
       "course": "英语写作",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 26,
       "badges": [
         "Unit 1–6"
-      ]
+      ],
+      "addedOrder": 26
     },
     {
       "path": "26spring/ENGLISH/文法U4.html",
       "title": "语法Unit 4",
-      "description": "",
+      "description": "情态动词的必要、禁止、建议、警告与预期表达。",
       "subject": "english",
       "type": "grammar",
       "course": "英语文法",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 27,
       "badges": [
         "Unit 4"
-      ]
+      ],
+      "addedOrder": 27
     },
     {
       "path": "26spring/ENGLISH/阅2问题.html",
       "title": "阅读2",
-      "description": "",
+      "description": "消极和平、积极和平与社会问题阅读问答。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 28,
       "badges": [
         "Unit 2"
-      ]
+      ],
+      "addedOrder": 28
     },
     {
       "path": "26spring/ENGLISH/阅3单词.html",
@@ -550,10 +594,10 @@
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 29,
       "badges": [
         "Unit 3"
-      ]
+      ],
+      "addedOrder": 29
     },
     {
       "path": "26spring/ENGLISH/阅读单词汇总.html",
@@ -564,20 +608,20 @@
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 30,
-      "badges": []
+      "badges": [],
+      "addedOrder": 30
     },
     {
       "path": "26spring/ENGLISH/阅读童兵.html",
       "title": "阅读童兵",
-      "description": "",
+      "description": "儿童兵的角色、成因、影响与援助行动。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 31,
-      "badges": []
+      "badges": [],
+      "addedOrder": 31
     },
     {
       "path": "26spring/ENGLISH/阅读第二章单词.html",
@@ -588,66 +632,22 @@
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 32,
       "badges": [
         "Unit 2"
-      ]
+      ],
+      "addedOrder": 32
     },
     {
       "path": "26spring/ENGLISH/阅读问答汇总.html",
       "title": "阅读问答",
-      "description": "",
+      "description": "阅读课各章节问答的汇总导航。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
       "date": "",
       "lessonNumber": null,
-      "addedOrder": 33,
-      "badges": []
-    },
-    {
-      "path": "26aut/ENGLISH/Human_Rights_Ch1.3_1.7_Vocab.html",
-      "title": "阅读单词1.3・1.7",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "阅读",
-      "date": "2026-10-18",
-      "lessonNumber": null,
-      "badges": [
-        "1.3",
-        "1.7"
-      ],
-      "addedOrder": 44
-    },
-    {
-      "path": "26aut/ENGLISH/Human_Rights_Ch2.3_2.7_Vocab.html",
-      "title": "阅读单词2.3・2.7",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "阅读",
-      "date": "2026-10-18",
-      "lessonNumber": null,
-      "badges": [
-        "2.3",
-        "2.7"
-      ],
-      "addedOrder": 45
-    },
-    {
-      "path": "26aut/ENGLISH/Human_Rights_Ch2.10_Vocab.html",
-      "title": "阅读单词2.10",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "阅读",
-      "date": "2026-10-19",
-      "lessonNumber": null,
-      "badges": [
-        "2.10"
-      ],
-      "addedOrder": 46
+      "badges": [],
+      "addedOrder": 33
     }
   ]
 }

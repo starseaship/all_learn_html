@@ -105,6 +105,11 @@ function render() {
     card.href='./'+material.path.split('/').map(encodeURIComponent).join('/');
     card.target='_blank'; card.rel='noopener noreferrer'; card.dataset.subject=material.subject;
     const heading=splitTitle(material.title);
+    const tags=node('div','card-tags');
+    tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]));
+    tags.append(node('span','tag tag-type',TYPE_LABELS[material.type]));
+    tags.append(node('span','tag tag-course',COURSE_LABELS[material.course]||material.course));
+    card.append(tags);
     if(heading.eyebrow) card.append(node('p','card-eyebrow',heading.eyebrow));
     card.append(node('h2','card-title',heading.title));
     if(material.description) card.append(node('p','card-desc',material.description));
