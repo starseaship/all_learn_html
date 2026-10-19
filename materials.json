@@ -648,6 +648,20 @@
       "lessonNumber": null,
       "badges": [],
       "addedOrder": 33
+    },
+    {
+      "path": "26aut/ENGLISH/No_Limits_Chapter10_P76-85_Bilingual.html",
+      "title": "No Limits",
+      "description": "《Hidden Figures》第10章 P76–85 中英对照与作业要求。",
+      "subject": "wgl",
+      "type": "reference",
+      "course": "WL",
+      "date": "2026-10-19",
+      "lessonNumber": 10,
+      "badges": [
+        "Chapter 10"
+      ],
+      "addedOrder": 49
     }
   ]
 }
