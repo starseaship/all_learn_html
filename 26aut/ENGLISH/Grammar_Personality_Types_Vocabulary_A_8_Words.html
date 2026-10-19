@@ -92,7 +92,7 @@ toggle.addEventListener('click',()=>{const hidden=app.classList.toggle('hidden-z
 const blanks=[...document.querySelectorAll('.blank')],status=document.getElementById('status');
 function showFeedback(input,correct,display){const f=input.closest('.exercise').querySelector('.feedback');f.classList.toggle('show',display);f.classList.toggle('wrong',display&&!correct);input.style.borderBottomColor=display?(correct?'#63af96':'#c96e80'):'#beaee4';}
 document.getElementById('check').addEventListener('click',()=>{let score=0;for(const input of blanks){const ok=input.value.trim().toLowerCase()===input.dataset.answer;score+=Number(ok);showFeedback(input,ok,true);}status.textContent=`答对 ${score} / ${blanks.length} 题。绿色代表正确，红色代表需要复习。`;});
-document.getElementById('show').addEventListener('click',()=>{for(const input of blanks){input.value=input.dataset.answer;showFeedback(input,true,true)}status.textContent='已显示全部 8 道答案。';});
+document.getElementById('show').addEventListener('click',()=>{for(const input of blanks){input.value=input.dataset.answer==='moreover'?'Moreover':input.dataset.answer;showFeedback(input,true,true)}status.textContent='已显示全部 8 道答案。';});
 document.getElementById('reset').addEventListener('click',()=>{for(const input of blanks){input.value='';showFeedback(input,false,false)}status.textContent='已清空答案，可以重新练习。';blanks[0].focus()});
 })();
 </script></body></html>
