@@ -1,131 +1,346 @@
 {
-  "26aut/数据科学第1回_知识点_汉字假名.html": {
-    "title": "数据科学第1回｜知识点与汉字假名",
-    "course": "ai",
-    "type": "notes",
-    "lessonNumber": 1,
-    "description": "第1回精细版：数据科学、数据活用、大数据3V、VUCA、IoT、AI协作流程、日中对照与知识点概括。",
-    "badges": [
-      "中文解释"
-    ],
-    "date": "2026-10-12"
-  },
-  "26aut/数据科学第2回_知识点_汉字假名.html": {
-    "title": "数据科学第2回｜社会变化｜知识点与汉字假名",
-    "course": "ai",
-    "type": "notes",
-    "lessonNumber": 2,
-    "description": "第2回精细版：人口减少、长尾化、体验经济、DX、第四次工业革命、CPS、Society 5.0、日中对照与知识点概括。",
-    "badges": [
-      "中文解释"
-    ],
-    "date": "2026-10-12"
-  },
   "26aut/DS3_知识整理_日中对照_假名.html": {
-    "title": "数据科学第3回｜社会で活用されているデータ",
     "course": "ai",
     "type": "notes",
     "lessonNumber": 3,
     "date": "2026-10-12",
-    "description": "第3回知识整理：国势调查、人口图表、日志数据、数据分类、开放数据、知识点概括；日中对照与35页原讲义。",
+    "title": "数据科学第3回",
+    "description": "",
     "badges": [
-      "日中对照",
-      "假名注音",
-      "原讲义 35 页"
+      "第3回"
     ]
   },
   "26aut/DS4_知识整理_日中对照_假名.html": {
-    "title": "数据科学第4回｜数据与AI的应用领域｜日中对照・假名",
     "course": "ai",
     "type": "notes",
     "lessonNumber": 4,
-    "description": "第4回知识整理：AI定义与三次热潮、专家系统、机器学习、产业应用、知识点概括；保留原讲义图表。",
+    "date": "2026-10-12",
+    "title": "数据科学第4回",
+    "description": "",
     "badges": [
-      "原讲义 30 页"
-    ],
-    "date": "2026-10-12"
+      "第4回"
+    ]
+  },
+  "26aut/ENGLISH/Breaking_Barriers_Chapter9_P65-74_Bilingual_Annotated.html": {
+    "title": "Breaking Barriers",
+    "description": "",
+    "badges": [
+      "Chapter 9"
+    ]
+  },
+  "26aut/ENGLISH/relative_clauses_complete_guide.html": {
+    "subject": "english",
+    "type": "grammar",
+    "course": "语法",
+    "date": "2026-10-19",
+    "title": "定语从句",
+    "description": "",
+    "badges": [
+      "Unit 14",
+      "Unit 15"
+    ]
   },
   "26aut/ENGLISH/句子副词_焦点副词_否定副词_完整语法笔记.html": {
-    "title": "句子副词、焦点副词与否定副词｜完整语法笔记",
-    "description": "句子副词、焦点副词、否定副词与倒装完整双语笔记，含易错点、24道互动练习及考前速查。",
     "subject": "english",
     "type": "grammar",
     "course": "英语文法",
     "date": "2026-10-12",
     "lessonNumber": 16,
+    "title": "副词",
+    "description": "",
     "badges": [
-      "中英双语",
-      "24道互动练习"
+      "Unit 16"
+    ]
+  },
+  "26aut/JAPANESE/abab-adverbs.html": {
+    "title": "日语ABAB副词",
+    "description": "",
+    "badges": []
+  },
+  "26aut/数据科学第1回_知识点_汉字假名.html": {
+    "course": "ai",
+    "type": "notes",
+    "lessonNumber": 1,
+    "date": "2026-10-12",
+    "title": "数据科学第1回",
+    "description": "",
+    "badges": [
+      "第1回"
+    ]
+  },
+  "26aut/数据科学第2回_知识点_汉字假名.html": {
+    "course": "ai",
+    "type": "notes",
+    "lessonNumber": 2,
+    "date": "2026-10-12",
+    "title": "数据科学第2回",
+    "description": "",
+    "badges": [
+      "第2回"
     ]
   },
   "26aut/ENGLISH/reading_chapter_2_17_bilingual.html": {
-    "title": "阅读2.7｜日本的国际劳动者与留学生",
-    "description": "10道阅读理解题：英文题目与补全答案，关键词彩色高亮，每题均附灰色小字中文翻译。重点题：2、7、8、9。",
     "subject": "english",
     "course": "阅读",
     "type": "reference",
     "date": "2026-10-18",
+    "title": "阅读2.7",
+    "description": "",
     "badges": [
-      "中英对照",
-      "10道问答",
-      "重点题高亮"
+      "2.7"
     ]
   },
   "26aut/ENGLISH/reading_dominant_minority_bilingual.html": {
-    "title": "阅读2.3｜Dominant Minority 与 Powerless Majority",
-    "description": "掌权少数与无权多数：10道阅读理解题，完善参考答案、题目/答案关键词高亮与逐题中文翻译。重点题：2、7、8、9。",
     "subject": "english",
     "course": "阅读",
     "type": "reference",
     "date": "2026-10-18",
+    "title": "阅读2.3",
+    "description": "",
     "badges": [
-      "中英对照",
-      "10道问答",
-      "答案补充"
+      "2.3"
     ]
   },
   "26aut/ENGLISH/HR_Chapter_2_10_First_People_Bilingual.html": {
-    "title": "阅读2.10｜First People of the New World",
-    "description": "非小测，是期末。HR Chapter 2.10：美洲原住民与人权，8道中英阅读问答；第4、5、6题重点标记，关键词底色辅助记忆。",
     "subject": "english",
     "type": "reference",
     "course": "阅读",
     "date": "2026-10-19",
+    "lessonNumber": null,
+    "title": "阅读2.10",
+    "description": "",
     "badges": [
-      "期末复习",
-      "中英对照",
-      "重点4·5·6",
-      "关键词高亮"
-    ],
-    "lessonNumber": null
+      "2.10"
+    ]
   },
   "26aut/ENGLISH/Grammar_Personality_Types_Vocabulary_A_8_Words.html": {
-    "title": "语法单词｜Unit 14–16 分单元复习",
-    "description": "Unit 14、15、16各8个Vocabulary A单词，按单元分页；含课文/考试词形、固定搭配、中文释义、单元练习与考试综合填空。",
     "subject": "english",
     "type": "vocabulary",
     "course": "语法",
     "date": "2026-10-19",
     "lessonNumber": null,
+    "title": "语法单词",
+    "description": "",
     "badges": [
-      "Unit 14–16",
-      "24个单词",
-      "分单元分页",
-      "互动填空"
+      "Unit 14",
+      "Unit 15",
+      "Unit 16"
     ]
   },
-  "26aut/ENGLISH/relative_clauses_complete_guide.html": {
-    "title": "定语从句｜完整讲义与Unit 14–15考试题型",
-    "description": "完整讲义＋六类考试题型；新增个人错题标注、作答对照、错误原因、章节跳转及针对性知识补充。",
-    "subject": "english",
-    "type": "grammar",
-    "course": "语法",
-    "date": "2026-10-19",
+  "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html": {
+    "title": "写作第1章",
+    "description": "",
     "badges": [
-      "六类考试题型",
-      "中英对照",
-      "逐题解析",
-      "错题复盘"
+      "Chapter 1"
+    ]
+  },
+  "26spring/ENGLISH/chapter2_information_paragraphs_review.html": {
+    "title": "写作第2章",
+    "description": "",
+    "badges": [
+      "Chapter 2"
+    ]
+  },
+  "26spring/ENGLISH/chapter3_opinion_paragraphs_review.html": {
+    "title": "写作第3章",
+    "description": "",
+    "badges": [
+      "Chapter 3"
+    ]
+  },
+  "26spring/ENGLISH/chapter4_descriptive_paragraphs_review.html": {
+    "title": "写作第4章",
+    "description": "",
+    "badges": [
+      "Chapter 4"
+    ]
+  },
+  "26spring/ENGLISH/chapter5_comparative_paragraphs_review.html": {
+    "title": "写作第5章",
+    "description": "",
+    "badges": [
+      "Chapter 5"
+    ]
+  },
+  "26spring/ENGLISH/chapter6_contrast_paragraphs_review.html": {
+    "title": "写作第6章",
+    "description": "",
+    "badges": [
+      "Chapter 6"
+    ]
+  },
+  "26spring/ENGLISH/english_tenses.html": {
+    "title": "英语时态",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/exam_review.html": {
+    "title": "期末语法",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/final-exam-review-all.html": {
+    "title": "期末复习・答案",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/final-exam-review-questions.html": {
+    "title": "期末复习・自测",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/final-review-four-chapters.html": {
+    "title": "期末复习・新增四章",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/paragraph-structure-notes.html": {
+    "title": "段落结构",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/phonetics_D_F_review.html": {
+    "title": "发音学D–F",
+    "description": "",
+    "badges": [
+      "D",
+      "E",
+      "F"
+    ]
+  },
+  "26spring/ENGLISH/reading2-war-definition.html": {
+    "title": "阅读2・战争定义",
+    "description": "",
+    "badges": [
+      "Unit 2"
+    ]
+  },
+  "26spring/ENGLISH/review-activity-sheet.html": {
+    "title": "作文结构",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/toeic520_100words_beautified.html": {
+    "title": "TOEIC 520词汇",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_compendium.html": {
+    "title": "词汇目录",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_compendium_core.html": {
+    "title": "词汇整理",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_confusable_meanings.html": {
+    "title": "近义易混词",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_focus_words.html": {
+    "title": "重点词1",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_focus_words_2.html": {
+    "title": "重点词2",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_lookalike_words.html": {
+    "title": "形近易混词",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_related_topics.html": {
+    "title": "主题关联词",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_starred_words.html": {
+    "title": "重点词",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/vocabulary_word_families.html": {
+    "title": "词族与词形",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/写作六单元汇总.html": {
+    "title": "英语写作",
+    "description": "",
+    "badges": [
+      "Unit 1–6"
+    ]
+  },
+  "26spring/ENGLISH/文法U4.html": {
+    "title": "语法Unit 4",
+    "description": "",
+    "badges": [
+      "Unit 4"
+    ]
+  },
+  "26spring/ENGLISH/阅2问题.html": {
+    "title": "阅读2",
+    "description": "",
+    "badges": [
+      "Unit 2"
+    ]
+  },
+  "26spring/ENGLISH/阅3单词.html": {
+    "title": "阅读3单词",
+    "description": "",
+    "badges": [
+      "Unit 3"
+    ]
+  },
+  "26spring/ENGLISH/阅读单词汇总.html": {
+    "title": "阅读单词",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/阅读童兵.html": {
+    "title": "阅读童兵",
+    "description": "",
+    "badges": []
+  },
+  "26spring/ENGLISH/阅读第二章单词.html": {
+    "title": "阅读2单词",
+    "description": "",
+    "badges": [
+      "Unit 2"
+    ]
+  },
+  "26spring/ENGLISH/阅读问答汇总.html": {
+    "title": "阅读问答",
+    "description": "",
+    "badges": []
+  },
+  "26aut/ENGLISH/Human_Rights_Ch1.3_1.7_Vocab.html": {
+    "title": "阅读单词1.3・1.7",
+    "description": "",
+    "badges": [
+      "1.3",
+      "1.7"
+    ]
+  },
+  "26aut/ENGLISH/Human_Rights_Ch2.3_2.7_Vocab.html": {
+    "title": "阅读单词2.3・2.7",
+    "description": "",
+    "badges": [
+      "2.3",
+      "2.7"
+    ]
+  },
+  "26aut/ENGLISH/Human_Rights_Ch2.10_Vocab.html": {
+    "title": "阅读单词2.10",
+    "description": "",
+    "badges": [
+      "2.10"
     ]
   }
 }
