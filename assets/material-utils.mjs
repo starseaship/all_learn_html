@@ -24,7 +24,8 @@ export function normalizeCatalog(raw) {
     const lesson = Number(item.lessonNumber);
     return {
       id:path, path, semester:parts[0], title:cleanText(item.title,300) || parts.at(-1).replace(/\.html$/i,''),
-      description:cleanText(item.description,1200), course:cleanText(item.course,100) || '未分类',
+      description:cleanText(item.description,1200),
+      course:COURSE_LABELS[cleanText(item.course,100)] || cleanText(item.course,100) || '未分类',
       subject:Object.hasOwn(SUBJECT_LABELS,item.subject) ? item.subject : 'general',
       type:Object.hasOwn(TYPE_LABELS,item.type) ? item.type : 'reference', date:validDate(item.date),
       // Existing cached catalogs may predate the explicit order field.

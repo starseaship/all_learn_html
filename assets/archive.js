@@ -1,4 +1,4 @@
-import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261018-3';
+import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261019-4';
 
 const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
 const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
