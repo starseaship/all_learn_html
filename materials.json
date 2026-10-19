@@ -156,6 +156,23 @@
       "addedOrder": 43
     },
     {
+      "path": "26aut/ENGLISH/HR_Chapter_2_10_First_People_Bilingual.html",
+      "title": "阅读2.10｜First People of the New World",
+      "description": "非小测，是期末。HR Chapter 2.10：美洲原住民与人权，8道中英阅读问答；第4、5、6题重点标记，关键词底色辅助记忆。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-10-19",
+      "lessonNumber": null,
+      "addedOrder": 47,
+      "badges": [
+        "期末复习",
+        "中英对照",
+        "重点4·5·6",
+        "关键词高亮"
+      ]
+    },
+    {
       "path": "26spring/ENGLISH/chapter1_explanatory_paragraphs_review.html",
       "title": "第一章：解释说明段落复习",
       "description": "英语写作课第一章：解释说明段落的知识点、常见错误与考试题型整理",
@@ -560,7 +577,8 @@
       "badges": [
         "中英双语",
         "配对练习"
-      ]
+      ],
+      "addedOrder": 46
     }
   ]
 }
