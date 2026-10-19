@@ -106,9 +106,15 @@ function render() {
     card.target='_blank'; card.rel='noopener noreferrer'; card.dataset.subject=material.subject;
     const heading=splitTitle(material.title);
     const tags=node('div','card-tags');
-    tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]));
-    tags.append(node('span','tag tag-type',TYPE_LABELS[material.type]));
-    tags.append(node('span','tag tag-course',COURSE_LABELS[material.course]||material.course));
+    const subjectLabel=SUBJECT_LABELS[material.subject];
+    const typeLabel=TYPE_LABELS[material.type];
+    const courseLabel=COURSE_LABELS[material.course]||material.course;
+    const labelKey=label=>label==='文法'?'语法':label;
+    tags.append(node('span',`tag tag-subject-${material.subject}`,subjectLabel));
+    if(labelKey(typeLabel)!==labelKey(courseLabel)&&labelKey(typeLabel)!==labelKey(subjectLabel)) {
+      tags.append(node('span','tag tag-type',typeLabel));
+    }
+    if(labelKey(courseLabel)!==labelKey(subjectLabel)) tags.append(node('span','tag tag-course',courseLabel));
     card.append(tags);
     if(heading.eyebrow) card.append(node('p','card-eyebrow',heading.eyebrow));
     card.append(node('h2','card-title',heading.title));
