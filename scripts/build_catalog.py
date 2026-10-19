@@ -103,7 +103,7 @@ def make_item(path, root, overrides):
     lesson_match = re.search(r"(?:第\s*|\bDS|chapter)(\d+)", relative, re.I)
     lesson = meta.get("lesson-number") or (lesson_match.group(1) if lesson_match else None)
     item = {
-        "path": relative, "title": title or guessed_title, "description": meta.get("description") or "课程学习资料，打开查看完整内容。",
+        "path": relative, "title": title or guessed_title, "description": "",
         "subject": subject, "type": kind, "course": meta.get("course") or guess_course(relative, kind),
         "date": date_or_empty(meta.get("date", "")), "lessonNumber": int(lesson) if lesson and str(lesson).isdigit() else None,
     }
@@ -115,13 +115,14 @@ def make_item(path, root, overrides):
             item[key] = override[key]
     if item["subject"] not in SUBJECTS or item["type"] not in TYPES:
         raise ValueError(f"Invalid classification: {relative}")
-    badges = override.get("badges")
+    badges = override.get("badges", [])
+    item["badges"] = []
     if badges:
         if not isinstance(badges, list) or not all(isinstance(b, str) and b.strip() for b in badges):
             raise ValueError(f"Invalid badges: {relative}")
         item["badges"] = [b.strip() for b in badges]
     item["date"] = date_or_empty(str(item["date"]))
-    if not item["title"] or not item["course"] or not item["description"]:
+    if not item["title"] or not item["course"]:
         raise ValueError(f"Missing catalog metadata: {relative}")
     return item
 
