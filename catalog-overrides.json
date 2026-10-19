@@ -83,5 +83,20 @@
       "10道问答",
       "答案补充"
     ]
+  },
+  "26aut/ENGLISH/HR_Chapter_2_10_First_People_Bilingual.html": {
+    "title": "阅读2.10｜First People of the New World",
+    "description": "非小测，是期末。HR Chapter 2.10：美洲原住民与人权，8道中英阅读问答；第4、5、6题重点标记，关键词底色辅助记忆。",
+    "subject": "english",
+    "type": "reference",
+    "course": "阅读",
+    "date": "2026-10-19",
+    "badges": [
+      "期末复习",
+      "中英对照",
+      "重点4·5·6",
+      "关键词高亮"
+    ],
+    "lessonNumber": null
   }
 }
