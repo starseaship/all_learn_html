@@ -197,33 +197,8 @@ document.addEventListener('keydown',event=>{
   if(event.key==='Escape' && ui.archiveMenu.open) {ui.archiveMenu.open=false;ui.archiveMenu.querySelector('summary').focus();}
   if(event.key==='Escape' && ui.advancedFilters.classList.contains('is-open')) {ui.advancedFilters.classList.remove('is-open');ui.filterToggle.setAttribute('aria-expanded','false');ui.filterToggle.focus();}
 });
-// 下滑时收起筛选行，只留搜索栏；上滑或回到顶部时展开。输入、展开筛选面板或页面太短时不收起。
-let lastScroll=0, scrollQueued=false, wasCompact=false;
-function updateCompact() {
-  scrollQueued=false;
-  const y=Math.max(0,window.scrollY), delta=y-lastScroll;
-  const hasRows=!ui.filterRow.hidden||!ui.advancedFilters.hidden;
-  const longPage=document.documentElement.scrollHeight-window.innerHeight>700;
-  // 离底部也留出缓冲区，和顶部的 y<80 对称：收起/展开会改变 scrollHeight，
-  // 如果允许在最底部附近继续切换，页面被钉在最大可滚动位置时会被反复拉扯，
-  // 造成来回闪烁、卡住滑不动。这里强制在底部缓冲区内保持展开，锁死这个状态。
-  const nearBottom=y+window.innerHeight>=document.documentElement.scrollHeight-80;
-  const blocked=!hasRows||!longPage||document.activeElement===ui.searchInput||ui.advancedFilters.classList.contains('is-open')||y<80||nearBottom;
-  let nextCompact=wasCompact;
-  if(blocked) nextCompact=false;
-  else if(delta>8) nextCompact=true;
-  else if(delta<-8) nextCompact=false;
-  if(Math.abs(delta)>8||y<80||nearBottom) lastScroll=y;
-  if(nextCompact!==wasCompact) {
-    wasCompact=nextCompact;
-    ui.controls.classList.toggle('is-compact',nextCompact);
-    // 收起/展开会改变吸顶控件的高度，浏览器可能借助 scroll anchoring 自动
-    // 补偿一次 scrollY；这里在布局更新完的下一帧重新校准 lastScroll，
-    // 避免把这次补偿误判成新的用户滑动，防止收起/展开互相触发形成死循环。
-    requestAnimationFrame(()=>{ lastScroll=Math.max(0,window.scrollY); });
-  }
-}
-window.addEventListener('scroll',()=>{ if(!scrollQueued) { scrollQueued=true; requestAnimationFrame(updateCompact); } },{passive:true});
+// 滚动时保持吸顶栏高度不变，避免收起/展开改变布局并触发滚动反馈循环。
+// 额外筛选仍由“筛选”按钮手动展开，不根据滚动方向切换。
 const cached=readCache();
 if(cached) setCatalog(cached);
 loadCatalog();

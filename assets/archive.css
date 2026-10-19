@@ -33,7 +33,6 @@ h1 span { color: #85508f; }
 .archive-options button { display: block; width: 100%; border: 0; text-align: left; background: none; padding: 12px; border-radius: 8px; }
 .archive-options button[aria-pressed="true"] { background: var(--lav); }
 .controls { position: sticky; top: 0; z-index: 20; padding: 12px clamp(20px,4vw,56px); background: rgba(247,244,239,.94); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); overflow-anchor: none; }
-.controls.is-compact .filter-row,.controls.is-compact .advanced-filters { display: none; }
 .search-row { display: flex; align-items: center; gap: 10px; }
 .search-wrap { position: relative; flex: 1 1 220px; max-width: 460px; min-width: 0; }
 .search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--dim); pointer-events: none; }
