@@ -100,21 +100,15 @@ function render() {
   ui.resultsInfo.textContent=active?`找到 ${filtered.length} / ${materials.length} 份资料`:`共 ${materials.length} 份资料`;
   ui.cardGrid.replaceChildren();
   const fragment=document.createDocumentFragment();
-  // 整个学期里完全相同的标签对区分资料没有帮助，隐藏它们；只有一份资料时保留。
-  const uniform=Object.fromEntries(['subject','type','course'].map(key=>[key,materials.length>1 && new Set(materials.map(item=>item[key])).size===1]));
   for(const material of filtered) {
     const card=node('a','material-card');
     card.href='./'+material.path.split('/').map(encodeURIComponent).join('/');
     card.target='_blank'; card.rel='noopener noreferrer'; card.dataset.subject=material.subject;
     const heading=splitTitle(material.title);
-    const tags=node('div','card-tags');
-    if(!uniform.subject) tags.append(node('span',`tag tag-subject-${material.subject}`,SUBJECT_LABELS[material.subject]));
-    if(!uniform.type) tags.append(node('span','tag tag-type',TYPE_LABELS[material.type]));
-    if(!uniform.course) tags.append(node('span','tag tag-course',COURSE_LABELS[material.course]||material.course));
-    if(tags.childElementCount) card.append(tags);
     if(heading.eyebrow) card.append(node('p','card-eyebrow',heading.eyebrow));
-    card.append(node('h2','card-title',heading.title),node('p','card-desc',material.description));
-    const badges=[...new Set([...heading.extra,...material.badges])].slice(0,4);
+    card.append(node('h2','card-title',heading.title));
+    if(material.description) card.append(node('p','card-desc',material.description));
+    const badges=[...new Set([...heading.extra,...(material.badges||[])])].slice(0,4);
     if(badges.length) { const row=node('div','card-badges'); for(const badge of badges) row.append(node('span','badge',badge)); card.append(row); }
     const foot=node('div','card-footer');
     const date=node('time','card-date',material.date ? `更新 ${material.date}` : '');
