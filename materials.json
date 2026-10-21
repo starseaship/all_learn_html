@@ -665,17 +665,17 @@
     },
     {
       "path": "26aut/ENGLISH/Human_Rights_Ch3.3_Vocab.html",
-      "title": "Human Rights 词汇｜Ch3.3",
-      "description": "IR2 Human Rights 教材 Chapter 3.3《Discrimination Against Women in Japan》共10个单词：中英释义背诵页，外加全部单词随机配对练习。",
+      "title": "阅读单词3.3",
+      "description": "",
       "subject": "english",
       "type": "vocabulary",
       "course": "阅读",
       "date": "2026-10-21",
       "lessonNumber": null,
       "badges": [
-        "中英双语",
-        "配对练习"
-      ]
+        "3.3"
+      ],
+      "addedOrder": 50
     }
   ]
 }
