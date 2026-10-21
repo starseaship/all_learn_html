@@ -9,6 +9,10 @@
     {
       "id": "26spring",
       "label": "2026 春学期"
+    },
+    {
+      "id": "extracurricular",
+      "label": "课外学习"
     }
   ],
   "materials": [
@@ -678,7 +682,7 @@
       "addedOrder": 50
     },
     {
-      "path": "26aut/ENGLISH/nce2_lesson1_interactive_demo.html",
+      "path": "extracurricular/ENGLISH/nce2_lesson1_interactive_demo.html",
       "title": "新概念2・精讲示范",
       "description": "第一课主题改写：逐句精讲、词汇词族、语法辨析与互动小测。",
       "subject": "english",
