@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Zoe 的学习资料库，按学期、课程和课次整理课堂知识。">
+  <meta name="description" content="Zoe 的学习资料库，包含春秋学期和课外学习，按课程和课次整理学习资料。">
   <meta name="application-name" content="Zoe Study">
   <meta name="theme-color" content="#f7f4ef">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,24 +14,19 @@
   <link rel="icon" type="image/png" href="./assets/icons/meibao-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/meibao-180.png">
   <link rel="stylesheet" href="./assets/tokens.css?v=20261011-5">
-  <link rel="stylesheet" href="./assets/archive.css?v=20261019-2">
-  <script type="module" src="./assets/archive.js?v=20261019-4"></script>
+  <link rel="stylesheet" href="./assets/archive.css?v=20261021-1">
+  <script type="module" src="./assets/archive.js?v=20261021-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#materials">跳到资料列表</a>
   <header class="site-header">
     <div class="header-left">
       <h1>Zoe's <span>Study Archive</span></h1>
-      <div class="semester-navigation">
-        <p id="semesterLabel" class="semester-label">2026 秋学期</p>
-        <button id="currentSemesterButton" class="text-button" type="button" hidden>返回当前学期</button>
-        <details class="archive-menu" id="archiveMenu">
-          <summary>历史资料 <span aria-hidden="true">⌄</span></summary>
-          <div id="archiveOptions" class="archive-options"></div>
-        </details>
-      </div>
+      <nav class="collection-navigation" aria-label="资料分类">
+        <div id="collectionTabs" class="collection-tabs" role="group" aria-label="选择学习资料分类"></div>
+      </nav>
     </div>
-    <div class="header-stats" aria-label="当前学期统计">
+    <div class="header-stats" aria-label="当前分类统计">
       <p class="stat-chip"><strong id="totalCount">—</strong> <span>份资料</span></p>
       <p class="stat-chip" id="subjectChip"><strong id="subjectCount">—</strong> <span>个科目</span></p>
     </div>
