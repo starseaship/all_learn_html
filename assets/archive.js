@@ -1,8 +1,8 @@
 import {SUBJECT_LABELS,COURSE_LABELS,TYPE_LABELS,normalizeCatalog,filterMaterials,sortMaterials} from './material-utils.mjs?v=20261019-4';
 
-const CACHE_KEY = 'zoeStudyArchiveCatalog:v2';
-const ui = Object.fromEntries(['semesterLabel','currentSemesterButton','archiveMenu','archiveOptions','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
-const state = {semester:'',subject:'all',type:'all',course:'all',query:'',sort:'added',sortDirection:'desc'};
+const CACHE_KEY = 'zoeStudyArchiveCatalog:v3';
+const ui = Object.fromEntries(['collectionTabs','totalCount','subjectCount','subjectChip','controls','filterRow','searchInput','filterToggle','clearFilters','courseFilter','sortSelect','sortDirection','sortDirectionLabel','sortArrow','advancedFilters','subjectFilter','typeFilter','loadStatus','statusMessage','retryButton','errorDetails','errorMessage','resultsInfo','cardGrid','emptyState','emptyMessage','emptyClearButton'].map(id=>[id,document.getElementById(id)]));
+const state = {semester:decodeURIComponent(location.hash.slice(1)),subject:'all',type:'all',course:'all',query:'',sort:'added',sortDirection:'desc'};
 let catalog = null;
 let loading = null;
 
@@ -39,9 +39,12 @@ function resetFilters() {
 function setSemester(id) {
   state.semester=id;
   resetFilters();
-  ui.archiveMenu.open=false;
   render();
-  ui.archiveMenu.querySelector('summary').focus();
+  const active=[...ui.collectionTabs.querySelectorAll('button[data-semester]')].find(b=>b.dataset.semester===id);
+  active?.focus();
+  const url=new URL(window.location.href);
+  url.hash=id===catalog.currentSemester ? '' : id;
+  window.history.replaceState(null,'',url);
 }
 
 function renderFilter(container,kind,values,labels,label,showSingle=false) {
@@ -70,17 +73,17 @@ function render() {
   const types=[...new Set(courseMaterials.map(m=>m.type))].sort();
   if(state.type!=='all' && !types.includes(state.type)) state.type='all';
 
-  ui.semesterLabel.textContent=semester.label;
-  ui.currentSemesterButton.hidden=state.semester===catalog.currentSemester;
   ui.totalCount.textContent=String(materials.length);
   ui.subjectCount.textContent=String(subjects.length);
   ui.subjectChip.hidden=subjects.length<=1;
-  ui.archiveOptions.replaceChildren();
-  const historical=catalog.semesters.filter(s=>s.id!==catalog.currentSemester);
-  ui.archiveMenu.hidden=!historical.length;
-  for(const item of historical) {
-    const button=node('button','',item.label); button.type='button'; button.dataset.semester=item.id;
-    button.setAttribute('aria-pressed',String(item.id===state.semester)); ui.archiveOptions.append(button);
+  ui.collectionTabs.replaceChildren();
+  for(const item of catalog.semesters) {
+    const label=item.id==='extracurricular' ? item.label : item.label.replace('学期','');
+    const button=node('button','collection-tab',label);
+    button.type='button'; button.dataset.semester=item.id;
+    button.title=item.label;
+    button.setAttribute('aria-pressed',String(item.id===state.semester));
+    ui.collectionTabs.append(button);
   }
   renderFilter(ui.subjectFilter,'subject',subjects,SUBJECT_LABELS,'科目');
   renderFilter(ui.courseFilter,'course',courses,COURSE_LABELS,'课程');
@@ -129,7 +132,7 @@ function render() {
   }
   ui.cardGrid.append(fragment);
   ui.emptyState.hidden=filtered.length>0;
-  ui.emptyMessage.textContent=materials.length?'没有找到符合条件的资料':'这个学期暂时没有资料';
+  ui.emptyMessage.textContent=materials.length?'没有找到符合条件的资料':'这个分类暂时没有资料';
   ui.emptyClearButton.hidden=!active;
   ui.cardGrid.setAttribute('aria-busy','false');
 }
@@ -179,10 +182,10 @@ for(const container of [ui.subjectFilter,ui.typeFilter,ui.courseFilter]) {
     if(replacement) replacement.focus();
   });
 }
-ui.archiveOptions.addEventListener('click',event=>{
-  const button=event.target.closest('button[data-semester]'); if(button) setSemester(button.dataset.semester);
+ui.collectionTabs.addEventListener('click',event=>{
+  const button=event.target.closest('button[data-semester]');
+  if(button && ui.collectionTabs.contains(button)) setSemester(button.dataset.semester);
 });
-ui.currentSemesterButton.addEventListener('click',()=>{setSemester(catalog.currentSemester); ui.archiveMenu.querySelector('summary').focus();});
 ui.searchInput.addEventListener('input',()=>{state.query=ui.searchInput.value; render();});
 ui.sortSelect.addEventListener('change',()=>{
   state.sort=ui.sortSelect.value;
@@ -198,9 +201,7 @@ ui.filterToggle.addEventListener('click',()=>{
   const open=ui.advancedFilters.classList.toggle('is-open'); ui.filterToggle.setAttribute('aria-expanded',String(open));
 });
 ui.retryButton.addEventListener('click',loadCatalog);
-document.addEventListener('click',event=>{if(!ui.archiveMenu.contains(event.target))ui.archiveMenu.open=false;});
 document.addEventListener('keydown',event=>{
-  if(event.key==='Escape' && ui.archiveMenu.open) {ui.archiveMenu.open=false;ui.archiveMenu.querySelector('summary').focus();}
   if(event.key==='Escape' && ui.advancedFilters.classList.contains('is-open')) {ui.advancedFilters.classList.remove('is-open');ui.filterToggle.setAttribute('aria-expanded','false');ui.filterToggle.focus();}
 });
 // 滚动时保持吸顶栏高度不变，避免收起/展开改变布局并触发滚动反馈循环。
