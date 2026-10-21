@@ -143,10 +143,14 @@ def get_existing_added_orders(catalog_path):
 
 
 def build_catalog(root, overrides, existing_orders=None):
-    roots = sorted((p for p in root.iterdir() if p.is_dir() and re.fullmatch(r"\d{2}(aut|spring)", p.name)), key=lambda p: (int(p.name[:2]), p.name.endswith("aut")), reverse=True)
-    if not roots:
+    semester_roots = sorted((p for p in root.iterdir() if p.is_dir() and re.fullmatch(r"\d{2}(aut|spring)", p.name)), key=lambda p: (int(p.name[:2]), p.name.endswith("aut")), reverse=True)
+    if not semester_roots:
         raise ValueError("No semester folders found")
-    semesters = [{"id": p.name, "label": f"20{p.name[:2]} {'秋' if p.name.endswith('aut') else '春'}学期"} for p in roots]
+    extra_root = root / "extracurricular"
+    roots = [*semester_roots, *([extra_root] if extra_root.is_dir() else [])]
+    semesters = [{"id": p.name, "label": f"20{p.name[:2]} {'秋' if p.name.endswith('aut') else '春'}学期"} for p in semester_roots]
+    if extra_root.is_dir():
+        semesters.append({"id": "extracurricular", "label": "课外学习"})
     items = []
     existing_orders = existing_orders or {}
     next_added_order = max(existing_orders.values(), default=0)
@@ -161,7 +165,7 @@ def build_catalog(root, overrides, existing_orders=None):
                         order = next_added_order
                     item["addedOrder"] = order
                     items.append(item)
-    return {"version": 1, "currentSemester": roots[0].name, "semesters": semesters, "materials": items}
+    return {"version": 1, "currentSemester": semester_roots[0].name, "semesters": semesters, "materials": items}
 
 
 def main():
@@ -175,7 +179,7 @@ def main():
     target = args.output or args.root / "materials.json"
     catalog = build_catalog(args.root.resolve(), overrides, get_existing_added_orders(target))
     target.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Built {len(catalog['materials'])} materials across {len(catalog['semesters'])} semesters ({target.stat().st_size} bytes)")
+    print(f"Built {len(catalog['materials'])} materials across {len(catalog['semesters'])} collections ({target.stat().st_size} bytes)")
 
 
 if __name__ == "__main__":
