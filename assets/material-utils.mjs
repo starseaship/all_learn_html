@@ -12,7 +12,7 @@ export function validDate(value) {
 export function normalizeCatalog(raw) {
   if (!raw || raw.version !== 1 || !Array.isArray(raw.semesters) || !Array.isArray(raw.materials)) throw new Error('资料目录格式不正确');
   const semesters = raw.semesters.map(item => ({id:cleanText(item.id),label:cleanText(item.label)}));
-  if (!semesters.length || semesters.some(item => !/^\d{2}(?:aut|spring)$/.test(item.id) || !item.label) || new Set(semesters.map(s=>s.id)).size !== semesters.length) throw new Error('学期信息不正确');
+  if (!semesters.length || semesters.some(item => (!/^\d{2}(?:aut|spring)$/.test(item.id) && item.id!=='extracurricular') || !item.label) || new Set(semesters.map(s=>s.id)).size !== semesters.length) throw new Error('资料分类信息不正确');
   const semesterIds = new Set(semesters.map(item=>item.id));
   if (!semesterIds.has(raw.currentSemester)) throw new Error('当前学期不存在');
   const paths = new Set();
