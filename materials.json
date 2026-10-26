@@ -720,6 +720,20 @@
         "3.7"
       ],
       "addedOrder": 53
+    },
+    {
+      "path": "26aut/ENGLISH/The_Area_Rule_Chapter11_P86-92_Bilingual.html",
+      "title": "The Area Rule",
+      "description": "《Hidden Figures》第11章 P86–92 中英对照。",
+      "subject": "wgl",
+      "type": "reference",
+      "course": "WL",
+      "date": "2026-10-26",
+      "lessonNumber": 11,
+      "badges": [
+        "Chapter 11"
+      ],
+      "addedOrder": 54
     }
   ]
 }
