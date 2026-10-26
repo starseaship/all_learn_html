@@ -706,6 +706,20 @@
       "lessonNumber": null,
       "badges": [],
       "addedOrder": 52
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch3.7_Vocab.html",
+      "title": "阅读单词3.7",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-10-26",
+      "lessonNumber": null,
+      "badges": [
+        "3.7"
+      ],
+      "addedOrder": 53
     }
   ]
 }
