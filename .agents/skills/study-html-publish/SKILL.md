@@ -36,6 +36,13 @@ Use this workflow for Zoe's study material tasks in `starseaship/all_learn_html`
 - For reading materials, choose type `reference` unless the user explicitly requests another category. “期末复习” is a useful badge when applicable.
 - Distinguish **newly added** from **last updated**; do not replace newest-added-first ordering with sorting by edit date.
 
+## HR chapter collections (2026 autumn)
+- The home page intentionally uses **two** cards for Human Rights: `26aut/ENGLISH/HR_Reading_Combined_Chapters.html` and `26aut/ENGLISH/HR_Vocabulary_Combined_Chapters.html`. Their chapter tabs use names such as **HR2.3**, **HR2.7**, **HR2.10**, **HR3.3**, **HR3.7**, **HR3.10**.
+- When adding another autumn HR reading or vocabulary chapter, update the matching combined HTML by adding another chapter tab/page. Preserve the earlier chapter pages, answer translations, keyword highlights, and quiz functionality.
+- The bundle pages embed their constituent standalone HTML documents to keep chapter scripts and styles isolated. Original pages remain accessible for previously saved links, but their `catalog-overrides.json` entries use `hidden: true` and are not listed individually on the homepage.
+- Avoid duplicate homepage cards for individual HR reading/vocabulary chapters. Both combined cards use subject `english`, course `阅读`; vocabulary has type `vocabulary`, reading has type `reference`. Keep vocabulary card descriptions empty.
+- Keep the `addedOrder` of existing bundle cards when updating them; do not promote them to the top unless explicitly requested.
+
 ## 5. Scope and limitations
 - This repository-hosted `SKILL.md` is a reusable instruction document, not by itself an installed ChatGPT skill. When working from this repository, read this file or direct relevant agents to it.
 - The user may override any format, content, or publishing preference in a particular request. Do not turn specific exam dates or focus question numbers into permanent defaults.
