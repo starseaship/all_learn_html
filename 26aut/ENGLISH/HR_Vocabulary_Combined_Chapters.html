@@ -14,7 +14,7 @@
       try{
        const doc=frame.contentDocument;if(!doc)return;
        if(info.inner){const btn=doc.querySelector('.page-tab[data-page="'+info.inner+'"]');if(btn)btn.click();}
-       const update=()=>{const h=Math.max(doc.documentElement?.scrollHeight||0,doc.body?.scrollHeight||0,500);frame.style.height=(h+8)+'px';};
+       const update=()=>{const h=Math.max(doc.documentElement?.scrollHeight||0,doc.body?.scrollHeight||0,500);frame.style.height=h+'px';};
        update();
        if(typeof ResizeObserver!=='undefined'){const ro=new ResizeObserver(()=>requestAnimationFrame(update));ro.observe(doc.documentElement);if(doc.body)ro.observe(doc.body);}
        doc.addEventListener('click',()=>requestAnimationFrame(update));setTimeout(update,250);setTimeout(update,1000);
