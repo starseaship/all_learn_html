@@ -653,6 +653,21 @@
         "Chapter 11"
       ],
       "addedOrder": 54
+    },
+    {
+      "path": "26aut/HUMAN_RIGHTS/Homeless_Japanese_Speech_Furigana.html",
+      "title": "野宿者｜人权课演讲",
+      "description": "「ホームレスは自己責任か？」约3分钟日语演讲稿，汉字假名标注，按PPT分成5页。可切换假名与调整字号。",
+      "subject": "general",
+      "type": "reference",
+      "course": "人权",
+      "date": "2026-10-28",
+      "lessonNumber": null,
+      "badges": [
+        "日语发表",
+        "假名标注"
+      ],
+      "addedOrder": 58
     }
   ]
 }
