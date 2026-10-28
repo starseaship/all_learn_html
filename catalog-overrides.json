@@ -402,7 +402,7 @@
   },
   "26aut/ENGLISH/HR_Reading_Combined_Chapters.html": {
     "title": "HR阅读｜综合问答",
-    "description": "HR2.3、HR2.7、HR2.10、HR3.10 分章节切换，题目与答案中英对照，保留重点题高亮。",
+    "description": "HR2.3、HR2.7、HR2.10、HR3.3、HR3.10 分章节切换，题目与答案中英对照，保留关键词及重点标记。",
     "subject": "english",
     "type": "reference",
     "course": "阅读",
@@ -412,7 +412,7 @@
       "HR2.3",
       "HR2.7",
       "HR2.10",
-      "HR3.10"
+      "HR3.3/3.10"
     ]
   },
   "26aut/ENGLISH/HR_Vocabulary_Combined_Chapters.html": {
@@ -428,5 +428,13 @@
       "HR2.x",
       "HR3.x"
     ]
+  },
+  "26aut/ENGLISH/HR_Chapter_3_3_Comprehension_Questions.html": {
+    "hidden": true,
+    "title": "HR3.3｜IV Comprehension Questions",
+    "subject": "english",
+    "type": "reference",
+    "course": "阅读",
+    "date": "2026-10-28"
   }
 }
