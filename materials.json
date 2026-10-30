@@ -668,6 +668,20 @@
         "假名标注"
       ],
       "addedOrder": 58
+    },
+    {
+      "path": "26aut/DS5_日语假名_中文翻译.html",
+      "title": "数据科学第5回",
+      "description": "数据与AI应用技术：图像、文字、语音及人脸识别，机器学习、AI难题与社会影响。35页日语假名标注、中文翻译及原讲义页面。",
+      "subject": "general",
+      "type": "notes",
+      "course": "ai",
+      "date": "2026-10-30",
+      "lessonNumber": 5,
+      "badges": [
+        "第5回"
+      ],
+      "addedOrder": 59
     }
   ]
 }
