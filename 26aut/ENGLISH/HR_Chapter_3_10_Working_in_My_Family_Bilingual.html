@@ -165,7 +165,7 @@
 document.querySelectorAll('.quick a[href^="#"]').forEach(link=>{
   link.addEventListener('click',()=>{
     const target=document.getElementById(link.getAttribute('href').slice(1));
-    if(target&&!target.classList.contains('featured')&&app.classList.contains('only-focus')) {
+    if(target&&!target.classList.contains('featured')&&document.getElementById('app').classList.contains('only-focus')) {
       document.getElementById('focusBtn').click();
     }
   });
