@@ -65,6 +65,15 @@ footer{font-size:12px;color:#96919d;text-align:center;margin-top:30px}
 .vocab-compare h2{font-size:17px;margin:0 0 8px}.vocab-compare p{margin:5px 0;color:var(--muted);font-size:12px}
 @media(max-width:720px){.vocab-grid{grid-template-columns:1fr}.vocab-card{padding:17px 16px}.vocab-word{font-size:22px}}
 @media print{.page-tabs,.vocab-jumps{display:none}.tab-page[hidden]{display:block!important}.vocab-card{break-inside:avoid}.vocab-grid{display:block}.vocab-card{margin-bottom:12px}}
+
+/* Tap-to-pronounce for vocabulary cards. Uses built-in browser voices. */
+.vocab-title-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.pronounce-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:40px;padding:5px 10px;flex:none;background:var(--accent-bg);border:1px solid #ded2ef;border-radius:9px;color:#5f4788;font-size:12px;font-weight:750;line-height:1.25}
+.pronounce-btn:hover{background:#e8ddfa}
+.pronounce-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pronounce-btn:disabled{opacity:.55;cursor:not-allowed}
+.pronounce-status{font-size:12px;color:var(--muted);margin:0 0 9px;min-height:1em}
+@media(max-width:460px){.vocab-card-header{flex-wrap:wrap}.vocab-title-group{gap:7px}}
 </style>
 </head>
 <body>
@@ -107,7 +116,8 @@ footer{font-size:12px;color:#96919d;text-align:center;margin-top:30px}
 </div>
 <section class="tab-page" id="vocab-page" role="tabpanel" aria-labelledby="tab-vocab" hidden>
 <h2>16 词 · 中文释义与例句</h2>
-<p class="vocab-intro">词性、中文解释、近义词和固定搭配；例句沿用 P.268 的 A / B 原句，绿色标记目标单词。中文直接展示，便于背诵。</p>
+<p class="vocab-intro">词性、中文解释、近义词和固定搭配；例句沿用 P.268 的 A / B 原句，绿色标记目标单词。中文直接展示，便于背诵。点击「发音」可听英文读音。</p>
+<p class="pronounce-status" id="pronounce-status" role="status" aria-live="polite"></p>
 <nav class="vocab-jumps" aria-label="词汇分组"><a href="#vocab-a">A · Vocabulary（8词）</a><a href="#vocab-b">B · Comprehension（8词）</a></nav>
 <section class="vocab-section" id="vocab-a"><h2>A. Vocabulary</h2><p class="vocab-subtitle">8 个黑体重点词 · 课本原句</p><div class="vocab-grid" id="vocab-cards-a"></div></section>
 <section class="vocab-section" id="vocab-b"><h2>B. Comprehension</h2><p class="vocab-subtitle">8 个填空词 · 课本原句</p><div class="vocab-grid" id="vocab-cards-b"></div></section>
@@ -217,6 +227,49 @@ byId('reveal').addEventListener('click',()=>grade(true));
 byId('reset').addEventListener('click',()=>render());
 render();
 
+let currentUtterance=null;
+let currentSpeakButton=null;
+const canSpeak = typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance !== 'undefined';
+function resetSpeechUi(){
+  if(currentSpeakButton){currentSpeakButton.setAttribute('aria-pressed','false');currentSpeakButton.textContent='🔊 发音';}
+  currentSpeakButton=null;
+  currentUtterance=null;
+}
+function stopPronunciation(){
+  if(canSpeak) window.speechSynthesis.cancel();
+  resetSpeechUi();
+}
+function speakWord(word,button){
+  if(!canSpeak){
+    byId('pronounce-status').textContent='当前浏览器不支持语音朗读，请使用 Safari、Chrome 或系统内置朗读功能。';
+    return;
+  }
+  // Called directly from a click, as required by mobile browser speech permissions.
+  const isSameButton=currentSpeakButton===button;
+  stopPronunciation();
+  if(isSameButton) return;
+  const utterance=new SpeechSynthesisUtterance(word);
+  utterance.lang='en-US';
+  utterance.rate=0.88;
+  utterance.pitch=1;
+  const voices=window.speechSynthesis.getVoices();
+  const chosen=voices.find(v=>/^en-US$/i.test(v.lang))||voices.find(v=>/^en(?:-|$)/i.test(v.lang));
+  if(chosen)utterance.voice=chosen;
+  utterance.onend=()=>{if(currentUtterance===utterance)resetSpeechUi();};
+  utterance.onerror=event=>{
+    if(currentUtterance!==utterance)return;
+    resetSpeechUi();
+    if(event.error!=='canceled'&&event.error!=='interrupted'){
+      byId('pronounce-status').textContent='朗读未成功，请再点一次发音按钮。';
+    }
+  };
+  currentUtterance=utterance;
+  currentSpeakButton=button;
+  button.setAttribute('aria-pressed','true');
+  button.textContent='■ 停止';
+  byId('pronounce-status').textContent='';
+  window.speechSynthesis.speak(utterance);
+}
 function renderVocab(){
   for (const part of ORDER) {
     const target=byId('vocab-cards-'+part);
@@ -228,7 +281,18 @@ function renderVocab(){
       const header=document.createElement('div');header.className='vocab-card-header';
       const term=document.createElement('strong');term.className='vocab-word';term.textContent=q.answer;
       const index=document.createElement('span');index.className='vocab-index';index.textContent=part.toUpperCase()+' · '+String(i+1).padStart(2,'0');
-      header.append(term,index);
+      const titleGroup=document.createElement('div');titleGroup.className='vocab-title-group';
+      const pronunciation=document.createElement('button');
+      pronunciation.type='button';
+      pronunciation.className='pronounce-btn';
+      pronunciation.textContent='🔊 发音';
+      pronunciation.setAttribute('aria-label','播放 '+q.answer+' 的英文发音');
+      pronunciation.setAttribute('aria-pressed','false');
+      pronunciation.title='点击朗读 '+q.answer;
+      pronunciation.disabled=!canSpeak;
+      pronunciation.addEventListener('click',()=>speakWord(q.answer,pronunciation));
+      titleGroup.append(term,pronunciation);
+      header.append(titleGroup,index);
       const pos=document.createElement('p');pos.className='vocab-pos';pos.textContent=info.pos;
       const meaning=document.createElement('p');meaning.className='vocab-meaning';meaning.textContent=info.zh;
       const near=document.createElement('p');near.className='vocab-near';near.textContent='近义／解释：'+info.near;
@@ -248,6 +312,7 @@ function renderVocab(){
 }
 function switchPage(next,updateHash=true){
   const page=next==='vocab-page'?'vocab-page':'quiz-page';
+  if(page!=='vocab-page'&&currentUtterance)stopPronunciation();
   for (const id of ['quiz-page','vocab-page']) {
     byId(id).hidden=id!==page;
     const tab=byId(id==='quiz-page'?'tab-quiz':'tab-vocab');
