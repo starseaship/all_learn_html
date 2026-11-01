@@ -682,6 +682,20 @@
         "第5回"
       ],
       "addedOrder": 59
+    },
+    {
+      "path": "26aut/ENGLISH/An_Exceptional_Mind_Chapter12_P93-101_Bilingual.html",
+      "title": "An Exceptional Mind",
+      "description": "《Hidden Figures》第12章 P93–101：Katherine Johnson 的数学天赋、求学经历与进入 Langley。",
+      "subject": "wgl",
+      "type": "reference",
+      "course": "WL",
+      "date": "2026-11-01",
+      "lessonNumber": 12,
+      "badges": [
+        "Chapter 12"
+      ],
+      "addedOrder": 60
     }
   ]
 }
