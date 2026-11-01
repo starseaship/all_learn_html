@@ -20,6 +20,15 @@
 .hide-zh .translation{display:none}.hide-answer .answer-content{display:none}.hide-cue .cue{display:none}button:focus-visible,a:focus-visible{outline:3px solid #a998d4;outline-offset:3px}
 @media(max-width:650px){.container{width:calc(100% - 24px);padding:27px 0 45px}.question-card{padding:19px 17px}.english{font-size:15px}.question-en{font-size:16px}.toolbar{margin-top:16px}.quick{gap:5px}.quick a{padding:4px 8px}}
 @media print{body{background:#fff}.container{width:100%;padding:0}.toolbar,.quick,.notice{display:none}.question-card{break-inside:avoid;box-shadow:none}.translation{color:#666}}
+
+/* Core questions: Unit HR3.10 Nos. 08–10 */
+.question-card.featured{border-color:#d9cef0;border-left:5px solid #8b71c0;background:linear-gradient(90deg,#fbf9ff 0,#fff 190px)}
+.featured .number{color:#6c4f9e}
+.core-label{display:inline-block;color:#5e458d;background:#eee7fa;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;letter-spacing:0;margin-left:7px}
+.only-focus .question-card:not(.featured){display:none}
+.quick a.core-link{background:#e4d9f7;color:#5c438b;border:1px solid #d6c5ef}
+.card-top{gap:8px}
+@media print{.only-focus .question-card:not(.featured){display:block}}
 </style>
 </head>
 <body><main class="container" id="app">
@@ -28,10 +37,12 @@
 <p>家庭中的工作：女性的平等机会 · 课堂参考答案整理</p>
 <div class="stats"><span class="pill">10 道阅读问答</span><span class="pill">中英对照</span><span class="pill">关键词高亮</span><span class="pill">记忆线索</span></div></header>
 <div class="toolbar"><div class="tools">
+<button id="focusBtn" class="btn" type="button" aria-pressed="false">只看核心题（08–10）</button>
+
 <button id="zhBtn" class="btn" type="button" aria-pressed="false">隐藏中文翻译</button>
 <button id="answerBtn" class="btn" type="button" aria-pressed="false">隐藏答案 · 自测</button>
 <button id="cueBtn" class="btn" type="button" aria-pressed="false">隐藏记忆线索</button>
-</div><nav class="quick" aria-label="题号跳转">跳转 <a href="#q1">01</a><a href="#q2">02</a><a href="#q3">03</a><a href="#q4">04</a><a href="#q5">05</a><a href="#q6">06</a><a href="#q7">07</a><a href="#q8">08</a><a href="#q9">09</a><a href="#q10">10</a></nav></div>
+</div><nav class="quick" aria-label="题号跳转">跳转 <a href="#q1">01</a><a href="#q2">02</a><a href="#q3">03</a><a href="#q4">04</a><a href="#q5">05</a><a href="#q6">06</a><a href="#q7">07</a><a class="core-link" href="#q8">08</a><a class="core-link" href="#q9">09</a><a class="core-link" href="#q10">10</a></nav></div>
 <div class="legend"><span><i class="swatch"></i>黄色：题目关键词</span><span><i class="swatch answer"></i>绿色：答案关键词</span></div>
 <section class="cards" aria-label="阅读理解题与参考答案">
 <article class="question-card" id="q1" data-num="1">
@@ -111,8 +122,8 @@
       <p class="translation"><span class="translation-icon">中译</span>她有一份全职工作。</p></div>
       <div class="cue"><span class="cue-label">记忆线索</span>Momoko → full-time</div>
     </article>
-<article class="question-card" id="q8" data-num="8">
-      <div class="card-top"><span class="number">08</span><span class="card-chapter">CHAPTER 3.10</span></div>
+<article class="question-card featured" id="q8" data-num="8" data-focus="true">
+      <div class="card-top"><span class="number">08</span><span class="card-chapter">CHAPTER 3.10 <span class="core-label">★ 核心问题</span></span></div>
       <div class="section-label question-label">QUESTION · 题目</div>
       <p class="english question-en">What is an <mark class="qmark">example</mark> of <mark class="qmark">sexual harassment</mark>?</p>
       <p class="translation"><span class="translation-icon">中译</span>什么行为属于性骚扰？请举一个例子。</p>
@@ -122,8 +133,8 @@
       <p class="translation"><span class="translation-icon">中译</span>不适当的身体触碰，或对女性身体发表不恰当的评论。</p></div>
       <div class="cue"><span class="cue-label">记忆线索</span>性骚扰＝不当触碰／身体评论</div>
     </article>
-<article class="question-card" id="q9" data-num="9">
-      <div class="card-top"><span class="number">09</span><span class="card-chapter">CHAPTER 3.10</span></div>
+<article class="question-card featured" id="q9" data-num="9" data-focus="true">
+      <div class="card-top"><span class="number">09</span><span class="card-chapter">CHAPTER 3.10 <span class="core-label">★ 核心问题</span></span></div>
       <div class="section-label question-label">QUESTION · 题目</div>
       <p class="english question-en">What is an <mark class="qmark">example</mark> of <mark class="qmark">maternity harassment</mark>?</p>
       <p class="translation"><span class="translation-icon">中译</span>什么行为属于妊娠或生育相关骚扰？请举一个例子。</p>
@@ -133,8 +144,8 @@
       <p class="translation"><span class="translation-icon">中译</span>因为孕妇没有像其他人一样努力工作而批评她。</p></div>
       <div class="cue"><span class="cue-label">记忆线索</span>妊娠骚扰＝因怀孕而指责</div>
     </article>
-<article class="question-card" id="q10" data-num="10">
-      <div class="card-top"><span class="number">10</span><span class="card-chapter">CHAPTER 3.10</span></div>
+<article class="question-card featured" id="q10" data-num="10" data-focus="true">
+      <div class="card-top"><span class="number">10</span><span class="card-chapter">CHAPTER 3.10 <span class="core-label">★ 核心问题</span></span></div>
       <div class="section-label question-label">QUESTION · 题目</div>
       <p class="english question-en">What is the <mark class="qmark">glass ceiling</mark>?</p>
       <p class="translation"><span class="translation-icon">中译</span>什么是“玻璃天花板”？</p>
@@ -145,8 +156,18 @@
       <div class="cue"><span class="cue-label">记忆线索</span>玻璃天花板＝女性晋升的无形障碍</div>
     </article>
 </section>
-<div class="notice">整理说明：基于所提供的老师参考答案，修正了部分拼写和英语语法（例如 Sakura 的拼写、第 3 题的职位表达）。第 6 题原答案“女性工资是男性的 70%”，因此若回答“男性比女性多多少”，应换算为约 43%，不能直接写 30%。此处没有把任何题目擅自标成老师指定重点。</div>
+<div class="notice">整理说明：基于所提供的老师参考答案，修正了部分拼写和英语语法（例如 Sakura 的拼写、第 3 题的职位表达）。第 6 题原答案“女性工资是男性的 70%”，因此若回答“男性比女性多多少”，应换算为约 43%，不能直接写 30%。第8、9、10题已按本次复习要求标为核心问题。</div>
 </main>
 <script>
-(()=>{const app=document.getElementById('app');const actions=[['zhBtn','hide-zh','隐藏中文翻译','显示中文翻译'],['answerBtn','hide-answer','隐藏答案 · 自测','显示答案'],['cueBtn','hide-cue','隐藏记忆线索','显示记忆线索']];for(const [id,cls,normal,active] of actions){const btn=document.getElementById(id);btn.addEventListener('click',()=>{let on=app.classList.toggle(cls);btn.setAttribute('aria-pressed',String(on));btn.textContent=on?active:normal})}})();
+(()=>{const app=document.getElementById('app');const actions=[['focusBtn','only-focus','只看核心题（08–10）','显示全部题目'],['zhBtn','hide-zh','隐藏中文翻译','显示中文翻译'],['answerBtn','hide-answer','隐藏答案 · 自测','显示答案'],['cueBtn','hide-cue','隐藏记忆线索','显示记忆线索']];for(const [id,cls,normal,active] of actions){const btn=document.getElementById(id);btn.addEventListener('click',()=>{let on=app.classList.toggle(cls);btn.setAttribute('aria-pressed',String(on));btn.textContent=on?active:normal})}})();
+
+// Keep all question numbers usable even when the core-only filter is enabled.
+document.querySelectorAll('.quick a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',()=>{
+    const target=document.getElementById(link.getAttribute('href').slice(1));
+    if(target&&!target.classList.contains('featured')&&app.classList.contains('only-focus')) {
+      document.getElementById('focusBtn').click();
+    }
+  });
+});
 </script></body></html>
