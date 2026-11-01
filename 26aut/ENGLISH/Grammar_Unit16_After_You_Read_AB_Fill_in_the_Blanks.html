@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f7f6fa">
-<meta name="description" content="Unit 16 After You Read：A、B 共16道课本原句选词填空，含中文翻译、交卷评分与答案。">
+<meta name="description" content="Unit 16 A/B：16道课本原句选词填空与16词中文释义、搭配及中英例句，含评分答案。">
 <meta name="subject" content="english">
 <meta name="course" content="语法">
 <meta name="type" content="quiz">
 <meta name="date" content="2026-11-01">
 <meta name="lesson-number" content="16">
-<title>语法选词填空｜Unit 16</title>
+<title>语法 Unit 16｜选词填空与16词复习</title>
 <style>
 :root{--bg:#f7f6fa;--paper:#fff;--ink:#292938;--muted:#717080;--line:#e6e2ed;--accent:#7256a5;--accent-bg:#f2edfa;--yellow:#fff2bf;--green:#e3f5e8;--green-ink:#286c48;--red:#a93f50;--red-bg:#fff0f2}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif}
@@ -35,15 +35,47 @@ h1{font-size:clamp(27px,5vw,40px);line-height:1.22;margin:0 0 11px;letter-spacin
 footer{font-size:12px;color:#96919d;text-align:center;margin-top:30px}
 @media(max-width:600px){main{padding:16px 11px 58px}.section{padding:18px 15px;margin:16px 0}.section h2{font-size:19px}.section-head{align-items:center}.sentence{font-size:16px}.blank{font-size:16px}.toolbar{align-items:flex-start}.results{padding:19px 16px}.word{font-size:12px;padding:4px 8px}}
 @media print{body{background:#fff}main{padding:0}.back,.jump,.toolbar,.actions,.hint,footer{display:none}.section,.results{box-shadow:none;break-inside:avoid}.question{break-inside:avoid}.blank{appearance:none;background:none}}
+
+/* Two study pages: preserve the original quiz, add independent vocabulary review. */
+.page-tabs{position:sticky;top:0;z-index:12;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0 18px;padding:8px;background:rgba(247,246,250,.94);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(12px)}
+.page-tab{appearance:none;border:1px solid #e2d9ed;border-radius:10px;background:#fff;color:#665580;padding:10px 12px;min-height:45px;font-weight:750;cursor:pointer}
+.page-tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab-page[hidden]{display:none!important}
+.vocab-intro{margin:8px 0 14px;color:var(--muted);font-size:13px}
+.vocab-jumps{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 24px}
+.vocab-jumps a{background:#fff;color:var(--accent);border:1px solid var(--line);text-decoration:none;border-radius:9px;padding:7px 12px;font-weight:700;font-size:12px}
+.vocab-section{scroll-margin-top:94px;margin:24px 0}
+.vocab-section h2{font-size:21px;margin:0 0 5px}.vocab-section .vocab-subtitle{margin:0 0 13px;color:var(--muted);font-size:12px}
+.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.vocab-card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:18px 20px;min-width:0}
+.vocab-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.vocab-word{font-size:23px;line-height:1.2;color:var(--ink);font-weight:800;overflow-wrap:anywhere}
+.vocab-index{font-size:11px;font-weight:800;color:var(--accent);background:var(--accent-bg);border-radius:7px;padding:4px 7px;white-space:nowrap}
+.vocab-pos{font-size:11px;color:var(--muted);margin:6px 0 3px}
+.vocab-meaning{color:var(--ink);font-size:15px;font-weight:700;margin:2px 0 7px}
+.vocab-near{color:var(--muted);font-size:12px;margin:0 0 11px}
+.vocab-phrase{background:#fff6d7;border-radius:8px;padding:9px 10px;font-size:12px;line-height:1.7;margin:10px 0}
+.vocab-label{display:block;color:#927a4d;font-size:10px;font-weight:800;letter-spacing:.07em;margin-bottom:2px}
+.vocab-example-title{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:.04em;margin:13px 0 4px}
+.vocab-example{font:15px/1.8 Georgia,"Times New Roman",serif;margin:0;overflow-wrap:anywhere}
+.vocab-example mark{background:var(--green);color:var(--green-ink);border-radius:4px;padding:1px 3px;font-weight:700}
+.vocab-zh{font-size:12px;color:#85818e;line-height:1.8;margin:8px 0 0;border-left:2px solid #e2d9ec;padding-left:10px}
+.vocab-note{font-size:12px;color:#66587a;margin:12px 0 0;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+.vocab-compare{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 20px;margin:23px 0}
+.vocab-compare h2{font-size:17px;margin:0 0 8px}.vocab-compare p{margin:5px 0;color:var(--muted);font-size:12px}
+@media(max-width:720px){.vocab-grid{grid-template-columns:1fr}.vocab-card{padding:17px 16px}.vocab-word{font-size:22px}}
+@media print{.page-tabs,.vocab-jumps{display:none}.tab-page[hidden]{display:block!important}.vocab-card{break-inside:avoid}.vocab-grid{display:block}.vocab-card{margin-bottom:12px}}
 </style>
 </head>
 <body>
 <main>
 <a class="back" href="../../index.html">‹ 返回资料库</a>
 <p class="eyebrow">ENGLISH GRAMMAR · UNIT 16</p>
-<h1>After You Read · 选词填空</h1>
-<p class="lead">P.268 · A Vocabulary + B Comprehension｜16道课本原句，按考试形式挖空。</p>
-<div class="tags"><span class="tag">Unit 16</span><span class="tag">A + B</span><span class="tag">16 道题</span></div>
+<h1>After You Read · Unit 16</h1>
+<p class="lead">P.268 · A Vocabulary + B Comprehension｜16道原句填空 + 16个单词中英复习。</p>
+<div class="tags"><span class="tag">Unit 16</span><span class="tag">A + B</span><span class="tag">16 道题</span><span class="tag">16 个单词</span></div>
+<nav class="page-tabs" role="tablist" aria-label="切换复习分页"><button type="button" class="page-tab" id="tab-quiz" role="tab" aria-controls="quiz-page" aria-selected="true" data-page="quiz-page">选词填空 · 16题</button><button type="button" class="page-tab" id="tab-vocab" role="tab" aria-controls="vocab-page" aria-selected="false" data-page="vocab-page">词汇复习 · 16词</button></nav>
+<div class="tab-page" id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz">
 <nav class="jump" aria-label="跳转到题组"><a href="#part-a">A · Vocabulary</a><a href="#part-b">B · Comprehension</a><a href="#submit-area">交卷评分</a></nav>
 <div class="toolbar"><p>从词库选词填空。中文默认隐藏，适合自测。</p><button class="button ghost" type="button" id="toggleChinese" aria-pressed="false">显示中文</button></div>
 
@@ -72,11 +104,21 @@ footer{font-size:12px;color:#96919d;text-align:center;margin-top:30px}
 <p><b>voluntary</b> 是形容词；<b>willingly</b> 是副词，常跟在 go 这样的动词后面。</p>
 <p><b>promoted</b> 是过去分词；注意句子结构 be promoted。</p>
 </details>
+</div>
+<section class="tab-page" id="vocab-page" role="tabpanel" aria-labelledby="tab-vocab" hidden>
+<h2>16 词 · 中文释义与例句</h2>
+<p class="vocab-intro">词性、中文解释、近义词和固定搭配；例句沿用 P.268 的 A / B 原句，绿色标记目标单词。中文直接展示，便于背诵。</p>
+<nav class="vocab-jumps" aria-label="词汇分组"><a href="#vocab-a">A · Vocabulary（8词）</a><a href="#vocab-b">B · Comprehension（8词）</a></nav>
+<section class="vocab-section" id="vocab-a"><h2>A. Vocabulary</h2><p class="vocab-subtitle">8 个黑体重点词 · 课本原句</p><div class="vocab-grid" id="vocab-cards-a"></div></section>
+<section class="vocab-section" id="vocab-b"><h2>B. Comprehension</h2><p class="vocab-subtitle">8 个填空词 · 课本原句</p><div class="vocab-grid" id="vocab-cards-b"></div></section>
+<div class="vocab-compare"><h2>易混词速记</h2><p><b>voluntary</b>（自愿的）↔ <b>compulsory / required</b>（强制的、必须的）</p><p><b>feminine</b>（具有女性特质的）↔ <b>unfeminine</b>（缺乏女性特质的）</p><p><b>voluntary</b> 是形容词；<b>willingly</b> 是副词；<b>promoted</b> 是过去分词。</p><p>复习完切回「选词填空」，原有作答不会丢失。</p></div>
+</section>
 <footer>Unit 16 · After You Read · P.268</footer>
 </main>
 <script>
 'use strict';
 const DATA = {"a":[{"before":"On this show, people express their uncensored opinions on today's ","answer":"controversial","after":" issues.","zh":"在这个节目中，人们对当今有争议的话题自由地表达未经审查的观点。","note":"controversial：有争议的；causing disagreement","clue":"issues"},{"before":"Should military service be required or ","answer":"voluntary","after":"?","zh":"兵役应该是强制性的还是自愿的？","note":"voluntary：自愿的；done willingly","clue":"required or"},{"before":"The first caller doesn't think military service should be ","answer":"compulsory","after":".","zh":"第一位来电者认为服兵役不应该是强制性的。","note":"compulsory：强制性的；required","clue":"should be"},{"before":"He believes forced military service would ","answer":"interfere","after":" with people's freedom.","zh":"他认为强制兵役会妨碍人们的自由。","note":"interfere with：干涉、妨碍；固定搭配","clue":"with people's freedom"},{"before":"Men and women have ","answer":"inherent","after":" differences.","zh":"男性和女性存在着天生的差异。","note":"inherent：固有的、内在的；natural","clue":"differences"},{"before":"If we put women in combat, we're saying that, ","answer":"fundamentally","after":", they're the same as men.","zh":"如果让女性参加战斗，就相当于在说，从根本上讲，女性与男性是一样的。","note":"fundamentally：根本上、本质上；basically","clue":"they're the same as men"},{"before":"That's an old ","answer":"stereotype","after":", clearly.","zh":"那显然是一种陈旧的刻板印象。","note":"stereotype：刻板印象、固定观念","clue":"an old"},{"before":"Not only should it be allowed, but it should also be ","answer":"promoted","after":".","zh":"这件事不仅应该被允许，还应该受到鼓励和推广。","note":"promoted：受到鼓励/推广的；be + 过去分词","clue":"should also be"}],"b":[{"before":"Jerry, the first caller, thinks ","answer":"military","after":" service should be voluntary.","zh":"第一位来电者杰里认为，服兵役应该是自愿的。","note":"military service：兵役","clue":"service"},{"before":"Jerry thinks that only people who have a military ","answer":"orientation","after":" should have to join the military.","zh":"杰里认为，只有具有从军意向的人才应该参军。","note":"orientation：倾向、取向、意向","clue":"military"},{"before":"Jerry is ","answer":"against","after":" women being in combat.","zh":"杰里反对女性参与战斗。","note":"be against：反对","clue":"women being in combat"},{"before":"Jerry doesn't think fighting is ","answer":"feminine","after":".","zh":"杰里认为战斗并不具有女性特质。","note":"feminine：女性化的、具有女性特质的","clue":"fighting is"},{"before":"Sarah, the second caller, thinks military service should be ","answer":"required","after":".","zh":"第二位来电者莎拉认为兵役应该是强制性的。","note":"required：必须的、被要求的","clue":"should be"},{"before":"In her opinion, it's the only way to ensure ","answer":"fair","after":" treatment for everyone.","zh":"在她看来，这是确保每个人都得到公平对待的唯一方法。","note":"fair treatment：公平待遇","clue":"treatment"},{"before":"Sarah does not believe combat is ","answer":"unfeminine","after":".","zh":"莎拉不认为参加战斗是不符合女性特质的。","note":"unfeminine：缺乏女性特质的；feminine 的反义词","clue":"combat is"},{"before":"If Sarah were called to combat, she would go ","answer":"willingly","after":".","zh":"如果莎拉被征召参加战斗，她会自愿前往。","note":"willingly：自愿地、乐意地；副词修饰 go","clue":"would go"}]};
+const LEXICON = {"controversial":{"pos":"adj. 形容词","zh":"有争议的；引起争论的","near":"causing disagreement（引起分歧的）","phrase":"controversial issues — 有争议的话题","tip":"名词 controversy 表示“争论”；注意与 important（重要的）区分。"},"voluntary":{"pos":"adj. 形容词","zh":"自愿的；志愿的","near":"done willingly（自愿进行的）","phrase":"voluntary military service — 自愿服兵役","tip":"反义词 compulsory / required；voluntary 是形容词，willingly 是副词。"},"compulsory":{"pos":"adj. 形容词","zh":"强制性的；义务性的","near":"required / mandatory（必须的）","phrase":"compulsory military service — 强制兵役","tip":"与 voluntary（自愿的）相反，常用于教育、规定和兵役。"},"interfere":{"pos":"v. 动词","zh":"干涉；妨碍；干扰","near":"limit / hinder（限制、阻碍）","phrase":"interfere with people's freedom — 妨碍人们的自由","tip":"固定搭配 interfere with + 名词；这里与 freedom 连用。"},"inherent":{"pos":"adj. 形容词","zh":"固有的；内在的；与生俱来的","near":"natural / intrinsic（天生的、固有的）","phrase":"inherent differences — 固有的差异","tip":"重点搭配 inherent + 名词；此处表示原句说话者所主张的“天生差异”。"},"fundamentally":{"pos":"adv. 副词","zh":"从根本上；本质上；基本上","near":"basically / essentially（基本上、本质上）","phrase":"fundamentally, they're the same — 从根本上讲，他们是一样的","tip":"fundamental（adj. 根本的）+ -ly → fundamentally（adv.）。"},"stereotype":{"pos":"n. 名词","zh":"刻板印象；固定成见","near":"fixed, oversimplified idea（固定且过度概括的观念）","phrase":"an old stereotype — 陈旧的刻板印象","tip":"这里的近义选项是 idea，但 stereotype 更强调以偏概全。"},"promoted":{"pos":"v. 过去分词（原形 promote）","zh":"被促进；被推广；受到鼓励","near":"encouraged（受到鼓励的）","phrase":"should be promoted — 应该受到鼓励／推广","tip":"be + promoted 构成被动语态。promote 也可以表示“使升职”，需看语境。"},"military":{"pos":"adj. 形容词；n. 名词","zh":"军事的；军队的；军方","near":"relating to the armed forces（与军队有关的）","phrase":"military service — 兵役；join the military — 参军","tip":"military service 是固定词组，不宜只按“军事服务”逐字翻译。"},"orientation":{"pos":"n. 名词","zh":"取向；倾向；方向；意向","near":"inclination / direction（倾向、方向）","phrase":"a military orientation — 从军倾向","tip":"在这个句子里不是“新生说明会”，而是对军事职业或生活的倾向。"},"against":{"pos":"prep. 介词","zh":"反对；与……对立","near":"opposed to（反对）","phrase":"be against + 名词／动名词 — 反对某事","tip":"Jerry is against women being in combat：against 后接 women being... 这一动名词结构。"},"feminine":{"pos":"adj. 形容词","zh":"女性化的；具有传统女性特质的","near":"traditionally associated with women（传统上被认为具有女性特质的）","phrase":"fighting is feminine — 战斗具有女性特质","tip":"本句是 Jerry 的看法；feminine 反义词 unfeminine。"},"required":{"pos":"adj. 形容词；v. 过去分词","zh":"必须的；规定要求的；被要求的","near":"compulsory / mandatory（强制性的）","phrase":"should be required — 应当被规定为必须","tip":"require sb. to do sth.＝要求某人做某事；在这里与 voluntary 相对。"},"fair":{"pos":"adj. 形容词","zh":"公平的；公正的；合理的","near":"just / equitable（公平的、公正的）","phrase":"ensure fair treatment — 确保公平待遇","tip":"fair treatment 是常见搭配；不要和 fare（票价、车费）混淆。"},"unfeminine":{"pos":"adj. 形容词","zh":"缺乏女性特质的；不符合传统女性气质的","near":"not feminine（非女性化的）","phrase":"combat is unfeminine — 战斗不符合传统女性特质","tip":"un-（否定前缀）+ feminine；句中的 does not believe 也有否定意义，要一起理解。"},"willingly":{"pos":"adv. 副词","zh":"自愿地；乐意地；心甘情愿地","near":"voluntarily / gladly（自愿地、乐意地）","phrase":"go willingly — 自愿前往","tip":"willing（adj. 愿意的）→ willingly（adv.）；用副词修饰 go。"}};
 const ORDER = ['a','b'];
 const byId = id => document.getElementById(id);
 const shuffle = items => {
@@ -174,6 +216,59 @@ byId('check').addEventListener('click',()=>grade(false));
 byId('reveal').addEventListener('click',()=>grade(true));
 byId('reset').addEventListener('click',()=>render());
 render();
+
+function renderVocab(){
+  for (const part of ORDER) {
+    const target=byId('vocab-cards-'+part);
+    target.replaceChildren();
+    DATA[part].forEach((q,i)=>{
+      const info=LEXICON[q.answer];
+      if(!info)throw new Error('Missing vocabulary entry: '+q.answer);
+      const card=document.createElement('article');card.className='vocab-card';card.id='word-'+q.answer;
+      const header=document.createElement('div');header.className='vocab-card-header';
+      const term=document.createElement('strong');term.className='vocab-word';term.textContent=q.answer;
+      const index=document.createElement('span');index.className='vocab-index';index.textContent=part.toUpperCase()+' · '+String(i+1).padStart(2,'0');
+      header.append(term,index);
+      const pos=document.createElement('p');pos.className='vocab-pos';pos.textContent=info.pos;
+      const meaning=document.createElement('p');meaning.className='vocab-meaning';meaning.textContent=info.zh;
+      const near=document.createElement('p');near.className='vocab-near';near.textContent='近义／解释：'+info.near;
+      const phrase=document.createElement('div');phrase.className='vocab-phrase';
+      const phraseLabel=document.createElement('span');phraseLabel.className='vocab-label';phraseLabel.textContent='固定搭配／记忆线索';
+      const phraseText=document.createElement('span');phraseText.textContent=info.phrase;phrase.append(phraseLabel,phraseText);
+      const exampleTitle=document.createElement('div');exampleTitle.className='vocab-example-title';exampleTitle.textContent='TEXTBOOK SENTENCE · 课本例句';
+      const example=document.createElement('p');example.className='vocab-example';
+      example.append(document.createTextNode(q.before));
+      const mark=document.createElement('mark');mark.textContent=q.answer;example.append(mark,document.createTextNode(q.after));
+      const cn=document.createElement('p');cn.className='vocab-zh';cn.textContent=q.zh;
+      const note=document.createElement('p');note.className='vocab-note';note.textContent='记忆：'+info.tip;
+      card.append(header,pos,meaning,near,phrase,exampleTitle,example,cn,note);
+      target.append(card);
+    });
+  }
+}
+function switchPage(next,updateHash=true){
+  const page=next==='vocab-page'?'vocab-page':'quiz-page';
+  for (const id of ['quiz-page','vocab-page']) {
+    byId(id).hidden=id!==page;
+    const tab=byId(id==='quiz-page'?'tab-quiz':'tab-vocab');
+    tab.setAttribute('aria-selected',String(id===page));
+    tab.tabIndex=id===page?0:-1;
+  }
+  if(updateHash) {
+    history.replaceState(null,'',location.pathname+location.search+(page==='vocab-page'?'#vocab-page':'#quiz-page'));
+    document.querySelector('.page-tabs').scrollIntoView({block:'start',behavior:'auto'});
+  }
+}
+document.querySelectorAll('.page-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>switchPage(btn.dataset.page));
+});
+window.addEventListener('hashchange',()=>{
+  const hash=location.hash.slice(1);
+  switchPage(hash==='vocab-page'||hash.startsWith('vocab-')?'vocab-page':'quiz-page',false);
+});
+renderVocab();
+const startHash=location.hash.slice(1);
+switchPage(startHash==='vocab-page'||startHash.startsWith('vocab-')?'vocab-page':'quiz-page',false);
 </script>
 </body>
 </html>
