@@ -247,6 +247,27 @@
     opacity:0.7;
     text-align:center;
   }
+
+  .speak-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;
+    height:26px;
+    margin-left:8px;
+    padding:0;
+    border:1px solid var(--sage);
+    background:transparent;
+    color:var(--sage-dark);
+    border-radius:50%;
+    cursor:pointer;
+    vertical-align:middle;
+    transition:background 0.15s, color 0.15s, transform 0.15s;
+    flex:0 0 auto;
+  }
+  .speak-btn svg{width:14px;height:14px;display:block;}
+  .speak-btn:active{transform:scale(0.92);}
+  .speak-btn.playing{background:var(--sage);color:#fff;}
 </style>
 </head>
 <body>
@@ -299,6 +320,35 @@ const data37 = [
   ["in terms of","used to describe which particular area of a subject you are discussing","phr","就……而言；从……角度看","particular area of a subject"]
 ];
 
+const SPEAK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+
+function speakText(raw, btn){
+  if(!('speechSynthesis' in window)) return;
+  const text = raw.replace(/\(s\)/g,'').replace(/[()]/g,'').replace(/\s+/g,' ').trim();
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  const voice = synth.getVoices().find(v=>/^en[-_]US/i.test(v.lang));
+  if(voice) u.voice = voice;
+  if(btn) btn.classList.add('playing');
+  const done = ()=>{ if(btn) btn.classList.remove('playing'); };
+  u.onend = done;
+  u.onerror = done;
+  synth.speak(u);
+}
+
+function makeSpeakBtn(word){
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'speak-btn';
+  b.setAttribute('aria-label','朗读 ' + word);
+  b.innerHTML = SPEAK_ICON;
+  b.addEventListener('click', e=>{ e.stopPropagation(); speakText(word, b); });
+  return b;
+}
+
 function buildHighlightedDef(defText, keyword){
   const frag = document.createDocumentFragment();
   const idx = keyword ? defText.indexOf(keyword) : -1;
@@ -325,6 +375,7 @@ function renderList(containerId, data){
     const wordEl = document.createElement('span');
     wordEl.className = 'list-word';
     wordEl.textContent = w;
+    wordEl.appendChild(makeSpeakBtn(w));
     const defCol = document.createElement('span');
     defCol.className = 'list-def-col';
     const defEl = document.createElement('span');
@@ -398,6 +449,7 @@ function startRound(){
     const el = document.createElement('div');
     el.className = 'match-item word';
     el.textContent = p.word;
+    el.appendChild(makeSpeakBtn(p.word));
     el.dataset.id = p.id;
     el.addEventListener('click', ()=>onPick(el, 'word', p.id));
     wordCol.appendChild(el);
