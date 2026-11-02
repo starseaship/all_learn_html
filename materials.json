@@ -738,6 +738,21 @@
         "4.7"
       ],
       "addedOrder": 63
+    },
+    {
+      "path": "26aut/ENGLISH/Grammar_Unit16_Review_Check_Quiz_20261102.html",
+      "title": "语法U16｜考试原题",
+      "description": "11月2日Review与Check考试题，含在线作答、自动评分、改错解析及单词发音。",
+      "subject": "english",
+      "type": "quiz",
+      "course": "语法",
+      "date": "2026-11-02",
+      "lessonNumber": 16,
+      "badges": [
+        "Unit 16",
+        "11.2考试"
+      ],
+      "addedOrder": 64
     }
   ]
 }
