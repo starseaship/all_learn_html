@@ -710,6 +710,20 @@
         "Unit 16"
       ],
       "addedOrder": 61
+    },
+    {
+      "path": "26aut/ENGLISH/Human_Rights_Ch4.3_Vocab.html",
+      "title": "阅读单词4.3",
+      "description": "",
+      "subject": "english",
+      "type": "vocabulary",
+      "course": "阅读",
+      "date": "2026-11-02",
+      "lessonNumber": null,
+      "badges": [
+        "4.3"
+      ],
+      "addedOrder": 62
     }
   ]
 }
