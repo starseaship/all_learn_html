@@ -146,18 +146,17 @@
     {
       "path": "26aut/ENGLISH/HR_Reading_Combined_Chapters.html",
       "title": "HR阅读｜综合问答",
-      "description": "HR2.3、HR2.7、HR2.10、HR3.3、HR3.10 分章节切换，题目与答案中英对照，保留关键词及重点标记。",
+      "description": "HR2.3、HR2.7、HR2.10、HR3.3、HR3.10、HR4.7 共6章阅读问答，中英对照及关键词记忆。",
       "subject": "english",
       "type": "reference",
       "course": "阅读",
-      "date": "2026-10-28",
+      "date": "2026-11-04",
       "lessonNumber": null,
       "addedOrder": 56,
       "badges": [
-        "HR2.3",
-        "HR2.7",
-        "HR2.10",
-        "HR3.3/3.10"
+        "HR2.x",
+        "HR3.x",
+        "HR4.7"
       ]
     },
     {
