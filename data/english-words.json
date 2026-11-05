@@ -1,4 +1,433 @@
 {
   "version": 1,
-  "words": []
+  "words": [
+    {
+      "id": 1501,
+      "word": "Resident",
+      "pos": "n.",
+      "meaning": "居民"
+    },
+    {
+      "id": 1502,
+      "word": "Selection",
+      "pos": "n.",
+      "meaning": "精选，挑选",
+      "definition": "the process of choosing someone or something carefully"
+    },
+    {
+      "id": 1503,
+      "word": "Empty",
+      "pos": "adj.",
+      "meaning": "空的"
+    },
+    {
+      "id": 1504,
+      "word": "Opposition",
+      "pos": "n.",
+      "meaning": "反对，对立",
+      "definition": "the feeling or act of disagreeing with something"
+    },
+    {
+      "id": 1505,
+      "word": "Entirely",
+      "pos": "adv.",
+      "meaning": "完全地"
+    },
+    {
+      "id": 1513,
+      "word": "Insist",
+      "pos": "v.",
+      "meaning": "坚持"
+    },
+    {
+      "id": 1514,
+      "word": "Bridge",
+      "pos": "n.",
+      "meaning": "桥梁"
+    },
+    {
+      "id": 1515,
+      "word": "License",
+      "pos": "n.",
+      "meaning": "许可证，执照"
+    },
+    {
+      "id": 1516,
+      "word": "Concentrate",
+      "pos": "v.",
+      "meaning": "集中"
+    },
+    {
+      "id": 1517,
+      "word": "Entry",
+      "pos": "n.",
+      "meaning": "进入，条目",
+      "definition": "the act of getting inside something"
+    },
+    {
+      "id": 1518,
+      "word": "Reduction",
+      "pos": "n.",
+      "meaning": "缩减"
+    },
+    {
+      "id": 1519,
+      "word": "Respectively",
+      "pos": "adv.",
+      "meaning": "各自，分别",
+      "definition": "with regards to each person or thing"
+    },
+    {
+      "id": 1522,
+      "word": "Rent",
+      "pos": "n.",
+      "meaning": "租金",
+      "definition": "payment for the use of someone else's property"
+    },
+    {
+      "id": 1523,
+      "word": "Odd",
+      "pos": "adj.",
+      "meaning": "奇怪的，古怪的"
+    },
+    {
+      "id": 1524,
+      "word": "Musical",
+      "pos": "adj.",
+      "meaning": "音乐的，悦耳的"
+    },
+    {
+      "id": 1525,
+      "word": "Appearance",
+      "pos": "n.",
+      "meaning": "外貌"
+    },
+    {
+      "id": 1526,
+      "word": "Bore",
+      "pos": "v.",
+      "meaning": "令人厌烦；令人感到无聊"
+    },
+    {
+      "id": 1528,
+      "word": "Adviser",
+      "pos": "n.",
+      "meaning": "顾问",
+      "definition": "someone who gives an opinion or suggestion about what should be done"
+    },
+    {
+      "id": 1529,
+      "word": "Reasonable",
+      "pos": "adj.",
+      "meaning": "合理的，公道的"
+    },
+    {
+      "id": 1530,
+      "word": "Rely",
+      "pos": "v.",
+      "meaning": "依赖，依靠",
+      "definition": "to trust in someone or something"
+    },
+    {
+      "id": 1531,
+      "word": "Presidential",
+      "pos": "adj.",
+      "meaning": "总统(职务)的；总统相关的"
+    },
+    {
+      "id": 1532,
+      "word": "Sequence",
+      "pos": "n.",
+      "meaning": "顺序，序列",
+      "definition": "the order in which things should happen or be done"
+    },
+    {
+      "id": 1533,
+      "word": "Soft",
+      "pos": "adj.",
+      "meaning": "柔软的",
+      "definition": "being smooth to the touch or not rough"
+    },
+    {
+      "id": 1534,
+      "word": "Stretch",
+      "pos": "v.",
+      "meaning": "舒展"
+    },
+    {
+      "id": 1535,
+      "word": "Considerable",
+      "pos": "adj.",
+      "meaning": "相当大的，可观的",
+      "definition": "being large enough or important to notice"
+    },
+    {
+      "id": 1536,
+      "word": "Fuel",
+      "pos": "n.",
+      "meaning": "燃料"
+    },
+    {
+      "id": 1537,
+      "word": "Bottle",
+      "pos": "n.",
+      "meaning": "瓶"
+    },
+    {
+      "id": 1538,
+      "word": "Unique",
+      "pos": "adj.",
+      "meaning": "独特的"
+    },
+    {
+      "id": 1539,
+      "word": "Atmosphere",
+      "pos": "n.",
+      "meaning": "大气，气氛"
+    },
+    {
+      "id": 1540,
+      "word": "Practical",
+      "pos": "adj.",
+      "meaning": "实用的，实际的",
+      "definition": "relating to real events or situations"
+    },
+    {
+      "id": 1541,
+      "word": "Presentation",
+      "pos": "n.",
+      "meaning": "陈述，报告"
+    },
+    {
+      "id": 1542,
+      "word": "Theme",
+      "pos": "n.",
+      "meaning": "主题"
+    },
+    {
+      "id": 1543,
+      "word": "Hell",
+      "pos": "n.",
+      "meaning": "地狱",
+      "definition": "the place where bad people will go when they die"
+    },
+    {
+      "id": 1544,
+      "word": "Lock",
+      "pos": "n.",
+      "meaning": "锁",
+      "definition": "a device that keeps something closed"
+    },
+    {
+      "id": 1545,
+      "word": "Prior",
+      "pos": "adj.",
+      "meaning": "优先的，在前的",
+      "definition": "existing earlier in time or order"
+    },
+    {
+      "id": 1546,
+      "word": "Secondly",
+      "pos": "adv.",
+      "meaning": "其次，第二"
+    },
+    {
+      "id": 1547,
+      "word": "Peak",
+      "pos": "n.",
+      "meaning": "顶峰，顶点",
+      "definition": "the highest level or degree of something"
+    },
+    {
+      "id": 1548,
+      "word": "Mechanism",
+      "pos": "n.",
+      "meaning": "机制，机械装置",
+      "definition": "a part of a machine that performs a certain function"
+    },
+    {
+      "id": 1549,
+      "word": "Explanation",
+      "pos": "n.",
+      "meaning": "解释"
+    },
+    {
+      "id": 1550,
+      "word": "Nowadays",
+      "pos": "adv.",
+      "meaning": "现今"
+    },
+    {
+      "id": 1551,
+      "word": "Native",
+      "pos": "adj.",
+      "meaning": "本国的，土著的，天然的"
+    },
+    {
+      "id": 1552,
+      "word": "Succeed",
+      "pos": "v.",
+      "meaning": "成功"
+    },
+    {
+      "id": 1553,
+      "word": "Mail",
+      "pos": "n.",
+      "meaning": "邮件"
+    },
+    {
+      "id": 1554,
+      "word": "Cast",
+      "pos": "n.",
+      "meaning": "演员阵容，投掷",
+      "definition": "a group of performers in a movie or show"
+    },
+    {
+      "id": 1555,
+      "word": "Wild",
+      "pos": "adj.",
+      "meaning": "野生的"
+    },
+    {
+      "id": 1556,
+      "word": "Folk",
+      "pos": "n.",
+      "meaning": "人们，世人"
+    },
+    {
+      "id": 1557,
+      "word": "Intelligence",
+      "pos": "n.",
+      "meaning": "智力"
+    },
+    {
+      "id": 1558,
+      "word": "Sheet",
+      "pos": "n.",
+      "meaning": "薄片，床单",
+      "definition": "a large piece of cloth used to cover something"
+    },
+    {
+      "id": 1559,
+      "word": "Ear",
+      "pos": "n.",
+      "meaning": "耳朵"
+    },
+    {
+      "id": 1560,
+      "word": "Journey",
+      "pos": "n.",
+      "meaning": "旅行"
+    },
+    {
+      "id": 1561,
+      "word": "Tiny",
+      "pos": "adj.",
+      "meaning": "微小的"
+    },
+    {
+      "id": 1562,
+      "word": "Terrible",
+      "pos": "adj.",
+      "meaning": "可怕的，非常讨厌的"
+    },
+    {
+      "id": 1563,
+      "word": "Online",
+      "pos": "adj.",
+      "meaning": "在线的"
+    },
+    {
+      "id": 1564,
+      "word": "Multiple",
+      "pos": "adj.",
+      "meaning": "多样的，多选的"
+    },
+    {
+      "id": 1565,
+      "word": "Declare",
+      "pos": "v.",
+      "meaning": "宣告"
+    },
+    {
+      "id": 1568,
+      "word": "Mental",
+      "pos": "adj.",
+      "meaning": "精神的，脑力的"
+    },
+    {
+      "id": 1569,
+      "word": "Specifically",
+      "pos": "adv.",
+      "meaning": "明确地，具体地",
+      "definition": "used to show the exact use of something"
+    },
+    {
+      "id": 1570,
+      "word": "Relief",
+      "pos": "n.",
+      "meaning": "解脱，放松"
+    },
+    {
+      "id": 1571,
+      "word": "Professor",
+      "pos": "n.",
+      "meaning": "教授"
+    },
+    {
+      "id": 1572,
+      "word": "Yard",
+      "pos": "n.",
+      "meaning": "院子"
+    },
+    {
+      "id": 1573,
+      "word": "Celebrate",
+      "pos": "v.",
+      "meaning": "庆祝"
+    },
+    {
+      "id": 1574,
+      "word": "Personality",
+      "pos": "n.",
+      "meaning": "个性，品格"
+    },
+    {
+      "id": 1575,
+      "word": "Construct",
+      "pos": "v.",
+      "meaning": "建立，建造"
+    },
+    {
+      "id": 1576,
+      "word": "Joint",
+      "pos": "n.",
+      "meaning": "关节",
+      "definition": "a part of the body where bones meet"
+    },
+    {
+      "id": 1577,
+      "word": "Row",
+      "pos": "n.",
+      "meaning": "行，排"
+    },
+    {
+      "id": 1578,
+      "word": "Capture",
+      "pos": "v.",
+      "meaning": "俘虏，捕获"
+    },
+    {
+      "id": 1579,
+      "word": "Justice",
+      "pos": "n.",
+      "meaning": "公正，公平"
+    },
+    {
+      "id": 1580,
+      "word": "Constant",
+      "pos": "adj.",
+      "meaning": "不变的，恒定的，经常的"
+    }
+  ]
 }
