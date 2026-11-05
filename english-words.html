@@ -58,6 +58,7 @@
     .phonetic { color: var(--dim); font-size: 13px; }
     .meaning { margin: 7px 0 0; font-size: 14px; color: var(--text); }
     .definition { margin: 5px 0 0; color: var(--dim); font-size: 13px; line-height: 1.65; }
+    .japanese { margin: 4px 0 0; color: var(--dim); font-size: 13px; line-height: 1.65; }
     .pos { display: inline-block; margin-right: 7px; color: var(--blue-deep); font-size: 12px; font-weight: 700; }
     .example { margin: 10px 0 0; padding-left: 12px; border-left: 3px solid var(--mint); font-size: 13px; color: var(--dim); }
     .example-translation { display: block; margin-top: 3px; }
@@ -177,6 +178,7 @@
             pos: String(entry.pos ?? entry.partOfSpeech ?? '').trim(),
             meaning: String(entry.meaning ?? '').trim(),
             definition: String(entry.definition ?? '').trim(),
+            japanese: String(entry.japanese ?? '').trim(),
             example: String(entry.example ?? '').trim(),
             translation: String(entry.exampleTranslation ?? entry.translation ?? '').trim()
           });
@@ -204,6 +206,7 @@
           main.append(meaning);
         }
         if (entry.definition) main.append(make('p', 'definition', entry.definition));
+        if (entry.japanese) main.append(make('p', 'japanese', '日文：' + entry.japanese));
         if (entry.example || entry.translation) {
           const example = make('p', 'example');
           if (entry.example) example.append(document.createTextNode(entry.example));
