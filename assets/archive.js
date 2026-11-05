@@ -85,6 +85,10 @@ function render() {
     button.setAttribute('aria-pressed',String(item.id===state.semester));
     ui.collectionTabs.append(button);
   }
+  const vocabLink=node('a','collection-tab vocabulary-tab','英语单词');
+  vocabLink.href='./english-words.html';
+  vocabLink.title='打开英语单词库';
+  ui.collectionTabs.append(vocabLink);
   renderFilter(ui.subjectFilter,'subject',subjects,SUBJECT_LABELS,'科目');
   renderFilter(ui.courseFilter,'course',courses,COURSE_LABELS,'课程');
   renderFilter(ui.typeFilter,'type',types,TYPE_LABELS,'类型');
