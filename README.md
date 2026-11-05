@@ -28,3 +28,30 @@
 - `scripts/build_catalog.py`：生成轻量目录，无第三方依赖。
 
 发布仍使用现有 GitHub Pages。没有本地编辑、导入导出、收藏或继续阅读功能。
+
+## 英语单词库
+
+首页顶部的「英语单词」是独立入口，页面文件为根目录下的 `english-words.html`，数据文件为 `data/english-words.json`，**不参与学期资料目录 `materials.json` 的生成**。
+
+单词页面支持英文单词实时搜索（大小写不敏感、支持部分拼写）、按**编号数值**正序/倒序，以及按起始编号和结束编号（两端包含，例如 1530–1610）筛选。三种条件可以组合，单词很多时每次显示 80 条并可继续加载。
+
+`data/english-words.json` 的格式：
+
+```json
+{
+  "version": 1,
+  "words": [
+    {
+      "id": 1530,
+      "word": "example",
+      "phonetic": "/ɪɡˈzæmpəl/",
+      "pos": "n.",
+      "meaning": "例子",
+      "example": "This is an example.",
+      "exampleTranslation": "这是一个例子。"
+    }
+  ]
+}
+```
+
+以上仅为格式示例，**不是页面内已录入的单词**。目前数据文件为空数组，后续应根据实际提供的编号与单词列表追加；`id` 是非负整数且不能重复，`word` 必填，其余字段可选。保存后，GitHub Pages 部署更新便会展示新词条。页面也兼容 `number`/`no` 作为编号、`english` 作为英文单词的字段名。
