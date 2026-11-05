@@ -24,6 +24,8 @@ h1 span { color: #85508f; }
 .collection-tab { min-height: 36px; padding: 7px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--dim); font-size: 12px; font-weight: 600; white-space: nowrap; transition: background-color .12s, color .12s; }
 .collection-tab[aria-pressed="true"] { background: var(--text); color: #fff; border-color: var(--text); }
 .collection-tab:hover:not([aria-pressed="true"]) { border-color: #b5a8c9; color: var(--text); background: var(--lav); }
+.collection-tabs a.collection-tab { display: inline-flex; align-items: center; text-decoration: none; }
+.collection-tabs a.collection-tab:hover { border-color: #b5a8c9; color: var(--text); background: var(--lav); }
 .header-stats { display: flex; gap: 6px; }
 .stat-chip { margin: 0; padding: 3px 8px; border: 1px solid var(--border); background: var(--surface); border-radius: 30px; font-size: 10px; white-space: nowrap; }
 .stat-chip strong { font-size: 11px; margin-right: 2px; }
