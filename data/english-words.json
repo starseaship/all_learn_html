@@ -428,6 +428,895 @@
       "word": "Constant",
       "pos": "adj.",
       "meaning": "不变的，恒定的，经常的"
+    },
+    {
+      "id": 1581,
+      "word": "Youth",
+      "pos": "n.",
+      "meaning": "青春，年轻",
+      "japanese": "若い頃、若さ"
+    },
+    {
+      "id": 1582,
+      "word": "Coast",
+      "pos": "n.",
+      "meaning": "海岸",
+      "japanese": "沿岸"
+    },
+    {
+      "id": 1583,
+      "word": "Expectation",
+      "pos": "n.",
+      "meaning": "期待",
+      "japanese": "期待"
+    },
+    {
+      "id": 1584,
+      "word": "Witness",
+      "pos": "n.",
+      "meaning": "目击者",
+      "japanese": "目撃者"
+    },
+    {
+      "id": 1585,
+      "word": "Blame",
+      "pos": "v.",
+      "meaning": "责备",
+      "japanese": "責める"
+    },
+    {
+      "id": 1586,
+      "word": "Tone",
+      "pos": "n.",
+      "meaning": "语调，基调",
+      "japanese": "口調、音色"
+    },
+    {
+      "id": 1587,
+      "word": "Seriously",
+      "pos": "adv.",
+      "meaning": "严肃地，认真地",
+      "japanese": "真剣に"
+    },
+    {
+      "id": 1588,
+      "word": "Honor",
+      "pos": "v.",
+      "meaning": "荣誉，表彰",
+      "japanese": "称賛する、名誉を与える"
+    },
+    {
+      "id": 1589,
+      "word": "Electronic",
+      "pos": "adj.",
+      "meaning": "电子的",
+      "japanese": "電子的な"
+    },
+    {
+      "id": 1590,
+      "word": "Dealer",
+      "pos": "n.",
+      "meaning": "经销商，商人",
+      "japanese": "商人、販売業者"
+    },
+    {
+      "id": 1591,
+      "word": "Disk",
+      "pos": "n.",
+      "meaning": "磁盘，圆盘",
+      "japanese": "ディスク"
+    },
+    {
+      "id": 1592,
+      "word": "Northern",
+      "pos": "adj.",
+      "meaning": "北方的",
+      "japanese": "北方の"
+    },
+    {
+      "id": 1593,
+      "word": "Chemical",
+      "pos": "adj.",
+      "meaning": "化学的",
+      "japanese": "化学の、化学的な"
+    },
+    {
+      "id": 1594,
+      "word": "Somehow",
+      "pos": "adv.",
+      "meaning": "不知为何，设法",
+      "japanese": "どうにかして"
+    },
+    {
+      "id": 1595,
+      "word": "Hill",
+      "pos": "n.",
+      "meaning": "小山，高地",
+      "japanese": "丘、(軍)高地"
+    },
+    {
+      "id": 1596,
+      "word": "Fruit",
+      "pos": "n.",
+      "meaning": "水果",
+      "japanese": "果物"
+    },
+    {
+      "id": 1597,
+      "word": "Fellow",
+      "pos": "adj.",
+      "meaning": "同伴的，伙伴的",
+      "japanese": "仲間の"
+    },
+    {
+      "id": 1598,
+      "word": "Guard",
+      "pos": "n.",
+      "meaning": "警卫，看守",
+      "japanese": "警備員"
+    },
+    {
+      "id": 1599,
+      "word": "Sky",
+      "pos": "n.",
+      "meaning": "天空",
+      "japanese": "空"
+    },
+    {
+      "id": 1600,
+      "word": "Vision",
+      "pos": "n.",
+      "meaning": "视力，愿景",
+      "japanese": "視力"
+    },
+    {
+      "id": 1601,
+      "word": "Impose",
+      "pos": "v.",
+      "meaning": "征收，强加",
+      "japanese": "課す、押しつける"
+    },
+    {
+      "id": 1602,
+      "word": "Reserve",
+      "pos": "n.",
+      "meaning": "储备，预定",
+      "japanese": "蓄え"
+    },
+    {
+      "id": 1603,
+      "word": "Minimum",
+      "pos": "adj.",
+      "meaning": "最小的",
+      "japanese": "最小の"
+    },
+    {
+      "id": 1604,
+      "word": "Surely",
+      "pos": "adv.",
+      "meaning": "确实，必定",
+      "japanese": "確かに"
+    },
+    {
+      "id": 1605,
+      "word": "Thin",
+      "pos": "adj.",
+      "meaning": "薄的，细的",
+      "japanese": "薄い"
+    },
+    {
+      "id": 1606,
+      "word": "Variation",
+      "pos": "n.",
+      "meaning": "变化，变体",
+      "japanese": "変化"
+    },
+    {
+      "id": 1607,
+      "word": "Formal",
+      "pos": "adj.",
+      "meaning": "正式的",
+      "japanese": "正式な、公式の"
+    },
+    {
+      "id": 1608,
+      "word": "Verb",
+      "pos": "n.",
+      "meaning": "动词",
+      "japanese": "動詞"
+    },
+    {
+      "id": 1609,
+      "word": "Frequently",
+      "pos": "adv.",
+      "meaning": "频繁地",
+      "japanese": "しばしば、頻繁に"
+    },
+    {
+      "id": 1611,
+      "word": "Retire",
+      "pos": "v.",
+      "meaning": "退休",
+      "japanese": "引退する"
+    },
+    {
+      "id": 1612,
+      "word": "Recover",
+      "pos": "v.",
+      "meaning": "恢复，康复",
+      "japanese": "快復する"
+    },
+    {
+      "id": 1613,
+      "word": "Seed",
+      "pos": "n.",
+      "meaning": "种子",
+      "japanese": "種"
+    },
+    {
+      "id": 1614,
+      "word": "Tip",
+      "pos": "n.",
+      "meaning": "尖端，小费",
+      "japanese": "先端"
+    },
+    {
+      "id": 1615,
+      "word": "Instruction",
+      "pos": "n.",
+      "meaning": "指示，说明",
+      "japanese": "指示"
+    },
+    {
+      "id": 1616,
+      "word": "Chart",
+      "pos": "n.",
+      "meaning": "图表",
+      "japanese": "図表"
+    },
+    {
+      "id": 1617,
+      "word": "Mission",
+      "pos": "n.",
+      "meaning": "任务",
+      "japanese": "任務"
+    },
+    {
+      "id": 1618,
+      "word": "Absence",
+      "pos": "n.",
+      "meaning": "缺席，缺乏",
+      "japanese": "不在、欠けていること"
+    },
+    {
+      "id": 1619,
+      "word": "Fat",
+      "pos": "adj.",
+      "meaning": "胖的，脂肪",
+      "japanese": "太った"
+    },
+    {
+      "id": 1620,
+      "word": "East",
+      "pos": "n.",
+      "meaning": "东方",
+      "japanese": "東"
+    },
+    {
+      "id": 1621,
+      "word": "Derive",
+      "pos": "v.",
+      "meaning": "衍生，导出",
+      "japanese": "引き出す"
+    },
+    {
+      "id": 1622,
+      "word": "Ordinary",
+      "pos": "adj.",
+      "meaning": "普通的",
+      "japanese": "普通の"
+    },
+    {
+      "id": 1623,
+      "word": "Critic",
+      "pos": "n.",
+      "meaning": "批评家，评论员",
+      "japanese": "評論家"
+    },
+    {
+      "id": 1624,
+      "word": "Helpful",
+      "pos": "adj.",
+      "meaning": "有帮助的",
+      "japanese": "役立つ、助けになる"
+    },
+    {
+      "id": 1625,
+      "word": "Gene",
+      "pos": "n.",
+      "meaning": "基因",
+      "japanese": "遺伝子"
+    },
+    {
+      "id": 1626,
+      "word": "Anywhere",
+      "pos": "adv.",
+      "meaning": "任何地方",
+      "japanese": "どこでも"
+    },
+    {
+      "id": 1629,
+      "word": "Ideal",
+      "pos": "adj.",
+      "meaning": "理想的",
+      "japanese": "理想的な"
+    },
+    {
+      "id": 1630,
+      "word": "Neighborhood",
+      "pos": "n.",
+      "meaning": "邻近地区，街坊",
+      "japanese": "近所"
+    },
+    {
+      "id": 1631,
+      "word": "Smell",
+      "pos": "n.",
+      "meaning": "气味",
+      "japanese": "匂い"
+    },
+    {
+      "id": 1632,
+      "word": "Silence",
+      "pos": "n.",
+      "meaning": "沉默，寂静",
+      "japanese": "沈黙、静けさ"
+    },
+    {
+      "id": 1633,
+      "word": "Disappear",
+      "pos": "v.",
+      "meaning": "消失",
+      "japanese": "消える"
+    },
+    {
+      "id": 1634,
+      "word": "Cat",
+      "pos": "n.",
+      "meaning": "猫",
+      "japanese": "猫"
+    },
+    {
+      "id": 1635,
+      "word": "Lip",
+      "pos": "n.",
+      "meaning": "嘴唇",
+      "japanese": "唇"
+    },
+    {
+      "id": 1636,
+      "word": "Passenger",
+      "pos": "n.",
+      "meaning": "乘客",
+      "japanese": "乗客"
+    },
+    {
+      "id": 1637,
+      "word": "Compete",
+      "pos": "v.",
+      "meaning": "竞争",
+      "japanese": "競争する"
+    },
+    {
+      "id": 1638,
+      "word": "Representation",
+      "pos": "n.",
+      "meaning": "表现，描绘",
+      "japanese": "描写"
+    },
+    {
+      "id": 1639,
+      "word": "Rush",
+      "pos": "v.",
+      "meaning": "急忙，冲",
+      "japanese": "急ぐ"
+    },
+    {
+      "id": 1640,
+      "word": "Disorder",
+      "pos": "n.",
+      "meaning": "混乱，失调",
+      "japanese": "障害、混乱"
+    },
+    {
+      "id": 1641,
+      "word": "Shut",
+      "pos": "v.",
+      "meaning": "关闭",
+      "japanese": "閉める"
+    },
+    {
+      "id": 1642,
+      "word": "Complaint",
+      "pos": "n.",
+      "meaning": "抱怨，投诉",
+      "japanese": "苦情"
+    },
+    {
+      "id": 1643,
+      "word": "Careful",
+      "pos": "adj.",
+      "meaning": "仔细的，小心的",
+      "japanese": "注意深い、気をつけて"
+    },
+    {
+      "id": 1644,
+      "word": "Column",
+      "pos": "n.",
+      "meaning": "专栏，柱子",
+      "japanese": "柱"
+    },
+    {
+      "id": 1645,
+      "word": "Religion",
+      "pos": "n.",
+      "meaning": "宗教",
+      "japanese": "宗教"
+    },
+    {
+      "id": 1646,
+      "word": "Legislation",
+      "pos": "n.",
+      "meaning": "立法",
+      "japanese": "法律制定、立法行為"
+    },
+    {
+      "id": 1647,
+      "word": "Employer",
+      "pos": "n.",
+      "meaning": "雇主",
+      "japanese": "雇い主"
+    },
+    {
+      "id": 1648,
+      "word": "Widely",
+      "pos": "adv.",
+      "meaning": "广泛地",
+      "japanese": "広く"
+    },
+    {
+      "id": 1649,
+      "word": "Protest",
+      "pos": "n.",
+      "meaning": "抗议",
+      "japanese": "抗議"
+    },
+    {
+      "id": 1650,
+      "word": "Ancient",
+      "pos": "adj.",
+      "meaning": "古代的",
+      "japanese": "古代の"
+    },
+    {
+      "id": 1651,
+      "word": "Illustrate",
+      "pos": "v.",
+      "meaning": "阐明，举例说明",
+      "japanese": "説明する、挿絵で示す"
+    },
+    {
+      "id": 1652,
+      "word": "Faith",
+      "pos": "n.",
+      "meaning": "信念，信仰",
+      "japanese": "信念、信用"
+    },
+    {
+      "id": 1653,
+      "word": "Observation",
+      "pos": "n.",
+      "meaning": "观察",
+      "japanese": "観察"
+    },
+    {
+      "id": 1654,
+      "word": "Reject",
+      "pos": "v.",
+      "meaning": "拒绝",
+      "japanese": "拒絶する"
+    },
+    {
+      "id": 1655,
+      "word": "Imply",
+      "pos": "v.",
+      "meaning": "暗示，意味着",
+      "japanese": "含意する、暗示する"
+    },
+    {
+      "id": 1656,
+      "word": "Ban",
+      "pos": "v.",
+      "meaning": "禁止",
+      "japanese": "禁止する"
+    },
+    {
+      "id": 1657,
+      "word": "Implement",
+      "pos": "v.",
+      "meaning": "实施，执行",
+      "japanese": "実行する"
+    },
+    {
+      "id": 1658,
+      "word": "Command",
+      "pos": "n.",
+      "meaning": "命令，指挥",
+      "japanese": "指揮"
+    },
+    {
+      "id": 1659,
+      "word": "Approximately",
+      "pos": "adv.",
+      "meaning": "大约",
+      "japanese": "およそ"
+    },
+    {
+      "id": 1660,
+      "word": "Maximum",
+      "pos": "n.",
+      "meaning": "最大值",
+      "japanese": "最大"
+    },
+    {
+      "id": 1661,
+      "word": "Qualify",
+      "pos": "v.",
+      "meaning": "取得资格",
+      "japanese": "資格がある"
+    },
+    {
+      "id": 1662,
+      "word": "Somewhat",
+      "pos": "adv.",
+      "meaning": "稍微，有点",
+      "japanese": "いくらか、多少"
+    },
+    {
+      "id": 1663,
+      "word": "Regional",
+      "pos": "adj.",
+      "meaning": "地区的",
+      "japanese": "地域の"
+    },
+    {
+      "id": 1664,
+      "word": "Assumption",
+      "pos": "n.",
+      "meaning": "假设，假定",
+      "japanese": "仮定、前提"
+    },
+    {
+      "id": 1665,
+      "word": "Temporary",
+      "pos": "adj.",
+      "meaning": "临时的",
+      "japanese": "一時的な"
+    },
+    {
+      "id": 1666,
+      "word": "Attractive",
+      "pos": "adj.",
+      "meaning": "有吸引力的",
+      "japanese": "魅力的な"
+    },
+    {
+      "id": 1667,
+      "word": "Plate",
+      "pos": "n.",
+      "meaning": "盘子",
+      "japanese": "皿"
+    },
+    {
+      "id": 1668,
+      "word": "Sad",
+      "pos": "adj.",
+      "meaning": "悲伤的",
+      "japanese": "悲しい"
+    },
+    {
+      "id": 1669,
+      "word": "Frequency",
+      "pos": "n.",
+      "meaning": "频率",
+      "japanese": "頻度"
+    },
+    {
+      "id": 1670,
+      "word": "Weak",
+      "pos": "adj.",
+      "meaning": "弱的",
+      "japanese": "弱い"
+    },
+    {
+      "id": 1671,
+      "word": "Slip",
+      "pos": "v.",
+      "meaning": "滑倒，滑动",
+      "japanese": "すべる"
+    },
+    {
+      "id": 1672,
+      "word": "Victory",
+      "pos": "n.",
+      "meaning": "胜利",
+      "japanese": "勝利"
+    },
+    {
+      "id": 1673,
+      "word": "Academic",
+      "pos": "adj.",
+      "meaning": "学术的",
+      "japanese": "学校の、学問の"
+    },
+    {
+      "id": 1674,
+      "word": "County",
+      "pos": "n.",
+      "meaning": "郡，县",
+      "japanese": "郡"
+    },
+    {
+      "id": 1675,
+      "word": "Circle",
+      "pos": "n.",
+      "meaning": "圆，圈子",
+      "japanese": "円"
+    },
+    {
+      "id": 1676,
+      "word": "Joke",
+      "pos": "n.",
+      "meaning": "玩笑",
+      "japanese": "冗談"
+    },
+    {
+      "id": 1677,
+      "word": "Hat",
+      "pos": "n.",
+      "meaning": "帽子",
+      "japanese": "帽子"
+    },
+    {
+      "id": 1678,
+      "word": "Dozen",
+      "pos": "n.",
+      "meaning": "一打，十二个",
+      "japanese": "12の集まり"
+    },
+    {
+      "id": 1679,
+      "word": "Kick",
+      "pos": "v.",
+      "meaning": "踢",
+      "japanese": "蹴る"
+    },
+    {
+      "id": 1680,
+      "word": "Steal",
+      "pos": "v.",
+      "meaning": "偷窃",
+      "japanese": "盗む"
+    },
+    {
+      "id": 1681,
+      "word": "Unable",
+      "pos": "adj.",
+      "meaning": "不能的，无法的",
+      "japanese": "〜ができない"
+    },
+    {
+      "id": 1682,
+      "word": "Settlement",
+      "pos": "n.",
+      "meaning": "解决，结算，协议",
+      "japanese": "合意"
+    },
+    {
+      "id": 1683,
+      "word": "Symptom",
+      "pos": "n.",
+      "meaning": "症状",
+      "japanese": "症状"
+    },
+    {
+      "id": 1684,
+      "word": "Reporter",
+      "pos": "n.",
+      "meaning": "记者，通讯员",
+      "japanese": "報告者、報道者"
+    },
+    {
+      "id": 1685,
+      "word": "Accommodation",
+      "pos": "n.",
+      "meaning": "住宿，膳宿",
+      "japanese": "宿泊施設"
+    },
+    {
+      "id": 1686,
+      "word": "Household",
+      "pos": "n.",
+      "meaning": "家庭，户",
+      "japanese": "家族、世帯"
+    },
+    {
+      "id": 1687,
+      "word": "Tennis",
+      "pos": "n.",
+      "meaning": "网球",
+      "japanese": "テニス"
+    },
+    {
+      "id": 1688,
+      "word": "Merely",
+      "pos": "adv.",
+      "meaning": "仅仅，只不过",
+      "japanese": "単に"
+    },
+    {
+      "id": 1689,
+      "word": "Emotion",
+      "pos": "n.",
+      "meaning": "情感",
+      "japanese": "感情"
+    },
+    {
+      "id": 1690,
+      "word": "Tall",
+      "pos": "adj.",
+      "meaning": "高的",
+      "japanese": "高い"
+    },
+    {
+      "id": 1691,
+      "word": "Sick",
+      "pos": "adj.",
+      "meaning": "生病的，不舒服的",
+      "japanese": "具合が悪い、病気の"
+    },
+    {
+      "id": 1692,
+      "word": "Calculate",
+      "pos": "v.",
+      "meaning": "计算",
+      "japanese": "計算する"
+    },
+    {
+      "id": 1693,
+      "word": "Accuse",
+      "pos": "v.",
+      "meaning": "指控，谴责",
+      "japanese": "告訴する、非難する"
+    },
+    {
+      "id": 1694,
+      "word": "Criminal",
+      "pos": "n.",
+      "meaning": "罪犯",
+      "japanese": "犯罪者"
+    },
+    {
+      "id": 1695,
+      "word": "Scientific",
+      "pos": "adj.",
+      "meaning": "科学的",
+      "japanese": "科学的な"
+    },
+    {
+      "id": 1711,
+      "word": "Meanwhile",
+      "pos": "adv.",
+      "meaning": "与此同时",
+      "japanese": "その間、一方で"
+    },
+    {
+      "id": 1712,
+      "word": "Impression",
+      "pos": "n.",
+      "meaning": "印象，影响",
+      "japanese": "影響、印象"
+    },
+    {
+      "id": 1713,
+      "word": "Existence",
+      "pos": "n.",
+      "meaning": "存在",
+      "japanese": "存在"
+    },
+    {
+      "id": 1714,
+      "word": "Accompany",
+      "pos": "v.",
+      "meaning": "陪伴，伴随",
+      "japanese": "同伴する"
+    },
+    {
+      "id": 1715,
+      "word": "Output",
+      "pos": "n.",
+      "meaning": "产量，输出",
+      "japanese": "生産物"
+    },
+    {
+      "id": 1716,
+      "word": "Exhibition",
+      "pos": "n.",
+      "meaning": "展览，展会",
+      "japanese": "展示会、展覧会"
+    },
+    {
+      "id": 1717,
+      "word": "Salary",
+      "pos": "n.",
+      "meaning": "薪水",
+      "japanese": "給料"
+    },
+    {
+      "id": 1718,
+      "word": "Attach",
+      "pos": "v.",
+      "meaning": "附加，贴上",
+      "japanese": "取り付ける"
+    },
+    {
+      "id": 1719,
+      "word": "Acknowledge",
+      "pos": "v.",
+      "meaning": "承认，致谢",
+      "japanese": "認める"
+    },
+    {
+      "id": 1720,
+      "word": "Snow",
+      "pos": "n.",
+      "meaning": "雪",
+      "japanese": "雪"
+    },
+    {
+      "id": 1721,
+      "word": "Properly",
+      "pos": "adv.",
+      "meaning": "适当地，正确地",
+      "japanese": "適切に、正しく"
+    },
+    {
+      "id": 1722,
+      "word": "Breast",
+      "pos": "n.",
+      "meaning": "胸部",
+      "japanese": "胸、乳房"
+    },
+    {
+      "id": 1723,
+      "word": "Prime",
+      "pos": "adj.",
+      "meaning": "首要的，主要的",
+      "japanese": "最も重要な"
+    },
+    {
+      "id": 1724,
+      "word": "Intention",
+      "pos": "n.",
+      "meaning": "意图，目的",
+      "japanese": "意図、意向"
+    },
+    {
+      "id": 1725,
+      "word": "Ill",
+      "pos": "adj.",
+      "meaning": "生病的，不舒服的",
+      "japanese": "病気である、気分が悪い"
     }
   ]
 }
