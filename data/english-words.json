@@ -172,9 +172,12 @@
     },
     {
       "id": 1529,
-      "word": "Reasonable",
+      "word": "reasonable",
       "pos": "adj.",
-      "meaning": "合理的，公道的"
+      "meaning": "合理的；明智的",
+      "definition": "fair or using sound judgment",
+      "example": "A balanced approach is to be reasonable, realistic and respectful.",
+      "exampleTranslation": "平衡的方法是保持理性、务实和尊重。"
     },
     {
       "id": 1530,
@@ -185,9 +188,12 @@
     },
     {
       "id": 1531,
-      "word": "Presidential",
+      "word": "presidential",
       "pos": "adj.",
-      "meaning": "总统(职务)的；总统相关的"
+      "meaning": "总统的",
+      "definition": "relating to the leader of a republic",
+      "example": "Which presidential candidate would you vote for?",
+      "exampleTranslation": "你会投票给哪位总统候选人？"
     },
     {
       "id": 1532,
@@ -205,9 +211,12 @@
     },
     {
       "id": 1534,
-      "word": "Stretch",
+      "word": "stretch",
       "pos": "v.",
-      "meaning": "舒展"
+      "meaning": "伸展；拉伸",
+      "definition": "to lengthen a body part",
+      "example": "Stretch before and after every workout.",
+      "exampleTranslation": "每次锻炼前后都要拉伸。"
     },
     {
       "id": 1535,
@@ -230,9 +239,12 @@
     },
     {
       "id": 1538,
-      "word": "Unique",
+      "word": "unique",
       "pos": "adj.",
-      "meaning": "独特的"
+      "meaning": "独特的；独一无二的",
+      "definition": "unlike anyone or anything else",
+      "example": "I think everybody has their sort of unique characteristics.",
+      "exampleTranslation": "我认为每个人都有自己独特的特点。"
     },
     {
       "id": 1539,
@@ -242,43 +254,57 @@
     },
     {
       "id": 1540,
-      "word": "Practical",
+      "word": "practical",
       "pos": "adj.",
-      "meaning": "实用的，实际的",
-      "definition": "relating to real events or situations"
+      "meaning": "实际的；实用的",
+      "definition": "relating to real events or situations",
+      "example": "...but also how to teach the discipline in a more practical way.",
+      "exampleTranslation": "……还包括如何以更实用的方式教授这门学科。"
     },
     {
       "id": 1541,
-      "word": "Presentation",
+      "word": "presentation",
       "pos": "n.",
-      "meaning": "陈述，报告"
+      "meaning": "演讲；展示",
+      "definition": "a formal talk in front of an audience",
+      "example": "I'm working on a presentation.",
+      "exampleTranslation": "我正在准备一场演讲。"
     },
     {
       "id": 1542,
-      "word": "Theme",
+      "word": "theme",
       "pos": "n.",
-      "meaning": "主题"
+      "meaning": "主题",
+      "definition": "the main idea of a work of art",
+      "example": "Today, I chose the theme of adventure.",
+      "exampleTranslation": "今天我选择了冒险这个主题。"
     },
     {
       "id": 1543,
-      "word": "Hell",
+      "word": "hell",
       "pos": "n.",
       "meaning": "地狱",
-      "definition": "the place where bad people will go when they die"
+      "definition": "a place of punishment after death",
+      "example": "...whether we will go to heaven or hell.",
+      "exampleTranslation": "……我们会去天堂还是地狱。"
     },
     {
       "id": 1544,
-      "word": "Lock",
+      "word": "lock",
       "pos": "n.",
       "meaning": "锁",
-      "definition": "a device that keeps something closed"
+      "definition": "a device that keeps something closed",
+      "example": "Mary put the key in the lock of the door and turned it.",
+      "exampleTranslation": "玛丽把钥匙插进门锁并转动。"
     },
     {
       "id": 1545,
-      "word": "Prior",
+      "word": "prior",
       "pos": "adj.",
-      "meaning": "优先的，在前的",
-      "definition": "existing earlier in time or order"
+      "meaning": "先前的；以前的",
+      "definition": "earlier",
+      "example": "My prior experiences helped me.",
+      "exampleTranslation": "我以前的经历帮助了我。"
     },
     {
       "id": 1546,
