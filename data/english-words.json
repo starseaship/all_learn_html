@@ -34,10 +34,31 @@
       "meaning": "完全地"
     },
     {
+      "id": 1510,
+      "word": "Narrow",
+      "pos": "adj.",
+      "meaning": "狭窄的",
+      "definition": "having a small width",
+      "example": "The street is too narrow for two cars to pass.",
+      "exampleTranslation": "这条街太窄了，两辆车无法并排通过。"
+    },
+    {
+      "id": 1512,
+      "word": "Increasingly",
+      "pos": "adv.",
+      "meaning": "越来越多地，日益",
+      "definition": "more and more",
+      "example": "As our world becomes increasingly complex, ...",
+      "exampleTranslation": "随着我们的世界变得越来越复杂……"
+    },
+    {
       "id": 1513,
       "word": "Insist",
       "pos": "v.",
-      "meaning": "坚持"
+      "meaning": "坚持",
+      "definition": "to demand forcefully",
+      "example": "Some may insist that each robot work much harder.",
+      "exampleTranslation": "有些人可能坚持要求每个机器人更加努力地工作。"
     },
     {
       "id": 1514,
@@ -75,20 +96,36 @@
       "word": "Respectively",
       "pos": "adv.",
       "meaning": "各自，分别",
-      "definition": "with regards to each person or thing"
+      "definition": "in the order mentioned",
+      "example": "The second and third types were 40 and 250 kilometers away, respectively.",
+      "exampleTranslation": "第二种和第三种类型分别位于40公里和250公里之外。"
+    },
+    {
+      "id": 1521,
+      "word": "Notion",
+      "pos": "n.",
+      "meaning": "概念，想法",
+      "definition": "an idea",
+      "example": "The novel is all about the timeless human notion of escape and freedom.",
+      "exampleTranslation": "这部小说围绕着人类永恒的逃离与自由观念展开。"
     },
     {
       "id": 1522,
       "word": "Rent",
       "pos": "n.",
       "meaning": "租金",
-      "definition": "payment for the use of someone else's property"
+      "definition": "payment for the use of a property",
+      "example": "My living expenses include rent, food and transportation.",
+      "exampleTranslation": "我的生活开支包括房租、食物和交通费。"
     },
     {
       "id": 1523,
       "word": "Odd",
       "pos": "adj.",
-      "meaning": "奇怪的，古怪的"
+      "meaning": "奇怪的，古怪的",
+      "definition": "strange",
+      "example": "This may seem like an odd question...",
+      "exampleTranslation": "这可能看起来是个奇怪的问题……"
     },
     {
       "id": 1524,
@@ -100,13 +137,19 @@
       "id": 1525,
       "word": "Appearance",
       "pos": "n.",
-      "meaning": "外貌"
+      "meaning": "外貌",
+      "definition": "how someone or something looks to others",
+      "example": "...and she checked your hands' functionality and appearance, ...",
+      "exampleTranslation": "……她还检查了你双手的功能和外观……"
     },
     {
       "id": 1526,
       "word": "Bore",
       "pos": "v.",
-      "meaning": "令人厌烦；令人感到无聊"
+      "meaning": "令人厌烦；令人感到无聊",
+      "definition": "to make someone feel uninterested",
+      "example": "Something about that glory just always seemed to bore me.",
+      "exampleTranslation": "那种荣耀总有某些地方让我觉得无聊。"
     },
     {
       "id": 1528,
