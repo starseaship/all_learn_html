@@ -111,7 +111,7 @@
           <label for="search">搜索英文单词</label>
           <div class="search-container">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7.5"></circle><path d="m17 17 4 4"></path></svg>
-            <input type="search" id="search" placeholder="输入英文单词或部分拼写" autocomplete="off" spellcheck="false">
+            <input type="search" id="search" placeholder="输入单词开头字母，如 S、SW" autocomplete="off" spellcheck="false">
           </div>
         </div>
         <div class="control">
@@ -233,7 +233,7 @@
         ui.direction.setAttribute('aria-pressed', String(descending));
         ui.total.textContent = String(words.length);
         const filtered = invalid ? [] : words.filter(entry =>
-          (!query || entry.word.toLocaleLowerCase('en').includes(query))
+          (!query || entry.word.toLocaleLowerCase('en').startsWith(query))
           && (from === null || entry.number >= from)
           && (to === null || entry.number <= to)
         ).sort((a, b) => (descending ? b.number - a.number : a.number - b.number) || a.word.localeCompare(b.word, 'en'));
