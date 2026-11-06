@@ -31,7 +31,19 @@
       "id": 1505,
       "word": "Entirely",
       "pos": "adv.",
-      "meaning": "完全地"
+      "meaning": "完全地",
+      "definition": "completely",
+      "example": "The sun is made almost entirely of hydrogen and helium.",
+      "exampleTranslation": "太阳几乎完全由氢和氦组成。"
+    },
+    {
+      "id": 1506,
+      "word": "Session",
+      "pos": "n.",
+      "meaning": "一段时间；（学习、会议等）活动时间",
+      "definition": "a period of time for a specific activity",
+      "example": "Plan a study session together.",
+      "exampleTranslation": "一起安排一次学习活动。"
     },
     {
       "id": 1510,
