@@ -752,6 +752,20 @@
         "11.2考试"
       ],
       "addedOrder": 64
+    },
+    {
+      "path": "26aut/ENGLISH/dialogue_practice.html",
+      "title": "面试与性别平等｜英语对话练习",
+      "description": "35 句关于求职面试与性别平等的英语对话，支持逐句朗读、调速和分角色跟读。",
+      "subject": "english",
+      "type": "reference",
+      "course": "阅读",
+      "date": "2026-11-09",
+      "lessonNumber": null,
+      "badges": [
+        "口语练习"
+      ],
+      "addedOrder": 65
     }
   ]
 }
