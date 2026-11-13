@@ -795,6 +795,20 @@
         "APA"
       ],
       "addedOrder": 67
+    },
+    {
+      "path": "26aut/DS7_知识整理_日中对照_假名.html",
+      "title": "数据科学第7回",
+      "description": "制造、零售、服务及公共基础设施中的数据与AI应用，共享经济、D2C、智慧城市与四种应用类型。附日中对照、假名和原讲义。",
+      "subject": "general",
+      "type": "notes",
+      "course": "ai",
+      "date": "2026-11-13",
+      "lessonNumber": 7,
+      "badges": [
+        "第7回"
+      ],
+      "addedOrder": 68
     }
   ]
 }
