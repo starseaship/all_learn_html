@@ -166,13 +166,14 @@
       "subject": "english",
       "type": "vocabulary",
       "course": "阅读",
-      "date": "2026-10-28",
+      "date": "2026-11-24",
       "lessonNumber": null,
       "addedOrder": 57,
       "badges": [
         "HR1.x",
         "HR2.x",
-        "HR3.x"
+        "HR3.x",
+        "HR4.x"
       ]
     },
     {
@@ -709,34 +710,6 @@
         "Unit 16"
       ],
       "addedOrder": 61
-    },
-    {
-      "path": "26aut/ENGLISH/Human_Rights_Ch4.3_Vocab.html",
-      "title": "阅读单词4.3",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "阅读",
-      "date": "2026-11-02",
-      "lessonNumber": null,
-      "badges": [
-        "4.3"
-      ],
-      "addedOrder": 62
-    },
-    {
-      "path": "26aut/ENGLISH/Human_Rights_Ch4.7_Vocab.html",
-      "title": "阅读单词4.7",
-      "description": "",
-      "subject": "english",
-      "type": "vocabulary",
-      "course": "阅读",
-      "date": "2026-11-02",
-      "lessonNumber": null,
-      "badges": [
-        "4.7"
-      ],
-      "addedOrder": 63
     },
     {
       "path": "26aut/ENGLISH/Grammar_Unit16_Review_Check_Quiz_20261102.html",
