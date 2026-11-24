@@ -112,6 +112,13 @@
     .pager:disabled { opacity: .35; cursor: not-allowed; }
     .pagecount { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #9ca2b2; }
     .footer-note { text-align: center; color: #999fb1; font-size: 11px; line-height: 1.9; margin: 23px 0 0; }
+    .sentences.full-script { display: block; }
+    .full-section + .full-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .full-section-title { margin: 0 0 8px; color: var(--accent-deep); font-size: 12px; font-weight: 750; line-height: 1.5; }
+    .full-paragraph { margin: 0; font-family: "Segoe UI", Arial, sans-serif; font-size: clamp(16px, 1.7vw, 19px); line-height: 1.85; color: #333950; user-select: text; }
+    .full-script .sentence { display: inline; width: auto; padding: 1px 0; border: 0; border-radius: 3px; background: transparent; font: inherit; color: inherit; cursor: pointer; user-select: text; -webkit-user-select: text; }
+    .full-script .sentence:hover { background: #f8f7fd; }
+    .full-script .sentence.speaking { background: #e8e4ff; box-shadow: none; color: var(--accent-deep); }
     @media (max-width: 1050px) {
       .top-header { align-items: flex-start; }
       .settings { margin-left: 0; width: 100%; }
@@ -206,7 +213,7 @@
           <p class="sidebar-sub">选择任意页开始练习</p>
         </div>
         <nav class="slide-list" id="slideList" aria-label="幻灯片列表"></nav>
-        <div class="sidebar-foot">使用上方的“全文朗读”，可以从第 1 页自动播放到第 11 页。播放时会自动切换当前页。</div>
+        <div class="sidebar-foot">选择“全文”查看完整演讲稿；全文页朗读时保留当前页面，分页面朗读时自动切换 PPT 页。</div>
       </aside>
 
       <section class="study-card" aria-label="当前页演讲内容">
@@ -366,7 +373,7 @@
       title: $("slideTitle"), subtitle: $("slideSubtitle"), mark: $("slideMark"), duration: $("slideDuration"),
       note: $("slideNote"), progress: $("progressFill"), count: $("pagecount"), prev: $("prev"), next: $("next")
     };
-    let slideIndex = 0;
+    let slideIndex = -1;
     let speechToken = 0;
     let queue = [];
     let queueIndex = 0;
@@ -396,8 +403,8 @@
 
     function highlightActiveSentence() {
       clearHighlight();
-      if (!activeSentence || activeSentence.slide !== slideIndex) return;
-      const node = ui.sentences.querySelector('[data-sentence="' + activeSentence.index + '"]');
+      if (!activeSentence || (slideIndex !== -1 && activeSentence.slide !== slideIndex)) return;
+      const node = ui.sentences.querySelector('[data-slide="' + activeSentence.slide + '"][data-sentence="' + activeSentence.index + '"]');
       if (node) {
         node.classList.add("speaking");
         node.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -405,6 +412,55 @@
     }
 
     function render() {
+      const full = slideIndex === -1;
+      ui.sentences.classList.toggle("full-script", full);
+      if (full) {
+        ui.mark.textContent = "FULL SCRIPT";
+        ui.duration.textContent = "约 5 分 14 秒";
+        ui.title.textContent = "Full Script";
+        ui.subtitle.textContent = "完整演讲稿 · Slide 01–11";
+        ui.count.textContent = "全文";
+        ui.progress.style.width = "100%";
+        ui.prev.disabled = true;
+        ui.next.disabled = false;
+        ui.note.textContent = "";
+        ui.note.classList.remove("visible");
+        ui.sentences.replaceChildren();
+        slides.forEach((slide, si) => {
+          const section = document.createElement("section");
+          section.className = "full-section";
+          const heading = document.createElement("h3");
+          heading.className = "full-section-title";
+          heading.textContent = pad(si + 1) + " · " + slide.title;
+          const paragraph = document.createElement("p");
+          paragraph.className = "full-paragraph";
+          slide.sentences.forEach((sentence, index) => {
+            if (index) paragraph.append(document.createTextNode(" "));
+            const button = document.createElement("span");
+            button.className = "sentence";
+            button.dataset.slide = String(si);
+            button.dataset.sentence = String(index);
+            button.textContent = sentence;
+            button.setAttribute("role", "button");
+            button.tabIndex = 0;
+            button.title = "点击朗读这一句";
+            const play = () => {
+              if (window.getSelection()?.toString()) return;
+              playItems([{slide: si, index, text: sentence}], "sentence");
+            };
+            button.addEventListener("click", play);
+            button.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
+            });
+            paragraph.append(button);
+          });
+          section.append(heading, paragraph);
+          ui.sentences.append(section);
+        });
+        updateNavigation();
+        highlightActiveSentence();
+        return;
+      }
       const slide = slides[slideIndex];
       ui.mark.textContent = `SLIDE ${pad(slideIndex + 1)} / ${pad(slides.length)}`;
       ui.duration.textContent = `约 ${slide.seconds} 秒`;
@@ -422,6 +478,7 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = "sentence";
+        button.dataset.slide = String(slideIndex);
         button.dataset.sentence = String(index);
         button.title = "点击朗读这一句";
         button.setAttribute("aria-label", `播放第 ${index + 1} 句：${sentence}`);
@@ -439,16 +496,26 @@
         ui.sentences.append(button);
       });
 
+      updateNavigation();
+      highlightActiveSentence();
+    }
+
+    function updateNavigation() {
       ui.list.querySelectorAll(".slide-nav").forEach((node, index) => {
-        const current = index === slideIndex;
+        const current = index - 1 === slideIndex;
         node.classList.toggle("current", current);
         if (current) node.setAttribute("aria-current", "page");
         else node.removeAttribute("aria-current");
       });
-      highlightActiveSentence();
     }
 
     function createSidebar() {
+      const fullButton = document.createElement("button");
+      fullButton.type = "button";
+      fullButton.className = "slide-nav";
+      fullButton.innerHTML = '<span class="slide-no">00</span><span><span class="slide-nav-name">Full Script · 全文</span><span class="slide-nav-time">全部 11 页</span></span>';
+      fullButton.addEventListener("click", () => goToSlide(-1));
+      ui.list.append(fullButton);
       slides.forEach((slide, index) => {
         const button = document.createElement("button");
         button.type = "button";
@@ -482,13 +549,13 @@
     }
 
     function goToSlide(index, cancelAudio = true) {
-      if (index < 0 || index >= slides.length) return;
+      if (index < -1 || index >= slides.length) return;
       if (cancelAudio && speechMode !== null) stopReading(false);
       slideIndex = index;
       render();
-      if (cancelAudio) setStatus(`当前为第 ${index + 1} 页。点击句子或“本页朗读”开始练习。`);
+      if (cancelAudio) setStatus(index === -1 ? "当前为全文页。点击任意英文句子即可朗读。" : `当前为第 ${index + 1} 页。点击句子或“本页朗读”开始练习。`);
       if (window.innerWidth < 721) {
-        const selected = ui.list.children[index];
+        const selected = ui.list.children[index + 1];
         if (selected) selected.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       }
     }
@@ -529,7 +596,7 @@
         return;
       }
       const item = queue[queueIndex];
-      if (item.slide !== slideIndex) goToSlide(item.slide, false);
+      if (slideIndex !== -1 && item.slide !== slideIndex) goToSlide(item.slide, false);
       activeSentence = item;
       highlightActiveSentence();
       const utterance = new SpeechSynthesisUtterance(item.text);
@@ -578,7 +645,7 @@
     }
 
     ui.playAll.addEventListener("click", () => playItems(buildQueue(slides.map((_, index) => index)), "all"));
-    ui.playSlide.addEventListener("click", () => playItems(buildQueue([slideIndex]), "slide"));
+    ui.playSlide.addEventListener("click", () => playItems(buildQueue(slideIndex === -1 ? slides.map((_, index) => index) : [slideIndex]), slideIndex === -1 ? "all" : "slide"));
     ui.stop.addEventListener("click", () => stopReading());
     ui.pause.addEventListener("click", () => {
       if (!supportsSpeech || speechMode === null) return;
