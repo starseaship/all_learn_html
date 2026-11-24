@@ -402,16 +402,16 @@
   },
   "26aut/ENGLISH/HR_Reading_Combined_Chapters.html": {
     "title": "HR阅读｜综合问答",
-    "description": "HR2.3、HR2.7、HR2.10、HR3.3、HR3.10、HR4.7 共6章阅读问答，中英对照及关键词记忆。",
+    "description": "HR2.3、HR2.7、HR2.10、HR3.3、HR3.10、HR4.3、HR4.7 共7章阅读问答，中英对照及关键词记忆。",
     "subject": "english",
     "type": "reference",
     "course": "阅读",
-    "date": "2026-11-04",
+    "date": "2026-11-24",
     "lessonNumber": null,
     "badges": [
       "HR2.x",
       "HR3.x",
-      "HR4.7"
+      "HR4.x"
     ]
   },
   "26aut/ENGLISH/HR_Vocabulary_Combined_Chapters.html": {
@@ -535,6 +535,15 @@
     "hidden": true
   },
   "26aut/ENGLISH/Human_Rights_Ch4.7_Vocab.html": {
+    "hidden": true
+  },
+  "26aut/ENGLISH/HR_Chapter_4_3_Child_Labor_Comprehension.html": {
+    "title": "HR4.3｜Child Labor",
+    "description": "HR4.3 童工劳动类型与风险：8道中英阅读理解问答、关键词高亮与记忆提示。",
+    "subject": "english",
+    "type": "reference",
+    "course": "阅读",
+    "date": "2026-11-24",
     "hidden": true
   }
 }
